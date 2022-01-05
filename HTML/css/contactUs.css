@@ -40,6 +40,10 @@ li{ list-style: none; }
 }
 
 
+.navbar-light .navbar-nav .nav-link {
+    color: white !important;
+    font-size: 17px;}
+
 .nav-btnn a{
     margin: 0 5px;
     padding: 5px 15px;
@@ -78,6 +82,7 @@ li{ list-style: none; }
     width: 1140px;
     height: 1px;
     background-color: #cccccc;
+    margin-top: 30px;
 }
 
 .main_button{
@@ -129,6 +134,10 @@ li{ list-style: none; }
 }
 
 
+.con_logo{
+    margin-top: 50px;
+    color: #4f4f4f;
+}
 
 @media (max-width: 1024px){
     .footer_btn{
@@ -139,6 +148,30 @@ li{ list-style: none; }
     
 }
 
+.innerlogo{
+    width: 195px;
+    min-height: 106px;
+    margin: 0 4.5vw;
+}
+.logo{
+    min-height: 54px;
+}
+.logos_content{
+    margin-top: 20px;
+}
+
+.get-in-touch-form{
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.get-in-touch-form h3{
+    padding-bottom: 30px;
+}
+
+.get-in-touch-form form{
+    width: 75%;
+}
 
 @media (max-width: 768px){
     .footer_mid ul{
@@ -153,6 +186,10 @@ li{ list-style: none; }
         height: fit-content !important;
         padding: 20px 0px;
         justify-content: space-between !important;
+    }
+
+    .innerlogo{
+        margin: 0 1vw;
     }
     
 }
@@ -172,6 +209,14 @@ li{ list-style: none; }
     }
 }
 
+@media (max-width: 644px){
+    .con_logo{
+        flex-direction: column;
+    }
+    .innerlogo{
+        margin-bottom: 40px;
+    }
+}
 
 .d-flex button.btn{background-color: #FF7B6D;
     border-radius: 20px;
