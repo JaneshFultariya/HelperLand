@@ -76,47 +76,81 @@
                     </li>
                 </ul>
             </div>
-            
+
             <a class="btn" style="float:right" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo">
                 <span class="navbar-toggler-icon"></span>
-              </a>
+            </a>
         </nav>
     </div>
 
     <div class="offcanvas offcanvas-end" id="demo">
         <div class="offcanvas-header">
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            <p>welcome,<br> <strong>Abc</strong></p>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                aria-label="Close"></button>
         </div>
-    
+
         <div class="offcanvas-body">
-          
-          <ul class="side-nav">
-            <li class="side-items">
-              <a class="side-link text-decoration-none" href="#">Book now</a>
-            </li>
-            <li class="side-items">
-              <a class="side-link text-decoration-none" href="#">Prices & services</a>
-            </li>
-            <li class="side-items">
-              <a class="side-link text-decoration-none" href="#">Warranty</a>
-            </li>
-            <li class="side-items">
-              <a class="side-link text-decoration-none" href="#">Blog</a>
-            </li>
-            <li class="side-items">
-              <a class="side-link text-decoration-none" href="#">Contact</a>
-            </li>
-            <li class="side-items">
-              <a class="side-link text-decoration-none" data-toggle="modal"
-              data-target="#exampleModalCenter" href="#">Login</a>
-            </li>
-            <li class="side-items">
-              <a class="side-link text-decoration-none" href="#">Become a cleaner</a>
-            </li>
-          </ul>
-    
+            <div class="devider-line"></div>
+            <ul class="side-nav">
+                <li class="side-items">
+                    <a class="side-link text-decoration-none" onclick="openCity(event, 'Deshboard')"
+                        href="#">Dashboard</a>
+                </li>
+                <li class="side-items">
+                    <a class="side-link text-decoration-none" onclick="openCity(event, 'History')" href="#">New Service
+                        </a>
+                </li>
+                <li class="side-items">
+                    <a class="side-link text-decoration-none" onclick="openCity(event, 'Upcoming')" href="#">Upcoming Service</a>
+                </li>
+                <li class="side-items">
+                    <a class="side-link text-decoration-none"  href="#" onclick="openCity(event, 'Schedule')">Service Schedule</a>
+                </li>
+                <li class="side-items">
+                    <a class="side-link text-decoration-none" onclick="openCity(event, 'History')" href="#">Service
+                        History</a>
+                </li>
+                <li class="side-items">
+                    <a class="side-link text-decoration-none" onclick="openCity(event, 'ratings')">My Ratings</a>
+                </li>
+                <li class="side-items">
+                    <a class="side-link text-decoration-none" onclick="openCity(event, 'Pros')">Block Customer</a>
+                </li>
+                <li class="side-items">
+                    <a class="side-link text-decoration-none" onclick="openCity(event, 'Invoices')" href="#">Invoices</a>
+                </li>
+                <li class="side-items">
+                    <a class="side-link text-decoration-none" onclick="openCity(event, 'Notification')" href="#">Notification</a>
+                </li>
+                <li class="side-items">
+                    <a class="side-link text-decoration-none" href="#">My Settings</a>
+                </li>
+                <li class="side-items">
+                    <a class="side-link text-decoration-none" href="#">Logout</a>
+                </li>
+            </ul>
+            <div class="devider-line"></div>
+            <ul class="side-nav">
+                <li class="side-items">
+                    <a class="side-link text-decoration-none" href="#">Book now</a>
+                </li>
+                <li class="side-items">
+                    <a class="side-link text-decoration-none" href="#">Prices & services</a>
+                </li>
+                <li class="side-items">
+                    <a class="side-link text-decoration-none" href="#">Warranty</a>
+                </li>
+                <li class="side-items">
+                    <a class="side-link text-decoration-none" href="#">Blog</a>
+                </li>
+                <li class="side-items">
+                    <a class="side-link text-decoration-none" href="#">Contact</a>
+                </li>
+            </ul>
+
         </div>
-      </div>
+    </div>
 
     <section id="title" class="text-center">
         <div class="main-text">
@@ -125,363 +159,9 @@
         <div class="div-line-below-user-profile"></div>
     </section>
 
-    <!-- <div class="content-sidebar d-flex flex-row">
-        <div class="sidebar" style="flex-basis: 30%;">
-            <a href="#dashboard">Dashboard</a>
-            <a href="#news">New Service Requests</a>
-            <a class="active" href="#home">
-                Upcoming Services</a>
-
-            <a href="#contact">Service Schedule
-            </a>
-            <a href="#about">Service History
-            </a>
-            <a href="#about">My Ratings</a>
-            <a href="#about">Block Customer</a>
-        </div>
-
-        <div class="content">
-            <div class="table-responsive">
-                <table class="table table-bordered" style="width: 845px; border: 2px solid red;">
-                    <thead>
-                        <tr style="background-color: #f9f9f9;">
-                            <th scope="col"> Service ID
-                                <img src="images/table-arrow.svg">
-                            </th>
-                            <th scope="col">Service date
-                                <img src="images/table-arrow.svg">
-                            </th>
-                            <th scope="col">Customer details
-                                <img src="images/table-arrow.svg">
-                            </th>
-                            <th scope="col">Distance
-                                <img src="images/table-arrow.svg">
-                            </th>
-                            <th scope="col">Actions
-                                <img src="images/table-arrow.svg">
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td scope="row">323436</td>
-                            <td style="padding: 0px; padding-top: 13px;">
-                                <div class="col">
-                                    <div class="d-flex">
-                                        <img src="images/calculator.png" class="calander-img">
-                                        <p>09/04/2018</p>
-                                    </div>
-                                    <div class="d-flex">
-                                        <img class="clock" src="images/layer-712.png">
-                                        <p>12:00 - 18:00</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td style="padding: 0px; padding-top: 13px;">
-                                <div class="col">
-                                    <div class="d-flex">
-                                        <p>David Bough</p>
-                                    </div>
-                                    <div class="d-flex">
-                                        <img src="images/layer-15.png"
-                                            style="width: 20px; height: 22px; margin-right: 7px;">
-                                        <p>Musterstrabe 5,12345 Bonn</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>15 km</td>
-                            <td>
-                                <button class="btn">Cancel</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td scope="row">323436</td>
-                            <td style="padding: 0px; padding-top: 13px;">
-                                <div class="col">
-                                    <div class="d-flex">
-                                        <img src="images/calculator.png" class="calander-img">
-                                        <p>09/04/2018</p>
-                                    </div>
-                                    <div class="d-flex">
-                                        <img class="clock" src="images/layer-712.png">
-                                        <p>12:00 - 18:00</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td style="padding: 0px; padding-top: 13px;">
-                                <div class="col">
-                                    <div class="d-flex">
-                                        <p>David Bough</p>
-                                    </div>
-                                    <div class="d-flex">
-                                        <img src="images/layer-15.png"
-                                            style="width: 20px; height: 22px; margin-right: 7px;">
-                                        <p>Musterstrabe 5,12345 Bonn</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>15 km</td>
-                            <td>
-                                <button class="btn">Cancel</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td scope="row">323436</td>
-                            <td style="padding: 0px; padding-top: 13px;">
-                                <div class="col">
-                                    <div class="d-flex">
-                                        <img src="images/calculator.png" class="calander-img">
-                                        <p>09/04/2018</p>
-                                    </div>
-                                    <div class="d-flex">
-                                        <img class="clock" src="images/layer-712.png">
-                                        <p>12:00 - 18:00</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td style="padding: 0px; padding-top: 13px;">
-                                <div class="col">
-                                    <div class="d-flex">
-                                        <p>David Bough</p>
-                                    </div>
-                                    <div class="d-flex">
-                                        <img src="images/layer-15.png"
-                                            style="width: 20px; height: 22px; margin-right: 7px;">
-                                        <p>Musterstrabe 5,12345 Bonn</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>15 km</td>
-                            <td>
-                                <button class="btn">Cancel</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td scope="row">323436</td>
-                            <td style="padding: 0px; padding-top: 13px;">
-                                <div class="col">
-                                    <div class="d-flex">
-                                        <img src="images/calculator.png" class="calander-img">
-                                        <p>09/04/2018</p>
-                                    </div>
-                                    <div class="d-flex">
-                                        <img class="clock" src="images/layer-712.png">
-                                        <p>12:00 - 18:00</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td style="padding: 0px; padding-top: 13px;">
-                                <div class="col">
-                                    <div class="d-flex">
-                                        <p>David Bough</p>
-                                    </div>
-                                    <div class="d-flex">
-                                        <img src="images/layer-15.png"
-                                            style="width: 20px; height: 22px; margin-right: 7px;">
-                                        <p>Musterstrabe 5,12345 Bonn</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>15 km</td>
-                            <td>
-                                <button class="btn">Cancel</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td scope="row">323436</td>
-                            <td style="padding: 0px; padding-top: 13px;">
-                                <div class="col">
-                                    <div class="d-flex">
-                                        <img src="images/calculator.png" class="calander-img">
-                                        <p>09/04/2018</p>
-                                    </div>
-                                    <div class="d-flex">
-                                        <img class="clock" src="images/layer-712.png">
-                                        <p>12:00 - 18:00</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td style="padding: 0px; padding-top: 13px;">
-                                <div class="col">
-                                    <div class="d-flex">
-                                        <p>David Bough</p>
-                                    </div>
-                                    <div class="d-flex">
-                                        <img src="images/layer-15.png"
-                                            style="width: 20px; height: 22px; margin-right: 7px;">
-                                        <p>Musterstrabe 5,12345 Bonn</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>15 km</td>
-                            <td>
-                                <button class="btn">Cancel</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td scope="row">323436</td>
-                            <td style="padding: 0px; padding-top: 13px;">
-                                <div class="col">
-                                    <div class="d-flex">
-                                        <img src="images/calculator.png" class="calander-img">
-                                        <p>09/04/2018</p>
-                                    </div>
-                                    <div class="d-flex">
-                                        <img class="clock" src="images/layer-712.png">
-                                        <p>12:00 - 18:00</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td style="padding: 0px; padding-top: 13px;">
-                                <div class="col">
-                                    <div class="d-flex">
-                                        <p>David Bough</p>
-                                    </div>
-                                    <div class="d-flex">
-                                        <img src="images/layer-15.png"
-                                            style="width: 20px; height: 22px; margin-right: 7px;">
-                                        <p>Musterstrabe 5,12345 Bonn</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>15 km</td>
-                            <td>
-                                <button class="btn">Cancel</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td scope="row">323436</td>
-                            <td style="padding: 0px; padding-top: 13px;">
-                                <div class="col">
-                                    <div class="d-flex">
-                                        <img src="images/calculator.png" class="calander-img">
-                                        <p>09/04/2018</p>
-                                    </div>
-                                    <div class="d-flex">
-                                        <img class="clock" src="images/layer-712.png">
-                                        <p>12:00 - 18:00</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td style="padding: 0px; padding-top: 13px;">
-                                <div class="col">
-                                    <div class="d-flex">
-                                        <p>David Bough</p>
-                                    </div>
-                                    <div class="d-flex">
-                                        <img src="images/layer-15.png"
-                                            style="width: 20px; height: 22px; margin-right: 7px;">
-                                        <p>Musterstrabe 5,12345 Bonn</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>15 km</td>
-                            <td>
-                                <button class="btn">Cancel</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td scope="row">323436</td>
-                            <td style="padding: 0px; padding-top: 13px;">
-                                <div class="col">
-                                    <div class="d-flex">
-                                        <img src="images/calculator.png" class="calander-img">
-                                        <p>09/04/2018</p>
-                                    </div>
-                                    <div class="d-flex">
-                                        <img class="clock" src="images/layer-712.png">
-                                        <p>12:00 - 18:00</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td style="padding: 0px; padding-top: 13px;">
-                                <div class="col">
-                                    <div class="d-flex">
-                                        <p>David Bough</p>
-                                    </div>
-                                    <div class="d-flex">
-                                        <img src="images/layer-15.png"
-                                            style="width: 20px; height: 22px; margin-right: 7px;">
-                                        <p>Musterstrabe 5,12345 Bonn</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>15 km</td>
-                            <td>
-                                <button class="btn">Cancel</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td scope="row">323436</td>
-                            <td style="padding: 0px; padding-top: 13px;">
-                                <div class="col">
-                                    <div class="d-flex">
-                                        <img src="images/calculator.png" class="calander-img">
-                                        <p>09/04/2018</p>
-                                    </div>
-                                    <div class="d-flex">
-                                        <img class="clock" src="images/layer-712.png">
-                                        <p>12:00 - 18:00</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td style="padding: 0px; padding-top: 13px;">
-                                <div class="col">
-                                    <div class="d-flex">
-                                        <p>David Bough</p>
-                                    </div>
-                                    <div class="d-flex">
-                                        <img src="images/layer-15.png"
-                                            style="width: 20px; height: 22px; margin-right: 7px;">
-                                        <p>Musterstrabe 5,12345 Bonn</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>15 km</td>
-                            <td>
-                                <button class="btn">Cancel</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td scope="row">323436</td>
-                            <td style="padding: 0px; padding-top: 13px;">
-                                <div class="col">
-                                    <div class="d-flex">
-                                        <img class="calander-img" src="images/calculator.png">
-                                        <p>09/04/2018</p>
-                                    </div>
-                                    <div class="d-flex">
-                                        <img class="clock" src="images/layer-712.png">
-                                        <p>12:00 - 18:00</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td style="padding: 0px; padding-top: 13px;">
-                                <div class="col">
-                                    <div class="d-flex">
-                                        <p>David Bough</p>
-                                    </div>
-                                    <div class="d-flex">
-                                        <img src="images/layer-15.png"
-                                            style="width: 20px; height: 22px; margin-right: 7px;">
-                                        <p>Musterstrabe 5,12345 Bonn</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>15 km</td>
-                            <td>
-                                <button class="btn">Cancel</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-        </div>
-    </div> -->
 
 
-    <div class="d-flex table-and-siddebar justify-content-between  container">
+    <!-- <div class="d-flex table-and-siddebar justify-content-between  container">
 
         <nav class="nav-ver nav-style">
 
@@ -851,348 +531,401 @@
         </div>
 
 
-        <!-- <div class="table-responsive">
-            <table class="table" id="example_table" style="width: 845px;">
-                <thead>
-                    <tr style="background-color: #f9f9f9;">
-                        <th scope="col"> Service ID
-                            <img src="images/table-arrow.svg">
-                        </th>
-                        <th scope="col">Service date
-                            <img src="images/table-arrow.svg">
-                        </th>
-                        <th scope="col">Customer details
-                            <img src="images/table-arrow.svg">
-                        </th>
-                        <th scope="col">Distance
-                            <img src="images/table-arrow.svg">
-                        </th>
-                        <th scope="col">Actions
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td scope="row text-color-table number-and-km">323436</td>
-                        <td style="padding: 0px; padding-top: 13px;">
-                            <div class="col">
-                                <div class="d-flex custom-margin-table">
-                                    <img src="images/calculator.png" class="calander-img">
-                                    <p>09/04/2018</p>
-                                </div>
-                                <div class="d-flex">
-                                    <img class="clock" src="images/layer-712.png">
-                                    <p>12:00 - 18:00</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td style="padding: 0px; padding-top: 13px;">
-                            <div class="col">
-                                <div class="d-flex custom-margin-table">
-                                    <p>David Bough</p>
-                                </div>
-                                <div class="d-flex">
-                                    <img src="images/layer-15.png"
-                                        style="width: 20px; height: 22px; margin-right: 7px;">
-                                    <p>Musterstrabe 5,12345 Bonn</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td>15 km</td>
-                        <td>
-                            <button class="btn">Cancel</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td scope="row">323436</td>
-                        <td style="padding: 0px; padding-top: 13px;">
-                            <div class="col">
-                                <div class="d-flex custom-margin-table">
-                                    <img src="images/calculator.png" class="calander-img">
-                                    <p>09/04/2018</p>
-                                </div>
-                                <div class="d-flex">
-                                    <img class="clock" src="images/layer-712.png">
-                                    <p>12:00 - 18:00</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td style="padding: 0px; padding-top: 13px;">
-                            <div class="col">
-                                <div class="d-flex custom-margin-table">
-                                    <p>David Bough</p>
-                                </div>
-                                <div class="d-flex">
-                                    <img src="images/layer-15.png"
-                                        style="width: 20px; height: 22px; margin-right: 7px;">
-                                    <p>Musterstrabe 5,12345 Bonn</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td>15 km</td>
-                        <td>
-                            <button class="btn">Cancel</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td scope="row">323436</td>
-                        <td style="padding: 0px; padding-top: 13px;">
-                            <div class="col">
-                                <div class="d-flex custom-margin-table">
-                                    <img src="images/calculator.png" class="calander-img">
-                                    <p>09/04/2018</p>
-                                </div>
-                                <div class="d-flex">
-                                    <img class="clock" src="images/layer-712.png">
-                                    <p>12:00 - 18:00</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td style="padding: 0px; padding-top: 13px;">
-                            <div class="col">
-                                <div class="d-flex custom-margin-table">
-                                    <p>David Bough</p>
-                                </div>
-                                <div class="d-flex">
-                                    <img src="images/layer-15.png"
-                                        style="width: 20px; height: 22px; margin-right: 7px;">
-                                    <p>Musterstrabe 5,12345 Bonn</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td>15 km</td>
-                        <td>
-                            <button class="btn">Cancel</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td scope="row">323436</td>
-                        <td style="padding: 0px; padding-top: 13px;">
-                            <div class="col">
-                                <div class="d-flex custom-margin-table">
-                                    <img src="images/calculator.png" class="calander-img">
-                                    <p>09/04/2018</p>
-                                </div>
-                                <div class="d-flex">
-                                    <img class="clock" src="images/layer-712.png">
-                                    <p>12:00 - 18:00</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td style="padding: 0px; padding-top: 13px;">
-                            <div class="col">
-                                <div class="d-flex custom-margin-table">
-                                    <p>David Bough</p>
-                                </div>
-                                <div class="d-flex">
-                                    <img src="images/layer-15.png"
-                                        style="width: 20px; height: 22px; margin-right: 7px;">
-                                    <p>Musterstrabe 5,12345 Bonn</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td>15 km</td>
-                        <td>
-                            <button class="btn">Cancel</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td scope="row">323436</td>
-                        <td style="padding: 0px; padding-top: 13px;">
-                            <div class="col">
-                                <div class="d-flex custom-margin-table">
-                                    <img src="images/calculator.png" class="calander-img">
-                                    <p>09/04/2018</p>
-                                </div>
-                                <div class="d-flex">
-                                    <img class="clock" src="images/layer-712.png">
-                                    <p>12:00 - 18:00</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td style="padding: 0px; padding-top: 13px;">
-                            <div class="col">
-                                <div class="d-flex custom-margin-table">
-                                    <p>David Bough</p>
-                                </div>
-                                <div class="d-flex">
-                                    <img src="images/layer-15.png"
-                                        style="width: 20px; height: 22px; margin-right: 7px;">
-                                    <p>Musterstrabe 5,12345 Bonn</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td>15 km</td>
-                        <td>
-                            <button class="btn">Cancel</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td scope="row">323436</td>
-                        <td style="padding: 0px; padding-top: 13px;">
-                            <div class="col">
-                                <div class="d-flex custom-margin-table">
-                                    <img src="images/calculator.png" class="calander-img">
-                                    <p>09/04/2018</p>
-                                </div>
-                                <div class="d-flex">
-                                    <img class="clock" src="images/layer-712.png">
-                                    <p>12:00 - 18:00</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td style="padding: 0px; padding-top: 13px;">
-                            <div class="col">
-                                <div class="d-flex custom-margin-table">
-                                    <p>David Bough</p>
-                                </div>
-                                <div class="d-flex">
-                                    <img src="images/layer-15.png"
-                                        style="width: 20px; height: 22px; margin-right: 7px;">
-                                    <p>Musterstrabe 5,12345 Bonn</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td>15 km</td>
-                        <td>
-                            <button class="btn">Cancel</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td scope="row">323436</td>
-                        <td style="padding: 0px; padding-top: 13px;">
-                            <div class="col">
-                                <div class="d-flex custom-margin-table">
-                                    <img src="images/calculator.png" class="calander-img">
-                                    <p>09/04/2018</p>
-                                </div>
-                                <div class="d-flex">
-                                    <img class="clock" src="images/layer-712.png">
-                                    <p>12:00 - 18:00</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td style="padding: 0px; padding-top: 13px;">
-                            <div class="col">
-                                <div class="d-flex custom-margin-table">
-                                    <p>David Bough</p>
-                                </div>
-                                <div class="d-flex">
-                                    <img src="images/layer-15.png"
-                                        style="width: 20px; height: 22px; margin-right: 7px;">
-                                    <p>Musterstrabe 5,12345 Bonn</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td>15 km</td>
-                        <td>
-                            <button class="btn">Cancel</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td scope="row">323436</td>
-                        <td style="padding: 0px; padding-top: 13px;">
-                            <div class="col">
-                                <div class="d-flex custom-margin-table">
-                                    <img src="images/calculator.png" class="calander-img">
-                                    <p>09/04/2018</p>
-                                </div>
-                                <div class="d-flex">
-                                    <img class="clock" src="images/layer-712.png">
-                                    <p>12:00 - 18:00</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td style="padding: 0px; padding-top: 13px;">
-                            <div class="col">
-                                <div class="d-flex custom-margin-table">
-                                    <p>David Bough</p>
-                                </div>
-                                <div class="d-flex">
-                                    <img src="images/layer-15.png"
-                                        style="width: 20px; height: 22px; margin-right: 7px;">
-                                    <p>Musterstrabe 5,12345 Bonn</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td>15 km</td>
-                        <td>
-                            <button class="btn">Cancel</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td scope="row">323436</td>
-                        <td style="padding: 0px; padding-top: 13px;">
-                            <div class="col">
-                                <div class="d-flex custom-margin-table">
-                                    <img src="images/calculator.png" class="calander-img">
-                                    <p>09/04/2018</p>
-                                </div>
-                                <div class="d-flex">
-                                    <img class="clock" src="images/layer-712.png">
-                                    <p>12:00 - 18:00</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td style="padding: 0px; padding-top: 13px;">
-                            <div class="col">
-                                <div class="d-flex custom-margin-table">
-                                    <p>David Bough</p>
-                                </div>
-                                <div class="d-flex">
-                                    <img src="images/layer-15.png"
-                                        style="width: 20px; height: 22px; margin-right: 7px;">
-                                    <p>Musterstrabe 5,12345 Bonn</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td>15 km</td>
-                        <td>
-                            <button class="btn">Cancel</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td scope="row">323436</td>
-                        <td style="padding: 0px; padding-top: 13px;">
-                            <div class="col">
-                                <div class="d-flex custom-margin-table">
-                                    <img class="calander-img" src="images/calculator.png">
-                                    <p>09/04/2018</p>
-                                </div>
-                                <div class="d-flex">
-                                    <img class="clock" src="images/layer-712.png">
-                                    <p>12:00 - 18:00</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td style="padding: 0px; padding-top: 13px;">
-                            <div class="col">
-                                <div class="d-flex custom-margin-table">
-                                    <p>David Bough</p>
-                                </div>
-                                <div class="d-flex">
-                                    <img src="images/layer-15.png"
-                                        style="width: 20px; height: 22px; margin-right: 7px;">
-                                    <p>Musterstrabe 5,12345 Bonn</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td>15 km</td>
-                        <td>
-                            <button class="btn">Cancel</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div> -->
+        
         
         
     
-    </div>
+    </div> -->
 
-    
+    <section id="tab_data">
+        <div class="tab">
+            <button class="tablinks" onclick="openCity(event, 'Deshboard')">Deshboard</button>
+            <button class="tablinks" onclick="openCity(event, 'NewService')" id="defaultOpen">New Service
+                Request</button>
+            <button class="tablinks" onclick="openCity(event, 'Upcoming')">Upcoming Service</button>
+            <button class="tablinks" onclick="openCity(event, 'Schedule')">Service Schedule</button>
+            <button class="tablinks" onclick="openCity(event, 'History')">Service History</button>
 
-    
+            <button class="tablinks" onclick="openCity(event, 'ratings')">My Ratings</button>
+            <button class="tablinks" onclick="openCity(event, 'Pros')">Block Customer</button>
+
+            <button class="tablinks" onclick="openCity(event, 'Invoices')">Invoices</button>
+
+            <button class="tablinks" onclick="openCity(event, 'Notification')">Notifications</button>
+        </div>
+
+
+        <div id="NewService" class="tabcontent">
+            <div class="d-flex flex-row justify-content-between">
+                <div class="float-left">
+                    <h3 class="link-text">Current Service Request</h3>
+                </div>
+
+                <button class="btn addrequestbuttton tablinks" onclick="openCity(event, 'newservicerequest')"
+                    style="width: 200px;">Add new service request</button>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <table id="example" class="display table nowrap" cellspacing="0" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="serviceidrow">Service ID
+                                    </th>
+                                    <th scope="col" class="servicedate">Service date
+                                    </th>
+                                    <th scope="col" class="provider">Customer Details
+                                    </th>
+                                    <th scope="col" class="payment">Payment
+                                    </th>
+                                    <th scope="col" class="payment">Time Conflict
+                                    </th>
+                                    <th scope="col" class="action">Actions
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td scope="row text-color-table number-and-km">
+                                        <a href="#" data-toggle="modal"
+                                            data-target="#withoutServiceProviderdashboardModalCenter"
+                                            class="text-decoration-none link-text">323436</a>
+                                    </td>
+                                    <td>
+                                        <div class="col">
+                                            <div class="d-flex custom-margin-table">
+                                                <img src="images/calculator.png" class="calander-img">
+                                                <a href="#" data-toggle="modal"
+                                                    data-target="#withoutServiceProviderdashboardModalCenter"
+                                                    class="text-decoration-none link-text"><strong>31/03/2018</strong></a>
+                                            </div>
+                                            <div class="d-flex">
+                                                <img class="clock" src="images/layer-712.png">
+                                                <a href="#" data-toggle="modal"
+                                                    data-target="#withoutServiceProviderdashboardModalCenter"
+                                                    class="text-decoration-none link-text">12:00 - 18:00</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex">
+                                            <img src="images/layer-15.png"
+                                                style="width: 20px; height: 22px; margin-right: 7px;">
+                                            <p>Musterstrabe 5,12345 Bonn</p>
+                                        </div>
+                                    </td>
+                                    <td class="eurotext">
+                                        <div class="d-flex flex-row custom-margin-table-two-data">
+                                            <p class="euro-text">
+                                                €
+                                            </p>
+                                            <p class="number-text">
+                                                63
+                                            </p>
+                                        </div>
+                                    </td>
+                                    <td></td>
+                                    <td>
+                                        <div class="d-flex flex-row">
+                                            <button class="btn Reschedule-button">Accept</button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="Upcoming" class="tabcontent">
+            <div class="d-flex flex-row justify-content-between">
+                <div class="float-left">
+                    <h3 class="link-text">Current Service Request</h3>
+                </div>
+
+                <button class="btn addrequestbuttton tablinks" onclick="openCity(event, 'newservicerequest')"
+                    style="width: 200px;">Add new service request</button>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <table id="upcoming" class="display table nowrap" cellspacing="0" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Service ID
+                                    </th>
+                                    <th scope="col">Service date
+                                    </th>
+                                    <th scope="col">Customer details
+                                    </th>
+                                    <th scope="col">Distance
+                                    </th>
+                                    <th scope="col">Actions
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td scope="row text-color-table number-and-km">323436</td>
+                                    <td style="padding: 0px; padding-top: 13px;">
+                                        <div class="col">
+                                            <div class="d-flex custom-margin-table">
+                                                <img src="images/calculator.png" class="calander-img">
+                                                <p>09/04/2018</p>
+                                            </div>
+                                            <div class="d-flex">
+                                                <img class="clock" src="images/layer-712.png">
+                                                <p>12:00 - 18:00</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td style="padding: 0px; padding-top: 13px;">
+                                        <div class="col">
+                                            <div class="d-flex custom-margin-table">
+                                                <p>David Bough</p>
+                                            </div>
+                                            <div class="d-flex">
+                                                <img src="images/layer-15.png"
+                                                    style="width: 20px; height: 22px; margin-right: 7px;">
+                                                <p>Musterstrabe 5,12345 Bonn</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>15 km</td>
+                                    <td>
+                                        <button class="btn">Cancel</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td scope="row">323436</td>
+                                    <td style="padding: 0px; padding-top: 13px;">
+                                        <div class="col">
+                                            <div class="d-flex custom-margin-table">
+                                                <img src="images/calculator.png" class="calander-img">
+                                                <p>09/04/2018</p>
+                                            </div>
+                                            <div class="d-flex">
+                                                <img class="clock" src="images/layer-712.png">
+                                                <p>12:00 - 18:00</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td style="padding: 0px; padding-top: 13px;">
+                                        <div class="col">
+                                            <div class="d-flex custom-margin-table">
+                                                <p>David Bough</p>
+                                            </div>
+                                            <div class="d-flex">
+                                                <img src="images/layer-15.png"
+                                                    style="width: 20px; height: 22px; margin-right: 7px;">
+                                                <p>Musterstrabe 5,12345 Bonn</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>15 km</td>
+                                    <td>
+                                        <button class="btn">Cancel</button>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="newservicerequest" class="tabcontent">
+            <div class="text-center">
+                <h1>Set up your cleaning service</h1>
+                <div class="faq-divider text-center d-flex align-items-center justify-content-center">
+                    <img src="images/forma-1-copy-5.png">
+                </div>
+            </div>
+        </div>
+
+        <div id="History" class="tabcontent">
+            <div class="d-flex flex-row justify-content-between">
+                <div class="float-left">
+                    <h3 class="link-text">Service History</h3>
+                </div>
+
+                <button class="btn addrequestbuttton" style="width: 200px;">Export</button>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <table id="selectedColumn" class="display table nowrap" cellspacing="0" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Service ID
+                                    </th>
+                                    <th scope="col">Service date
+                                    </th>
+                                    <th scope="col">Customer details
+                                    </th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td scope="row text-color-table number-and-km"><a href="#" data-toggle="modal"
+                                            data-target="#withServiceProviderModalCenter"
+                                            class="text-decoration-none link-text">323436</a></td>
+                                    <td>
+                                        <div class="col">
+                                            <div class="d-flex custom-margin-table">
+                                                <img src="images/calculator.png" class="calander-img">
+                                                <a href="#" data-toggle="modal"
+                                                    data-target="#withServiceProviderModalCenter"
+                                                    class="text-decoration-none link-text"><strong>31/03/2018</strong></a>
+                                            </div>
+                                            <div class="d-flex">
+                                                <img class="clock" src="images/layer-712.png">
+                                                <a href="#" data-toggle="modal"
+                                                    data-target="#withServiceProviderModalCenter"
+                                                    class="text-decoration-none link-text">12:00 - 18:00</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><div class="col">
+                                        <div class="d-flex custom-margin-table">
+                                            <p>David Bough</p>
+                                        </div>
+                                        <div class="d-flex">
+                                            <img src="images/layer-15.png"
+                                                style="width: 20px; height: 22px; margin-right: 7px;">
+                                            <p>Musterstrabe 5,12345 Bonn</p>
+                                        </div>
+                                    </div></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="Invoices" class="tabcontent">
+            <div class="d-flex flex-row justify-content-between">
+                <div class="float-left">
+                    <h3 class="link-text">Invoice</h3>
+                </div>
+
+                <button class="btn addrequestbuttton" style="width: 200px;">Export</button>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <table id="InvoiceColumn" class="display table nowrap" cellspacing="0" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Service ID
+                                    </th>
+                                    <th scope="col">Invoice Number
+                                    </th>
+                                    <th scope="col">Customer Details
+                                    </th>
+                                    <th scope="col">Invoice Date
+                                    </th>
+                                    <th scope="col">Invoice Amount
+                                    </th>
+                                    <th scope="col">Invoice
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td scope="row text-color-table number-and-km">323436</td>
+                                    <td scope="row text-color-table number-and-km">141415616151</td>
+                                    
+                                    <td>
+                                        <div class="col">
+                                            <div class="d-flex custom-margin-table">
+                                                <p>David Bough</p>
+                                            </div>
+                                            <div class="d-flex">
+                                                <img src="images/layer-15.png"
+                                                    style="width: 20px; height: 22px; margin-right: 7px;">
+                                                <p>Musterstrabe 5,12345 Bonn</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="col">
+                                            <div class="d-flex custom-margin-table">
+                                                <img src="images/calculator.png" class="calander-img">
+                                                <p><strong>31/03/2018</strong></p>
+                                            </div>
+                                            <div class="d-flex">
+                                                <img class="clock" src="images/layer-712.png">
+                                                <p>12:00 - 18:00</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="eurotext">
+                                        <div class="d-flex flex-row custom-margin-table-two-data">
+                                            <p class="">
+                                                €
+                                            </p>
+                                            <p class="">
+                                                63
+                                            </p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <img src="images/icons8-pdf-50.png" alt="reportimg">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td scope="row text-color-table number-and-km">323436</td>
+                                    <td scope="row text-color-table number-and-km">141415616151</td>
+                                    <td>
+
+                                    </td>
+                                    <td>
+                                        <div class="col">
+                                            <div class="d-flex custom-margin-table">
+                                                <img src="images/calculator.png" class="calander-img">
+                                                <p><strong>31/03/2018</strong></p>
+                                            </div>
+                                            <div class="d-flex">
+                                                <img class="clock" src="images/layer-712.png">
+                                                <p>12:00 - 18:00</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    
+                                    <td class="eurotext">
+                                        <div class="d-flex flex-row custom-margin-table-two-data">
+                                            <p class="">
+                                                €
+                                            </p>
+                                            <p class="">
+                                                63
+                                            </p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <img src="images/icons8-pdf-50.png" alt="reportimg">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <div style="flex-grow: 1;"></div>
 
 
     <div class="footer_section w-100">
@@ -1260,7 +993,8 @@
 
     <script>
         $(document).ready(function () {
-            $('#example').DataTable({responsive: true,
+            $('#example').DataTable({
+                responsive: true,
                 "dom": '<"top">rt<"bottom"><"clear">',
                 "aaSorting": [],
                 columnDefs: [{
@@ -1269,6 +1003,60 @@
                 }]
             });
         });
+        $(document).ready(function () {
+            $('#upcoming').DataTable({
+                responsive: true,
+                "dom": '<"top">rt<"bottom"><"clear">',
+                "aaSorting": [],
+                columnDefs: [{
+                    orderable: false,
+                    targets: 4
+                }]
+            });
+        });
+        $(document).ready(function () {
+            $('#selectedColumn').DataTable({
+                responsive: true,
+                "dom": '<"top">rt<"bottom"lip><"clear">',
+                "aaSorting": [],
+                columnDefs: [{
+                    orderable: false,
+                    targets: 4
+                }]
+            });
+        });
+
+        $(document).ready(function () {
+            $('#InvoiceColumn').DataTable({
+
+                responsive: true,
+                "dom": '<"top">rt<"bottom"lip><"clear">',
+                "aaSorting": [],
+                columnDefs: [{
+                    orderable: false,
+                    targets: 4
+                }]
+            });
+        });
+    </script>
+
+    <script>
+        function openCity(evt, cityName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+
+        // Get the element with id="defaultOpen" and click on it
+        document.getElementById("defaultOpen").click();
     </script>
 
 </body>
