@@ -70,8 +70,13 @@
                                 src="images/forma-1-1-1.png"> </a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-cyan text-color-nav"
                             aria-labelledby="navbarDropdownMenuLink-4">
-                            <a class="dropdown-item text-color-nav " href="#">My account</a>
-                            <a class="dropdown-item text-color-nav" href="#">Log out</a>
+                            <span style="padding-left: 15px;">Welcome,<br><strong style="padding-left: 15px;">First
+                                    Customer</strong></span>
+                            <div class="devider-line"></div>
+                            <a class="dropdown-item text-color-nav text-decoration-none" href="#">My Dashboard</a>
+                            <a class="dropdown-item text-color-nav text-decoration-none"
+                                onclick="openCity(event, 'mySettings')" href="#">My Settings</a>
+                            <a class="dropdown-item text-color-nav text-decoration-none" href="#">Log out</a>
                         </div>
                     </li>
                 </ul>
@@ -86,8 +91,7 @@
     <div class="offcanvas offcanvas-end" id="demo">
         <div class="offcanvas-header">
             <p>welcome,<br> <strong>Abc</strong></p>
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
-                aria-label="Close"></button>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
 
         <div class="offcanvas-body">
@@ -99,13 +103,15 @@
                 </li>
                 <li class="side-items">
                     <a class="side-link text-decoration-none" onclick="openCity(event, 'History')" href="#">New Service
-                        </a>
+                    </a>
                 </li>
                 <li class="side-items">
-                    <a class="side-link text-decoration-none" onclick="openCity(event, 'Upcoming')" href="#">Upcoming Service</a>
+                    <a class="side-link text-decoration-none" onclick="openCity(event, 'Upcoming')" href="#">Upcoming
+                        Service</a>
                 </li>
                 <li class="side-items">
-                    <a class="side-link text-decoration-none"  href="#" onclick="openCity(event, 'Schedule')">Service Schedule</a>
+                    <a class="side-link text-decoration-none" href="#" onclick="openCity(event, 'Schedule')">Service
+                        Schedule</a>
                 </li>
                 <li class="side-items">
                     <a class="side-link text-decoration-none" onclick="openCity(event, 'History')" href="#">Service
@@ -115,16 +121,18 @@
                     <a class="side-link text-decoration-none" onclick="openCity(event, 'ratings')">My Ratings</a>
                 </li>
                 <li class="side-items">
-                    <a class="side-link text-decoration-none" onclick="openCity(event, 'Pros')">Block Customer</a>
+                    <a class="side-link text-decoration-none" onclick="openCity(event, 'block-cust')">Block Customer</a>
                 </li>
                 <li class="side-items">
-                    <a class="side-link text-decoration-none" onclick="openCity(event, 'Invoices')" href="#">Invoices</a>
+                    <a class="side-link text-decoration-none" onclick="openCity(event, 'Invoices')"
+                        href="#">Invoices</a>
                 </li>
                 <li class="side-items">
-                    <a class="side-link text-decoration-none" onclick="openCity(event, 'Notification')" href="#">Notification</a>
+                    <a class="side-link text-decoration-none" onclick="openCity(event, 'Notification')"
+                        href="#">Notification</a>
                 </li>
                 <li class="side-items">
-                    <a class="side-link text-decoration-none" href="#">My Settings</a>
+                    <a class="side-link text-decoration-none" onclick="openCity(event, 'mySettings')" href="#">My Settings</a>
                 </li>
                 <li class="side-items">
                     <a class="side-link text-decoration-none" href="#">Logout</a>
@@ -547,7 +555,7 @@
             <button class="tablinks" onclick="openCity(event, 'History')">Service History</button>
 
             <button class="tablinks" onclick="openCity(event, 'ratings')">My Ratings</button>
-            <button class="tablinks" onclick="openCity(event, 'Pros')">Block Customer</button>
+            <button class="tablinks" onclick="openCity(event, 'block-cust')">Block Customer</button>
 
             <button class="tablinks" onclick="openCity(event, 'Invoices')">Invoices</button>
 
@@ -558,7 +566,7 @@
         <div id="NewService" class="tabcontent">
             <div class="d-flex flex-row justify-content-between">
                 <div class="float-left">
-                    <h3 class="link-text">Current Service Request</h3>
+                    <h3 class="link-text">New Service Request</h3>
                 </div>
 
                 <button class="btn addrequestbuttton tablinks" onclick="openCity(event, 'newservicerequest')"
@@ -770,7 +778,7 @@
                                     </th>
                                     <th scope="col">Customer details
                                     </th>
-                                    
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -794,16 +802,18 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td><div class="col">
-                                        <div class="d-flex custom-margin-table">
-                                            <p>David Bough</p>
+                                    <td>
+                                        <div class="col">
+                                            <div class="d-flex custom-margin-table">
+                                                <p>David Bough</p>
+                                            </div>
+                                            <div class="d-flex">
+                                                <img src="images/layer-15.png"
+                                                    style="width: 20px; height: 22px; margin-right: 7px;">
+                                                <p>Musterstrabe 5,12345 Bonn</p>
+                                            </div>
                                         </div>
-                                        <div class="d-flex">
-                                            <img src="images/layer-15.png"
-                                                style="width: 20px; height: 22px; margin-right: 7px;">
-                                            <p>Musterstrabe 5,12345 Bonn</p>
-                                        </div>
-                                    </div></td>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -844,7 +854,7 @@
                                 <tr>
                                     <td scope="row text-color-table number-and-km">323436</td>
                                     <td scope="row text-color-table number-and-km">141415616151</td>
-                                    
+
                                     <td>
                                         <div class="col">
                                             <div class="d-flex custom-margin-table">
@@ -901,7 +911,7 @@
                                             </div>
                                         </div>
                                     </td>
-                                    
+
                                     <td class="eurotext">
                                         <div class="d-flex flex-row custom-margin-table-two-data">
                                             <p class="">
@@ -920,6 +930,239 @@
                         </table>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <div id="block-cust" class="tabcontent">
+            <div class="d-flex flex-row">
+                <div class="card card-style">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-center">
+                            <img src="images/hat.png" class="hat-img">
+                        </div>
+                        <div class="text-class-block d-flex justify-content-center">
+                            <span><strong>cust1 cust1</strong></span>
+                        </div>
+                        <div class="text-class-block d-flex justify-content-center">
+                            <button class="unblock-btn">Unblock</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="mySettings" class="tabcontent">
+            <div class="d-flex flex-row container">
+
+                <div class="faq-questions-list " style="width: 100%;">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item text-center text-dark">
+                            <a class="nav-link active w-100" data-toggle="tab" href="#mydetails"><img
+                                    src="images/setup-service-white.png">My Details</a>
+                        </li>
+                        <li class="nav-item text-center text-dark">
+                            <a class="nav-link w-100" data-toggle="tab" href="#myaddresses"><img
+                                    src="images/schedule-white.png">Change Password</a>
+                        </li>
+
+                    </ul>
+
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div id="mydetails" class="container tab-pane active"><br>
+                            <span><strong>Account Status:</strong>Active</span>
+
+                            <div class="d-flex flex-row">
+                                <div class="w-100 custome-margin-my-details">
+                                    <span>Basic details</span>
+                                    <div class="mydetails-devider-line"></div>
+                                </div>
+                                <div>
+                                    <img src="images/avatar-iron.png" alt="">
+                                </div>
+                            </div>
+
+                            <form>
+                                <div class="form-row name-form">
+                                    <div class="col">
+                                        <label for="exampleFormControlInput1">First name</label>
+                                        <input type="text" class="form-control" placeholder="First name">
+                                    </div>
+                                    <div class="col">
+                                        <label for="exampleFormControlInput1">Last name</label>
+                                        <input type="text" class="form-control" placeholder="First name">
+                                    </div>
+                                    <div class="col">
+                                        <fieldset disabled>
+                                            <label for="exampleFormControlInput1">E-mail address</label>
+                                            <input type="text" id="disabledTextInput" class="form-control"
+                                                placeholder="Disabled input">
+
+                                        </fieldset>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="justify-content-center form-group col-md-4" style="padding-top: 5px;">
+                                        <label for="exampleFormControlInput1">Mobile Number</label>
+                                        <div class="number_input d-flex">
+                                            <input type="text" id="form3Example1"
+                                                class="form-control float-right country_number" placeholder="+42"
+                                                style="height: 46px; width: 54px; background-color: #f4f4f4;" />
+
+                                            <input type="text" id="form3Example1" class="form-control"
+                                                placeholder="Mobile number" style="height: 46px;" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4" style="padding-top: 5px;">
+                                        <label for="exampleFormControlInput1">Date of birth</label>
+                                        <div class="d-flex flex-row">
+                                            <select class="custom-select date-select" id="inlineFormCustomSelectPref"
+                                                style="width: 150px; height: 46px;">
+                                                <option selected>Choose...</option>
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                            </select>
+                                            <select class="custom-select month-select" id="inlineFormCustomSelectPref"
+                                                style="margin-left: 5px; width: 200px; height: 46px;">
+                                                <option selected>Choose...</option>
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                            </select>
+                                            <select class="custom-select year-select" id="inlineFormCustomSelectPref"
+                                                style="margin-left: 5px; width: 150px; height: 46px;">
+                                                <option selected>Choose...</option>
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="exampleFormControlInput1">Nationality</label>
+                                        <select class="custom-select Nationality-select" id="inlineFormCustomSelectPref">
+                                            <option selected>Choose...</option>
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                                            id="inlineRadio1" value="option1">
+                                        <label class="form-check-label" for="inlineRadio1">Male</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                                            id="inlineRadio2" value="option2">
+                                        <label class="form-check-label" for="inlineRadio2">Female</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                                            id="inlineRadio3" value="option3">
+                                        <label class="form-check-label" for="inlineRadio3">Rather not to say</label>
+                                    </div>
+                                </div>
+                                <label>Select Avatar</label>
+                                <div class="d-flex justify-content-left align-items-center extra-services-img"
+                                    style="padding-bottom: 41px; padding-top: 30px;">
+                                    <div class="flex-column col d-flex justify-content-center align-items-center">
+                                        <div class="img-col d-flex justify-content-center align-items-center">
+                                            <img src="images/avatar-car.png">
+                                        </div>
+                                    </div>
+                                    <div class="flex-column col d-flex justify-content-center align-items-center">
+                                        <div class="img-col d-flex justify-content-center align-items-center">
+                                            <img src="images/avatar-female.png">
+                                        </div>
+                                    </div>
+                                    <div class="flex-column col d-flex justify-content-center align-items-center">
+                                        <div class="img-col d-flex justify-content-center align-items-center">
+                                            <img src="images/avatar-hat.png">
+                                        </div>
+                                    </div>
+                                    <div class="flex-column col d-flex justify-content-center align-items-center">
+                                        <div class="img-col d-flex justify-content-center align-items-center">
+                                            <img src="images/avatar-iron.png">
+                                        </div>
+                                    </div>
+                                    <div class="flex-column col d-flex justify-content-center align-items-center">
+                                        <div class="img-col d-flex justify-content-center align-items-center">
+                                            <img src="images/avatar-male.png">
+                                        </div>
+                                    </div>
+                                    <div class="flex-column col d-flex justify-content-center align-items-center">
+                                        <div class="img-col d-flex justify-content-center align-items-center">
+                                            <img src="images/avatar-ship.png">
+                                        </div>
+                                    </div>
+                                </div>
+                                <span>My address</span>
+                                <div class="devider-line"></div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <label for="exampleFormControlInput1">Street name</label>
+                                        <input type="text" class="form-control" placeholder="Street name">
+                                    </div>
+                                    <div class="col">
+                                        <label for="exampleFormControlInput1">House number</label>
+                                        <input type="text" class="form-control" placeholder="House number">
+                                    </div>
+                                    <div class="col">
+                                        <label for="exampleFormControlInput1">Postal code</label>
+                                        <input type="text" class="form-control" placeholder="Postal code">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-lg-4">
+                                        <label for="exampleFormControlInput1">City</label>
+                                        <input type="text" class="form-control" placeholder="City name">
+                                    </div>
+                                </div>
+
+                                <div class="submit-devider-line">
+
+                                </div>
+                                <button class="settings-submit">Submit</button>
+                            </form>
+                        </div>
+
+                        <div id="myaddresses" class="container tab-pane details fade"><br>
+                            <form style="margin-top: 20px;">
+                                <div class="form-group">
+                                    <div class="col-lg-4">
+                                        <label for="exampleFormControlInput1">Old Password</label>
+                                        <input type="email" class="form-control" id="exampleFormControlInput1"
+                                            placeholder="current password">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-4">
+                                        <label for="exampleFormControlInput1">New Password</label>
+                                        <input type="email" class="form-control" id="exampleFormControlInput1"
+                                            placeholder="Password">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-4">
+                                        <label for="exampleFormControlInput1">Confirm Password</label>
+                                        <input type="email" class="form-control" id="exampleFormControlInput1"
+                                            placeholder="Confirm Password">
+                                    </div>
+                                </div>
+                                <button class="save-btn" style="margin-left: 0px;">save</button>
+                            </form>
+                        </div>
+
+
+                    </div>
+                </div>
+
+
             </div>
         </div>
 
