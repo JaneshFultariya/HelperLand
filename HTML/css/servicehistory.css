@@ -732,11 +732,19 @@ ul {
     font-weight: bold;
     line-height: 40px;
     border: none !important;
+    border-bottom: 4px solid #e1e1e1 !important;
+    
+}
+
+.nav-tabs{
+    border-bottom: 4px solid #e1e1e1 !important;
 }
 
 .nav-tabs .nav-link.active {
     color: #146371 !important;
+    border-bottom: 4px solid #1d7a8c !important;
 }
+
 
 .col-auto img {
     width: 511px;
