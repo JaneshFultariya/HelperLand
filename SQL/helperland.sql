@@ -30,7 +30,9 @@ CREATE TABLE `address` (
   `postal_code` int NOT NULL,
   `city` varchar(45) NOT NULL,
   `contact` varchar(45) NOT NULL,
-  PRIMARY KEY (`Address_id`)
+  PRIMARY KEY (`Address_id`),
+  KEY `user_id_idx` (`user_id`),
+  CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `user_table` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -52,7 +54,11 @@ DROP TABLE IF EXISTS `block_customer`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `block_customer` (
   `sp_id` int NOT NULL,
-  `cust_id` int NOT NULL
+  `cust_id` int NOT NULL,
+  PRIMARY KEY (`sp_id`,`cust_id`),
+  KEY `block_cust_id_idx` (`cust_id`),
+  CONSTRAINT `block_cust_id` FOREIGN KEY (`cust_id`) REFERENCES `customer` (`cust_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `block_service_provider` FOREIGN KEY (`sp_id`) REFERENCES `service_provider` (`sp_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -73,16 +79,15 @@ DROP TABLE IF EXISTS `customer`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `customer` (
-  `cust_id` int DEFAULT NULL,
+  `cust_id` int NOT NULL,
   `cust_first_name` varchar(45) NOT NULL,
   `cust_last_name` varchar(45) DEFAULT NULL,
   `cust_dob` date DEFAULT NULL,
   `cust_phone` int NOT NULL,
   `cust_language` varchar(15) NOT NULL,
-  `user_id` int NOT NULL,
+  PRIMARY KEY (`cust_id`),
   UNIQUE KEY `cust_id_UNIQUE` (`cust_id`),
-  KEY `user_id` (`user_id`),
-  CONSTRAINT `customer_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user_table` (`user_id`)
+  CONSTRAINT `customer` FOREIGN KEY (`cust_id`) REFERENCES `user_table` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -108,10 +113,13 @@ CREATE TABLE `rating` (
   `s_id` int NOT NULL,
   `ratings` int NOT NULL,
   `Comments` varchar(100) DEFAULT NULL,
-  `user_id` int NOT NULL,
+  PRIMARY KEY (`s_id`,`sp_id`,`cust_id`),
   UNIQUE KEY `S_id_UNIQUE` (`s_id`),
-  KEY `user_id` (`user_id`),
-  CONSTRAINT `rating_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user_table` (`user_id`)
+  KEY `sp_id_idx` (`sp_id`),
+  KEY `customer_idx` (`cust_id`),
+  CONSTRAINT `rating_cust_id` FOREIGN KEY (`cust_id`) REFERENCES `customer` (`cust_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `service` FOREIGN KEY (`s_id`) REFERENCES `service` (`s_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `serviceprovider` FOREIGN KEY (`sp_id`) REFERENCES `service_provider` (`sp_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -133,6 +141,9 @@ DROP TABLE IF EXISTS `service`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `service` (
   `s_id` int NOT NULL AUTO_INCREMENT,
+  `sp_id` int NOT NULL,
+  `Address_id` int NOT NULL,
+  `cust_id` int NOT NULL,
   `s_date` date NOT NULL,
   `s_start_time` time NOT NULL,
   `s_total_time` time NOT NULL,
@@ -140,14 +151,14 @@ CREATE TABLE `service` (
   `s_status` varchar(15) NOT NULL,
   `amount` int NOT NULL,
   `payment_status` varchar(15) NOT NULL,
-  `cust_id` int NOT NULL,
-  `Address_id` int NOT NULL,
-  `sp_id` int DEFAULT NULL,
   `pet_status` int DEFAULT NULL,
-  `user_id` int NOT NULL,
-  PRIMARY KEY (`s_id`),
-  KEY `user_id` (`user_id`),
-  CONSTRAINT `service_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user_table` (`user_id`)
+  PRIMARY KEY (`s_id`,`sp_id`,`Address_id`,`cust_id`),
+  KEY `sp_id_idx` (`sp_id`),
+  KEY `address_id_idx` (`Address_id`),
+  KEY `cust_id_idx` (`cust_id`),
+  CONSTRAINT `address_id` FOREIGN KEY (`Address_id`) REFERENCES `address` (`Address_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `cust_id` FOREIGN KEY (`cust_id`) REFERENCES `customer` (`cust_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `sp_id` FOREIGN KEY (`sp_id`) REFERENCES `service_provider` (`sp_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -178,10 +189,8 @@ CREATE TABLE `service_provider` (
   `rating` int DEFAULT NULL,
   `status` int DEFAULT NULL,
   `nationality` varchar(45) NOT NULL,
-  `user_id` int NOT NULL,
   PRIMARY KEY (`sp_id`),
-  KEY `user_id` (`user_id`),
-  CONSTRAINT `service_provider_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user_table` (`user_id`)
+  CONSTRAINT `service_provider_id` FOREIGN KEY (`sp_id`) REFERENCES `user_table` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -229,4 +238,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-01-20 14:51:30
+-- Dump completed on 2022-01-20 19:21:34
