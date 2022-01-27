@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,19 +8,19 @@
 <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="css/contactUs.css">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/faqstyle.css" />">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
         integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
         
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
-    <title>Contact Us</title>
+    <title>FAQs</title>
 </head>
 <body>
     <div class="header" id="topheader">
         <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #525252;">
-            <a class="navbar-brand" href="homepage.jsp">
-                <img src="images/white-logo-transparent-background.png" style="  width: 73px; height: 54px;">
+            <a class="navbar-brand" href="homepage ">
+                <img src="<c:url value="/resources/images/white-logo-transparent-background.png" />" style="  width: 73px; height: 54px;">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,12 +31,12 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
                         <div class="nav-btn-blue">
-                            <a class="nav-link" href="bookservice.jsp">Book now</a>
+                            <a class="nav-link" href="bookservice ">Book now</a>
                         </div>
                     </li>
                     <li class="nav-item">
                         <div class="nav-btn">
-                            <a class="nav-link" href="price.jsp">Prices & services</a>
+                            <a class="nav-link" href="price ">Prices & services</a>
                         </div>
                     </li>
                     <li class="nav-item">
@@ -50,7 +51,7 @@
                     </li>
                     <li class="nav-item">
                         <div class="nav-btnn">
-                            <a class="nav-link" href="contactUs.jsp">Contact</a>
+                            <a class="nav-link" href="contactUs ">Contact</a>
                         </div>
                     </li>
                     <li class="nav-item">
@@ -61,7 +62,7 @@
                     </li>
                     <li class="nav-item">
                         <div class="nav-btn-blue">
-                            <a class="nav-link" href="becomeapro.jsp">Become a Helper</a>
+                            <a class="nav-link" href="becomeapro ">Become a Helper</a>
                         </div>
                     </li>
                 </ul>
@@ -70,6 +71,7 @@
                 <span class="navbar-toggler-icon"></span>
               </a>
         </nav>
+        
     </div>
 
     <div class="offcanvas offcanvas-end" id="demo">
@@ -81,10 +83,10 @@
           
           <ul class="side-nav">
             <li class="side-items">
-              <a class="side-link text-decoration-none" href="bookservice.jsp">Book now</a>
+              <a class="side-link text-decoration-none" href="bookservice ">Book now</a>
             </li>
             <li class="side-items">
-              <a class="side-link text-decoration-none" href="price.jsp">Prices & services</a>
+              <a class="side-link text-decoration-none" href="price ">Prices & services</a>
             </li>
             <li class="side-items">
               <a class="side-link text-decoration-none" href="#">Warranty</a>
@@ -93,24 +95,36 @@
               <a class="side-link text-decoration-none" href="#">Blog</a>
             </li>
             <li class="side-items">
-              <a class="side-link text-decoration-none" href="contactUs.jsp">Contact</a>
+              <a class="side-link text-decoration-none" href="contactUs ">Contact</a>
             </li>
             <li class="side-items">
               <a class="side-link text-decoration-none" data-toggle="modal"
               data-target="#exampleModalCenter" href="#">Login</a>
             </li>
             <li class="side-items">
-              <a class="side-link text-decoration-none" href="becomeapro.jsp">Become a cleaner</a>
+              <a class="side-link text-decoration-none" href="becomeapro ">Become a cleaner</a>
             </li>
           </ul>
     
         </div>
       </div>
 
-
-
     <section id="banner">
-        <img class="img-fluid w-100" src="images/group-16_2.png" />
+        <img class="img-fluid w-100" src="<c:url value="/resources/images/faq-banner.png" />" />
+    </section>
+
+    <section id="faq-text-and-design">
+        <div class="text-center" style="margin-top: 30px;">
+            <h1>FAQs</h1>
+        </div>
+            <div class="faq-divider text-center d-flex align-items-center justify-content-center">
+                <img src="<c:url value="/resources/images/forma-1-copy-5.png" />">
+            </div>
+        <div class="text-center" style="margin-top: 15px;">
+            <p>Whether you are Customer or Service provider,<br>
+                We have tried our best to solve all your queries and questions.</p>
+        </div>
+
     </section>
 
     <section id="model">
@@ -204,7 +218,7 @@
                   <h3 class="modal-title" id="exampleModalLongTitle">Create an account</h3>
                 </div>
                 <div class="faq-divider text-center d-flex align-items-center justify-content-center">
-                  <img src="images/forma-1-copy-5.png">
+                  <img src="<c:url value="/resources/images/forma-1-copy-5.png" />">
                 </div>
                 <form class="mx-auto" style="margin-top: 15px;">
                   <div class="form-group">
@@ -259,179 +273,173 @@
         </div>
   
   
-    </section>
+      </section>
 
-    <section id="contactUs">
-        <div class="text-center" style="margin-top: 31px;">
-            <h1 style="color: #4F4F4F;">Contact us</h1>
-        </div>
-        <div class="faq-divider text-center d-flex align-items-center justify-content-center">
-            <img src="images/forma-1-copy-5.png">
-        </div>
+    <section class="faq-questions-list container ">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item text-center text-dark">
+                <a class="nav-link active w-100" data-toggle="tab" href="#home">For Customer</a>
+            </li>
+            <li class="nav-item text-center text-dark">
+                <a class="nav-link w-100" data-toggle="tab" href="#menu">For Service Provider</a>
+            </li>
+        </ul>
 
-        <div class="con_logo d-flex align-items-center justify-content-center">
-            <div class="innerlogo d-flex flex-column align-items-center justify-content-start">
-                <div class="logo">
-                    <image src="images/forma-1_2.png">
-                </div>
-                <div class="logos_content">
-                    <p class="mb-0 text-center">1111 Lorem ipsum text 100,<br>Lorem ipsum AB</p>
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div id="home" class="container tab-pane active"><br>
+                <div class="accordion">
+                    <div class="accordion-item" id="question1">
+                        <a class="accordion-link" href="#question1">
+                            <img class="up-arrow" src="<c:url value="/resources/images/vector-smart-object-copy.png" />" style="margin-right: 15px;" >
+                            
+                            <img class="down-arrow" src="<c:url value="/resources/images/vector-smart-object.png" />" style="margin-right: 15px;">
+                            What's included in a cleaning?
+                        </a>
+                        <div class="answer">
+                            <p>Bedroom, Living Room & Common Areas,Bathrooms,Kitchen,Extras</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item" id="question2">
+                        <a class="accordion-link" href="#question2">
+                            <img class="up-arrow" src="<c:url value="/resources/images/vector-smart-object-copy.png" />" style="margin-right: 15px;" >
+                            
+                            <img class="down-arrow" src="<c:url value="/resources/images/vector-smart-object.png" />" style="margin-right: 15px;">
+                            testQA??
+                        </a>
+                        <div class="answer">
+                            <p>A:testQA</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item" id="question3">
+                        <a class="accordion-link" href="#question3">
+                            <img class="up-arrow" src="<c:url value="/resources/images/vector-smart-object-copy.png" />" style="margin-right: 15px;" >
+                            
+                            <img class="down-arrow" src="<c:url value="/resources/images/vector-smart-object.png" />" style="margin-right: 15px;">
+                            Which Helperland professional will come to my place?
+                        </a>
+                        <div class="answer">
+                            <p>Helperland has a vast network of experienced, top-rated cleaners. Based on the time and date of your request, we work to assign the best professional available.Like working with a specific pro? Add them to your Pro Team from the mobile app and they'll be requested first for all future bookings.You will receive an email with details about your professional prior to your appointment.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item" id="question4">
+                        <a class="accordion-link" href="#question4">
+                            <img class="up-arrow" src="<c:url value="/resources/images/vector-smart-object-copy.png" />" style="margin-right: 15px;" >
+                            
+                            <img class="down-arrow" src="<c:url value="/resources/images/vector-smart-object.png" />" style="margin-right: 15px;">
+                            Can I skip or reschedule bookings?
+                        </a>
+                        <div class="answer">
+                            <p>You can reschedule any booking for free at least 24 hours in advance of the scheduled start time. If you need to skip a booking within the minimum commitment, we’ll credit the value of the booking to your account. You can use this credit on future cleanings and other Helperland services. </p>
+                        </div>
+                    </div>
+                    <div class="accordion-item" id="question9">
+                        <a class="accordion-link" href="#question9">
+                            <img class="up-arrow" src="<c:url value="/resources/images/vector-smart-object-copy.png" />" style="margin-right: 15px;" >
+                            
+                            <img class="down-arrow" src="<c:url value="/resources/images/vector-smart-object.png" />" style="margin-right: 15px;">
+                            test tatva
+                        </a>
+                        <div class="answer">
+                            <p>test tatva</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item" id="question10">
+                        <a class="accordion-link" href="#question10">
+                            <img class="up-arrow" src="<c:url value="/resources/images/vector-smart-object-copy.png" />" style="margin-right: 15px;" >
+                            
+                            <img class="down-arrow" src="<c:url value="/resources/images/vector-smart-object.png" />" style="margin-right: 15px;">
+                            test tatvasoft
+                        </a>
+                        <div class="answer">
+                            <p>test tatvasoft</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item" id="question11">
+                        <a class="accordion-link" href="#question11">
+                            <img class="up-arrow" src="<c:url value="/resources/images/vector-smart-object-copy.png" />" style="margin-right: 15px;" >
+                            
+                            <img class="down-arrow" src="<c:url value="/resources/images/vector-smart-object.png" />" style="margin-right: 15px;">
+                            Do I need to be home for the booking?
+                        </a>
+                        <div class="answer">
+                            <p>We strongly recommend that you are home for the first clean of your booking to show your cleaner around. Some customers choose to give a spare key to their cleaner, but this decision is based on individual preferences.</p>
+                        </div>
+                    </div>
+                    
+                   
                 </div>
             </div>
-            <div class="innerlogo d-flex flex-column align-items-center justify-content-start">
-                <div class="logo">
-                    <image src="images/phone-call.png">
-                </div>
-                <div class="logos_content">
-                    <p class="mb-0 text-center">+49 (40) 123 56 7890</p>
-                    <p class="mb-0 text-center">+49 (40) 987 56 0000</p>
-                </div>
-            </div>
-            <div class="innerlogo d-flex flex-column align-items-center justify-content-start mb-0">
-                <div class="logo">
-                    <image src="images/mail.png">
-                </div>
-                <div class="logos_content">
-                    <p class="mb-0 text-center">info@helperland.com <br> &nbsp</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="deviderline  mx-auto">
-        </div>
-
-        <!-- <div class="container" style="padding-top: 74px;">
-            <div class="text-center">
-                <h3>Get in touch with us</h3>
-            </div>
-            <form class="form-get-in-touch" style="margin-top: 23px;">
-                <div class="name_input d-flex justify-content-center" style="margin-bottom: 15px;">
-                    <input type="text" id="form3Example1" class="form-control" placeholder="First Name"
-                        style="width: 299px; height: 46px; margin-right: 25px;" />
-                    <input type="text" id="form3Example2" class="form-control" placeholder="Last Name"
-                        style="width: 299px; height: 46px;" />
-                </div>
-                <div class=" d-flex justify-content-center" style="margin-bottom: 15px;">
-                    <input type="text" id="form3Example1" class="form-control float-right country_number"
-                        placeholder="+42" style="width: 57px; height: 46px; background-color: #c8c8c8;" />
-                    <div class="number_input d-flex justify-content-center">
-                        <input type="text" id="form3Example1" class="form-control float-right"
-                            placeholder="Mobile number" style="width: 242px; height: 46px; margin-right: 25px;" />
-                        <input type="text" id="form3Example2" class="form-control float-left"
-                            placeholder="Email address" style="width: 299px; height: 46px;" />
+            <div id="menu" class="container tab-pane fade"><br>
+                <div class="accordion">
+                    <div class="accordion-item" id="question5">
+                        <a class="accordion-link" href="#question5">
+                            <img class="up-arrow" src="<c:url value="/resources/images/vector-smart-object-copy.png" />" style="margin-right: 15px;" >
+                            
+                            <img class="down-arrow" src="<c:url value="/resources/images/vector-smart-object.png" />" style="margin-right: 15px;">
+							How much do service providers earn?
+                        </a>
+                        <div class="answer">
+                            <p>The self-employed service providers working with Helperland set their own payouts, this means that they decide how much they earn per hour.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item" id="question6">
+                        <a class="accordion-link" href="#question6">    
+                            <!-- <ion-icon size="large" class="up-arrow" style="margin-right: 15px;"
+                                name="chevron-forward-circle-outline"></ion-icon>
+                            <ion-icon size="large" class="down-arrow" style="margin-right: 15px;" name="chevron-down-circle-outline">
+                            </ion-icon> -->
+                            <img class="up-arrow" src="<c:url value="/resources/images/vector-smart-object-copy.png" />" style="margin-right: 15px;" >
+                            
+                            <img class="down-arrow" src="<c:url value="/resources/images/vector-smart-object.png" />" style="margin-right: 15px;">
+                            What support do you provide to the service providers?
+                        </a>
+                        <div class="answer">
+                            <p>Our call-centre is available to assist the service providers with all queries or issues in regards to their bookings during office hours. Before a service provider starts receiving jobs, every individual partner receives an orientation session to familiarise with the online platform and their profile.</p>
+                        </div>
                     </div>
                 </div>
-                <div class="row" style="margin-bottom: 15px;">
-                    <select class="custom-select mx-auto" style="width: 626px; height: 46px;"
-                        id="inlineFormCustomSelectPref">
-                        <option selected>Subject</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
-                </div>
-
-                <div class="d-flex justify-content-center">
-                    <input type="text" placeholder="Message" class="Rounded-Rectangle-2-copy-11">
-                </div>
-
-        </div> -->
-
-        <div class="container get-in-touch-form">
-            <div class="text-center">
-                <h3>Get in touch with us</h3>
             </div>
-            <form class="mx-auto">
-                <div class="form-group">
-                    <div class="row">
-                      <div class="col">
-                        <input type="text" class="form-control" placeholder="First name">
-                      </div>
-                      <div class="col">
-                        <input type="text" class="form-control" placeholder="Last name">
-                      </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col">
-                            <div class="input-group mb-2">
-                              <div class="input-group-prepend">
-                                <div class="input-group-text">+42</div>
-                              </div>
-                              <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Mobile number">
-                            </div>
-                          </div>
-                      <div class="col">
-                        <input type="text" class="form-control" placeholder="email">
-                      </div>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                  <select class="form-control" id="exampleFormControlSelect1">
-                    <option>select</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                  </select>
-                </div>
-                
-                <div class="form-group">
-                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Message"></textarea>
-                </div>
-              </form>
         </div>
-        <div class="main_button position-relative rounded-pill mx-auto" style="margin-bottom: 45px;">
-            <a class="button_link  text-decoration-none text-light">Submit</a>
-        </div>
-        </form>
-        </div>
-    </section>
-
-    <section id="map">
-        <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3671.698050238408!2d72.49824711566968!3d23.034856384946902!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e8352e403437b%3A0xdc9d4dae36889fb9!2sTatvaSoft!5e0!3m2!1sen!2sin!4v1641377683077!5m2!1sen!2sin"
-            width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
     </section>
 
 
-    <section id="get-news-letter">
-        <div class="align-items-center" style="padding-top: 47.67px;">
 
+    <section id="get news letter">
+        <div class="d-flex flex-row justify-content-center">
+            
             <div class="news-letter-news-letters-email-submit d-flex flex-column">
                 <div class="news-letter-news-letters text-center" style="margin-top: 45px; margin-left: -15px;">
                     <h5>GET OUR NEWSLETTER</h5>
                 </div>
-                <div class="email-submit-btn d-flex flex-row justify-content-center"
-                    style="margin-top: 15px; margin-bottom: 30px;">
+                <div class="d-flex flex-row justify-content-center" style="margin-top: 15px; margin-bottom: 30px;">
                     <input type="email" class="text-md-left" style="border-radius: 20px;" id="exampleInputEmail1"
                         aria-describedby="emailHelp" placeholder="Enter email">
                     <button class="btn">Submit</button>
                 </div>
             </div>
+            
         </div>
     </section>
 
-    <div class="footer_section w-100" style="margin-top: 53px;">
+    <div class="footer_section w-100">
         <div class="footer_main d-flex justify-content-around align-items-center">
             <div class="footer_left">
-                <img src="images/white-logo-transparent-background.png" alt="" height="78" width="106">
+                <img src="<c:url value="/resources/images/white-logo-transparent-background.png" />" alt="" height="78" width="106">
             </div>
             <div class="footer_mid">
                 <ul class="d-flex p-0 text-center">
                     <li>
-                        <a href="homepage.jsp" class="text-decoration-none">HOME</a>
+                        <a href="homepage " class="text-decoration-none">HOME</a>
                     </li>
                     <li>
-                        <a href="aboutus.jsp" class="text-decoration-none">ABOUT</a>
+                        <a href="aboutus " class="text-decoration-none">ABOUT</a>
                     </li>
                     <li>
                         <a href="" class="text-decoration-none">TESTIMONIAL</a>
                     </li>
                     <li>
-                        <a href="faq.jsp" class="text-decoration-none">FAQS</a>
+                        <a href="faq " class="text-decoration-none">FAQS</a>
                     </li>
                     <li>
                         <a href="" class="text-decoration-none">INSURANCE POLICY</a>
@@ -442,22 +450,18 @@
                 </ul>
             </div>
             <div class="footer_right d-flex">
-            <a class="text-decoration-none" href="https://www.facebook.com/helperDE/">
                 <svg xmlns="http://www.w3.org/2000/svg" width="9" height="18">
                     <path fill-rule="evenodd" fill="#CCC"
                         d="M1.947 3.48v2.481H0v3.033h1.947V18.1h4.001V8.995h2.685S8.885 7.541 9.7 5.95H5.963V3.876c0-.31.437-.728.868-.728H9.11V.9H6.46C1.848.9 1.947 3.27 1.947 3.48z" />
                 </svg>
-                </a>
-                <a class="text-decoration-none" href="https://www.instagram.com/helperlandde/">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
                     <path fill-rule="evenodd" fill="#CCC"
                         d="M14.48 20H5.519A5.524 5.524 0 0 1 0 14.482V5.52C0 2.477 2.475.2 5.519.2h8.961c3.043 0 5.519 2.277 5.519 5.32v8.962A5.525 5.525 0 0 1 14.48 20zm3.744-5.518V5.52a3.748 3.748 0 0 0-3.744-3.744H5.519A3.749 3.749 0 0 0 1.774 5.52v8.962a3.749 3.749 0 0 0 3.745 3.744h8.961a3.748 3.748 0 0 0 3.744-3.744zm-2.855-8.536c-.099 0-.678-.14-.92-.381-.242-.243.221-.578.221-.921 0-.342-.463-.678-.221-.92.242-.242.821-.381.92-.381.343 0 1.111.139.92.381.242.242.381.578.381.92 0 .342-.139.678-.381.921.171.241-.577.381-.92.381zm-5.37 9.208c-2.841 0-5.153-2.312-5.153-5.054 0-2.941 2.312-5.252 5.153-5.252 2.842 0 5.153 2.311 5.153 5.252 0 2.742-2.311 5.054-5.153 5.054zm0-8.532c-1.863 0-3.379 1.516-3.379 3.478 0 1.764 1.516 3.28 3.379 3.28s3.379-1.516 3.379-3.28c0-1.962-1.516-3.478-3.379-3.478z" />
                 </svg>
-                </a>
             </div>
         </div>
         <div class="footer_end d-flex align-items-center justify-content-center">
-            <p class="m-0 text-center">�2018 Helperland. All rights reserved. <a class="termsandcon text-decoration-none" href="#">Terms and Conditions </a>| <a class="termsandcon text-decoration-none" href="#">Privacy Policy</a>
+            <p class="m-0 text-center">©2018 Helperland. All rights reserved. Terms and Conditions | Privacy Policy
             </p>
         </div>
     </div>
@@ -472,10 +476,12 @@
         integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2"
         crossorigin="anonymous"></script>
 
+
+    
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

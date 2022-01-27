@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +8,7 @@
 <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="css/becomeapro.css">
+  <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/becomeapro.css" />">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
     integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
@@ -20,8 +21,8 @@
 <body>
   <div class="header" id="topheader">
     <nav class="navbar navbar-expand-lg navbar-light">
-      <a class="navbar-brand" href="homepage.jsp">
-        <img class="header-logo-image" src="images/white-logo-transparent-background.png">
+      <a class="navbar-brand" href="homepage">
+        <img class="header-logo-image" src="<c:url value="/resources/images/white-logo-transparent-background.png" />">
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,14 +33,14 @@
         <ul class="navbar-nav ml-auto nav-ul-margin">
           <li class="nav-item">
             <div class="nav-btn" href="#">
-              <a class="nav-btn-item text-decoration-none" href="bookservice.jsp">
+              <a class="nav-btn-item text-decoration-none" href="bookservice ">
                 Book a cleaner
               </a>
             </div>
           </li>
           <li class="nav-item">
             <div class="nav-btnn" href="#">
-              <a class="nav-btn-item text-decoration-none" href="price.jsp">
+              <a class="nav-btn-item text-decoration-none" href="price ">
                 Price
               </a>
             </div>
@@ -62,7 +63,7 @@
           </li>
           <li class="nav-item">
             <div class="nav-btnn" href="#">
-              <a class="nav-btn-item text-decoration-none" href="contactUs.jsp">
+              <a class="nav-btn-item text-decoration-none" href="contactUs ">
                 contact us
               </a>
             </div>
@@ -131,12 +132,12 @@
           <label class="form-check-label" for="exampleCheck1">I accept terms and conditions & privacy policy</label>
         </div>
         <div class="btn-get-strated mx-auto text-center align-items-center py-2 my-3">
-          <a class="button_link  text-decoration-none text-light">Get Started <img src="images/shape-1.svg"></a>
+          <a class="button_link  text-decoration-none text-light">Get Started <img src="<c:url value="/resources/images/shape-1.svg" />"></a>
         </div>
       </form>
     </div>
     <div class="text-center two-images" style="padding-top: 54px; padding-bottom: 40px;">
-      <img src="images/group-18_5.png" class="img-fluid" alt="Responsive image">
+      <img src="<c:url value="/resources/images/group-18_5.png" />" class="img-fluid" alt="Responsive image">
     </div>
 
   </div>
@@ -150,10 +151,10 @@
 
       <ul class="side-nav">
         <li class="side-items">
-          <a class="side-link text-decoration-none" href="bookservice.jsp">Book now</a>
+          <a class="side-link text-decoration-none" href="bookservice ">Book now</a>
         </li>
         <li class="side-items">
-          <a class="side-link text-decoration-none" href="price.jsp">Prices & services</a>
+          <a class="side-link text-decoration-none" href="price ">Prices & services</a>
         </li>
         <li class="side-items">
           <a class="side-link text-decoration-none" href="#">Warranty</a>
@@ -162,14 +163,14 @@
           <a class="side-link text-decoration-none" href="#">Blog</a>
         </li>
         <li class="side-items">
-          <a class="side-link text-decoration-none" href="contactUs.jsp">Contact</a>
+          <a class="side-link text-decoration-none" href="contactUs ">Contact</a>
         </li>
         <li class="side-items">
           <a class="side-link text-decoration-none" data-toggle="modal" data-target="#exampleModalCenter"
             href="#">Login</a>
         </li>
         <li class="side-items">
-          <a class="side-link text-decoration-none" href="becomeapro.jsp">Become a cleaner</a>
+          <a class="side-link text-decoration-none" href="becomeapro ">Become a cleaner</a>
         </li>
       </ul>
 
@@ -268,7 +269,7 @@
               <h3 class="modal-title" id="exampleModalLongTitle">Create an account</h3>
             </div>
             <div class="faq-divider text-center d-flex align-items-center justify-content-center">
-              <img src="images/forma-1-copy-5.png">
+              <img src="<c:url value="/resources/images/forma-1-copy-5.png" />">
             </div>
             <form class="mx-auto" style="margin-top: 15px;">
               <div class="form-group">
@@ -326,8 +327,8 @@
   </section>
 
   <section class="spacing blog-bg position-relative">
-    <img src="images/blog-left-bg.png" class="position-absolute image-left" style="left: 0;">
-    <img src="images/blog-right-bg.png" class="position-absolute image-right" style="right: 0;">
+    <img src="<c:url value="/resources/images/blog-left-bg.png" />" class="position-absolute image-left" style="left: 0;">
+    <img src="<c:url value="/resources/images/blog-right-bg.png" />" class="position-absolute image-right" style="right: 0;">
     <div class="text-center text-dark" style="margin-top: 68px;">
       <h2>How it works</h2>
     </div>
@@ -346,14 +347,14 @@
         </div> -->
       </div>
       <div class="img-icon">
-        <img src="images/group-19.png" class="image_size" style="margin-left: 158px; margin-top: 73px;">
+        <img src="<c:url value="/resources/images/group-19.png" />" class="image_size" style="margin-left: 158px; margin-top: 73px;">
       </div>
     </div>
 
     <div class="text-image-main d-flex justify-content-center">
 
       <div class="content-images img-icon">
-        <img src="images/group-19_1.png" class="image_size" style=" margin-top: 20px;">
+        <img src="<c:url value="/resources/images/group-19_1.png" />" class="image_size" style=" margin-top: 20px;">
       </div>
 
       <div class="content-paragraph">
@@ -387,7 +388,7 @@
           </div> -->
       </div>
       <div class="img-icon">
-        <img src="images/group-19_2.png" class="image_size" style="margin-left: 158px; margin-top: 20px;">
+        <img src="<c:url value="/resources/images/group-19_2.png" />" class="image_size" style="margin-left: 158px; margin-top: 20px;">
       </div>
     </div>
 
@@ -413,21 +414,21 @@
   <div class="footer_section w-100">
     <div class="footer_main d-flex justify-content-around align-items-center">
       <div class="footer_left">
-        <img src="images/white-logo-transparent-background.png" alt="" height="78" width="106">
+        <img src="<c:url value="/resources/images/white-logo-transparent-background.png" />" alt="" height="78" width="106">
       </div>
       <div class="footer_mid">
         <ul class="d-flex p-0 text-center">
           <li>
-            <a href="homepage.jsp" class="text-decoration-none">HOME</a>
+            <a href="homepage " class="text-decoration-none">HOME</a>
           </li>
           <li>
-            <a href="aboutus.jsp" class="text-decoration-none">ABOUT</a>
+            <a href="aboutus " class="text-decoration-none">ABOUT</a>
           </li>
           <li>
             <a href="" class="text-decoration-none">TESTIMONIAL</a>
           </li>
           <li>
-            <a href="faq.jsp" class="text-decoration-none">FAQS</a>
+            <a href="faq " class="text-decoration-none">FAQS</a>
           </li>
           <li>
             <a href="" class="text-decoration-none">INSURANCE POLICY</a>

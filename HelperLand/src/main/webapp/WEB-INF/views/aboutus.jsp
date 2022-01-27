@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +8,7 @@
 <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="css/pricestyle.css">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/pricestyle.css" />">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
@@ -18,8 +19,8 @@
 <body>
     <div class="header" id="topheader">
         <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #525252;">
-            <a class="navbar-brand" href="homepage.jsp">
-                <img src="images/white-logo-transparent-background.png" style="  width: 73px; height: 54px;">
+            <a class="navbar-brand" href="homepage">
+                <img src="<c:url value="/resources/images/white-logo-transparent-background.png" />" style="  width: 73px; height: 54px;">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,12 +31,12 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
                         <div class="nav-btn-blue">
-                            <a class="nav-link" href="bookservice.jsp">Book now</a>
+                            <a class="nav-link" href="bookservice">Book now</a>
                         </div>
                     </li>
                     <li class="nav-item">
                         <div class="nav-btn">
-                            <a class="nav-link" href="price.jsp">Prices & services</a>
+                            <a class="nav-link" href="price">Prices & services</a>
                         </div>
                     </li>
                     <li class="nav-item">
@@ -50,7 +51,7 @@
                     </li>
                     <li class="nav-item">
                         <div class="nav-btnn">
-                            <a class="nav-link" href="contactUs.jsp">Contact</a>
+                            <a class="nav-link" href="contactUs">Contact</a>
                         </div>
                     </li>
                     <li class="nav-item">
@@ -60,7 +61,7 @@
                     </li>
                     <li class="nav-item">
                         <div class="nav-btn-blue">
-                            <a class="nav-link" href="becomeapro.jsp">Become a Helper</a>
+                            <a class="nav-link" href="becomeapro">Become a Helper</a>
                         </div>
                     </li>
                 </ul>
@@ -80,10 +81,10 @@
           
           <ul class="side-nav">
             <li class="side-items">
-              <a class="side-link text-decoration-none" href="bookservice.jsp">Book now</a>
+              <a class="side-link text-decoration-none" href="bookservice">Book now</a>
             </li>
             <li class="side-items">
-              <a class="side-link text-decoration-none" href="price.jsp">Prices & services</a>
+              <a class="side-link text-decoration-none" href="price">Prices & services</a>
             </li>
             <li class="side-items">
               <a class="side-link text-decoration-none" href="#">Warranty</a>
@@ -92,14 +93,14 @@
               <a class="side-link text-decoration-none" href="#">Blog</a>
             </li>
             <li class="side-items">
-              <a class="side-link text-decoration-none" href="contactUs.jsp">Contact</a>
+              <a class="side-link text-decoration-none" href="contactUs">Contact</a>
             </li>
             <li class="side-items">
               <a class="side-link text-decoration-none" data-toggle="modal"
               data-target="#exampleModalCenter" href="#">Login</a>
             </li>
             <li class="side-items">
-              <a class="side-link text-decoration-none" href="becomeapro.jsp">Become a cleaner</a>
+              <a class="side-link text-decoration-none" href="becomeapro">Become a cleaner</a>
             </li>
           </ul>
     
@@ -108,7 +109,7 @@
 
 
     <section id="banner">
-        <img class="img-fluid w-100" src="images/hero-banner-img.png" />
+        <img class="img-fluid w-100" src="<c:url value="/resources/images/hero-banner-img.png" />" />
     </section>
 
     <section id="A-Few-words-about-us">
@@ -116,7 +117,7 @@
             <h1 style="color: #4F4F4F;">A Few words about us</h1>
         </div>
         <div class="faq-divider text-center d-flex align-items-center justify-content-center">
-            <img src="images/forma-1-copy-5.png">
+            <img src="<c:url value="/resources/images/forma-1-copy-5.png" />">
         </div>
         <div class="text-center container" >
             <p>We are providers of professional home cleaning services, offering hourly based house cleaning options, which mean that you don’t have to fret about getting your house cleaned anymore. We will handle everything for you, so that you can focus on spending your precious time with your family members.</p>
@@ -129,7 +130,7 @@
             <h1 style="color: #4F4F4F;">Our Story</h1>
         </div>
         <div class="faq-divider text-center d-flex align-items-center justify-content-center">
-            <img src="images/forma-1-copy-5.png">
+            <img src="<c:url value="/resources/images/forma-1-copy-5.png" />">
         </div>
         <div class="text-center container">
             <p>A cleaner is a type of industrial or domestic worker who cleans homes or commercial premises for payment. Cleaners may specialise in cleaning particular things or places, such as window cleaners. Cleaners often work when the people who otherwise occupy the space are not around. They may clean offices at night or houses during the workday.</p>
@@ -157,21 +158,21 @@
     <div class="footer_section w-100" style="margin-top: 53px;">
         <div class="footer_main d-flex justify-content-around align-items-center">
             <div class="footer_left">
-                <img src="images/white-logo-transparent-background.png" alt="" height="78" width="106">
+                <img src="<c:url value="/resources/images/white-logo-transparent-background.png" />" alt="" height="78" width="106">
             </div>
             <div class="footer_mid">
                 <ul class="d-flex p-0 text-center">
                     <li>
-                        <a href="homepage.jsp" class="text-decoration-none">HOME</a>
+                        <a href="" class="text-decoration-none">HOME</a>
                     </li>
                     <li>
-                        <a href="aboutus.jsp" class="text-decoration-none">ABOUT</a>
+                        <a href="aboutus" class="text-decoration-none">ABOUT</a>
                     </li>
                     <li>
                         <a href="" class="text-decoration-none">TESTIMONIAL</a>
                     </li>
                     <li>
-                        <a href="faq.jsp" class="text-decoration-none">FAQS</a>
+                        <a href="faq" class="text-decoration-none">FAQS</a>
                     </li>
                     <li>
                         <a href="" class="text-decoration-none">INSURANCE POLICY</a>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +8,7 @@
 <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="css/pricestyle.css">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/pricestyle.css" />">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
         integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
         
@@ -18,8 +19,8 @@
 <body>
     <div class="header" id="topheader">
         <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #525252;">
-            <a class="navbar-brand" href="homepage.jsp">
-                <img src="images/white-logo-transparent-background.png" style="  width: 73px; height: 54px;">
+            <a class="navbar-brand" href="homepage ">
+                <img src="<c:url value="/resources/images/white-logo-transparent-background.png" />" style="  width: 73px; height: 54px;">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,12 +31,12 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
                         <div class="nav-btn-blue">
-                            <a class="nav-link" href="bookservice.jsp">Book now</a>
+                            <a class="nav-link" href="bookservice ">Book now</a>
                         </div>
                     </li>
                     <li class="nav-item">
                         <div class="nav-btn">
-                            <a class="nav-link" href="price.jsp">Prices & services</a>
+                            <a class="nav-link" href="price ">Prices & services</a>
                         </div>
                     </li>
                     <li class="nav-item">
@@ -50,7 +51,7 @@
                     </li>
                     <li class="nav-item">
                         <div class="nav-btnn">
-                            <a class="nav-link" href="contactUs.jsp">Contact</a>
+                            <a class="nav-link" href="contactUs ">Contact</a>
                         </div>
                     </li>
                     <li class="nav-item">
@@ -61,7 +62,7 @@
                     </li>
                     <li class="nav-item">
                         <div class="nav-btn-blue">
-                            <a class="nav-link" href="becomeapro.jsp">Become a Helper</a>
+                            <a class="nav-link" href="becomeapro ">Become a Helper</a>
                         </div>
                     </li>
                 </ul>
@@ -82,10 +83,10 @@
           
           <ul class="side-nav">
             <li class="side-items">
-              <a class="side-link text-decoration-none" href="bookservice.jsp">Book now</a>
+              <a class="side-link text-decoration-none" href="bookservice ">Book now</a>
             </li>
             <li class="side-items">
-              <a class="side-link text-decoration-none" href="price.jsp">Prices & services</a>
+              <a class="side-link text-decoration-none" href="price ">Prices & services</a>
             </li>
             <li class="side-items">
               <a class="side-link text-decoration-none" href="#">Warranty</a>
@@ -94,14 +95,14 @@
               <a class="side-link text-decoration-none" href="#">Blog</a>
             </li>
             <li class="side-items">
-              <a class="side-link text-decoration-none" href="contactUs.jsp">Contact</a>
+              <a class="side-link text-decoration-none" href="contactUs ">Contact</a>
             </li>
             <li class="side-items">
               <a class="side-link text-decoration-none" data-toggle="modal"
               data-target="#exampleModalCenter" href="#">Login</a>
             </li>
             <li class="side-items">
-              <a class="side-link text-decoration-none" href="becomeapro.jsp">Become a cleaner</a>
+              <a class="side-link text-decoration-none" href="becomeapro ">Become a cleaner</a>
             </li>
           </ul>
     
@@ -109,7 +110,7 @@
       </div>
 
     <section id="banner">
-        <img class="img-fluid w-100" src="images/group-18.png" />
+        <img class="img-fluid w-100" src="<c:url value="/resources/images/group-18.png" />" />
     </section>
 
     <section id="model">
@@ -203,7 +204,7 @@
                   <h3 class="modal-title" id="exampleModalLongTitle">Create an account</h3>
                 </div>
                 <div class="faq-divider text-center d-flex align-items-center justify-content-center">
-                  <img src="images/forma-1-copy-5.png">
+                  <img src="<c:url value="/resources/images/forma-1-copy-5.png" />">
                 </div>
                 <form class="mx-auto" style="margin-top: 15px;">
                   <div class="form-group">
@@ -265,7 +266,7 @@
             <h1 style="color: #4F4F4F;">Prices</h1>
         </div>
         <div class="faq-divider text-center d-flex align-items-center justify-content-center">
-            <img src="images/forma-1-copy-5.png">
+            <img src="<c:url value="/resources/images/forma-1-copy-5.png" />">
         </div>
 
         <div class="container-fluid d-flex justify-content-center">
@@ -279,12 +280,12 @@
                             class="text-muted">/ hr</small>
                     </h1>
                     <div class="container img-text-class">
-                        <p style="margin-left: 150px;"><img src="images/forma-1_5.png" style="margin-right: 15px;">Lower
+                        <p style="margin-left: 150px;"><img src="<c:url value="/resources/images/forma-1_5.png" />" style="margin-right: 15px;">Lower
                             prices</p>
-                        <p style="margin-left: 150px;"><img src="images/forma-1_5.png" style="margin-right: 15px;">Easy
+                        <p style="margin-left: 150px;"><img src="<c:url value="/resources/images/forma-1_5.png" />" style="margin-right: 15px;">Easy
                             online & secure payment
                         </p>
-                        <p style="margin-left: 150px;"><img src="images/forma-1_5.png" style="margin-right: 15px;">Easy
+                        <p style="margin-left: 150px;"><img src="<c:url value="/resources/images/forma-1_5.png" />" style="margin-right: 15px;">Easy
                             amendment</p>
                     </div>
                 </div>
@@ -296,13 +297,13 @@
                 <h1 style="color: #4F4F4F; margin-top: 41px;">Extra services</h1>
             </div>
             <div class="faq-divider text-center d-flex align-items-center justify-content-center">
-                <img src="images/forma-1-copy-5.png">
+                <img src="<c:url value="/resources/images/forma-1-copy-5.png" />">
             </div>
             <div class="d-flex justify-content-center align-items-center extra-services-img"
                 style="padding-bottom: 41px; padding-top: 30px;">
                 <div class="flex-column col d-flex justify-content-center align-items-center">
                     <div class="img-col d-flex justify-content-center align-items-center">
-                        <img src="images/3.png">
+                        <img src="<c:url value="/resources/images/3.png" />">
                     </div>
                     <div class="text-center" style="margin-top: 15px;">
                         <h6 style="color: #4F4F4F;">Inside cabinets</h6>
@@ -311,7 +312,7 @@
                 </div>
                 <div class="flex-column col d-flex justify-content-center align-items-center">
                     <div class="img-col d-flex justify-content-center align-items-center">
-                        <img src="images/5.png">
+                        <img src="<c:url value="/resources/images/5.png" />">
                     </div>
                     <div class="text-center" style="margin-top: 15px;">
                         <h6 style="color: #4F4F4F;">Inside fridge</h6>
@@ -320,7 +321,7 @@
                 </div>
                 <div class="flex-column col d-flex justify-content-center align-items-center">
                     <div class="img-col d-flex justify-content-center align-items-center">
-                        <img src="images/4.png">
+                        <img src="<c:url value="/resources/images/4.png" />">
                     </div>
                     <div class="text-center" style="margin-top: 15px;">
                         <h6 style="color: #4F4F4F;">Inside oven</h6>
@@ -329,7 +330,7 @@
                 </div>
                 <div class="flex-column col d-flex justify-content-center align-items-center">
                     <div class="img-col d-flex justify-content-center align-items-center">
-                        <img src="images/2.png">
+                        <img src="<c:url value="/resources/images/2.png" />">
                     </div>
                     <div class="text-center" style="margin-top: 15px;">
                         <h6 style="color: #4F4F4F;">Laundry wash & dry</h6>
@@ -338,7 +339,7 @@
                 </div>
                 <div class="flex-column col d-flex justify-content-center align-items-center">
                     <div class="img-col d-flex justify-content-center align-items-center">
-                        <img src="images/1.png">
+                        <img src="<c:url value="/resources/images/1.png" />">
                     </div>
                     <div class="text-center" style="margin-top: 15px;">
                         <h6 style="color: #4F4F4F;">Interior windows</h6>
@@ -359,11 +360,11 @@
                 <h1 class="text-40 font-weight-bold whyhl-head" style="color: #4F4F4F;">What we include in cleaning</h1>
             </div>
             <div class="faq-divider text-center d-flex align-items-center justify-content-center">
-                <img src="images/forma-1-copy-5.png">
+                <img src="<c:url value="/resources/images/forma-1-copy-5.png" />">
             </div>
             <div class="row whyhl-row justify-content-center justify-content-between align-items-start small-src-padding-top" style="margin-top: 30px;">
                 <div class="col whyhl-col p-0 include-cleaning why-helperland-content">
-                    <img src="images/group-18_3.png" alt="">
+                    <img src="<c:url value="/resources/images/group-18_3.png" />" alt="">
                     <div class="d-flex whyhl-content flex-column justify-content-between  why-helperland-content">
                         <h4 style="margin-top: 30px;">Bedroom and Living Room</h4>
                         <div class="flex-row d-flex  why-helperland-content">
@@ -391,7 +392,7 @@
                 </div>
                 <div
                     class="col whyhl-col why-helperland-content-mid include-cleaning  why-helperland-content small-src-padding-top">
-                    <img src="images/group-18_4.png" alt="">
+                    <img src="<c:url value="/resources/images/group-18_4.png" />" alt="">
                     <div class="d-flex whyhl-content flex-column justify-content-between  why-helperland-content">
                         <h4 style="margin-top: 30px;">Bathrooms</h4>
                         <div class="flex-row d-flex  why-helperland-content">
@@ -427,7 +428,7 @@
                     </div>
                 </div>
                 <div class="col whyhl-col p-0 include-cleaning  why-helperland-content small-src-padding-top">
-                    <img src="images/group-18_2.png" alt="">
+                    <img src="<c:url value="/resources/images/group-18_2.png" />" alt="">
                     <div class="d-flex flex-column whyhl-col justify-content-between  why-helperland-content">
                         <h4 style="margin-top: 30px;">Dedicated Customer Service</h4>
                         <div class="flex-row d-flex  why-helperland-content">
@@ -472,7 +473,7 @@
                 <h1 class="text-40 font-weight-bold whyhl-head" style="color: #4F4F4F;">Why Helperland</h1>
             </div>
             <div class="faq-divider text-center d-flex align-items-center justify-content-center">
-                <img src="images/forma-1-copy-5.png">
+                <img src="<c:url value="/resources/images/forma-1-copy-5.png" />">
             </div>
             <div class="d-flex flex-row Why-Helperland-img-text" style="margin-top: 42px;">
                 <div class="col content-first" style="color: #4F4F4F;">
@@ -488,7 +489,7 @@
                     </div>
                 </div>
                 <div class="col content-second text-center">
-                    <img src="images/the-best-img-1.png" class="img-fluid" alt="Responsive image">
+                    <img src="<c:url value="/resources/images/the-best-img-1.png" />" class="img-fluid" alt="Responsive image">
                 </div>
                 <div class="col content-third" style="color: #4F4F4F;">
                     <div class="text-left">
@@ -524,21 +525,21 @@
     <div class="footer_section w-100">
         <div class="footer_main d-flex justify-content-around align-items-center">
             <div class="footer_left">
-                <img src="images/white-logo-transparent-background.png" alt="" height="78" width="106">
+                <img src="<c:url value="/resources/images/white-logo-transparent-background.png" />" alt="" height="78" width="106">
             </div>
             <div class="footer_mid">
                 <ul class="d-flex p-0 text-center">
                     <li>
-                        <a href="homepage.jsp" class="text-decoration-none">HOME</a>
+                        <a href="homepage " class="text-decoration-none">HOME</a>
                     </li>
                     <li>
-                        <a href="aboutus.jsp" class="text-decoration-none">ABOUT</a>
+                        <a href="aboutus " class="text-decoration-none">ABOUT</a>
                     </li>
                     <li>
                         <a href="" class="text-decoration-none">TESTIMONIAL</a>
                     </li>
                     <li>
-                        <a href="faq.jsp" class="text-decoration-none">FAQS</a>
+                        <a href="faq " class="text-decoration-none">FAQS</a>
                     </li>
                     <li>
                         <a href="" class="text-decoration-none">INSURANCE POLICY</a>

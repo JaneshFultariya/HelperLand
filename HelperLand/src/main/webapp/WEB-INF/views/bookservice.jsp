@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +8,7 @@
 <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="css/bookservice.css">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/bookservice.css" />">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
         integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
@@ -25,7 +26,7 @@
     <div class="header" id="topheader">
         <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #525252;">
             <a class="navbar-brand" href="#">
-                <img src="images/white-logo-transparent-background.png" style="  width: 73px; height: 54px;">
+                <img src="<c:url value="/resources/images/white-logo-transparent-background.png" />" style="  width: 73px; height: 54px;">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -115,7 +116,7 @@
 
 
     <section id="banner">
-        <img class="img-fluid w-100" src="images/book-service-banner.jpg" />
+        <img class="img-fluid w-100" src="<c:url value="/resources/images/book-service-banner.jpg" />" />
     </section>
 
     <section id="main-body" style="padding-top: 30px;">
@@ -123,7 +124,7 @@
             <h1>Set up your cleaning service</h1>
         </div>
         <div class="faq-divider text-center d-flex align-items-center justify-content-center" style="margin-bottom: 30px;">
-            <img src="images/forma-1-copy-5.png">
+            <img src="<c:url value="/resources/images/forma-1-copy-5.png" />">
         </div>
 
         <div class="d-flex flex-row container">
@@ -131,16 +132,16 @@
             <div class="faq-questions-list " style="width: 100%;">
                 <ul class="nav nav-tabs" role="tablist">
                     <li class="nav-item text-center text-dark">
-                        <a class="nav-link active w-100" data-toggle="tab" href="#home"><img src="images/setup-service-white.png"> Setup Service</a>
+                        <a class="nav-link active w-100" data-toggle="tab" href="#home"><img src="<c:url value="/resources/images/setup-service-white.png" />"> Setup Service</a>
                     </li>
                     <li class="nav-item text-center text-dark">
-                        <a class="nav-link w-100" data-toggle="tab" href="#Schedule"><img src="images/schedule-white.png"> Schedule & Plan</a>
+                        <a class="nav-link w-100" data-toggle="tab" href="#Schedule"><img src="<c:url value="/resources/images/schedule-white.png" />"> Schedule & Plan</a>
                     </li>
                     <li class="nav-item text-center text-dark">
-                        <a class="nav-link w-100" data-toggle="tab" href="#Details"><img src="images/details-white.png">Your Details</a>
+                        <a class="nav-link w-100" data-toggle="tab" href="#Details"><img src="<c:url value="/resources/images/details-white.png" />">Your Details</a>
                     </li>
                     <li class="nav-item text-center text-dark">
-                        <a class="nav-link w-100" data-toggle="tab" href="#Payment"><img src="images/payment-white.png"> Make Payment</a>
+                        <a class="nav-link w-100" data-toggle="tab" href="#Payment"><img src="<c:url value="/resources/images/payment-white.png" />"> Make Payment</a>
                     </li>
                 </ul>
 
@@ -211,7 +212,7 @@
                                 style="padding-bottom: 41px; padding-top: 30px;">
                                 <div class="flex-column col d-flex justify-content-center align-items-center">
                                     <div class="img-col d-flex justify-content-center align-items-center">
-                                        <img src="images/3.png">
+                                        <img src="<c:url value="/resources/images/3.png" />">
                                     </div>
                                     <div class="text-center" style="margin-top: 15px;">
                                         <h6 style="color: #4F4F4F;">Inside cabinets</h6>
@@ -219,7 +220,7 @@
                                 </div>
                                 <div class="flex-column col d-flex justify-content-center align-items-center">
                                     <div class="img-col d-flex justify-content-center align-items-center">
-                                        <img src="images/5.png">
+                                        <img src="<c:url value="/resources/images/5.png" />">
                                     </div>
                                     <div class="text-center" style="margin-top: 15px;">
                                         <h6 style="color: #4F4F4F;">Inside fridge</h6>
@@ -227,7 +228,7 @@
                                 </div>
                                 <div class="flex-column col d-flex justify-content-center align-items-center">
                                     <div class="img-col d-flex justify-content-center align-items-center">
-                                        <img src="images/4.png">
+                                        <img src="<c:url value="/resources/images/4.png" />">
                                     </div>
                                     <div class="text-center" style="margin-top: 15px;">
                                         <h6 style="color: #4F4F4F;">Inside oven</h6>
@@ -235,7 +236,7 @@
                                 </div>
                                 <div class="flex-column col d-flex justify-content-center align-items-center">
                                     <div class="img-col d-flex justify-content-center align-items-center">
-                                        <img src="images/2.png">
+                                        <img src="<c:url value="/resources/images/2.png" />">
                                     </div>
                                     <div class="text-center" style="margin-top: 15px;">
                                         <h6 style="color: #4F4F4F;">Laundry wash & dry</h6>
@@ -243,7 +244,7 @@
                                 </div>
                                 <div class="flex-column col d-flex justify-content-center align-items-center">
                                     <div class="img-col d-flex justify-content-center align-items-center">
-                                        <img src="images/1.png">
+                                        <img src="<c:url value="/resources/images/1.png" />">
                                     </div>
                                     <div class="text-center" style="margin-top: 15px;">
                                         <h6 style="color: #4F4F4F;">Interior windows</h6>
@@ -416,9 +417,9 @@
                 <div class="accordion">
                     <div class="accordion-item" id="question1">
                         <a class="accordion-link" href="#question1">
-                            <img class="up-arrow" src="images/vector-smart-object-copy.png" style="margin-right: 15px;">
+                            <img class="up-arrow" src="<c:url value="/resources/images/vector-smart-object-copy.png" />" style="margin-right: 15px;">
 
-                            <img class="down-arrow" src="images/vector-smart-object.png" style="margin-right: 15px;">
+                            <img class="down-arrow" src="<c:url value="/resources/images/vector-smart-object.png" />" style="margin-right: 15px;">
 
                             What's included in a cleaning?
 
@@ -430,9 +431,9 @@
                     </div>
                     <div class="accordion-item" id="question2">
                         <a class="accordion-link" href="#question2">
-                            <img class="up-arrow" src="images/vector-smart-object-copy.png" style="margin-right: 15px;">
+                            <img class="up-arrow" src="<c:url value="/resources/images/vector-smart-object-copy.png" />" style="margin-right: 15px;">
 
-                            <img class="down-arrow" src="images/vector-smart-object.png" style="margin-right: 15px;">
+                            <img class="down-arrow" src="<c:url value="/resources/images/vector-smart-object.png" />" style="margin-right: 15px;">
 
                             Which Helperland professional will come to my place?
 
@@ -448,9 +449,9 @@
                     </div>
                     <div class="accordion-item" id="question3">
                         <a class="accordion-link" href="#question3">
-                            <img class="up-arrow" src="images/vector-smart-object-copy.png" style="margin-right: 15px;">
+                            <img class="up-arrow" src="<c:url value="/resources/images/vector-smart-object-copy.png" />" style="margin-right: 15px;">
 
-                            <img class="down-arrow" src="images/vector-smart-object.png" style="margin-right: 15px;">
+                            <img class="down-arrow" src="<c:url value="/resources/images/vector-smart-object.png" />" style="margin-right: 15px;">
 
                             Can I skip or reschedule bookings?
 
@@ -473,7 +474,7 @@
     <div class="footer_section w-100" style="margin-top: 53px;">
         <div class="footer_main d-flex justify-content-around align-items-center">
             <div class="footer_left">
-                <img src="images/white-logo-transparent-background.png" alt="" height="78" width="106">
+                <img src="<c:url value="/resources/images/white-logo-transparent-background.png" />" alt="" height="78" width="106">
             </div>
             <div class="footer_mid">
                 <ul class="d-flex p-0 text-center">

@@ -1,11 +1,11 @@
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/style.css" />">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
     integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
   <link rel="icon" type="image/x-icon" href="/images/white-logo-transparent-background.png">
@@ -19,7 +19,7 @@
   <div class="header" id="topheader">
     <nav class="navbar navbar-expand-lg navbar-light">
       <a class="navbar-brand" href="#">
-        <img src="images/white-logo-transparent-background.png">
+        <img src="<c:url value="/resources/images/white-logo-transparent-background.png" />">
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,14 +30,14 @@
         <ul class="navbar-nav ml-auto nav-ul-margin">
           <li class="nav-item">
             <div class="nav-btn" href="#">
-              <a class="nav-btn-item text-decoration-none" href="bookservice.jsp">
+              <a class="nav-btn-item text-decoration-none" href="bookservice">
                 Book a cleaner
               </a>
             </div>
           </li>
           <li class="nav-item">
             <div class="nav-btnn" href="#">
-              <a class="nav-btn-item text-decoration-none" href="price.jsp">
+              <a class="nav-btn-item text-decoration-none" href="price">
                 Price
               </a>
             </div>
@@ -60,7 +60,7 @@
           </li>
           <li class="nav-item">
             <div class="nav-btnn" href="#">
-              <a class="nav-btn-item text-decoration-none" href="contactUs.jsp">
+              <a class="nav-btn-item text-decoration-none" href="contactUs">
                 contact us
               </a>
             </div>
@@ -75,7 +75,7 @@
           </li>
           <li class="nav-item">
             <div class="nav-btn" href="#">
-              <a class="nav-btn-item text-decoration-none" href="becomeapro.jsp">
+              <a class="nav-btn-item text-decoration-none" href="becomeapro">
                 Become a cleaner
               </a>
             </div>
@@ -181,7 +181,7 @@
                 <h3 class="modal-title" id="exampleModalLongTitle">Create an account</h3>
               </div>
               <div class="faq-divider text-center d-flex align-items-center justify-content-center">
-                <img src="images/forma-1-copy-5.png">
+                <img src="<c:url value="/resources/images/forma-1-copy-5.png" />">
               </div>
               <form class="mx-auto" style="margin-top: 15px;">
                 <div class="form-group">
@@ -240,13 +240,13 @@
 
     <div class="header-text">
       <h1>Lorem ipsum text</h1>
-      <p class="text-md-left"><img src="images/forma-1-copy-10(1).svg" style="margin-right: 5px;">Lorem ipsum dolor sit
+      <p class="text-md-left"><img src="<c:url value="/resources/images/forma-1-copy-10(1).svg" />" style="margin-right: 5px;">Lorem ipsum dolor sit
         amet, consectetur
         adipiscing
-        <br><img src="images/forma-1-copy-10(1).svg" style="margin-right: 5px;">Lorem ipsum dolor sit
+        <br><img src="<c:url value="/resources/images/forma-1-copy-10(1).svg" />" style="margin-right: 5px;">Lorem ipsum dolor sit
         amet, consectetur
         adipiscing<br>
-        <img src="images/forma-1-copy-10(1).svg" style="margin-right: 5px;">Lorem ipsum dolor sit
+        <img src="<c:url value="/resources/images/forma-1-copy-10(1).svg" />" style="margin-right: 5px;">Lorem ipsum dolor sit
         amet, consectetur
         adipiscing
       </p>
@@ -285,7 +285,7 @@
     </div>
 
     <div class="text-center two-images">
-      <img src="images/group-18_5.png" class="img-fluid" alt="Responsive image">
+      <img src="<c:url value="/resources/images/group-18_5.png " />" class="img-fluid" alt="Responsive image">
     </div>
 
   </div>
@@ -299,10 +299,10 @@
       
       <ul class="side-nav">
         <li class="side-items">
-          <a class="side-link text-decoration-none" href="bookservice.jsp">Book now</a>
+          <a class="side-link text-decoration-none" href="bookservice">Book now</a>
         </li>
         <li class="side-items">
-          <a class="side-link text-decoration-none" href="price.jsp">Prices & services</a>
+          <a class="side-link text-decoration-none" href="price">Prices & services</a>
         </li>
         <li class="side-items">
           <a class="side-link text-decoration-none" href="#">Warranty</a>
@@ -311,14 +311,14 @@
           <a class="side-link text-decoration-none" href="#">Blog</a>
         </li>
         <li class="side-items">
-          <a class="side-link text-decoration-none" href="contactUs.jsp">Contact</a>
+          <a class="side-link text-decoration-none" href="contactUs">Contact</a>
         </li>
         <li class="side-items">
           <a class="side-link text-decoration-none" data-toggle="modal"
           data-target="#exampleModalCenter" href="#">Login</a>
         </li>
         <li class="side-items">
-          <a class="side-link text-decoration-none" href="becomeapro.jsp">Become a cleaner</a>
+          <a class="side-link text-decoration-none" href="becomeapro">Become a cleaner</a>
         </li>
       </ul>
 
@@ -332,7 +332,7 @@
       </div>
       <div class="row whyhl-row justify-content-center align-items-start why-helperland-content">
         <div class="col whyhl-col text-center first-img p-0">
-          <img src="images/helper-img-1.png" style="margin-top: -25px;" alt="">
+          <img src="<c:url value="/resources/images/helper-img-1.png" />" style="margin-top: -25px;" alt="">
           <div class="d-flex whyhl-content flex-column justify-content-between align-items-center">
             <h4>Experience & Vetted Professionals</h4>
             <p>dominate the industry in scale and scope with an adaptable, extensive network that
@@ -340,7 +340,7 @@
           </div>
         </div>
         <div class="col whyhl-col text-center why-helperland-content-mid">
-          <img src="images/group-23.png" alt="">
+          <img src="<c:url value="/resources/images/group-23.png" />" alt="">
           <div class="d-flex whyhl-content flex-column justify-content-between align-items-center">
             <h4 style="margin-top: 30px;">Secure Online Payment</h4>
             <p>Payment is processed securely online. Customers can safely pay online and manage the booking.
@@ -348,7 +348,7 @@
           </div>
         </div>
         <div class="col whyhl-col text-center p-0">
-          <img src="images/group-24.png" alt="">
+          <img src="<c:url value="/resources/images/group-24.png" />" alt="">
           <div class="d-flex flex-column whyhl-col justify-content-between align-items-center">
             <h4 style="margin-top: 30px;">Dedicated Customer Service</h4>
             <p>to our customers and are guided in all we do by their needs. The team is always happy to
@@ -360,8 +360,8 @@
   </section>
 
   <section class="spacing  position-relative">
-    <img src="images/blog-left-bg.png" class="position-absolute" style="left: 0;">
-    <img src="images/blog-right-bg.png" class="position-absolute" style="right: 0;">
+    <img src="<c:url value="/resources/images/blog-left-bg.png" />" class="position-absolute" style="left: 0;">
+    <img src="<c:url value="/resources/images/blog-right-bg.png" />" class="position-absolute" style="right: 0;">
 
     <div class="Bloger" id="thirdheader">
       <!-- <img src="images/blog-left-bg.png" class="float-left img-fluid" alt="Responsive image">
@@ -379,7 +379,7 @@
               Mauris consequat ornare enim, sed lobortis quam ultrices sed.</p>
           </div>
           <div class="col-6 p-0 order-2">
-            <img src="images/group-36.png" class="img-fluid float-right" alt="Responsive image">
+            <img src="<c:url value="/resources/images/group-36.png" />" class="img-fluid float-right" alt="Responsive image">
           </div>
         </div>
       </div>
@@ -391,7 +391,7 @@
 
     <div class="card-deck card-deck-class container mx-auto our-blog-card row" style="margin-top: 15px;">
       <div class="extra-div card">
-        <img class="card-img-top" src="images/group-28.png" alt="Card image cap">
+        <img class="card-img-top" src="<c:url value="/resources/images/group-28.png" />" alt="Card image cap">
         <div class="card-body">
           <h5 class="card-title mb-1">Lorem ipsum dolor sit amet</h5>
           <p class="card-text"><small class="text-muted">January 28, 2019</small></p>
@@ -401,7 +401,7 @@
         </div>
       </div>
       <div class="extra-div card">
-        <img class="card-img-top" src="images/group-29.png" alt="Card image cap">
+        <img class="card-img-top" src="<c:url value="/resources/images/group-29.png" />" alt="Card image cap">
         <div class="card-body">
           <h5 class="card-title mb-1">Lorem ipsum dolor sit amet</h5>
           <p class="card-text"><small class="text-muted">January 28, 2019</small></p>
@@ -411,7 +411,7 @@
         </div>
       </div>
       <div class="extra-div card">
-        <img class="card-img-top" src="images/group-30.png" alt="Card image cap">
+        <img class="card-img-top" src="<c:url value="/resources/images/group-30.png" />" alt="Card image cap">
         <div class="card-body">
           <h5 class="card-title mb-1">Lorem ipsum dolor sit amet</h5>
           <p class="card-text"><small class="text-muted">January 28, 2019</small></p>
@@ -433,10 +433,10 @@
         <div class="extra-div card">
           <div class="card-body">
             <div class="message justify-content-right" style="float: right; margin-top: 15px;">
-              <img src="images/message.png">
+              <img src="<c:url value="/resources/images/message.png" />">
             </div>
             <div class="d-flex flex-row" style=" margin-top: 15px;">
-              <img src="images/group-31.png">
+              <img src="<c:url value="/resources/images/group-31.png" />">
               <h5 style="margin-top: 10px; padding-left: 18px;">Lary Watson<br><small
                   class="text-muted">Manchester</small></h5>
             </div>
@@ -449,10 +449,10 @@
         <div class="extra-div card">
           <div class="card-body">
             <div class="message justify-content-right" style="float: right; margin-top: 15px;">
-              <img src="images/message.png">
+              <img src="<c:url value="/resources/images/message.png" />">
             </div>
             <div class="d-flex flex-row" style=" margin-top: 15px;">
-              <img src="images/group-32.png">
+              <img src="<c:url value="/resources/images/group-32.png" />">
               <h5 style="margin-top: 10px; padding-left: 18px;">John Smith<br><small
                   class="text-muted">Manchester</small></h5>
             </div>
@@ -468,10 +468,10 @@
         <div class="extra-div card">
           <div class="card-body">
             <div class="message justify-content-right" style="float: right; margin-top: 15px;">
-              <img src="images/message.png">
+              <img src="<c:url value="/resources/images/message.png" />">
             </div>
             <div class="d-flex flex-row" style=" margin-top: 15px;">
-              <img src="images/group-33.png">
+              <img src="<c:url value="/resources/images/group-33.png" />">
               <h5 style="margin-top: 10px; padding-left: 18px;">Lars Johnson<br><small
                   class="text-muted">Manchester</small></h5>
             </div>
@@ -506,21 +506,21 @@
   <div class="footer_section w-100">
     <div class="footer_main d-flex justify-content-around align-items-center">
       <div class="footer_left">
-        <img src="images/white-logo-transparent-background.png" alt="" height="78" width="106">
+        <img src="<c:url value="/resources/images/white-logo-transparent-background.png" />" alt="" height="78" width="106">
       </div>
       <div class="footer_mid">
         <ul class="d-flex p-0 text-center">
           <li>
-            <a href="homepage.jsp" class="text-decoration-none">HOME</a>
+            <a href="homepage" class="text-decoration-none">HOME</a>
           </li>
           <li>
-            <a href="aboutus.jsp" class="text-decoration-none">ABOUT</a>
+            <a href="aboutus" class="text-decoration-none">ABOUT</a>
           </li>
           <li>
             <a href="" class="text-decoration-none">TESTIMONIAL</a>
           </li>
           <li>
-            <a href="faq.jsp" class="text-decoration-none">FAQS</a>
+            <a href="faq" class="text-decoration-none">FAQS</a>
           </li>
           <li>
             <a href="" class="text-decoration-none">INSURANCE POLICY</a>
