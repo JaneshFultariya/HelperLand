@@ -114,12 +114,8 @@ justify-content: center;
     margin-top: 30px;
 }
 
-.main_button {
-    padding: 10px 50px;
-    background-color: #00607299;
-    max-width: 163px;
-    max-height: 46px;
-}
+
+
 
 .footer_section {
     background-color: #111111;
@@ -266,6 +262,7 @@ justify-content: center;
     background: #000;
     color: #fff;
 }
+
 
 @media (max-width: 450px) {
 
@@ -468,4 +465,13 @@ justify-content: center;
     height: 35px;
     margin-top: 15px;
     color: white;
+}
+
+
+.main_button {
+    padding: 10px 50px !important;
+    background-color: #00607299 !important;
+    max-width: 163px;
+    max-height: 46px;
+    z-index:1000;
 }

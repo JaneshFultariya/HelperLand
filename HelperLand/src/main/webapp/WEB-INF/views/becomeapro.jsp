@@ -95,28 +95,40 @@
       <div class="text-center register-text">
         <h3>Register Now!</h3>
       </div>
-      <form>
+      <form  method="post" action="registerServiceProvider">
+      <div class="alert alert-danger alert-dismissible fade show d-none "
+				${displayError } role="alert">
+				${error }
+				<button type="button" class="btn-close" data-bs-dismiss="alert"
+					aria-label="Close"></button>
+			</div>
+			<div class="alert alert-success alert-dismissible fade show d-none "
+				${displaySuccess } role="alert">
+				${success }
+				<button type="button" class="btn-close" data-bs-dismiss="alert"
+					aria-label="Close"></button>
+			</div>
         <div class="form-group" style="padding-top: 25px;">
-          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+          <input type="text" class="form-control" id="exampleInputEmail1" name="first_name" aria-describedby="emailHelp"
             style="height: 46px;" placeholder="First name">
         </div>
         <div class="form-group input-text" style="padding-top: 15px;">
-          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+          <input type="text" class="form-control" id="exampleInputEmail1" name="last_name" aria-describedby="emailHelp"
             style="height: 46px;" placeholder="Last name">
         </div>
         <div class="form-group" style="padding-top: 15px;">
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+          <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp"
             style="height: 46px;" placeholder="Email Address">
         </div>
         <div class="number_input d-flex justify-content-center form-group" style="padding-top: 15px;">
           <input type="text" id="form3Example1" class="form-control float-right country_number" placeholder="+42"
             style="height: 46px; width: 54px; background-color: #f4f4f4;" />
 
-          <input type="text" id="form3Example1" class="form-control" placeholder="Mobile number"
+          <input type="text" id="form3Example1" class="form-control" placeholder="Mobile number" name="mobile"
             style="height: 46px;" />
         </div>
         <div class="form-group" style="padding-top: 15px;">
-          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"
+          <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Password"
             style="height: 46px;">
         </div>
         <div class="form-group" style="padding-top: 15px;">
@@ -132,7 +144,7 @@
           <label class="form-check-label" for="exampleCheck1">I accept terms and conditions & privacy policy</label>
         </div>
         <div class="btn-get-strated mx-auto text-center align-items-center py-2 my-3">
-          <a class="button_link  text-decoration-none text-light">Get Started <img src="<c:url value="/resources/images/shape-1.svg" />"></a>
+          <button type="submit" class="button_link text-decoration-none text-light">Get Started <img src="<c:url value="/resources/images/shape-1.svg" />"></button>
         </div>
       </form>
     </div>

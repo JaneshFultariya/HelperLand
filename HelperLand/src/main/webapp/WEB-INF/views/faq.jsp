@@ -142,22 +142,39 @@
                 </button>
               </div>
               <div class="modal-body">
-                <form>
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                      placeholder="Enter email">
-                  </div>
-                  <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                  </div>
-                  <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Remember me</label>
-                  </div>
-                  <button type="submit" class="btn btn-primary btn-lg" title="Login">Login</button>
-                </form>
+                <form action="login" method="post">
+							<div
+								class="alert alert-danger alert-dismissible fade show d-none "
+								${displayError } role="alert">
+								${error }
+								<button type="button" class="btn-close" data-bs-dismiss="alert"
+									aria-label="Close"></button>
+							</div>
+							<div
+								class="alert alert-success alert-dismissible fade show d-none "
+								${displaySuccess } role="alert">
+								${success }
+								<button type="button" class="btn-close" data-bs-dismiss="alert"
+									aria-label="Close"></button>
+							</div>
+							<div class="form-group">
+								<label for="exampleInputEmail1">Email address</label> <input
+									type="email" name="email" class="form-control"
+									id="exampleInputEmail1" aria-describedby="emailHelp"
+									placeholder="Enter email">
+							</div>
+							<div class="form-group">
+								<label for="exampleInputPassword1">Password</label> <input
+									type="password" name="password" class="form-control"
+									id="exampleInputPassword1" placeholder="Password">
+							</div>
+							<div class="form-check">
+								<input type="checkbox" class="form-check-input"
+									id="exampleCheck1"> <label class="form-check-label"
+									for="exampleCheck1">Remember me</label>
+							</div>
+							<button type="submit" class="btn btn-primary btn-lg"
+								title="Login">Login</button>
                 <div class="text-center">
                   <a class="forgetpassword text-decoration-none" href="#" data-toggle="modal" data-dismiss="modal"
                     data-target="#forgetpasswordModalCenter">Forget password?</a>
@@ -185,13 +202,26 @@
                 </button>
               </div>
               <div class="modal-body">
-                <div class="form-group">
-                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                    placeholder="Enter email">
-                </div>
-  
-                <button type="submit" class="btn btn-primary btn-lg" title="Send">Send</button>
-  
+                <form action="forgetpassword" method="post">
+					<div class="alert alert-danger alert-dismissible fade show d-none "
+				${displayError } role="alert">
+				${error }
+				<button type="button" class="btn-close" data-bs-dismiss="alert"
+					aria-label="Close"></button>
+			</div>
+			<div class="alert alert-success alert-dismissible fade show d-none "
+				${displaySuccess } role="alert">
+				${success }
+				<button type="button" class="btn-close" data-bs-dismiss="alert"
+					aria-label="Close"></button>
+			</div>
+						<div class="form-group">
+							<input type="email" class="form-control" id="exampleInputEmail1"
+								aria-describedby="emailHelp" required name="email" placeholder="Enter email">
+						</div>
+
+						<button type="submit" class="btn btn-primary btn-lg" title="Send">Send</button>
+</form>
                 <div class="text-center">
                   <a class="forgetpassword text-decoration-none" href="#" data-toggle="modal" data-dismiss="modal"
                     data-target="#exampleModalCenter">Login</a>
@@ -220,53 +250,75 @@
                 <div class="faq-divider text-center d-flex align-items-center justify-content-center">
                   <img src="<c:url value="/resources/images/forma-1-copy-5.png" />">
                 </div>
-                <form class="mx-auto" style="margin-top: 15px;">
-                  <div class="form-group">
-                    <div class="row">
-                      <div class="col">
-                        <input type="text" class="form-control" placeholder="First name">
-                      </div>
-                      <div class="col">
-                        <input type="text" class="form-control" placeholder="Last name">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <div class="row">
-                      <div class="col">
-                        <input type="text" class="form-control" placeholder="email">
-                      </div>
-                      <div class="col">
-                        <div class="input-group mb-2">
-                          <div class="input-group-prepend">
-                            <div class="input-group-text">+42</div>
-                          </div>
-                          <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Mobile number">
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <div class="row">
-                      <div class="col">
-                        <input type="text" class="form-control" placeholder="Password">
-                      </div>
-                      <div class="col">
-                        <input type="text" class="form-control" placeholder="Confirm Password">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-check" style="margin-left: 15px;">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">I have read <a href="#"
-                        class="privercypolicy text-decoration-none forgetpassword">privercy policy</a></label>
-                  </div>
-                  <button type="submit" class="btn btn-primary btn-lg" title="Send">Register</button>
-                  <div class="text-center">
-                    <span>already register? <a class="forgetpassword text-decoration-none" href="#" data-toggle="modal"
-                        data-dismiss="modal" data-target="#exampleModalCenter">Login</a></span>
-                  </div>
-                </form>
+                <form class="mx-auto" style="margin-top: 15px;" method="post" action="registerUser"
+						oninput='confirmpassword.setCustomValidity(confirmpassword.value != password.value ? "Passwords do not match." : "")'
+						>
+						<div class="alert alert-danger alert-dismissible fade show d-none "
+				${displayError } role="alert">
+				${error }
+				<button type="button" class="btn-close" data-bs-dismiss="alert"
+					aria-label="Close"></button>
+			</div>
+			<div class="alert alert-success alert-dismissible fade show d-none "
+				${displaySuccess } role="alert">
+				${success }
+				<button type="button" class="btn-close" data-bs-dismiss="alert"
+					aria-label="Close"></button>
+			</div>
+							<div class="form-group">
+								<div class="row">
+									<div class="col">
+										<input type="text" class="form-control" required name="first_name"
+											placeholder="First name">
+									</div>
+									<div class="col">
+										<input type="text" class="form-control" required name="last_name"
+											placeholder="Last name">
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="row">
+									<div class="col">
+										<input type="text" class="form-control" required name="email" placeholder="email">
+									</div>
+									<div class="col">
+										<div class="input-group mb-2">
+											<div class="input-group-prepend">
+												<div class="input-group-text">+42</div>
+											</div>
+											<input type="text" class="form-control"
+												id="inlineFormInputGroup"  name="mobile" placeholder="Mobile number">
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="row">
+									<div class="col">
+										<input type="password" class="form-control" id="exampleInputPassword1" required name="password" placeholder="Password">
+									</div>
+									<div class="col">
+										<input type="password" class="form-control" id="exampleInputPassword2" required name="confirmpassword"
+											placeholder="Confirm Password">
+									</div>
+								</div>
+							</div>
+							<div class="form-check" style="margin-left: 15px;">
+								<input type="checkbox" class="form-check-input" required
+									id="exampleCheck1"> <label class="form-check-label"
+									for="exampleCheck1">I have read <a href="#"
+									class="privercypolicy text-decoration-none forgetpassword">privercy
+										policy</a></label>
+							</div>
+							<button type="submit" class="btn btn-primary btn-lg" title="Send">Register</button>
+							<div class="text-center">
+								<span>already register? <a
+									class="forgetpassword text-decoration-none" href="#"
+									data-toggle="modal" data-dismiss="modal"
+									data-target="#exampleModalCenter">Login</a></span>
+							</div>
+						</form>
               </div>
             </div>
           </div>
