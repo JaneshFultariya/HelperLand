@@ -20,7 +20,7 @@ public class LoginDaoimpl implements LoginDao {
 	private SessionFactory factory;
 	
 	@Transactional
-	public int getUser(User user) {
+	public User getUser(User user) {
 		Session session = factory.getCurrentSession();
 		try {
 			  Query<User> query = session.createQuery("from user where (email =:userEmail AND password =:userPassword)",User.class);
@@ -31,13 +31,16 @@ public class LoginDaoimpl implements LoginDao {
 			  loginuser = query.getSingleResult();
 			  int login_type = loginuser.getUser_type_id();
 			  
+			  System.out.println(loginuser.toString());
+			  
+			  
 			  System.out.println(loginuser.getUser_id());
 			  
-			  return login_type;
+			  return loginuser;
 			}
 		catch(Exception e) {
 			System.out.println(e.getMessage());
-			return 0;
+			return null;
 		}
 	}
 

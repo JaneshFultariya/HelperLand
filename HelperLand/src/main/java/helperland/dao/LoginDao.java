@@ -4,6 +4,6 @@ import helperland.model.User;
 
 public interface LoginDao {
 
-	public int getUser(User user);
+	public User getUser(User user);
 	
 }

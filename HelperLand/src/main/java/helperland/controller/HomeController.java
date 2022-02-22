@@ -1,5 +1,6 @@
 package helperland.controller;
 
+import java.awt.Window;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -20,7 +21,10 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.swing.text.View;
 
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
@@ -31,6 +35,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import antlr.collections.List;
@@ -169,7 +174,7 @@ public class HomeController {
 	
 	
 	@RequestMapping(value="/login",method = RequestMethod.POST)
-	public String handleLogin(@ModelAttribute helperland.model.User user , BindingResult br , Model model) {
+	public String handleLogin(@ModelAttribute helperland.model.User user , BindingResult br , Model model, HttpServletRequest request) {
 		
 		if(br.hasErrors()) {
 			java.util.List<FieldError> errors = br.getFieldErrors();
@@ -186,25 +191,29 @@ public class HomeController {
 			model.addAttribute("success" , "Your response submitted. Thank you!");
 			model.addAttribute("displaySuccess" , "style='display: block !important;'");
 			
-//			contactUs.setName(contactUs.getFirstname() , contactUs.getLastname());
-//			contactUs.setCreated_by(this.contactUsService.getContactUsUser(contactUs));
-//			contactUs.setCreated_on(dtf.format(date));
-//			this.contactUsService.createContactUs(contactUs);
+			User login_user = this.loginService.getUser(user);
 			
-			int login_type = this.loginService.getUser(user);
+			String temp = "" + login_user.getUser_type_id();
 			
-			System.out.println(login_type);
+			HttpSession session = request.getSession();
+			session.setAttribute("loginUser", login_user.getUser_id());
+			session.setAttribute("loginUsertype", temp);
 			
 			
-			if(login_type == 1) {
+			
+//			System.out.println(login_user.toString());
+			session.setMaxInactiveInterval(10*60);
+			
+			if(login_user.getUser_type_id() == 1) {
 				return "admin";
 			}
 			
-			else if(login_type == 2) {
+			else if(login_user.getUser_type_id() == 2) {
 				return "serviceprovider";
 			}
 			
-			else if(login_type == 3) {
+			else if(login_user.getUser_type_id() == 3) {
+
 				return "user";
 				
 			}
@@ -363,11 +372,37 @@ public class HomeController {
 		return "becomeapro";
 	}
 	@RequestMapping("/bookservice")
-	public String bookservice() {
-		System.out.println("url");
-		return "bookservice";
+	public String bookservice(HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		System.out.println(session.getAttribute("loginUser"));
+		
+		
+		if(session.getAttribute("loginUser") != null && session.getAttribute("loginUsertype").equals("3")) {
+			System.out.println(session.getAttribute("loginUsertype").getClass().getSimpleName());
+			System.out.println("url");
+			return "bookservice";
+		}
+		else {
+			
+			request.setAttribute("notfoundalert", "alert");
+			
+			return "homepage";
+		}
+		
+		
 	}
 	
+	
+	
+	@RequestMapping(value = "/logout")
+	public String logout(HttpServletRequest request) {
+	    HttpSession session = request.getSession(false);
+	    if (session != null) {
+	        session.invalidate();
+	    }
+	    return "homepage";  //Where you go after logout here.
+	}
 	
 	
 	

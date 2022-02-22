@@ -72,7 +72,7 @@
                     </li>
                 </ul>
             </div>
-            <a class="" style="float:right" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo">
+            <a class="btn" style="float:right" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo">
                 <span class="navbar-toggler-icon"></span>
             </a>
         </nav>
@@ -114,6 +114,67 @@
     </div>
 
 
+	<section id="modal">
+		<div class="modal fade" id="addnewaddress" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered  login-model" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title strong-color" id="exampleModalLongTitle">Edit Address</h4>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <form method="post" id="addaddressform" name="addaddressform">
+                        <div class="form-row">
+                          <div class="form-group col-md-6">
+                            <label for="inputEmail4">Street name</label>
+                            <input style="height: 46px;" type="text" class="form-control" id="AddressLine1" name="AddressLine1" placeholder="Street name">
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label for="inputPassword4">House number</label>
+                            <input style="height: 46px;" type="text" class="form-control" name="AddressLine2" id="AddressLine2"
+                              placeholder="House number">
+                          </div>
+                        </div>
+                        <div class="form-row">
+                          <div class="form-group col-md-6">
+                            <label for="inputEmail4">Postal code</label>
+                            <input style="height: 46px;" type="text" class="form-control" id="pincode" name="postalcode" placeholder="Postal code">
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label for="inputPassword4">City</label>
+                            <select class="custom-select" id="City" name="City"
+                              style="margin-left: 5px; width: 200px; height: 46px;">
+                              <option selected value="ABC">ABC</option>
+                              <option value="DEF">DEF</option>
+                              <option value="GHI">GHI</option>
+                              <option value="JKL">JKL</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="form-row">
+                          <div class="form-group col-md-6">
+                            <label for="exampleFormControlInput1">Mobile Number</label>
+                            <div class="input-group mb-2">
+                              <div class="input-group-prepend">
+                                <div class="input-group-text">+42</div>
+                              </div>
+                              <input type="text" class="form-control" id="Mobile" name="Mobile" placeholder="Mobile number">
+                            </div>
+                          </div>
+              
+                        </div>
+                        <button type="submit" class="Save-btn" title="Save">Save</button>
+                       	<div id="successmessage"></div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+	</section>
+
 
     <section id="banner">
         <img class="img-fluid w-100" src="<c:url value="/resources/images/book-service-banner.jpg" />" />
@@ -131,51 +192,56 @@
 
             <div class="faq-questions-list " style="width: 100%;">
                 <ul class="nav nav-tabs" role="tablist">
-                    <li class="nav-item text-center text-dark">
-                        <a class="nav-link active w-100" data-toggle="tab" href="#home"><img src="<c:url value="/resources/images/setup-service-white.png" />"> Setup Service</a>
+                    <li class="nav-item text-center text-dark" id="firsttab">
+                        <button class="nav-link active w-100" data-toggle="tab" href="#home" disabled><img src="<c:url value="/resources/images/setup-service-white.png" />"> Setup Service</button>
                     </li>
-                    <li class="nav-item text-center text-dark">
-                        <a class="nav-link w-100" data-toggle="tab" href="#Schedule"><img src="<c:url value="/resources/images/schedule-white.png" />"> Schedule & Plan</a>
+                    <li class="nav-item text-center text-dark" id="secondtab">
+                        <button class="nav-link w-100" data-toggle="tab" href="#Schedule" disabled><img src="<c:url value="/resources/images/schedule-white.png" />"> Schedule & Plan</button>
                     </li>
-                    <li class="nav-item text-center text-dark">
-                        <a class="nav-link w-100" data-toggle="tab" href="#Details"><img src="<c:url value="/resources/images/details-white.png" />">Your Details</a>
+                    <li class="nav-item text-center text-dark" id="thirdtab">
+                        <button class="nav-link w-100" data-toggle="tab" href="#Details" disabled><img src="<c:url value="/resources/images/details-white.png" />">Your Details</button>
                     </li>
-                    <li class="nav-item text-center text-dark">
-                        <a class="nav-link w-100" data-toggle="tab" href="#Payment"><img src="<c:url value="/resources/images/payment-white.png" />"> Make Payment</a>
+                    <li class="nav-item text-center text-dark" id="fourthtab">
+                        <button class="nav-link w-100" data-toggle="tab" href="#Payment" disabled><img src="<c:url value="/resources/images/payment-white.png" />"> Make Payment</button>
                     </li>
                 </ul>
 
+
+		
+
                 <!-- Tab panes -->
                 <div class="tab-content">
-                    <div id="home" class="container tab-pane active"><br>
+                    <div id="home" class="container tab-pane "><br>
 
                         <span>Enter your Postal Code</span>
 
-                        <form>
+  						<form method="post" id="postalCodeForm" name="postalCodeForm">
                             <div class="row">
                                 <div class="col-lg-3">
-                                    <input type="text" class="form-control" placeholder="First name">
+                                    <input type="text" class="form-control" placeholder="Postal Code" id="postalcode" name="postal_code">
                                 </div>
                                 <div class="col">
-                                    <button type="submit" class="btn mb-2 submit-btn">Confirm identity</button>
+                                    <button type="submit" class="btn mb-2 submit-btn">Check Availability</button>
                                 </div>
+                                <div id="postalerror"></div>
                             </div>
-                        </form>
+						</form>
 
                     </div>
 
-                    <div id="Schedule" class="container tab-pane details fade"><br>
+                    <div id="Schedule" class="container tab-pane details"><br>
                         <div class="d-flex flex-row justify-content-between">
                             <div>
                                 <span>When do you need the cleaner?</span>
-                                <form style="margin-top: 15px;">
+                        
                                     <div class="d-flex flex-row">
                                         <div class="col-lg-6">
-                                            <input type="date" id="date-picker" class="date-picker link-text"
-                                                name="date-picker">
+                                            <input type="date" class="link-text form-control"
+													id="service_start_date" name="service_start_date">
                                         </div>
                                         <div class="col-lg-6">
-                                            <select class="custom-select" id="inlineFormCustomSelectPref">
+                                            <select class="custom-select" name="servicetime"
+													id="servicetime">
                                                 <option selected>Choose...</option>
                                                 <option value="1">One</option>
                                                 <option value="2">Two</option>
@@ -183,7 +249,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                </form>
+
                             </div>
                             <div>
                                 <span>How long do you need your cleaner to stay?</span>
@@ -191,12 +257,12 @@
                                     <div class="d-flex flex-row">
 
                                         <div class="col-lg-6">
-                                            <select class="custom-select" id="inlineFormCustomSelectPref">
-                                                <option selected>Choose...</option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
-                                            </select>
+                                            <select class="custom-select" title="Time" id="extratime" name="service_hours" form="mainServiceForm" onclick="clicktime()">
+                        <option value="3">3.0 Hrs</option>
+                        <option value="4">4.0 Hrs</option>
+                        <option value="5">5.0 Hrs</option>
+                        <option value="6">6.0 Hrs</option>
+                      </select>
                                         </div>
                                     </div>
                                 </form>
@@ -208,50 +274,78 @@
                         <span>Extra Services</span>
 
                         <div class="container-fluid extra-services">
-                            <div class="d-flex justify-content-center align-items-center extra-services-img"
-                                style="padding-bottom: 41px; padding-top: 30px;">
-                                <div class="flex-column col d-flex justify-content-center align-items-center">
-                                    <div class="img-col d-flex justify-content-center align-items-center">
-                                        <img src="<c:url value="/resources/images/3.png" />">
-                                    </div>
-                                    <div class="text-center" style="margin-top: 15px;">
-                                        <h6 style="color: #4F4F4F;">Inside cabinets</h6>
-                                    </div>
-                                </div>
-                                <div class="flex-column col d-flex justify-content-center align-items-center">
-                                    <div class="img-col d-flex justify-content-center align-items-center">
-                                        <img src="<c:url value="/resources/images/5.png" />">
-                                    </div>
-                                    <div class="text-center" style="margin-top: 15px;">
-                                        <h6 style="color: #4F4F4F;">Inside fridge</h6>
-                                    </div>
-                                </div>
-                                <div class="flex-column col d-flex justify-content-center align-items-center">
-                                    <div class="img-col d-flex justify-content-center align-items-center">
-                                        <img src="<c:url value="/resources/images/4.png" />">
-                                    </div>
-                                    <div class="text-center" style="margin-top: 15px;">
-                                        <h6 style="color: #4F4F4F;">Inside oven</h6>
-                                    </div>
-                                </div>
-                                <div class="flex-column col d-flex justify-content-center align-items-center">
-                                    <div class="img-col d-flex justify-content-center align-items-center">
-                                        <img src="<c:url value="/resources/images/2.png" />">
-                                    </div>
-                                    <div class="text-center" style="margin-top: 15px;">
-                                        <h6 style="color: #4F4F4F;">Laundry wash & dry</h6>
-                                    </div>
-                                </div>
-                                <div class="flex-column col d-flex justify-content-center align-items-center">
-                                    <div class="img-col d-flex justify-content-center align-items-center">
-                                        <img src="<c:url value="/resources/images/1.png" />">
-                                    </div>
-                                    <div class="text-center" style="margin-top: 15px;">
-                                        <h6 style="color: #4F4F4F;">Interior windows</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+              <div class="d-flex justify-content-center align-items-center extra-services-img wrapper"
+                style="padding-bottom: 41px; padding-top: 30px;">
+                <div class="flex-column col d-flex justify-content-center align-items-center">
+                  <div class=" d-flex justify-content-center align-items-center">
+                    <label class="option_item">
+                      <input type="checkbox" class="checkbox" id="Insidecabinets" value="Inside_cabinets">
+                      <div class="option_inner facebook" style="border-radius:200px">
+                        <div class="icon "><img src="<c:url value="/resources/images/3.png" />"></div>
+                      </div>
+                    </label>
+                  </div>
+                  <div class="text-center" style="margin-top: 15px;">
+                    <h6 style="color: #4F4F4F;">Inside cabinets</h6>
+                  </div>
+                </div>
+                <div class="flex-column col d-flex justify-content-center align-items-center">
+                  <div class=" d-flex justify-content-center align-items-center">
+                    <label class="option_item">
+                      <input type="checkbox" class="checkbox" id="Insidefridge" value="Inside_fridge">
+                      <div class="option_inner twitter" style="border-radius:200px">
+                        <div class="icon"><img src="<c:url value="/resources/images/5.png" />"></div>
+                      </div>
+                    </label>
+                  </div>
+                  <div class="text-center" style="margin-top: 15px;">
+                    <h6 style="color: #4F4F4F;">Inside fridge</h6>
+                  </div>
+                </div>
+                <div class="flex-column col d-flex justify-content-center align-items-center">
+                  <div class=" d-flex justify-content-center align-items-center">
+                    <label class="option_item">
+                      <input type="checkbox" class="checkbox" id="Insideoven" value="Inside_oven">
+                      <div class="option_inner instagram" style="border-radius:200px">
+                        <div class="icon"><img src="<c:url value="/resources/images/4.png" />"></div>
+                      </div>
+                    </label>
+                  </div>
+                  <div class="text-center" style="margin-top: 15px;">
+                    <h6 style="color: #4F4F4F;">Inside oven</h6>
+                  </div>
+                </div>
+                <div class="flex-column col d-flex justify-content-center align-items-center">
+                  <div class="d-flex justify-content-center align-items-center">
+                    <label class="option_item">
+                      <input type="checkbox" class="checkbox" id="Laundrywash" value="Laundry_wash">
+                      <div class="option_inner instagram" style="border-radius:200px">
+                        <div class="icon"><img src="<c:url value="/resources/images/2.png" />"></div>
+                      </div>
+                    </label>
+                  </div>
+                  <div class="text-center" style="margin-top: 15px;">
+                    <h6 style="color: #4F4F4F;">Laundry wash </h6>
+                  </div>
+                </div>
+                <div class="flex-column col d-flex justify-content-center align-items-center">
+                  <div class="d-flex justify-content-center align-items-center">
+
+                    <label class="option_item">
+                      <input type="checkbox" class="checkbox" id="Interiorwindows" value="Interior_windows">
+                      <div class="option_inner instagram" style="border-radius:200px">
+                        <div class="icon"><img src="<c:url value="/resources/images/1.png" />"></div>
+                      </div>
+                    </label>
+                  </div>
+                  <div class="text-center">
+                    <h6 style="color: #4F4F4F;">Interior windows</h6>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
                         <div class="devider-line">
 
                         </div>
@@ -259,38 +353,49 @@
                         <div>
                             <span>Comments</span>
                         </div>
-                        <form>
+       
                             <div class="form-group">
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                                <textarea class="form-control" id="comments" name="comments" rows="3"
                                     placeholder="Comments"></textarea>
                             </div>
                             <div class="form-group">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="gridCheck">
+                                    <input class="form-check-input" type="checkbox" id="petcheck">
                                     <label class="form-check-label" for="gridCheck">
                                         I have pets at home
                                     </label>
                                 </div>
                             </div>
-                        </form>
+       
                         <div class="float-right">
-                            <button type="submit" class="btn mb-2 submit-btn">Confirm identity</button>
+                            <button type="submit" onclick="ThirdTab()" class="btn mb-2 submit-btn">Continue</button>
                         </div>
                     </div>
-                    <div id="Details" class="container tab-pane fade"><br>
+                    <div id="Details" class="container tab-pane"><br>
 
                         <span>Enter your contact details, so we can serve you in better way!</span>
 
-                        <form>
-                            <div class="form-check" style="border: 1px solid #cccccc; border-radius: 5px;">
-                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1"
-                                    value="option1" checked>
-                                <label class="form-check-label" for="gridRadios1">
-                                    <strong>Address:</strong> street 2 40, Troisdorf 53844 <br>
-                                    <strong>Phone number:</strong> 9988556644
-                                </label>
-                            </div>
-                            <button class="bookservice-btn"> + Add New Address</button>
+<!-- <div id="showadd"></div> -->
+
+<div id="showadd" class="table-responsive  mt-2 mb-2 p-2">
+								<table class="table">
+									<thead>
+										<tr>
+											<th></th>
+											<th></th>
+											<th></th>
+										</tr>
+									</thead>
+									<tbody>
+										
+									</tbody>
+								</table>
+							</div>
+
+
+                            <button type="button" class="bookservice-btn" data-toggle="modal" data-target="#addnewaddress">
+                + Add New Address
+              </button>
                             <div class="form-group">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" id="gridCheck">
@@ -299,16 +404,15 @@
                                     </label>
                                 </div>
                             </div>
-                        </form>
                         <div class="devider-line">
 
                         </div>
                         <div class="float-right">
-                            <button type="submit" class="Continue-btn">Continue</button>
+                            <button type="submit" id="continue-btn-thirdtab" onclick="FourthTab()" class="Continue-btn">Continue</button>
                         </div>
 
                     </div>
-                    <div id="Payment" class="container tab-pane fade"><br>
+                    <div id="Payment" class="container tab-pane"><br>
 
                         <h4>Pay securely with Helperland payment getway!</h4>
 
@@ -358,9 +462,8 @@
 
                         </div>
                         <div class="float-right">
-                            <button type="submit" class="Continue-btn">Continue</button>
+                            <button type="submit" class="Continue-btn" onclick="finalcontinue()">Continue</button>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -375,12 +478,17 @@
                         <p class="card-text px-3"><strong>Duration</strong></p>
                         <div class="d-flex justify-content-between px-3 py-2">
                             <p>Basic</p>
-                            <p>3 Hrs</p>
+                            <p id="timevalue">3 Hrs</p>
                         </div>
+                        
+                        <div class="print-values justify-content-between pl-3 pr-3 pb-2 pt-2">
+              <p id="valueList"></p>
+            </div>
+                        
                         <div class="total-divider-line mx-auto"></div>
                         <div class="d-flex justify-content-between px-3" style="margin-bottom: 20px;">
                             <p><strong>Total Service Time</strong></p>
-                            <p>3 Hrs</p>
+                            <p><span class="totalservicetime">54</span> Hrs</p>
                         </div>
 
                         <div class="devider-line">
@@ -388,7 +496,7 @@
                         </div>
                         <div class="d-flex justify-content-between px-3" style="margin-bottom: 20px; margin-top: 20px;">
                             <p>Per cleaning</p>
-                            <p><strong>54,00 €</strong></p>
+                            <p><span id="EuroValue" class="firstEuroValue">54</span> &euro;</p>
                         </div>
 
                         <div class="devider-line">
@@ -397,14 +505,10 @@
 
                         <div class="d-flex justify-content-between px-3" style="margin-top: 20px;">
                             <p style="font-size: 20px; color: #1d7a8c; padding-top: 25px;">Total Payment</p>
-                            <p style="font-size: 42px; font-weight: 700; color: #1d7a8c;">54,00 €</p>
+                            <p style="font-size: 42px; font-weight: 700; color: #1d7a8c;"><span id="firstEuroValue">54</span> &euro;</p>
                         </div>
-                        <p class="px-3"><small>According to § 19 UStG no sales tax is calculated.</small></p>
-                        <div class="d-flex justify-content-between px-3" style="margin-bottom: 5px; margin-top: 5px;">
-                            <p>Effective Price</p>
-                            <p><strong>43,20 €</strong></p>
-                        </div>
-                        <p class="px-3"><small>*You will save 20% according to §35a EStG.</small></p>
+                        
+                        
                     </div>
                     <div class="card-footer text-muted">
                         <p>🙂 See what is always included</p>
@@ -417,9 +521,9 @@
                 <div class="accordion">
                     <div class="accordion-item" id="question1">
                         <a class="accordion-link" href="#question1">
-                            <img class="up-arrow" src="<c:url value="/resources/images/vector-smart-object-copy.png" />" style="margin-right: 15px;">
+                            <img class="up-arrow" src='<c:url value="/resources/images/vector-smart-object-copy.png" />' style="margin-right: 15px;">
 
-                            <img class="down-arrow" src="<c:url value="/resources/images/vector-smart-object.png" />" style="margin-right: 15px;">
+                            <img class="down-arrow" src='<c:url value="/resources/images/vector-smart-object.png" />' style="margin-right: 15px;">
 
                             What's included in a cleaning?
 
@@ -431,9 +535,9 @@
                     </div>
                     <div class="accordion-item" id="question2">
                         <a class="accordion-link" href="#question2">
-                            <img class="up-arrow" src="<c:url value="/resources/images/vector-smart-object-copy.png" />" style="margin-right: 15px;">
+                            <img class="up-arrow" src='<c:url value="/resources/images/vector-smart-object-copy.png" />' style="margin-right: 15px; height: 24px">
 
-                            <img class="down-arrow" src="<c:url value="/resources/images/vector-smart-object.png" />" style="margin-right: 15px;">
+                            <img class="down-arrow" src='<c:url value="/resources/images/vector-smart-object.png" />' style="margin-right: 15px; height: 24px">
 
                             Which Helperland professional will come to my place?
 
@@ -449,9 +553,9 @@
                     </div>
                     <div class="accordion-item" id="question3">
                         <a class="accordion-link" href="#question3">
-                            <img class="up-arrow" src="<c:url value="/resources/images/vector-smart-object-copy.png" />" style="margin-right: 15px;">
+                            <img class="up-arrow" src='<c:url value="/resources/images/vector-smart-object-copy.png" />' style="margin-right: 15px;">
 
-                            <img class="down-arrow" src="<c:url value="/resources/images/vector-smart-object.png" />" style="margin-right: 15px;">
+                            <img class="down-arrow" src='<c:url value="/resources/images/vector-smart-object.png" />' style="margin-right: 15px;">
 
                             Can I skip or reschedule bookings?
 
@@ -460,7 +564,7 @@
                         <div class="answer">
                             <p>You can reschedule any booking for free at<br> least 24 hours in advance of the
                                 scheduled<br> start time. If you need to skip a booking within<br> the minimum
-                                commitment, we’ll credit the<br> value of the booking to your account. You can<br> use
+                                commitment, weâll credit the<br> value of the booking to your account. You can<br> use
                                 this credit on future cleanings and other<br> Helperland services.</p>
                         </div>
                     </div>
@@ -510,7 +614,7 @@
             </div>
         </div>
         <div class="footer_end d-flex align-items-center justify-content-center">
-            <p class="m-0 text-center">©2018 Helperland. All rights reserved. Terms and Conditions | Privacy Policy
+            <p class="m-0 text-center">Â©2018 Helperland. All rights reserved. Terms and Conditions | Privacy Policy
             </p>
         </div>
     </div>
@@ -533,6 +637,286 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    
+    <script>
+
+    window.onload = function() {
+    	document.getElementById("home").style.display = "block";
+    	
+    	document.getElementById("firsttab").style.color = "#fff";
+    	document.getElementById("firsttab").style.color = "#1d7a8c";
+    }
+    
+    function SecondTab() {
+    	document.getElementById("home").style.display = "none";
+    	document.getElementById("Schedule").style.display = "block";
+    	document.getElementById("Details").style.display = "none";
+    	document.getElementById("Payment").style.display = "none";
+    	
+    	document.getElementById("firsttab").style.color = "#646464";
+    	document.getElementById("firsttab").style.color = "#f3f3f3";
+    	
+    	document.getElementById("secondtab").style.color = "#fff";
+    	document.getElementById("secondtab").style.color = "#1d7a8c";
+	}
+    function ThirdTab() {
+    	document.getElementById("home").style.display = "none";
+    	document.getElementById("Schedule").style.display = "none";
+    	document.getElementById("Details").style.display = "block";
+    	document.getElementById("Payment").style.display = "none";
+    	
+    	$.ajax({
+    		type:"GET",
+    		url:"/helperland/showaddress",
+    		contentType: "application/json",
+    		success:function(response){
+    			var result = "<thead><tr><th></th><th></th><th></th></tr></thead>"
+    				result += "<tbody>";
+    				$.each(response, function(k, v) {
+    					
+    					//console.log(v.state);
+    					//document.getElementById("showadd").innerHTML = document.getElementById("showadd").innerHTML + v.addressLine1;
+    					result += "<tr>";
+    					result += "<td>";
+    					result +='<div class="form-check"><input class="form-check-input position-static address_id" type="radio" name="address_id" id="address_id" value='+v.user_address_id+' aria-label="..."></div>';
+    					result += "</td>";
+    					result += "<td>";
+    					result += "</td>";
+    					result += "<td>";
+    					result += '<div class="row"><span><strong>Address:  </strong>'+v.addressLine1+', '+v.addressLine2+'</span> <span><strong>Phone number:  </strong>'+v.mobile+'</span></div>';
+    					result += "</td>";
+    					result += "</tr>";
+    				});
+    				console.log("SUCCESS: ", response);
+    				result += "</tbody>";
+    				$("#showadd").html(result);
+    				
+    		},
+    		error: function(e){
+    			console.log("ERROR: ", e);
+    		},
+    		done: function(e){
+    			console.log("Done");
+    		}
+    	});
+    	
+    	
+	}
+    function FourthTab() {
+    	document.getElementById("home").style.display = "none";
+    	document.getElementById("Schedule").style.display = "none";
+    	document.getElementById("Details").style.display = "none";
+    	document.getElementById("Payment").style.display = "block";
+	}
+    
+    
+    
+    
+    
+    
+</script>
+
+<script>
+
+$("#continue-btn-thirdtab").click(function(){
+	console.log($("#petcheck").is(":checked"));
+});
+
+</script>
+
+
+<script>
+jQuery(document).ready(function($){
+	$("#postalCodeForm").submit(function(event){
+		event.preventDefault();
+		serachPostalCode();
+	});
+});
+
+function serachPostalCode(){
+	var search={}
+	
+	$.ajax({
+		type:"GET",
+		url:"/helperland/postalcode/" + $("#postalcode").val(),
+		success:function(data){
+			console.log("SUCCESS: ", data);
+			if(data == "true"){
+				SecondTab();
+			}
+			else{
+				console.log("hiiii")
+				document.getElementById('postalerror').innerHTML = 'reenter postal code';
+			}
+		},
+		error: function(e){
+			console.log("ERROR: ", e);
+		},
+		done: function(e){
+			console.log("Done");
+		}
+	});
+}
+
+</script>
+
+<script>
+jQuery(document).ready(function($){
+	$("#addaddressform").submit(function(event){
+		event.preventDefault();
+		addaddress();
+	});
+});
+
+function addaddress(){
+	var search={}
+	
+	$.ajax({
+		type:"GET",
+		url:"/helperland/addaddress/" + $("#AddressLine1").val()+ "," + $("#AddressLine2").val() + "," + $("#pincode").val() + "," + $("#City").val() + "," + $("#Mobile").val(),
+		success:function(data){
+			console.log("SUCCESS: ", data);
+			document.getElementById('successmessage').innerHTML = 'successmessage';  
+			ThirdTab();
+		},
+		error: function(e){
+			console.log("ERROR: ", e);
+		},
+		done: function(e){
+			console.log("Done");
+		}
+	});
+}
+
+</script>
+
+
+<script>
+
+var list = document.getElementById('valueList');
+
+var text = '<span> you have selected: <br> </span>'
+
+var Basic = "54";
+
+var normal = "100";
+
+var listArray = [];
+
+var checkboxes = document.querySelectorAll('.checkbox');
+
+for (var checkbox of checkboxes) {
+  checkbox.addEventListener('click', function () {
+    if (this.checked == true) {
+      listArray.push(this.value);
+      valueList.innerHTML = text + listArray.join('<br>');
+
+    }
+    else {
+      listArray = listArray.filter(e => e !== this.value);
+      valueList.innerHTML = text + listArray.join('<br>');
+
+    }
+    console.log(listArray.length)
+    if (listArray.length == 0) {
+      // EuroValue.innerHTML = '54,00 €'
+      $("#firstEuroValue").html(54,00);
+      $(".totalservicetime").html(3);
+      // totaltime.innerHTML = '3 Hrs'
+      
+      $("#EuroValue").html(54,00);
+    }
+    else if (listArray.length == 1) {
+      // EuroValue.innerHTML = '63,00 €'
+      $("#firstEuroValue").html(63,00);
+      $(".totalservicetime").html(3.5);
+      $("#EuroValue").html(63,00);
+      // var totaltime = parseFloat(document.getElementById('totaltime').value);
+
+      // document.getElementById('totaltime').innerHTML = "3.5 Hrs";
+      // console.log(totaltime.value)
+      
+    }
+    else if (listArray.length == 2) {
+      // EuroValue.innerHTML = '72,00 €'
+      $("#firstEuroValue").html(72,00);
+      $(".totalservicetime").html(4);
+      $("#EuroValue").html(72,00);
+    }
+    else if (listArray.length == 3) {
+      // EuroValue.innerHTML = '81,00 €'
+      $("#firstEuroValue").html(81,00);
+      $(".totalservicetime").html(4.5);
+      $("#EuroValue").html(81,00);
+    }
+    else if (listArray.length == 4) {
+      // EuroValue.innerHTML = '90,00 €'
+      $("#firstEuroValue").html(90,00);
+      $(".totalservicetime").html(5);
+      $("#EuroValue").html(90,00);
+    }
+    else if (listArray.length == 5) {
+      // EuroValue.innerHTML = '99,00 €'
+      $("#firstEuroValue").html(99,00);
+      $(".totalservicetime").html(5.5);
+      $("#EuroValue").html(99,00);
+    }
+    console.log(listArray)
+  });
+  
+}
+
+
+
+function finalcontinue(){
+	var allitems = "";
+
+	listArray.map(e => {
+		allitems += e + " ";
+	});
+	
+	console.log(allitems);
+	$.ajax({
+		type:"GET",
+		url:"/helperland/finalsave/" + $('#address_id:checked').val()+ "," +$("#firstEuroValue").text() + "," + $("#EuroValue").text() + "," + $("#comments").val() + "," + $("#extratime").val() + "," + $("#postalcode").val() + "," + $("#service_start_date").val() +","+ $("#petcheck").is(":checked").toString() + "," + allitems,
+		success:function(response){
+			
+				console.log("SUCCESS: ", response);
+				
+		},
+		error: function(e){
+			console.log("ERROR: ", e);
+		},
+		done: function(e){
+			console.log("Done");
+		}
+	});
+}
+
+function clicktime() {
+  var time = parseFloat(document.getElementById('extratime').value);
+
+  document.getElementById('timevalue').innerHTML = time + " Hrs";
+
+  console.log(extratime.value)
+}
+
+$("#date_pick").change(function(){
+  console.log( $("#date_pick").val());
+});
+
+$("#parentidcheckbox label").click(function(){
+  var temp = $(".firstEuroValue").text();
+  console.log(temp);
+});
+
+
+
+  </script>  
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
 </body>
 
 </html>

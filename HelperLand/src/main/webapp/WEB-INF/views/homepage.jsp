@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -113,14 +114,14 @@
 						<div class="modal-body">
 							<form action="login" method="post">
 								<div
-									class="alert alert-danger alert-dismissible fade show d-none "
+									class="alert alert-danger alert-dismissible fade show d-none w-75"
 									${displayError } role="alert">
 									${error }
 									<button type="button" class="btn-close" data-bs-dismiss="alert"
 										aria-label="Close"></button>
 								</div>
 								<div
-									class="alert alert-success alert-dismissible fade show d-none "
+									class="alert alert-success alert-dismissible fade show d-none w-75"
 									${displaySuccess } role="alert">
 									${success }
 									<button type="button" class="btn-close" data-bs-dismiss="alert"
@@ -322,14 +323,15 @@
 
 		</section>
 
+
+
 		<div class="header-text">
 			<h1>Lorem ipsum text</h1>
 			<p class="text-md-left">
 				<img
 					src="<c:url value="/resources/images/forma-1-copy-10(1).svg" />"
 					style="margin-right: 5px;">Lorem ipsum dolor sit amet,
-				consectetur adipiscing <br>
-				<img
+				consectetur adipiscing <br> <img
 					src="<c:url value="/resources/images/forma-1-copy-10(1).svg" />"
 					style="margin-right: 5px;">Lorem ipsum dolor sit amet,
 				consectetur adipiscing<br> <img
@@ -541,7 +543,7 @@
 				</div>
 			</div>
 		</div>
-		</div>
+	</div>
 	</section>
 
 	<section class="spacing background">
@@ -559,8 +561,7 @@
 						<div class="d-flex flex-row" style="margin-top: 15px;">
 							<img src="<c:url value="/resources/images/group-31.png" />">
 							<h5 style="margin-top: 10px; padding-left: 18px;">
-								Lary Watson<br>
-								<small class="text-muted">Manchester</small>
+								Lary Watson<br> <small class="text-muted">Manchester</small>
 							</h5>
 						</div>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -580,8 +581,7 @@
 						<div class="d-flex flex-row" style="margin-top: 15px;">
 							<img src="<c:url value="/resources/images/group-32.png" />">
 							<h5 style="margin-top: 10px; padding-left: 18px;">
-								John Smith<br>
-								<small class="text-muted">Manchester</small>
+								John Smith<br> <small class="text-muted">Manchester</small>
 							</h5>
 						</div>
 						<div class="box-text">
@@ -603,8 +603,7 @@
 						<div class="d-flex flex-row" style="margin-top: 15px;">
 							<img src="<c:url value="/resources/images/group-33.png" />">
 							<h5 style="margin-top: 10px; padding-left: 18px;">
-								Lars Johnson<br>
-								<small class="text-muted">Manchester</small>
+								Lars Johnson<br> <small class="text-muted">Manchester</small>
 							</h5>
 						</div>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -694,6 +693,18 @@
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+	<script>
+		let temp =
+	<%=request.getAttribute("notfoundalert")%>
+		if (temp !== null) {
+			alert("Please Login !!!");
+		}
+	</script>
+	
+	
+	
 
 </body>
 </html>

@@ -5,6 +5,6 @@ import helperland.model.User;
 
 public interface LoginService {
 
-	public int getUser(User user);
+	public User getUser(User user);
 	
 }

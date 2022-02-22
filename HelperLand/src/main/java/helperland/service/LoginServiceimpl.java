@@ -12,10 +12,8 @@ public class LoginServiceimpl implements LoginService {
 
 	@Autowired
 	private LoginDao loginDao;
-	
-	
-	
-	public int getUser(User user) {
+
+	public User getUser(User user) {
 		return this.loginDao.getUser(user);
 	}
 

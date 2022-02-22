@@ -71,6 +71,10 @@
 			<list>
 				<value>helperland.model.Contactus</value>
 				<value>helperland.model.User</value>
+				<value>helperland.model.UserAddress</value>
+				<value>helperland.model.ServiceRequestAddress</value>
+				<value>helperland.model.ServiceRequest</value>
+				<value>helperland.model.ServiceRequestExtra</value>
 			</list>
 		</property>
 
