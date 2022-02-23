@@ -8,7 +8,8 @@
 <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/servicehistory.css" />">
+    <link rel="stylesheet" type="text/css"
+	href="<c:url value="/resources/css/user.css" />">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
         integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css">
@@ -582,21 +583,15 @@
                 <div class="faq-questions-list " style="width: 100%;">
                     <ul class="nav nav-tabs" role="tablist">
                         <li class="nav-item text-center text-dark">
-                            <a class="nav-link active w-100" data-toggle="tab" href="#mydetails"><img
-                                    src="images/setup-service-white.png">My Details</a>
+                            <a class="nav-link active w-100" data-toggle="tab" href="#mydetails">My Details</a>
                         </li>
                         <li class="nav-item text-center text-dark">
-                            <a class="nav-link w-100" data-toggle="tab" href="#myaddresses"><img
-                                    src="images/schedule-white.png">My Addresses</a>
+                            <a class="nav-link w-100" data-toggle="tab" href="#myaddresses">My Addresses</a>
                         </li>
                         <li class="nav-item text-center text-dark">
-                            <a class="nav-link w-100" data-toggle="tab" href="#changepassword"><img
-                                    src="images/details-white.png">Change Password</a>
+                            <a class="nav-link w-100" data-toggle="tab" href="#changepassword">Change Password</a>
                         </li>
-                        <li class="nav-item text-center text-dark">
-                            <a class="nav-link w-100" data-toggle="tab" href="#subscribenotfication"><img
-                                    src="images/payment-white.png">Subscribe Notifications</a>
-                        </li>
+                        
                     </ul>
 
                     <!-- Tab panes -->
@@ -757,20 +752,7 @@
                                 <button class="save-btn" style="margin-left: 0px;">save</button>
                             </form>
                         </div>
-                        <div id="subscribenotfication" class="container tab-pane fade"><br>
-
-                            <form style="margin-top: 15px;">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                    <label class="form-check-label" for="defaultCheck1">
-                                        Yes, I would like to subscribe to the newsletter of Helperland GmbH with
-                                        vouchers, trends, promotions and individualized offers. I can unsubscribe from
-                                        the newsletter at any time in the newsletter and in the customer account itself.
-                                        If you no longer wish to receive our newsletter, remove the tick.
-                                    </label>
-                                </div>
-                            </form>
-                        </div>
+                        
                     </div>
                 </div>
 

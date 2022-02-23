@@ -721,7 +721,7 @@ ul {
 } */
 
 .nav-tabs .nav-item {
-    width: 25%;
+    width: 33.33%;
 }
 
 .nav-tabs .nav-link {
@@ -736,9 +736,7 @@ ul {
     
 }
 
-.nav-tabs{
-    border-bottom: 4px solid #e1e1e1 !important;
-}
+
 
 .nav-tabs .nav-link.active {
     color: #146371 !important;
