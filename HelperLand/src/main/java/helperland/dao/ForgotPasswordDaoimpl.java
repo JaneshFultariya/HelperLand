@@ -26,13 +26,10 @@ public class ForgotPasswordDaoimpl implements ForgotPasswordDao {
 		try {
 			  Query<User> query = session.createQuery("from user where email =:userEmail",User.class);
 			  query.setParameter("userEmail", user.getEmail());
-			  
 			  User forgotuser = new User();
 			  forgotuser = query.getSingleResult();
 			  String forgotemail = forgotuser.getEmail();
-			  
 			  System.out.println(forgotuser.getEmail());
-			  
 			  return forgotemail;
 			}
 		catch(Exception e) {
@@ -48,15 +45,7 @@ public class ForgotPasswordDaoimpl implements ForgotPasswordDao {
 			  Query query = session.createQuery("update user set password=:userPassword where email=:userEmail");
 			  query.setParameter("userEmail", user.getEmail());
 			  query.setParameter("userPassword", user.getPassword());
-			  
 			  int state = query.executeUpdate();
-			  
-//			  User forgotuser = new User();
-//			  forgotuser = query.getSingleResult();
-//			  String forgotemail = forgotuser.getEmail();
-//			  
-//			  System.out.println(forgotuser.getEmail());
-//			  
 			  return state;
 			}
 		catch(Exception e) {

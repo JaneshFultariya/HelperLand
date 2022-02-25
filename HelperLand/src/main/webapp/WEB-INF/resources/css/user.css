@@ -705,14 +705,14 @@ ul {
     padding: 0px 12px;
     width: 84%;
     border-left: none;
-    height: 700px;
+	min-height: 700px;
     margin-top: 30px;
 }
 
-.show {
+#model .show {
     display: flex !important;
     /* justify-content: center !important; */
-}
+} 
 
 /* .footer_section {
     position: fixed;
@@ -750,15 +750,15 @@ ul {
 
 .select-dob-date{
     width: 75px !important;
-    height: 46px !important;
+    height: 38px !important;
 }
 .select-dob-month{
-    width: 75px !important;
-    height: 46px !important;
+    width: 130px !important;
+    height: 38px !important;
 }
 .select-dob-year{
     width: 90px !important;
-    height: 46px !important;
+    height: 38px !important;
 }
 
 .col-auto img {
@@ -1054,4 +1054,16 @@ ul {
     .show .modal-body {
         flex-direction: column !important;
     }
+}
+
+.dropdown-item.active{
+	background-color: transparent !important;
+}
+
+#tab_data{
+	margin-bottom: 25px;
+}
+
+#changepassword{
+	width: 300px;
 }

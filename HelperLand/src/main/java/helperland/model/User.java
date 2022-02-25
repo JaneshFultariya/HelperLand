@@ -37,6 +37,26 @@ public class User {
 	private String created_date;
 	private String modified_date;
 	
+	private String date_of_birth;
+	
+	private String language;
+	
+	public String getLanguage() {
+		return language;
+	}
+
+	public void setLanguage(String language) {
+		this.language = language;
+	}
+
+	public String getDate_of_birth() {
+		return date_of_birth;
+	}
+
+	public void setDate_of_birth(String date_of_birth) {
+		this.date_of_birth = date_of_birth;
+	}
+
 	public String getModified_date() {
 		return modified_date;
 	}
@@ -113,14 +133,7 @@ public class User {
 		this.works_with_pet = works_with_pet;
 	}
 	
-	@Override
-	public String toString() {
-		return "user [user_id=" + user_id + ", user_type_id=" + user_type_id + ", first_name=" + first_name
-				+ ", last_name=" + last_name + ", email=" + email + ", mobile=" + mobile + ", password=" + password
-				+ ", is_registered_user=" + is_registered_user + ", works_with_pet=" + works_with_pet + ", modified_by="
-				+ modified_by + ", is_approved=" + is_approved + ", is_active=" + is_active + ", is_deleted="
-				+ is_deleted + ", is_online=" + is_online + "]";
-	}
+	
 
 	public int getModified_by() {
 		return modified_by;
@@ -152,6 +165,17 @@ public class User {
 	public void setIs_online(int is_online) {
 		this.is_online = is_online;
 	}
+
+	@Override
+	public String toString() {
+		return "User [user_id=" + user_id + ", user_type_id=" + user_type_id + ", first_name=" + first_name
+				+ ", last_name=" + last_name + ", email=" + email + ", mobile=" + mobile + ", password=" + password
+				+ ", is_registered_user=" + is_registered_user + ", works_with_pet=" + works_with_pet + ", modified_by="
+				+ modified_by + ", is_approved=" + is_approved + ", is_active=" + is_active + ", is_deleted="
+				+ is_deleted + ", is_online=" + is_online + ", created_date=" + created_date + ", modified_date="
+				+ modified_date + ", date_of_birth=" + date_of_birth + ", language=" + language + "]";
+	}
+
 	
 	
 }

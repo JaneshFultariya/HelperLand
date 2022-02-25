@@ -37,13 +37,10 @@ public class ContactusDaoIclass implements ContactusDao {
 		try {
 			  Query<User> query = session.createQuery("from user where email =:userEmail",User.class);
 			  query.setParameter("userEmail", contactUsUser.getEmail());
-			  
 			  User user = new User();
 			  user = query.getSingleResult();
 			  int userId = user.getUser_id();
-			  
 			  System.out.println(user.getUser_id());
-			  
 			  return userId;
 			}
 		catch(Exception e) {

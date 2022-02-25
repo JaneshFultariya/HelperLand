@@ -53,7 +53,7 @@ public class BookaServiceController{
 			@PathVariable("postalcode") String postalcode,
 			@PathVariable("City") String City,
 			@PathVariable("Mobile") String Mobile,
-			@ModelAttribute helperland.model.UserAddress userAddress, 
+			@ModelAttribute UserAddress userAddress, 
 			BindingResult br , Model model,
 			HttpServletRequest request) throws Exception {
 		HttpSession session = request.getSession();
@@ -63,8 +63,7 @@ public class BookaServiceController{
 		System.out.println(uid);
 		userAddress.setUserid(uid);
 		int pin = this.bookaService.addAddress(userAddress);
-		
-//		return pin;
+
 	}
 	
 	@RequestMapping(value="/showaddress",method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
@@ -123,9 +122,9 @@ public class BookaServiceController{
 		serviceRequest.setHas_pets(petcheck);
 		serviceRequest.setPayment_transaction_ref_no("0");
 		serviceRequest.setUser_id(uid);
-		int temp1 = this.bookaService.saveServiceRequest(serviceRequest);
+		int servicerequestid = this.bookaService.saveServiceRequest(serviceRequest);
 		
-		System.out.println(temp1 + "hiiii");
+		System.out.println(servicerequestid + "hiiii");
 		
 		UserAddress seleteduseraddress = this.bookaService.getSelectedAddress(address_id);
 		
@@ -137,6 +136,7 @@ public class BookaServiceController{
 		serviceRequestAddress.setMobile(seleteduseraddress.getMobile());
 		serviceRequestAddress.setPostalCode(seleteduseraddress.getPostalcode());
 		serviceRequestAddress.setState(seleteduseraddress.getState());
+		serviceRequestAddress.setServiceRequestId(servicerequestid);
 		
 		this.bookaService.saveSelectedAddress(serviceRequestAddress);
 
@@ -144,7 +144,7 @@ public class BookaServiceController{
 		for(int i=0;i<extraService.length;i++) {
 			ServiceRequestExtra serviceRequestExtra = new ServiceRequestExtra();
 			
-			serviceRequestExtra.setService_req_id(temp1);
+			serviceRequestExtra.setService_req_id(servicerequestid);
 			serviceRequestExtra.setService_extra_(extraService[i]);
 			
 			serviceRequestExtraslist.add(serviceRequestExtra);

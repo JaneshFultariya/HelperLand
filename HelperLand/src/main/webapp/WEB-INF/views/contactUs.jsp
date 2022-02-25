@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page isELIgnored="false"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -64,18 +65,42 @@
 							<a class="nav-link" href="contactUs ">Contact</a>
 						</div>
 					</li>
-					<li class="nav-item">
+					<li class="nav-item" id="loginlink">
 						<div class="nav-btn-blue">
 							<a class="nav-link" href="#" data-toggle="modal"
 								data-target="#exampleModalCenter">Login</a>
 						</div>
 					</li>
-					<li class="nav-item">
+					<li class="nav-item" id="becomelink">
 						<div class="nav-btn-blue">
 							<a class="nav-link" href="becomeapro ">Become a Helper</a>
 						</div>
 					</li>
 				</ul>
+			</div>
+			<div class="d-flex mx-auto" id="notificon">
+				<div class="vertical-line"></div>
+				<img class="notification-icon"
+					src="<c:url value="/resources/images/icon-notification.png" />">
+				<div class="vertical-line"></div>
+			</div>
+			<div class="profile-dropedown" id="profilepic">
+				<a class="nav-link  dropdown-toggle text-decoration-none"
+					id="navbarDropdownMenuLink-4" data-toggle="dropdown"
+					aria-haspopup="true" aria-expanded="false"><i
+					class="fa fa-user"></i> <img
+					src="<c:url value="/resources/images/forma-1-1-1.png" />"> </a>
+				<div
+					class="dropdown-menu dropdown-menu-right dropdown-cyan text-color-nav"
+					aria-labelledby="navbarDropdownMenuLink-4">
+					<span style="padding-left: 15px;">Welcome,<br>
+					<strong style="padding-left: 15px;">First Customer</strong></span>
+					<div class="devider-line"></div>
+					<a class="dropdown-item text-color-nav text-decoration-none"
+						href="user">My Dashboard</a>  <a
+						class="dropdown-item text-color-nav text-decoration-none"
+						href="logout">Log out</a>
+				</div>
 			</div>
 			<a class="btn" style="float: right" type="button"
 				data-bs-toggle="offcanvas" data-bs-target="#demo"> <span
@@ -121,8 +146,7 @@
 
 	<section id="banner">
 		<img class="img-fluid w-100"
-			src="<c:url value="/resources/images/group-16_2.png" />
-        " />
+			src="<c:url value="/resources/images/group-16_2.png" />" />
 	</section>
 
 	<section id="model">
@@ -617,6 +641,32 @@
 			  }  
 			}  
 		</script>
+		
+		<script>
+	let name = <%=request.getAttribute("hideshow")%>
+	
+	if(name == null){
+		/* document.getElementById("notificon").style.display = "none"; */
+		/* $("#notificon").hide(); */
+		$("#notificon").removeClass( "d-flex" );
+		$("#notificon").css("display", "none");
+		$("#profilepic").css("display", "none");
+		$("#loginlink").css("display", "block");
+		$("#becomelink").css("display", "block");
+		console.log("hiiiiiiiiiiiiiiiiiii");
+	}
+	else{
+		$("#notificon").addClass( "d-flex" );
+		$("#notificon").css("display", "block");
+		$("#profilepic").css("display", "block");
+		$("#loginlink").css("display", "none");
+		$("#becomelink").css("display", "none");
+		$('#my_image').css("width", "73px");
+		$('#my_image').css("height", "54px"); 
+		console.log("hiiiiiiiiiiiiiiiiiii");
+ 		
+	}
+	</script>
 
 </body>
 </html>

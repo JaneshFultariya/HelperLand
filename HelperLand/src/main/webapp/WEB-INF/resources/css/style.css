@@ -133,6 +133,9 @@ li {
     font-weight: 400;
     line-height: 1.4;
     text-align: center;
+    width: 150px;
+display: block;
+height: 35px;
 }
 
 .img-fluid {
@@ -147,6 +150,11 @@ li {
     font-weight: 400;
     line-height: 1.4;
     text-align: center;
+    width: auto;
+    margin-left: 10px;
+    margin-right: 10px;
+display: block;
+height: 35px;
 }
 
 .center-div {
@@ -681,4 +689,19 @@ img.Forma-2 {
 
 .offcanvas-header{
     justify-content: right !important;
+}
+
+.vertical-line {
+    content: "";
+    width: 1px;
+    height: 35px;
+    opacity: 1;
+    background-color: #cccccc;
+    margin-right: 17.07px;
+    margin-left: 17.07px;
+}
+
+.notification-icon{
+	width: 40px !important;
+	height: 40px !important;
 }

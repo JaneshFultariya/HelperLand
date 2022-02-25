@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ page isELIgnored="false"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -60,18 +61,42 @@
                             <a class="nav-link" href="#">Contact</a>
                         </div>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" id="loginlink">
                         <div class="nav-btn-blue">
                             <a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModalCenter">Login</a>
                         </div>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" id="becomelink">
                         <div class="nav-btn-blue">
                             <a class="nav-link" href="#">Become a Helper</a>
                         </div>
                     </li>
                 </ul>
             </div>
+            <div class="d-flex mx-auto" id="notificon">
+				<div class="vertical-line"></div>
+				<img class="notification-icon"
+					src="<c:url value="/resources/images/icon-notification.png" />">
+				<div class="vertical-line"></div>
+			</div>
+			<div class="profile-dropedown" id="profilepic">
+				<a class="nav-link  dropdown-toggle text-decoration-none"
+					id="navbarDropdownMenuLink-4" data-toggle="dropdown"
+					aria-haspopup="true" aria-expanded="false"><i
+					class="fa fa-user"></i> <img
+					src="<c:url value="/resources/images/forma-1-1-1.png" />"> </a>
+				<div
+					class="dropdown-menu dropdown-menu-right dropdown-cyan text-color-nav"
+					aria-labelledby="navbarDropdownMenuLink-4">
+					<span style="padding-left: 15px;">Welcome,<br>
+					<strong style="padding-left: 15px;">First Customer</strong></span>
+					<div class="devider-line"></div>
+					<a class="dropdown-item text-color-nav text-decoration-none"
+						href="user">My Dashboard</a>  <a
+						class="dropdown-item text-color-nav text-decoration-none"
+						href="logout">Log out</a>
+				</div>
+			</div>
             <a class="btn" style="float:right" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo">
                 <span class="navbar-toggler-icon"></span>
             </a>
@@ -120,7 +145,7 @@
                 <div class="modal-dialog modal-dialog-centered  login-model" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h4 class="modal-title strong-color" id="exampleModalLongTitle">Edit Address</h4>
+                      <h4 class="modal-title strong-color" id="exampleModalLongTitle">Add Address</h4>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
@@ -193,16 +218,16 @@
             <div class="faq-questions-list " style="width: 100%;">
                 <ul class="nav nav-tabs" role="tablist">
                     <li class="nav-item text-center text-dark" id="firsttab">
-                        <button class="nav-link active w-100" data-toggle="tab" href="#home" disabled><img src="<c:url value="/resources/images/setup-service-white.png" />"> Setup Service</button>
+                        <button class="nav-link active w-100" id="firstbtncolor" data-toggle="tab" href="#home" disabled><img src="<c:url value="/resources/images/setup-service-white.png" />"> Setup Service</button>
                     </li>
                     <li class="nav-item text-center text-dark" id="secondtab">
-                        <button class="nav-link w-100" data-toggle="tab" href="#Schedule" disabled><img src="<c:url value="/resources/images/schedule-white.png" />"> Schedule & Plan</button>
+                        <button class="nav-link w-100" data-toggle="tab" id="secondbtncolor" href="#Schedule" disabled><img src="<c:url value="/resources/images/schedule-white.png" />"> Schedule & Plan</button>
                     </li>
                     <li class="nav-item text-center text-dark" id="thirdtab">
-                        <button class="nav-link w-100" data-toggle="tab" href="#Details" disabled><img src="<c:url value="/resources/images/details-white.png" />">Your Details</button>
+                        <button class="nav-link w-100" data-toggle="tab" id="thirdbtncolor" href="#Details" disabled><img src="<c:url value="/resources/images/details-white.png" />">Your Details</button>
                     </li>
                     <li class="nav-item text-center text-dark" id="fourthtab">
-                        <button class="nav-link w-100" data-toggle="tab" href="#Payment" disabled><img src="<c:url value="/resources/images/payment-white.png" />"> Make Payment</button>
+                        <button class="nav-link w-100" data-toggle="tab" id="fourthbtncolor" href="#Payment" disabled><img src="<c:url value="/resources/images/payment-white.png" />"> Make Payment</button>
                     </li>
                 </ul>
 
@@ -236,7 +261,7 @@
                         
                                     <div class="d-flex flex-row">
                                         <div class="col-lg-6">
-                                            <input type="date" class="link-text form-control"
+                                            <input type="date" class="link-text form-control" style="width: 150px;"
 													id="service_start_date" name="service_start_date">
                                         </div>
                                         <div class="col-lg-6">
@@ -367,8 +392,13 @@
                                 </div>
                             </div>
        
+       <div class="justify-content-between d-flex flex-row">
+                            <div class="float-left">
+                                <button onclick="FirstTab()"  class="back-btn">Back</button>
+                            </div>
                         <div class="float-right">
-                            <button type="submit" onclick="ThirdTab()" class="btn mb-2 submit-btn">Continue</button>
+                            <button type="submit" onclick="ThirdTab()" style="margin-top: 20px" class="btn mb-2 submit-btn">Continue</button>
+                        </div>
                         </div>
                     </div>
                     <div id="Details" class="container tab-pane"><br>
@@ -407,8 +437,13 @@
                         <div class="devider-line">
 
                         </div>
+                        <div class="justify-content-between d-flex flex-row">
+                            <div class="float-left">
+                                <button onclick="SecondTab()"  class="back-btn">Back</button>
+                            </div>
                         <div class="float-right">
                             <button type="submit" id="continue-btn-thirdtab" onclick="FourthTab()" class="Continue-btn">Continue</button>
+                        </div>
                         </div>
 
                     </div>
@@ -461,8 +496,13 @@
                         <div class="devider-line">
 
                         </div>
+                        <div class="justify-content-between d-flex flex-row">
+                            <div class="float-left">
+                                <button onclick="ThirdTab()"  class="back-btn">Back</button>
+                            </div>
                         <div class="float-right">
                             <button type="submit" class="Continue-btn" onclick="finalcontinue()">Continue</button>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -641,12 +681,22 @@
     
     <script>
 
-    window.onload = function() {
+    window.onload = function () {
     	document.getElementById("home").style.display = "block";
     	
     	document.getElementById("firsttab").style.color = "#fff";
     	document.getElementById("firsttab").style.color = "#1d7a8c";
     }
+    
+    
+    function FirstTab() {
+document.getElementById("home").style.display = "block";
+document.getElementById("Schedule").style.display = "none";
+    	document.getElementById("firsttab").style.color = "#fff";
+    	document.getElementById("firsttab").style.color = "#1d7a8c";
+    	$("#firstbtncolor").addClass("active");
+    	$("#secondbtncolor").removeClass("active");
+	}
     
     function SecondTab() {
     	document.getElementById("home").style.display = "none";
@@ -654,17 +704,25 @@
     	document.getElementById("Details").style.display = "none";
     	document.getElementById("Payment").style.display = "none";
     	
-    	document.getElementById("firsttab").style.color = "#646464";
-    	document.getElementById("firsttab").style.color = "#f3f3f3";
+/*     	document.getElementById("firsttab").style.color = "#646464";
+    	document.getElementById("firsttab").style.color = "#f3f3f3"; */
     	
-    	document.getElementById("secondtab").style.color = "#fff";
-    	document.getElementById("secondtab").style.color = "#1d7a8c";
+    	$("#firstbtncolor").removeClass("active");
+    	$("#secondbtncolor").addClass("active");
+    	$("#thirdbtncolor").removeClass("active");
+    	
+/*     	document.getElementById("secondtab").style.color = "#fff";
+    	document.getElementById("secondtab").style.color = "#1d7a8c"; */
 	}
     function ThirdTab() {
     	document.getElementById("home").style.display = "none";
     	document.getElementById("Schedule").style.display = "none";
     	document.getElementById("Details").style.display = "block";
     	document.getElementById("Payment").style.display = "none";
+    	
+    	$("#secondbtncolor").removeClass("active");
+    	$("#thirdbtncolor").addClass("active");
+    	$("#fourthbtncolor").removeClass("active");
     	
     	$.ajax({
     		type:"GET",
@@ -708,6 +766,9 @@
     	document.getElementById("Schedule").style.display = "none";
     	document.getElementById("Details").style.display = "none";
     	document.getElementById("Payment").style.display = "block";
+    	
+    	$("#thirdbtncolor").removeClass("active");
+    	$("#fourthbtncolor").addClass("active");
 	}
     
     
@@ -916,6 +977,32 @@ $("#parentidcheckbox label").click(function(){
   </script>  
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+    <script>
+	let name = <%=request.getAttribute("hideshow")%>
+	
+	if(name == null){
+		/* document.getElementById("notificon").style.display = "none"; */
+		/* $("#notificon").hide(); */
+		$("#notificon").removeClass( "d-flex" );
+		$("#notificon").css("display", "none");
+		$("#profilepic").css("display", "none");
+		$("#loginlink").css("display", "block");
+		$("#becomelink").css("display", "block");
+		console.log("hiiiiiiiiiiiiiiiiiii");
+	}
+	else{
+		$("#notificon").addClass( "d-flex" );
+		$("#notificon").css("display", "block");
+		$("#profilepic").css("display", "block");
+		$("#loginlink").css("display", "none");
+		$("#becomelink").css("display", "none");
+		$('#my_image').css("width", "73px");
+		$('#my_image').css("height", "54px"); 
+		console.log("hiiiiiiiiiiiiiiiiiii");
+ 		
+	}
+	</script>
     
 </body>
 

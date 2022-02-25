@@ -72,24 +72,30 @@ public class HomeController {
 	
 
 	@RequestMapping({"/homepage","/"})
-	public String homepage() {
+	public String homepage(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		request.setAttribute("hideshow", session.getAttribute("loginUser"));
 		System.out.println("url");
 		return "homepage";
 	}
 	
 	@RequestMapping("/aboutus")
-	public String aboutus() {
+	public String aboutus(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		request.setAttribute("hideshow", session.getAttribute("loginUser"));
 		System.out.println("url");
 		return "aboutus";
 	}
 	@RequestMapping(value = "/contactUs", method = RequestMethod.GET)
-	public String contactUs() {
+	public String contactUs(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		request.setAttribute("hideshow", session.getAttribute("loginUser"));
 		System.out.println("url");
 		return "contactUs";
 	}
 	
 	@RequestMapping(value  = "/contactUs" , method=RequestMethod.POST)
-	public String handleContactUs(@ModelAttribute helperland.model.Contactus contactUs , BindingResult br , Model model) {
+	public String handleContactUs(@ModelAttribute Contactus contactUs , BindingResult br , Model model) {
 		
 		if(br.hasErrors()) {
 			java.util.List<FieldError> errors = br.getFieldErrors();
@@ -115,7 +121,7 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value  = "/registerUser" , method=RequestMethod.POST)
-	public String handleRegisterUser(@ModelAttribute helperland.model.User user , BindingResult br , Model model) {
+	public String handleRegisterUser(@ModelAttribute User user , BindingResult br , Model model) {
 		
 		if(br.hasErrors()) {
 			java.util.List<FieldError> errors = br.getFieldErrors();
@@ -146,7 +152,7 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value  = "/registerServiceProvider" , method=RequestMethod.POST)
-	public String handleRegisterServiceProvider(@ModelAttribute helperland.model.User user , BindingResult br , Model model) {
+	public String handleRegisterServiceProvider(@ModelAttribute User user , BindingResult br , Model model) {
 		
 		if(br.hasErrors()) {
 			java.util.List<FieldError> errors = br.getFieldErrors();
@@ -174,7 +180,7 @@ public class HomeController {
 	
 	
 	@RequestMapping(value="/login",method = RequestMethod.POST)
-	public String handleLogin(@ModelAttribute helperland.model.User user , BindingResult br , Model model, HttpServletRequest request) {
+	public String handleLogin(@ModelAttribute User user , BindingResult br , Model model, HttpServletRequest request) {
 		
 		if(br.hasErrors()) {
 			java.util.List<FieldError> errors = br.getFieldErrors();
@@ -188,20 +194,27 @@ public class HomeController {
 		}
 		else {
 			
-			model.addAttribute("success" , "Your response submitted. Thank you!");
+			model.addAttribute("success" , "You Login successfully. Thank you!");
 			model.addAttribute("displaySuccess" , "style='display: block !important;'");
 			
 			User login_user = this.loginService.getUser(user);
 			
 			String temp = "" + login_user.getUser_type_id();
 			
+			
+			
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", login_user.getUser_id());
 			session.setAttribute("loginUsertype", temp);
-			
-			
-			
-//			System.out.println(login_user.toString());
+			session.setAttribute("username", login_user.getFirst_name());
+			session.setAttribute("useremail", login_user.getEmail());
+			session.setAttribute("userlastname", login_user.getLast_name());
+			session.setAttribute("usermobile", login_user.getMobile());
+			model.addAttribute("htmluseremail", session.getAttribute("useremail"));
+			model.addAttribute("htmlusername" , session.getAttribute("username"));
+			model.addAttribute("htmllastname" , session.getAttribute("userlastname"));
+			model.addAttribute("htmlMobile" , session.getAttribute("usermobile"));
+
 			session.setMaxInactiveInterval(10*60);
 			
 			if(login_user.getUser_type_id() == 1) {
@@ -229,7 +242,7 @@ public class HomeController {
 	} 
 	
 	@RequestMapping(value="/forgetpassword",method = RequestMethod.POST)
-	public String handleForgetpassword(@ModelAttribute helperland.model.User user , BindingResult br , Model model) {
+	public String handleForgetpassword(@ModelAttribute User user , BindingResult br , Model model) {
 		
 		if(br.hasErrors()) {
 			java.util.List<FieldError> errors = br.getFieldErrors();
@@ -266,20 +279,11 @@ public class HomeController {
 		
 	} 
 	
-//	@RequestMapping(value="/handle-contact", method = RequestMethod.POST)
-//	public RedirectView handleContact(@ModelAttribute Contactus contactus, HttpServletRequest request) {
-//		System.out.println(contactus);
-//		RedirectView redirectView = new RedirectView();
-//		redirectView.setUrl(request.getContextPath()+"/");
-//		return redirectView;
-//	}
-	
 	
 	public void sendEmail(String email, String pass) {
 
 		Properties prop = new Properties();
 		prop.put("mail.smtp.auth", true);
-//		prop.put("mail.smtp.starttls.enable", "true");
 		prop.put("mail.smtp.host", "smtp.mailtrap.io");
 		prop.put("mail.smtp.port", "2525");
 		prop.put("mail.smtp.ssl.trust", "smtp.mailtrap.io");
@@ -305,7 +309,6 @@ public class HomeController {
 					message.setSubject("Mail Subject");
 
 					String msg = "Your new Password:-" + pass;
-//					message.setText(msg);
 					MimeBodyPart mimeBodyPart = new MimeBodyPart();
 					mimeBodyPart.setContent(msg, "text/html; charset=utf-8");
 
@@ -328,10 +331,8 @@ public class HomeController {
 					
 					
 		} catch (AddressException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (MessagingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -357,17 +358,23 @@ public class HomeController {
 	}
 	
 	@RequestMapping("/faq")
-	public String faq() {
+	public String faq(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		request.setAttribute("hideshow", session.getAttribute("loginUser"));
 		System.out.println("url");
 		return "faq";
 	}
 	@RequestMapping("/price")
-	public String price() {
+	public String price(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		request.setAttribute("hideshow", session.getAttribute("loginUser"));
 		System.out.println("url");
 		return "price";
 	}
 	@RequestMapping("/becomeapro")
-	public String becomeapro() {
+	public String becomeapro(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		request.setAttribute("hideshow", session.getAttribute("loginUser"));
 		System.out.println("url");
 		return "becomeapro";
 	}
@@ -375,6 +382,7 @@ public class HomeController {
 	public String bookservice(HttpServletRequest request) {
 		
 		HttpSession session = request.getSession();
+		request.setAttribute("hideshow", session.getAttribute("loginUser"));
 		System.out.println(session.getAttribute("loginUser"));
 		
 		
@@ -401,7 +409,7 @@ public class HomeController {
 	    if (session != null) {
 	        session.invalidate();
 	    }
-	    return "homepage";  //Where you go after logout here.
+	    return "homepage";
 	}
 	
 	
@@ -412,15 +420,27 @@ public class HomeController {
 //		return "admin";
 //	}
 //	
-//	@RequestMapping("/user")
-//	public String user() {
-//		System.out.println("url");
-//		return "user";
-//	}
-//
-//	@RequestMapping("/aboutus")
-//	public String aboutus() {
-//		System.out.println("url");
-//		return "aboutus";
-//	}
+	@RequestMapping("/user")
+	public String user(HttpServletRequest request, Model model) {
+		HttpSession session = request.getSession();
+		System.out.println(session.getAttribute("loginUser"));
+		
+		
+		if(session.getAttribute("loginUser") != null && session.getAttribute("loginUsertype").equals("3")) {
+			model.addAttribute("htmluseremail", session.getAttribute("useremail"));
+			model.addAttribute("htmlusername" , session.getAttribute("username"));
+			model.addAttribute("htmllastname" , session.getAttribute("userlastname"));
+			model.addAttribute("htmlMobile" , session.getAttribute("usermobile"));
+			System.out.println(session.getAttribute("loginUsertype").getClass().getSimpleName());
+			System.out.println("url");
+			return "user";
+		}
+		else {
+			
+			request.setAttribute("notfoundalert", "alert");
+			
+			return "homepage";
+		}
+	}
+
 }

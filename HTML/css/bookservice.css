@@ -643,3 +643,28 @@ padding-top: 5px;
   label{
       margin-bottom: 0 !important;
   }
+
+  .back-btn{
+  
+        background-color: white;
+        border-radius: 50px;
+        width: 150px;
+        height: 48px;
+        margin-top: 20px;
+        border: 1px solid #1D7A8C;
+        color: #1D7A8C;
+        font-weight: bold;
+    
+    
+    
+  }
+  .back-btn:hover{
+    background-color: #146371;
+    border-radius: 50px;
+    width: 150px;
+    height: 48px;
+    margin-top: 20px;
+    border: 1px solid #146371;
+    color: white;
+    font-weight: bold;
+}

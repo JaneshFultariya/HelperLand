@@ -465,3 +465,18 @@ li {
     margin-top: 15px;
     color: white;
 }
+
+.vertical-line {
+    content: "";
+    width: 1px;
+    height: 35px;
+    opacity: 1;
+    background-color: #cccccc;
+    margin-right: 17.07px;
+    margin-left: 17.07px;
+}
+
+.notification-icon{
+	width: 40px !important;
+	height: 40px !important;
+}

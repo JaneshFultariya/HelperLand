@@ -29,13 +29,10 @@ public class BookaServiceDaoimpl implements BookaServiceDao{
 	
 	@Transactional
 	public boolean getUserAddress(String pincode) {
-		
 		Session session = factory.getCurrentSession();
 		try {
 			  Query query = session.createQuery("from useraddress where postalcode =:userPostalCode",UserAddress.class);
 			  query.setParameter("userPostalCode", Integer.parseInt(pincode));
-			  
-			  
 			  return query.list().size() > 0;
 			}
 		catch(Exception e) {
@@ -58,13 +55,8 @@ public class BookaServiceDaoimpl implements BookaServiceDao{
 			  query.setParameter("userid", uid);
 			  
 			  UserAddress useraddress = new UserAddress();
-			  List<UserAddress> useraddList = query.getResultList();
-//			  int login_type = useraddress.getUserid();
-			  
+			  List<UserAddress> useraddList = query.getResultList();	  
 			  System.out.println(useraddList.toString());
-			  
-//			  System.out.println(useraddress.getUserid());
-			  
 			  return useraddList;
 			}
 		catch(Exception e) {
@@ -83,11 +75,7 @@ public class BookaServiceDaoimpl implements BookaServiceDao{
 			  
 			  UserAddress reqstedaddress = new UserAddress();
 			  reqstedaddress = query.getSingleResult();
-			  
 			  System.out.println(reqstedaddress.toString());
-			  
-//			  System.out.println(useraddress.getUserid());
-			  
 			  return reqstedaddress;
 			}
 		catch(Exception e) {
@@ -110,9 +98,7 @@ public class BookaServiceDaoimpl implements BookaServiceDao{
 
 	@Transactional
 	public int saveExtraService(List<ServiceRequestExtra> serviceRequestExtraslist) {
-		
 		Iterator<ServiceRequestExtra> iterator = serviceRequestExtraslist.iterator();
-		
 		while(iterator.hasNext()) {
 			int servicerequestextra = (Integer) this.hibernateTemplate.save(iterator.next());
 		}
