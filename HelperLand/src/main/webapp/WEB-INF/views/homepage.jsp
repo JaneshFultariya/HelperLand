@@ -300,7 +300,7 @@
 										<div class="col">
 											<div class="input-group mb-2">
 												<div class="input-group-prepend">
-													<div class="input-group-text">+42</div>
+													<div class="input-group-text">+91</div>
 												</div>
 												<input type="text" class="form-control"
 													id="inlineFormInputGroup" name="mobile"

@@ -665,7 +665,7 @@
 										<div class="number_input d-flex">
 											<div class="input-group mb-2">
 												<div class="input-group-prepend">
-													<div class="input-group-text">+42</div>
+													<div class="input-group-text">+91</div>
 												</div>
 												<input type="text" class="form-control" name="mobile" required
 													id="edtmobile" value= ${htmlMobile }>
@@ -915,7 +915,7 @@
                             <label for="exampleFormControlInput1">Mobile Number</label>
                             <div class="input-group mb-2">
                               <div class="input-group-prepend">
-                                <div class="input-group-text">+42</div>
+                                <div class="input-group-text">+91</div>
                               </div>
                               <input type="text" class="form-control" id="Mobile" name="Mobile" placeholder="Mobile number">
                             </div>
@@ -976,7 +976,7 @@
                             <label for="exampleFormControlInput1">Mobile Number</label>
                             <div class="input-group mb-2">
                               <div class="input-group-prepend">
-                                <div class="input-group-text">+42</div>
+                                <div class="input-group-text">+91</div>
                               </div>
                               <input type="text" class="form-control" id="Mobile" name="Mobile" placeholder="Mobile number">
                             </div>

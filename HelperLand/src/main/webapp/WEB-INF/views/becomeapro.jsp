@@ -145,7 +145,7 @@
             style="height: 46px;" placeholder="Email Address">
         </div>
         <div class="number_input d-flex justify-content-center form-group" style="padding-top: 15px;">
-          <input type="text" id="form3Example1" class="form-control float-right country_number" placeholder="+42"
+          <input type="text" id="form3Example1" class="form-control float-right country_number" placeholder="+91"
             style="height: 46px; width: 54px; background-color: #f4f4f4;" />
 
           <input type="text" id="form3Example1" class="form-control" placeholder="Mobile number" name="mobile"
@@ -326,7 +326,7 @@
                   <div class="col">
                     <div class="input-group mb-2">
                       <div class="input-group-prepend">
-                        <div class="input-group-text">+42</div>
+                        <div class="input-group-text">+91</div>
                       </div>
                       <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Mobile number">
                     </div>

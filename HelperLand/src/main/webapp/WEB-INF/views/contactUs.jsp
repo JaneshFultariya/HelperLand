@@ -324,7 +324,7 @@
 									<div class="col">
 										<div class="input-group mb-2">
 											<div class="input-group-prepend">
-												<div class="input-group-text">+42</div>
+												<div class="input-group-text">+91</div>
 											</div>
 											<input type="text" class="form-control"
 												id="inlineFormInputGroup"  name="mobile" placeholder="Mobile number">
@@ -433,7 +433,7 @@
                 </div>
                 <div class=" d-flex justify-content-center" style="margin-bottom: 15px;">
                     <input type="text" id="form3Example1" class="form-control float-right country_number"
-                        placeholder="+42" style="width: 57px; height: 46px; background-color: #c8c8c8;" />
+                        placeholder="+91" style="width: 57px; height: 46px; background-color: #c8c8c8;" />
                     <div class="number_input d-flex justify-content-center">
                         <input type="text" id="form3Example1" class="form-control float-right"
                             placeholder="Mobile number" style="width: 242px; height: 46px; margin-right: 25px;" />
@@ -491,7 +491,7 @@
 					<div class="col">
 						<div class="input-group mb-2">
 							<div class="input-group-prepend">
-								<div class="input-group-text">+42</div>
+								<div class="input-group-text">+91</div>
 							</div>
 							<input type="text" required name="phone_number"
 								placeholder="Mobile number" class=" form-control">
