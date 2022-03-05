@@ -10,6 +10,7 @@ import helperland.dao.LoginDao;
 import helperland.model.ServiceRequest;
 import helperland.model.ServiceRequestAddress;
 import helperland.model.ServiceRequestExtra;
+import helperland.model.User;
 import helperland.model.UserAddress;
 
 @Service
@@ -46,6 +47,10 @@ public class BookaServiceimpl implements BookaService{
 	public int saveExtraService(List<ServiceRequestExtra> serviceRequestExtraslist) {
 		return bookaServiceDao.saveExtraService(serviceRequestExtraslist);
 		
+	}
+
+	public List<User> getAllEmail(int uid) {
+		return bookaServiceDao.getAllEmail(uid);
 	}
 
 

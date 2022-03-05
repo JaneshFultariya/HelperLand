@@ -8,8 +8,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity(name="ServiceRequest")
-@Table(name="ServiceRequest")
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+@JsonSerialize
+@Entity(name="servicerequest")
+@Table(name="servicerequest")
 public class ServiceRequest {
 
 	
@@ -42,13 +45,14 @@ public class ServiceRequest {
 	private String payment_transaction_ref_no;
 	
 	private float payment_due;
-	private int job_status;
+	private String job_status;
+	private float service_start_time;
 	
 	private int service_provider_id;
 	private String sp_accepted_date;
 	
 	private String has_pets;
-	private int status;
+	private String status;
 	
 
 	private String created_date;
@@ -152,10 +156,10 @@ public class ServiceRequest {
 	public void setPayment_due(float payment_due) {
 		this.payment_due = payment_due;
 	}
-	public int getJob_status() {
+	public String getJob_status() {
 		return job_status;
 	}
-	public void setJob_status(int job_status) {
+	public void setJob_status(String job_status) {
 		this.job_status = job_status;
 	}
 	public int getService_provider_id() {
@@ -176,10 +180,10 @@ public class ServiceRequest {
 	public void setHas_pets(String has_pets) {
 		this.has_pets = has_pets;
 	}
-	public int getStatus() {
+	public String getStatus() {
 		return status;
 	}
-	public void setStatus(int status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 	public String getCreated_date() {
@@ -230,6 +234,16 @@ public class ServiceRequest {
 	public void setRecord_version(String record_version) {
 		this.record_version = record_version;
 	}
+	
+	
+	public float getService_start_time() {
+		return service_start_time;
+	}
+	public void setService_start_time(float service_start_time) {
+		this.service_start_time = service_start_time;
+	}
+	
+	
 	@Override
 	public String toString() {
 		return "ServiceRequest [service_req_id=" + service_req_id + ", user_id=" + user_id + ", service_id="
@@ -238,14 +252,11 @@ public class ServiceRequest {
 				+ ", service_hours=" + service_hours + ", extra_hours=" + extra_hours + ", sub_total=" + sub_total
 				+ ", discount=" + discount + ", total_cost=" + total_cost + ", comments=" + comments
 				+ ", payment_transaction_ref_no=" + payment_transaction_ref_no + ", payment_due=" + payment_due
-				+ ", job_status=" + job_status + ", service_provider_id=" + service_provider_id + ", sp_accepted_date="
-				+ sp_accepted_date + ", has_pets=" + has_pets + ", status=" + status + ", created_date=" + created_date
-				+ ", modified_date=" + modified_date + ", modified_by=" + modified_by + ", refunded_amount="
-				+ refunded_amount + ", distance=" + distance + ", has_issue=" + has_issue + ", payment_done="
-				+ payment_done + ", record_version=" + record_version + "]";
+				+ ", job_status=" + job_status + ", service_start_time=" + service_start_time + ", service_provider_id="
+				+ service_provider_id + ", sp_accepted_date=" + sp_accepted_date + ", has_pets=" + has_pets
+				+ ", status=" + status + ", created_date=" + created_date + ", modified_date=" + modified_date
+				+ ", modified_by=" + modified_by + ", refunded_amount=" + refunded_amount + ", distance=" + distance
+				+ ", has_issue=" + has_issue + ", payment_done=" + payment_done + ", record_version=" + record_version
+				+ "]";
 	}
-	
-	
-	
-	
 }

@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
   <link rel="icon" type="image/x-icon" href="/images/white-logo-transparent-background.png">
   <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
   <title>testing</title>
 </head>
 
@@ -153,6 +154,62 @@
           </li>
         </ul>
 
+
+
+        <div class="modal fade" id="withoutServiceProviderdashboardModalCenter" tabindex="-1" role="dialog"
+          aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered custom-size-modal-normal" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <div class="d-flex flex-row">
+                  <img src="images/hat.png" class="hat-img">
+                  <div class="col">
+                    <p class="link-text">Lyum Watson</p>
+                    <div class="d-flex">
+                      <img class="clock" src="images/yellowstar.png">
+                      <img class="clock" src="images/yellowstar.png">
+                      <img class="clock" src="images/yellowstar.png">
+                      <img class="clock" src="images/yellowstar.png">
+                      <img class="clock" src="images/brownstar.png">
+                      <p>4</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <h4>Rate your service provider</h4>
+                <hr>
+                <!-- <div class="d-flex flex-row">
+                  <span>One time arrival</span>
+                  <div class="star-container">
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                  </div>
+                  </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-container">
+          <span class="star"></span>
+        </div>
+
+        <!-- <div class="star-container">
+          <div class="star"></div>
+          <div class="star"></div>
+          <div class="star"></div>
+          <div class="star"></div>
+          <div class="star"></div>
+        </div>
+        <h1 class="rating">0/5</h1> -->
+
         <!-- Tab panes -->
         <div class="tab-content">
           <div id="home" class="container tab-pane active"><br>
@@ -165,7 +222,7 @@
                   <input type="text" class="form-control" placeholder="First name">
                 </div>
                 <div class="col">
-                  <button type="submit" class="btn mb-2 submit-btn">Confirm identity</button>
+                  <a data-toggle="modal" data-target="#withoutServiceProviderdashboardModalCenter">Confirm identity</a>
                 </div>
               </div>
             </form>
@@ -215,8 +272,8 @@
             <span>Extra Services</span>
 
             <div class="container-fluid extra-services">
-              <div class="d-flex justify-content-center align-items-center extra-services-img wrapper" id="parentidcheckbox"
-                style="padding-bottom: 41px; padding-top: 30px;">
+              <div class="d-flex justify-content-center align-items-center extra-services-img wrapper"
+                id="parentidcheckbox" style="padding-bottom: 41px; padding-top: 30px;">
                 <div class="flex-column col d-flex justify-content-center align-items-center">
                   <div class=" d-flex justify-content-center align-items-center">
                     <label class="option_item">
@@ -328,8 +385,8 @@
               <button type="button" class="bookservice-btn" data-toggle="modal" data-target="#addnewaddress">
                 + Add New Address
               </button>
-              <div class="modal fade" id="addnewaddress" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-                aria-hidden="true">
+              <div class="modal fade" id="addnewaddress" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered  login-model" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -343,7 +400,8 @@
                         <div class="form-row">
                           <div class="form-group col-md-6">
                             <label for="inputEmail4">Street name</label>
-                            <input style="height: 46px;" type="email" class="form-control" id="inputEmail4" placeholder="Street name">
+                            <input style="height: 46px;" type="email" class="form-control" id="inputEmail4"
+                              placeholder="Street name">
                           </div>
                           <div class="form-group col-md-6">
                             <label for="inputPassword4">House number</label>
@@ -354,7 +412,8 @@
                         <div class="form-row">
                           <div class="form-group col-md-6">
                             <label for="inputEmail4">Postal code</label>
-                            <input style="height: 46px;" type="email" class="form-control" id="inputEmail4" placeholder="Postal code">
+                            <input style="height: 46px;" type="email" class="form-control" id="inputEmail4"
+                              placeholder="Postal code">
                           </div>
                           <div class="form-group col-md-6">
                             <label for="inputPassword4">City</label>
@@ -374,10 +433,11 @@
                               <div class="input-group-prepend">
                                 <div class="input-group-text">+42</div>
                               </div>
-                              <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Mobile number">
+                              <input type="text" class="form-control" id="inlineFormInputGroup"
+                                placeholder="Mobile number">
                             </div>
                           </div>
-              
+
                         </div>
                         <button type="submit" class="Save-btn" title="Save">Save</button>
                       </form>
@@ -611,12 +671,12 @@
         console.log(listArray.length)
         if (listArray.length == 0) {
           // EuroValue.innerHTML = '54,00 €'
-          $(".firstEuroValue").html(54,00);
+          $(".firstEuroValue").html(54, 00);
           // totaltime.innerHTML = '3 Hrs'
         }
         else if (listArray.length == 1) {
           // EuroValue.innerHTML = '63,00 €'
-          $(".firstEuroValue").html(63,00);
+          $(".firstEuroValue").html(63, 00);
           document.getElementById('totaltime').innerHTML = '3.5 Hrs'
 
           // var totaltime = parseFloat(document.getElementById('totaltime').value);
@@ -627,23 +687,23 @@
         }
         else if (listArray.length == 2) {
           // EuroValue.innerHTML = '72,00 €'
-          $(".firstEuroValue").html(72,00);
+          $(".firstEuroValue").html(72, 00);
           totaltime.innerHTML = '4 Hrs'
         }
         else if (listArray.length == 3) {
           // EuroValue.innerHTML = '81,00 €'
-          $(".firstEuroValue").html(81,00);
+          $(".firstEuroValue").html(81, 00);
         }
         else if (listArray.length == 4) {
           // EuroValue.innerHTML = '90,00 €'
-          $(".firstEuroValue").html(90,00);
+          $(".firstEuroValue").html(90, 00);
         }
         else if (listArray.length == 5) {
           // EuroValue.innerHTML = '99,00 €'
-          $(".firstEuroValue").html(99,00);
+          $(".firstEuroValue").html(99, 00);
         }
       });
-      
+
     }
 
     function clicktime() {
@@ -654,14 +714,74 @@
       console.log(extratime.value)
     }
 
-    $("#date_pick").change(function(){
-      console.log( $("#date_pick").val());
+    $("#date_pick").change(function () {
+      console.log($("#date_pick").val());
     });
 
-    $("#parentidcheckbox label").click(function(){
+    $("#parentidcheckbox label").click(function () {
       var temp = $(".firstEuroValue").text();
       console.log(temp);
     });
+
+    // let stars = document.querySelectorAll(".star");
+    // document.querySelector(".star-container").addEventListener("click", starRating);
+    // let rating = document.querySelector(".rating");
+
+    // function starRating(e) {
+    //   stars.forEach((star) => star.classList.remove("star__checked"));
+    //   const i = [...stars].indexOf(e.target);
+    //   if (i > -1) {
+    //     stars[i].classList.add("star__checked");
+    //     rating.textContent = `${stars.length - i}/5`;
+    //   } else {
+    //     rating.textContent = `${0}/5`;
+    //   }
+    // }
+
+    document.addEventListener('DOMContentLoaded', () => {
+
+const container = document.querySelector('.carousel-container');
+const star = container.querySelector('.star');
+const stars = 5;
+addStars(stars);
+
+function addStars(count) {
+
+  const documentFragment = new DocumentFragment();
+
+  for (let i = 0; i < count; i++) {
+    const node = star.cloneNode(true);
+    node.setAttribute('id', `star-${i}`);
+    node.dataset.index = i;
+    node.onclick = () => {
+      const stars = [...document.querySelectorAll('.star')];
+      var count = 0;
+      for (let j = 0; j < stars.length; j++) {
+        const star = stars[j];
+        if (count < i) {
+          star.classList.remove('checked');
+        } else {
+          star.classList.add('checked');
+        }
+        count++;
+        
+      }
+      
+    };
+
+    documentFragment.append(node);
+  }
+ 
+ 
+  container.append(documentFragment);
+  star.remove();
+}
+
+
+});
+
+
+
   </script>
 
 </body>

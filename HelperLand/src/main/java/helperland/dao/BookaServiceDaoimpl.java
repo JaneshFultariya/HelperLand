@@ -31,8 +31,9 @@ public class BookaServiceDaoimpl implements BookaServiceDao{
 	public boolean getUserAddress(String pincode) {
 		Session session = factory.getCurrentSession();
 		try {
-			  Query query = session.createQuery("from useraddress where postalcode =:userPostalCode",UserAddress.class);
+			  Query query = session.createQuery("from useraddress inner join user on user_id=userid where postalcode =:userPostalCode and user_type_id=:user_type_id");
 			  query.setParameter("userPostalCode", Integer.parseInt(pincode));
+			  query.setParameter("user_type_id", 2);
 			  return query.list().size() > 0;
 			}
 		catch(Exception e) {
@@ -104,6 +105,26 @@ public class BookaServiceDaoimpl implements BookaServiceDao{
 		}
 		
 		return 1;
+	}
+
+	
+	@Transactional
+	public List<User> getAllEmail(int uid) {
+		Session session = factory.getCurrentSession();
+		try {
+			  Query<User> query = session.createQuery("from user where user_type_id =:user_type_id",User.class);
+			  query.setParameter("user_type_id", 2);
+			  
+			  User user = new User();
+			  List<User> useremaillist = query.getResultList();
+			  String[] allemailaddress = {};
+			  System.out.println(allemailaddress);
+			  return useremaillist;
+			}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
 	}
 
 }

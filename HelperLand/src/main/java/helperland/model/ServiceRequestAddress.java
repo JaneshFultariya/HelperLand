@@ -6,13 +6,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity(name="ServiceRequestAddress")
-@Table(name="ServiceRequestAddress")
+@Entity(name="servicerequestaddress")
+@Table(name="servicerequestaddress")
 public class ServiceRequestAddress {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int Id;
+	
 	private int ServiceRequestId;
 	public String AddressLine1;
 	public String AddressLine2;

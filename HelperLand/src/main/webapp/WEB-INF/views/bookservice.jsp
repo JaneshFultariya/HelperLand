@@ -19,7 +19,8 @@
 
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="icon" type="image/x-icon" href="/images/white-logo-transparent-background.png">
+    <link rel="icon" type="image/x-icon"
+	href="<c:url value="/resources/images/white-logo-transparent-background.png" />">
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
     <title>Upcoming Services</title>
 </head>
@@ -38,7 +39,7 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
                         <div class="nav-btn-blue">
-                            <a class="nav-link" href="#">Book now</a>
+                            <a class="nav-link" href="bookservice">Book now</a>
                         </div>
                     </li>
                     <li class="nav-item">
@@ -112,7 +113,7 @@
 
             <ul class="side-nav">
                 <li class="side-items">
-                    <a class="side-link text-decoration-none" href="#">Book now</a>
+                    <a class="side-link text-decoration-none" href="bookservice">Book now</a>
                 </li>
                 <li class="side-items">
                     <a class="side-link text-decoration-none" href="#">Prices & services</a>
@@ -213,7 +214,7 @@
             <img src="<c:url value="/resources/images/forma-1-copy-5.png" />">
         </div>
 
-        <div class="d-flex flex-row container">
+        <div class="d-flex paymentmedia container">
 
             <div class="faq-questions-list " style="width: 100%;">
                 <ul class="nav nav-tabs" role="tablist">
@@ -255,22 +256,22 @@
                     </div>
 
                     <div id="Schedule" class="container tab-pane details"><br>
-                        <div class="d-flex flex-row justify-content-between">
+                        <div class="d-flex flex-row justify-content-between dateandtimeflex">
                             <div>
                                 <span>When do you need the cleaner?</span>
                         
                                     <div class="d-flex flex-row">
                                         <div class="col-lg-6">
-                                            <input type="date" class="link-text form-control" style="width: 150px;"
+                                            <input type="date" class="link-text form-control" style="width: 150px; margin-right: 20px;"
 													id="service_start_date" name="service_start_date">
                                         </div>
                                         <div class="col-lg-6">
-                                            <select class="custom-select" name="servicetime"
-													id="servicetime">
-                                                <option selected>Choose...</option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
+                                            <select class="custom-select" name="servicetime" id="startTime" name="service_start_time">
+                                                <option value="8.0">8:00</option>
+                                                <option value="8.5">8:30</option>
+                                                <option value="9.0">9:00</option>
+                                                <option value="9.5">9:30</option>
+                                                <option value="10.0">10:00</option>
                                             </select>
                                         </div>
                                     </div>
@@ -283,10 +284,10 @@
 
                                         <div class="col-lg-6">
                                             <select class="custom-select" title="Time" id="extratime" name="service_hours" form="mainServiceForm" onclick="clicktime()">
-                        <option value="3">3.0 Hrs</option>
-                        <option value="4">4.0 Hrs</option>
-                        <option value="5">5.0 Hrs</option>
-                        <option value="6">6.0 Hrs</option>
+                        <option value="3.0">3.0 Hrs</option>
+                        <option value="4.0">4.0 Hrs</option>
+                        <option value="5.0">5.0 Hrs</option>
+                        <option value="6.0">6.0 Hrs</option>
                       </select>
                                         </div>
                                     </div>
@@ -299,7 +300,7 @@
                         <span>Extra Services</span>
 
                         <div class="container-fluid extra-services">
-              <div class="d-flex justify-content-center align-items-center extra-services-img wrapper"
+              <div class="d-flex justify-content-center align-items-center extra-services-img wrapper" id="uncheckallcheckbox"
                 style="padding-bottom: 41px; padding-top: 30px;">
                 <div class="flex-column col d-flex justify-content-center align-items-center">
                   <div class=" d-flex justify-content-center align-items-center">
@@ -380,7 +381,7 @@
                         </div>
        
                             <div class="form-group">
-                                <textarea class="form-control" id="comments" name="comments" rows="3"
+                                <textarea class="form-control commentsection" id="comments" name="comments" rows="4"
                                     placeholder="Comments"></textarea>
                             </div>
                             <div class="form-group">
@@ -392,13 +393,9 @@
                                 </div>
                             </div>
        
-       <div class="justify-content-between d-flex flex-row">
-                            <div class="float-left">
+       <div class="justify-content-between d-flex flex-row btnalignclass">
                                 <button onclick="FirstTab()"  class="back-btn">Back</button>
-                            </div>
-                        <div class="float-right">
                             <button type="submit" onclick="ThirdTab()" style="margin-top: 20px" class="btn mb-2 submit-btn">Continue</button>
-                        </div>
                         </div>
                     </div>
                     <div id="Details" class="container tab-pane"><br>
@@ -466,23 +463,11 @@
                             </form>
                         </form>
                         <div class="devider-line">
-
                         </div>
-
-                        <div class="input" style="margin-top: 20px;"> <i class="fa fa-credit-card"></i> <input
-                                type="text" class="form-control" placeholder="0000 0000 0000 0000"> </div>
-
-                        <div class="float-right">
-                            <span>accepted cards:</span>
-                        </div>
-                        <div class="devider-line" style="margin-top: 20px;">
-
-                        </div>
-
                         <form>
                             <div class="form-group">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="gridCheck">
+                                    <input class="form-check-input" type="checkbox" id="gridCheck" required>
                                     <label class="form-check-label" for="gridCheck">
                                         I accepted terms and conditions, the cancellation policy and the privacy policy.
                                         I confirm that Helperland starts to execute the contract before the expiry of
@@ -528,7 +513,7 @@
                         <div class="total-divider-line mx-auto"></div>
                         <div class="d-flex justify-content-between px-3" style="margin-bottom: 20px;">
                             <p><strong>Total Service Time</strong></p>
-                            <p><span class="totalservicetime">54</span> Hrs</p>
+                            <p><span class="totalservicetime" id="totaltime">3</span> Hrs</p>
                         </div>
 
                         <div class="devider-line">
@@ -737,7 +722,7 @@ document.getElementById("Schedule").style.display = "none";
     					//document.getElementById("showadd").innerHTML = document.getElementById("showadd").innerHTML + v.addressLine1;
     					result += "<tr>";
     					result += "<td>";
-    					result +='<div class="form-check"><input class="form-check-input position-static address_id" type="radio" name="address_id" id="address_id" value='+v.user_address_id+' aria-label="..."></div>';
+    					result +='<div class="form-check"><input required class="form-check-input position-static address_id" type="radio" name="address_id" id="address_id" value='+v.user_address_id+' aria-label="..."></div>';
     					result += "</td>";
     					result += "<td>";
     					result += "</td>";
@@ -867,32 +852,33 @@ var listArray = [];
 
 var checkboxes = document.querySelectorAll('.checkbox');
 
+
+
 for (var checkbox of checkboxes) {
   checkbox.addEventListener('click', function () {
     if (this.checked == true) {
       listArray.push(this.value);
       valueList.innerHTML = text + listArray.join('<br>');
-
+      addcost();
     }
     else {
       listArray = listArray.filter(e => e !== this.value);
       valueList.innerHTML = text + listArray.join('<br>');
-
+      removecost();
     }
     console.log(listArray.length)
+    var TotalTimeMenu = $("#extratime").val();
+    var firstEuroValueMenu = $("#firstEuroValue").text();
     if (listArray.length == 0) {
-      // EuroValue.innerHTML = '54,00 €'
-      $("#firstEuroValue").html(54,00);
-      $(".totalservicetime").html(3);
-      // totaltime.innerHTML = '3 Hrs'
-      
-      $("#EuroValue").html(54,00);
+
+
+      $("#totaltime").html(TotalTimeMenu);
+
     }
     else if (listArray.length == 1) {
       // EuroValue.innerHTML = '63,00 €'
-      $("#firstEuroValue").html(63,00);
-      $(".totalservicetime").html(3.5);
-      $("#EuroValue").html(63,00);
+      $("#totaltime").html(parseInt(TotalTimeMenu)+(0.5));
+      
       // var totaltime = parseFloat(document.getElementById('totaltime').value);
 
       // document.getElementById('totaltime').innerHTML = "3.5 Hrs";
@@ -901,33 +887,106 @@ for (var checkbox of checkboxes) {
     }
     else if (listArray.length == 2) {
       // EuroValue.innerHTML = '72,00 €'
-      $("#firstEuroValue").html(72,00);
-      $(".totalservicetime").html(4);
-      $("#EuroValue").html(72,00);
+      $("#totaltime").html(parseInt(TotalTimeMenu)+(1));
     }
     else if (listArray.length == 3) {
       // EuroValue.innerHTML = '81,00 €'
-      $("#firstEuroValue").html(81,00);
-      $(".totalservicetime").html(4.5);
-      $("#EuroValue").html(81,00);
+      $("#totaltime").html(parseInt(TotalTimeMenu)+(1.5));
     }
     else if (listArray.length == 4) {
       // EuroValue.innerHTML = '90,00 €'
-      $("#firstEuroValue").html(90,00);
-      $(".totalservicetime").html(5);
-      $("#EuroValue").html(90,00);
+      $("#totaltime").html(parseInt(TotalTimeMenu)+(2));  
     }
     else if (listArray.length == 5) {
       // EuroValue.innerHTML = '99,00 €'
-      $("#firstEuroValue").html(99,00);
-      $(".totalservicetime").html(5.5);
-      $("#EuroValue").html(99,00);
+      $("#totaltime").html(parseInt(TotalTimeMenu)+(2.5));
     }
     console.log(listArray)
   });
   
 }
+function addcost(){
+	var firstEuroValueMenu = $("#firstEuroValue").text();
+    if (listArray.length == 0) {
+      $("#totaltime").html(TotalTimeMenu);
+    }
+    else if (listArray.length == 1) {
+      // EuroValue.innerHTML = '63,00 €'
+      $("#firstEuroValue").html(parseInt(firstEuroValueMenu)+9);
+      $("#EuroValue").html(parseInt(firstEuroValueMenu)+9);
+      
+      // var totaltime = parseFloat(document.getElementById('totaltime').value);
 
+      // document.getElementById('totaltime').innerHTML = "3.5 Hrs";
+      // console.log(totaltime.value)
+      
+    }
+    else if (listArray.length == 2) {
+      // EuroValue.innerHTML = '72,00 €'
+      $("#firstEuroValue").html(parseInt(firstEuroValueMenu)+9);
+      $("#EuroValue").html(parseInt(firstEuroValueMenu)+9);
+    }
+    else if (listArray.length == 3) {
+      // EuroValue.innerHTML = '81,00 €'
+      $("#firstEuroValue").html(parseInt(firstEuroValueMenu)+9);
+      $("#EuroValue").html(parseInt(firstEuroValueMenu)+9);
+    }
+    else if (listArray.length == 4) {
+      // EuroValue.innerHTML = '90,00 €'
+      $("#firstEuroValue").html(parseInt(firstEuroValueMenu)+9);
+      $("#EuroValue").html(parseInt(firstEuroValueMenu)+9);
+    }
+    else if (listArray.length == 5) {
+      // EuroValue.innerHTML = '99,00 €'
+      $("#firstEuroValue").html(parseInt(firstEuroValueMenu)+9);
+      $("#EuroValue").html(parseInt(firstEuroValueMenu)+9);
+    }
+}
+
+
+function removecost(){
+	var firstEuroValueMenu = $("#firstEuroValue").text();
+	console.log(firstEuroValueMenu + "hiiiii");
+	if (listArray.length == 0) {
+
+	      $("#firstEuroValue").html(parseInt(firstEuroValueMenu)-9);
+	      $("#EuroValue").html(parseInt(firstEuroValueMenu)-9);
+
+	    }
+	    else if (listArray.length == 1) {
+	    	console.log(parseInt(firstEuroValueMenu)-9 + "111111111");
+	    	console.log("111111111");
+	      // EuroValue.innerHTML = '63,00 €'
+	      $("#firstEuroValue").html(parseInt(firstEuroValueMenu)-9);
+	      $("#EuroValue").html(parseInt(firstEuroValueMenu)-9);
+	      
+	      // var totaltime = parseFloat(document.getElementById('totaltime').value);
+
+	      // document.getElementById('totaltime').innerHTML = "3.5 Hrs";
+	      // console.log(totaltime.value)
+	      
+	    }
+	    else if (listArray.length == 2) {
+	      // EuroValue.innerHTML = '72,00 €'
+	      $("#firstEuroValue").html(parseInt(firstEuroValueMenu)-9);
+	      $("#EuroValue").html(parseInt(firstEuroValueMenu)-9);
+	    }
+	    else if (listArray.length == 3) {
+	      // EuroValue.innerHTML = '81,00 €'
+	      $("#firstEuroValue").html(parseInt(firstEuroValueMenu)-9);
+	      $("#EuroValue").html(parseInt(firstEuroValueMenu)-9);
+	    }
+	    else if (listArray.length == 4) {
+	      // EuroValue.innerHTML = '90,00 €'
+	      $("#firstEuroValue").html(parseInt(firstEuroValueMenu)-9);
+	      $("#EuroValue").html(parseInt(firstEuroValueMenu)-9);  
+	    }
+	    else if (listArray.length == 5) {
+	      // EuroValue.innerHTML = '99,00 €'
+	      $("#firstEuroValue").html(parseInt(firstEuroValueMenu)-9);
+	      $("#EuroValue").html(parseInt(firstEuroValueMenu)-9);
+	    }
+}
 
 
 function finalcontinue(){
@@ -940,14 +999,15 @@ function finalcontinue(){
 	console.log(allitems);
 	$.ajax({
 		type:"GET",
-		url:"/helperland/finalsave/" + $('#address_id:checked').val()+ "," +$("#firstEuroValue").text() + "," + $("#EuroValue").text() + "," + $("#comments").val() + "," + $("#extratime").val() + "," + $("#postalcode").val() + "," + $("#service_start_date").val() +","+ $("#petcheck").is(":checked").toString() + "," + allitems,
+		url:"/helperland/finalsave/" + $('#address_id:checked').val()+ "," +$("#firstEuroValue").text() + "," + $("#EuroValue").text() + "," + $("#comments").val() + "," + $("#extratime").val() + "," + $("#postalcode").val() + "," + $("#service_start_date").val() +","+ $("#petcheck").is(":checked").toString() + "," + allitems + "," + $("#startTime").val(),
 		success:function(response){
 			
 				console.log("SUCCESS: ", response);
-				
+				alert("service request sent...");
 		},
 		error: function(e){
 			console.log("ERROR: ", e);
+			alert("please select address....");
 		},
 		done: function(e){
 			console.log("Done");
@@ -959,7 +1019,31 @@ function clicktime() {
   var time = parseFloat(document.getElementById('extratime').value);
 
   document.getElementById('timevalue').innerHTML = time + " Hrs";
+  document.getElementById('totaltime').innerHTML = time;
+  
+  listArray = [];
+  
+  console.log(listArray.length);
+  
+  listArray = listArray.filter(e => e !== this.value);
+  valueList.innerHTML = text + listArray.join('<br>');
+  
+  $('#uncheckallcheckbox input[type=checkbox]').prop('checked', false);
 
+  if (time == 3) {
+		document.getElementById('firstEuroValue').innerHTML = "54";
+		document.getElementById('EuroValue').innerHTML = "54";
+	} else if (time == 4) {
+		document.getElementById('firstEuroValue').innerHTML = "72";
+		document.getElementById('EuroValue').innerHTML = "72";
+	} else if (time == 5) {
+		document.getElementById('firstEuroValue').innerHTML = "90";
+		document.getElementById('EuroValue').innerHTML = "90";
+	} else {
+		document.getElementById('firstEuroValue').innerHTML = "108";
+		document.getElementById('EuroValue').innerHTML = "108";
+	}
+  
   console.log(extratime.value)
 }
 
@@ -1002,6 +1086,22 @@ $("#parentidcheckbox label").click(function(){
 		console.log("hiiiiiiiiiiiiiiiiiii");
  		
 	}
+	
+	
+	$(document).ready(function(){
+        var dtToday = new Date();
+        
+        var month = dtToday.getMonth() + 1;
+        var day = dtToday.getDate() + 1;
+        var year = dtToday.getFullYear();
+        if(month < 10)
+            month = '0' + month.toString();
+        if(day < 10)
+            day = '0' + day.toString();
+        
+        var maxDate = year + '-' + month + '-' + day;
+        $('#service_start_date').attr('min', maxDate);
+    });
 	</script>
     
 </body>

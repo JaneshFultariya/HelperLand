@@ -519,8 +519,11 @@ p {
 }
 
 @media screen and (max-width: 1150px) {
-	.details>div {
+	.details .dateandtimeflex {
 		flex-direction: column !important;
+	}
+	.btnalignclass{
+	flex-direction: row !important;
 	}
 }
 
@@ -530,10 +533,10 @@ p {
 	}
 }
 
-@media screen and (max-width: 752px) {
-	.classbeforcard {
-		display: none;
-	}
+@media screen and (max-width: 769px) {
+	.paymentmedia{
+        flex-direction: column !important;
+    }
 }
 
 @media screen and (max-width: 400px) {
@@ -678,4 +681,8 @@ label {
 .notification-icon{
 	width: 40px !important;
 	height: 40px !important;
+}
+
+.commentsection{
+	height: auto !important;
 }

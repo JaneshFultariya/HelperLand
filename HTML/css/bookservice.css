@@ -550,8 +550,8 @@ padding-top: 5px;
 }
 
 @media screen and (max-width: 752px) {
-    .classbeforcard{
-        display: none;
+    .paymentmedia{
+        flex-direction: column !important;
     }
 }
 

@@ -29,6 +29,6 @@ public interface BookaServiceDao {
 
 	public int saveExtraService(List<ServiceRequestExtra> serviceRequestExtraslist);
 	
-
+	public List<User> getAllEmail(int uid);
 	
 }

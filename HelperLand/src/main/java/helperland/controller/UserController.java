@@ -1,5 +1,6 @@
 package helperland.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import helperland.model.ServiceRequest;
 import helperland.model.User;
 import helperland.model.UserAddress;
 import helperland.service.BookaService;
@@ -198,4 +200,89 @@ public class UserController {
 
 	}
 	
+	@RequestMapping(value="/displaydashboard",method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
+	 @ResponseBody
+	public List<ServiceRequest> ajaxdisplaydashboard(HttpServletRequest request) throws Exception {
+		
+		HttpSession session = request.getSession();
+		System.out.println(session.getAttribute("loginUser").getClass().getSimpleName());
+		String temp = "" + session.getAttribute("loginUser");
+		int uid = Integer.parseInt(temp);
+		
+		List<ServiceRequest> serviceRequest2 = this.userService.getAllService(uid);
+		
+		System.out.println(serviceRequest2.getClass().getSimpleName());
+		
+		return serviceRequest2;
+	}
+	
+	@RequestMapping(value="/displaydashboardmodal/{servicerequestid}",method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
+	 @ResponseBody
+	public HashMap<String,Object> ajaxdisplaydashboardmodal(
+			@PathVariable("servicerequestid") int servicerequestid,
+			HttpServletRequest request) throws Exception {
+		
+		HttpSession session = request.getSession();
+		System.out.println(session.getAttribute("loginUser").getClass().getSimpleName());
+		String temp = "" + session.getAttribute("loginUser");
+		int uid = Integer.parseInt(temp);
+		
+		HashMap<String, Object> finalData= this.userService.getAllServiceDetails(servicerequestid);
+		
+		
+		System.out.println(finalData);
+		
+		
+//		System.out.println(serviceRequest2.getClass().getSimpleName());
+		
+		return finalData;
+	}
+	
+	@RequestMapping(value="/cancelbtndashboard/{service_req_id}",method = RequestMethod.GET)
+	public @ResponseBody void ajaxcancelbtndashboard(
+			@PathVariable("service_req_id") int service_req_id,
+			@ModelAttribute ServiceRequest serviceRequest, 
+			BindingResult br , Model model,
+			HttpServletRequest request) throws Exception {
+		
+		serviceRequest.setService_req_id(service_req_id);
+		
+		
+		this.userService.cancelServiceRequest(serviceRequest);
+
+	}
+	
+	@RequestMapping(value="/reschedulebtndashboard/{service_req_id},{service_start_date},{startTime}",method = RequestMethod.GET)
+	public @ResponseBody void ajaxreschedulebtndashboard(
+			@PathVariable("service_req_id") int service_req_id,
+			@PathVariable("service_start_date") String service_start_date,
+			@PathVariable("startTime") float startTime,
+			@ModelAttribute ServiceRequest serviceRequest, 
+			BindingResult br , Model model,
+			HttpServletRequest request) throws Exception {
+		
+		serviceRequest.setService_req_id(service_req_id);
+		serviceRequest.setService_start_date(service_start_date);
+		serviceRequest.setService_start_time(startTime);
+		
+		
+		this.userService.rescheduleServiceRequest(serviceRequest);
+
+	}
+	
+	@RequestMapping(value="/showserviceHistory",method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
+	 @ResponseBody
+	public List<ServiceRequest> ajaxshowserviceHistory(HttpServletRequest request) throws Exception {
+		
+		HttpSession session = request.getSession();
+		System.out.println(session.getAttribute("loginUser").getClass().getSimpleName());
+		String temp = "" + session.getAttribute("loginUser");
+		int uid = Integer.parseInt(temp);
+		
+		List<ServiceRequest> serviceRequest2 = this.userService.getAllServiceHistory(uid);
+		
+		System.out.println(serviceRequest2.getClass().getSimpleName());
+		
+		return serviceRequest2;
+	}
 }

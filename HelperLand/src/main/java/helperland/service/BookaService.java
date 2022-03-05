@@ -23,5 +23,7 @@ public interface BookaService {
 	public int saveServiceRequest(ServiceRequest serviceRequest);
 
 	public int saveExtraService(List<ServiceRequestExtra> serviceRequestExtraslist);
+
+	public List<User> getAllEmail(int uid);
 	
 }

@@ -16,13 +16,13 @@
 	crossorigin="anonymous">
 <link rel="stylesheet"
 	href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+<!-- <link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css"> -->
 <link rel="icon" type="image/x-icon"
-	href="/images/white-logo-transparent-background.png">
+	href="<c:url value="/resources/images/white-logo-transparent-background.png" />">
 <link rel="stylesheet"
 	href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap.min.css">
-
+<!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">  -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -56,7 +56,7 @@
 						</li>
 						<li class="nav-item">
 							<div class="nav-btnn">
-								<a class="nav-link" href="price.html">Prices & services</a>
+								<a class="nav-link" href="price">Prices & services</a>
 							</div>
 						</li>
 						<li class="nav-item">
@@ -71,7 +71,7 @@
 						</li>
 						<li class="nav-item">
 							<div class="nav-btnn">
-								<a class="nav-link" href="contactUs.html">Contact</a>
+								<a class="nav-link" href="contactUs">Contact</a>
 							</div>
 						</li>
 
@@ -93,7 +93,7 @@
 						class="dropdown-menu dropdown-menu-right dropdown-cyan text-color-nav"
 						aria-labelledby="navbarDropdownMenuLink-4">
 						<span style="padding-left: 15px;">Welcome,<br>
-						<strong style="padding-left: 15px;">First Customer</strong></span>
+						<strong style="padding-left: 15px;">${htmlusername }!</strong></span>
 						<div class="devider-line"></div>
 						<a class="dropdown-item text-color-nav text-decoration-none"
 							href="#">My Dashboard</a> <a
@@ -112,7 +112,7 @@
 		<div class="offcanvas offcanvas-end" id="demo">
 			<div class="offcanvas-header">
 				<p>
-					welcome,<br> <strong>Abc</strong>
+					welcome,<br> <strong>${htmlusername }!</strong>
 				</p>
 				<button type="button" class="btn-close text-reset"
 					data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -196,9 +196,8 @@
 
 	<section id="tab_data">
 		<div class="tab">
-			<button class="tablinks" onclick="openCity(event, 'Deshboard')"
-				id="defaultOpen">Deshboard</button>
-			<button class="tablinks" onclick="openCity(event, 'History')">Service
+			<button class="tablinks" id="realtimedashboard" onclick="openCity(event, 'Deshboard')">Deshboard</button>
+			<button class="tablinks" id="realtimeservicehistory"  onclick="openCity(event, 'History')">Service
 				History</button>
 			<button class="tablinks" onclick="openCity(event, 'Schedule')">Service
 				Schedule</button>
@@ -221,7 +220,7 @@
 				<button class="btn addrequestbuttton tablinks" style="width: 200px;">Add
 					new service request</button>
 			</div>
-			<div class="container">
+			<%-- <div class="container">
 				<div class="row">
 					<div class="col-lg-12">
 						<table id="example" class="display table nowrap" cellspacing="0"
@@ -340,7 +339,30 @@
 						</table>
 					</div>
 				</div>
-			</div>
+			</div> --%>
+			
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+					<div id="displaydashboard">
+					<table id="example" class="display table nowrap" cellspacing="0"
+							style="width: 100%">
+							<thead>
+								<tr>
+									<th scope="col" class="serviceidrow">Service ID</th>
+									<th scope="col" class="servicedate">Service date</th>
+									<th scope="col" class="provider">Service Provider</th>
+									<th scope="col" class="payment">Payment</th>
+									<th scope="col" class="action">Actions</th>
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+							</table>
+							</div>
+					</div>
+					</div>
+					</div>
 
 		</div>
 
@@ -357,7 +379,8 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-12">
-						<table id="selectedColumn" class="display table nowrap"
+					<div id="serviceHistory">
+						<%-- <table id="selectedColumn" class="display table nowrap"
 							cellspacing="0" style="width: 100%">
 							<thead>
 								<tr>
@@ -475,7 +498,26 @@
 											SP</button></td>
 								</tr>
 							</tbody>
-						</table>
+						</table> --%>
+						
+						<table id="selectedColumn" class="display table nowrap"
+							cellspacing="0" style="width: 100%">
+							<thead>
+								<tr>
+									<th scope="col">Service ID</th>
+									<th scope="col">Service date</th>
+									<th scope="col">Service Provider</th>
+									<th scope="col">Payment</th>
+									<th scope="col">Report</th>
+									<th scope="col">Status</th>
+									<th scope="col">Rate SP</th>
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+							</table>
+						
+						</div>
 					</div>
 				</div>
 			</div>
@@ -990,242 +1032,48 @@
 				</div>
 			</div>
 		</div>
-		<div class="modal fade" id="withoutServiceProviderModalCenter"
-			tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-			aria-hidden="true">
-			<div
-				class="modal-dialog modal-dialog-centered mx-auto modal-lg custom-size-modal-normal"
-				role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h4 class="modal-title strong-color" id="exampleModalLongTitle">Service
-							Details</h4>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-						<p class="strong-color" style="font-size: 25px;">
-							07/01/2022 15:30 - 18:30<br>
-							<strong>Duration:</strong> <small>3 Hrs</small>
-						</p>
-						<div class="model-deviderline"></div>
-						<span class="link-text"><strong class="strong-color">Service
-								Id:</strong> 8521 <br>
-						<strong class="strong-color">Extras:</strong><br>
-						<strong class="strong-color">Net Amount:</strong>54,00 €</span>
-						<div class="model-deviderline"></div>
-						<span class="link-text"><strong class="strong-color">Service
-								Address:</strong> Street 54, 5344 Troisdorf<br>
-						<strong class="strong-color">Billing Address:</strong> Same as
-							cleaning Address <br>
-						<strong class="strong-color">Phone:</strong> +49 9988556644 <br>
-						<strong class="strong-color">Email:</strong> cust001@yopmail.com</span>
-						<div class="model-deviderline"></div>
-						<span class="link-text"><strong class="strong-color">Comments</strong><br>
-							<img
-							src="<c:url value="/resources/images/icons8-check-circle-48.png" />">
-							I have pets at home </span>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="modal fade" id="withServiceProviderModalCenter"
-			tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-			aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered custom-size-modal"
-				role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h4 class="modal-title strong-color" id="exampleModalLongTitle">Service
-							Details</h4>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-						<div class="d-flex flex-row" id="main-content-flex">
-							<div class="col-lg-8">
-								<p class="strong-color" style="font-size: 25px;">
-									07/01/2022 15:30 - 18:30<br>
-									<strong>Duration:</strong> <small>3 Hrs</small>
-								</p>
-								<div class="model-deviderline"></div>
-								<span class="link-text"><strong class="strong-color">Service
-										Id:</strong> 8521 <br>
-								<strong class="strong-color">Extras:</strong><br>
-								<strong class="strong-color">Net Amount:</strong>54,00 €</span>
-								<div class="model-deviderline"></div>
-								<span class="link-text"><strong class="strong-color">Service
-										Address:</strong> Street 54, 5344 Troisdorf<br>
-								<strong class="strong-color">Billing Address:</strong> Same as
-									cleaning Address <br>
-								<strong class="strong-color">Phone:</strong> +49 9988556644 <br>
-								<strong class="strong-color">Email:</strong> cust001@yopmail.com</span>
-								<div class="model-deviderline"></div>
-								<span class="link-text"><strong class="strong-color">Comments</strong><br>
-									<img
-									src="<c:url value="/resources/images/icons8-check-circle-48.png" />">
-									I have pets at home </span>
-							</div>
-							<div class="col-lg-4">
-								<span class="strong-color" style="font-size: 25px;">Service
-									Provider <br> Details
-								</span>
-								<div class="d-flex flex-row">
-									<img src="images/hat.png" class="hat-img">
-									<div class="col">
-										<p class="link-text">Lyum Watson</p>
-										<div class="d-flex">
-											<img class="clock"
-												src="<c:url value="/resources/images/yellowstar.png" />">
-											<img class="clock"
-												src="<c:url value="/resources/images/yellowstar.png" />">
-											<img class="clock"
-												src="<c:url value="/resources/images/yellowstar.png" />">
-											<img class="clock"
-												src="<c:url value="/resources/images/yellowstar.png" />">
-											<img class="clock"
-												src="<c:url value="/resources/images/brownstar.png" />">
-											<p>4</p>
-										</div>
-									</div>
-								</div>
-								<small class="link-text">1 cleaning</small>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="modal fade"
-			id="withoutServiceProviderdashboardModalCenter" tabindex="-1"
-			role="dialog" aria-labelledby="exampleModalCenterTitle"
-			aria-hidden="true">
-			<div
-				class="modal-dialog modal-dialog-centered custom-size-modal-normal"
-				role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h4 class="modal-title strong-color" id="exampleModalLongTitle">Service
-							Details</h4>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-						<p class="strong-color" style="font-size: 25px;">
-							07/01/2022 15:30 - 18:30<br>
-							<strong>Duration:</strong> <small>3 Hrs</small>
-						</p>
-						<div class="model-deviderline"></div>
-						<span class="link-text"><strong class="strong-color">Service
-								Id:</strong> 8521 <br>
-						<strong class="strong-color">Extras:</strong><br>
-						<strong class="strong-color">Net Amount:</strong>54,00 €</span>
-						<div class="model-deviderline"></div>
-						<span class="link-text"><strong class="strong-color">Service
-								Address:</strong> Street 54, 5344 Troisdorf<br>
-						<strong class="strong-color">Billing Address:</strong> Same as
-							cleaning Address <br>
-						<strong class="strong-color">Phone:</strong> +49 9988556644 <br>
-						<strong class="strong-color">Email:</strong> cust001@yopmail.com</span>
-						<div class="model-deviderline"></div>
-						<span class="link-text"><strong class="strong-color">Comments</strong><br>
-							<img
-							src="<c:url value="/resources/images/icons8-check-circle-48.png" />">
-							I have pets at home </span>
-						<div class="model-deviderline"></div>
-						<div class="d-flex flex-row">
-							<button class="btn Reschedule-button" data-toggle="modal"
-								data-target="#rescheduleModalCenter">Reschedule</button>
-							<button class="btn Cancle-button" data-toggle="modal"
-								data-target="#cancelModalCenter">Cancle</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="modal fade" id="withServiceProviderdashboardModalCenter"
-			tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-			aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered custom-size-modal"
-				role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h4 class="modal-title strong-color" id="exampleModalLongTitle">Service
-							Details</h4>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-						<div class="d-flex flex-row">
-							<div class="col-lg-8">
-								<p class="strong-color" style="font-size: 25px;">
-									07/01/2022 15:30 - 18:30<br>
-									<strong>Duration:</strong> <small>3 Hrs</small>
-								</p>
-								<div class="model-deviderline"></div>
-								<span class="link-text"><strong class="strong-color">Service
-										Id:</strong> 8521 <br>
-								<strong class="strong-color">Extras:</strong><br>
-								<strong class="strong-color">Net Amount:</strong>54,00 €</span>
-								<div class="model-deviderline"></div>
-								<span class="link-text"><strong class="strong-color">Service
-										Address:</strong> Street 54, 5344 Troisdorf<br>
-								<strong class="strong-color">Billing Address:</strong> Same as
-									cleaning Address <br>
-								<strong class="strong-color">Phone:</strong> +49 9988556644 <br>
-								<strong class="strong-color">Email:</strong> cust001@yopmail.com</span>
-								<div class="model-deviderline"></div>
-								<span class="link-text"><strong class="strong-color">Comments</strong><br>
-									<img
-									src="<c:url value="/resources/images/icons8-check-circle-48.png" />">
-									I have pets at home </span>
-								<div class="model-deviderline"></div>
-								<div class="d-flex flex-row">
-									<button class="btn Reschedule-button" data-toggle="modal"
-										data-target="#rescheduleModalCenter">Reschedule</button>
-									<button class="btn Cancle-button" data-toggle="modal"
-										data-target="#cancelModalCenter">Cancle</button>
-								</div>
-							</div>
-							<div class="col-lg-4">
-								<span class="strong-color" style="font-size: 25px;">Service
-									Provider <br> Details
-								</span>
-								<div class="d-flex flex-row">
-									<img src="<c:url value="/resources/images/hat.png" />"
-										class="hat-img">
-									<div class="col">
-										<p class="link-text">Lyum Watson</p>
-										<div class="d-flex">
-											<img class="clock"
-												src="<c:url value="/resources/images/yellowstar.png" />">
-											<img class="clock"
-												src="<c:url value="/resources/images/yellowstar.png" />">
-											<img class="clock"
-												src="<c:url value="/resources/images/yellowstar.png" />">
-											<img class="clock"
-												src="<c:url value="/resources/images/yellowstar.png" />">
-											<img class="clock"
-												src="<c:url value="/resources/images/brownstar.png" />">
-											<p>4</p>
-										</div>
-									</div>
-								</div>
-								<small class="link-text">1 cleaning</small>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+
+		
+		<div class="modal fade" id="withoutServiceProviderdashboardModalCenter" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered custom-size-modal-normal" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title strong-color" id="exampleModalLongTitle">Service Details</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p class="strong-color" style="font-size: 25px;"><span id="serviceStartDateModal"></span>&nbsp;<span id="serviceTotalTimeModal"></span><br><strong>Duration:</strong> <small><span id="serviceDurationModal"></span></small></p>
+                        <hr>
+                        <span class="link-text"><strong class="strong-color">Service Id:</strong> <span id="serviceIdModal"></span> <br><strong
+                                class="strong-color">Extras:</strong><span id="ExtraServiceModal"></span><br><strong class="strong-color">Net
+                                Amount:</strong><span id="NetAmountModal"></span>&euro;</span>
+                        <hr>
+                        <span class="link-text"><strong class="strong-color">Service Address:</strong> <span id="AddressLine1Modal"></span>, <span id="AddressLine2Modal"></span>
+                          <br><strong class="strong-color">Billing Address:</strong> Same as cleaning Address
+                            <br><strong class="strong-color">Phone:</strong> <span id="MobileModal"></span> <br><strong
+                                class="strong-color">Email:</strong> <span id="EmailModal"></span></span>
+                        <hr>
+                        <span class="link-text"><strong class="strong-color">Comments</strong><br>
+                          <span id="CommentsModal"></span><br>
+                           <span id="PetModal"></span>
+                        </span>
+                        <hr>
+                        <div class="d-flex flex-row">
+                            <button class="btn Reschedule-button" data-toggle="modal" data-dismiss="modal"
+                            data-target="#rescheduleModalCenter">Reschedule</button>
+                            <button class="btn Cancle-button" data-toggle="modal" data-dismiss="modal"
+                            data-target="#cancelModalCenter">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		
+		
+		
 
 		<div class="modal fade" id="cancelModalCenter" tabindex="-1"
 			role="dialog" aria-labelledby="exampleModalCenterTitle"
@@ -1236,7 +1084,7 @@
 					<div class="modal-header">
 						<h4 class="modal-title strong-color" id="exampleModalLongTitle">Cancel
 							Service Request</h4>
-						<button type="button" class="close" data-dismiss="modal"
+						<button type="button" class="close" data-dismiss="modal" id="closecanclemodal"
 							aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
@@ -1244,11 +1092,12 @@
 					<div class="modal-body">
 						<span class="link-text">Why you want to cancel the service
 							request?</span>
-						<form>
+						<form id="cancelbtndashboardform" name="cancelbtndashboardform">
 							<div class="form-group">
 								<textarea class="form-control" id="exampleFormControlTextarea1"
 									rows="3"></textarea>
 							</div>
+							<button class="btn Cancle-button" >Cancel</button>
 						</form>
 					</div>
 				</div>
@@ -1271,20 +1120,21 @@
 					</div>
 					<div class="modal-body">
 						<span class="link-text">Select New Date & Time</span>
-						<form style="margin-top: 15px;">
+						<form style="margin-top: 15px;" id="reschedulebtndashboardform" name="reschedulebtndashboardform">
 							<div class="d-flex flex-row">
 								<div class="col-lg-6">
-									<input type="date" id="date-picker"
-										class="date-picker link-text" name="date-picker">
-								</div>
-								<div class="col-lg-6">
-									<select class="custom-select" id="inlineFormCustomSelectPref">
-										<option selected>Choose...</option>
-										<option value="1">One</option>
-										<option value="2">Two</option>
-										<option value="3">Three</option>
-									</select>
-								</div>
+                                            <input type="date" class="link-text form-control datepicker" style="width: 150px;"
+													id="service_start_date" name="service_start_date">
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <select class="custom-select" id="startTime" name="service_start_time">
+                                                <option value="8">8:00</option>
+                                                <option value="8.5">8:50</option>
+                                                <option value="9">9:00</option>
+                                                <option value="9.5">9:50</option>
+                                                <option value="10">10:00</option>
+                                            </select>
+                                        </div>
 							</div>
 							<button type="submit" class="btn-submit btn-lg" title="Login">Update</button>
 						</form>
@@ -1310,11 +1160,11 @@
 				<ul class="d-flex p-0 text-center">
 					<li><a href="homepage" class="text-decoration-none">HOME</a></li>
 					<li><a href="aboutus" class="text-decoration-none">ABOUT</a></li>
-					<li><a href="" class="text-decoration-none">TESTIMONIAL</a></li>
+					<li><a href="#" class="text-decoration-none">TESTIMONIAL</a></li>
 					<li><a href="faq" class="text-decoration-none">FAQS</a></li>
-					<li><a href="" class="text-decoration-none">INSURANCE
+					<li><a href="#" class="text-decoration-none">INSURANCE
 							POLICY</a></li>
-					<li><a href="" class="text-decoration-none">IMPRESSUM</a></li>
+					<li><a href="#" class="text-decoration-none">IMPRESSUM</a></li>
 				</ul>
 			</div>
 			<div class="footer_right d-flex">
@@ -1360,6 +1210,8 @@
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+		
+	
 		<!-- <script>
 		
 		function name(){
@@ -1372,30 +1224,36 @@
 		
 		</script> -->
 	<script>
+	function dashboardtable(){
         $(document).ready(function () {
-            $('#example').DataTable({
+            $('#dashboardtable').DataTable({
 
                 responsive: true,
                 "dom": '<"top">rt<"bottom"lip><"clear">',
                 "aaSorting": [],
+                "order": [[ 0, "desc" ]],
                 columnDefs: [{
                     orderable: false,
                     targets: 4
                 }]
             });
         });
+	}
 
+	function serviceHistoryTable(){
         $(document).ready(function () {
             $('#selectedColumn').DataTable({
                 responsive: true,
                 "dom": '<"top">rt<"bottom"lip><"clear">',
                 "aaSorting": [],
+                "order": [[ 0, "desc" ]],
                 columnDefs: [{
                     orderable: false,
-                    targets: 4
+                    targets: [4,6]
                 }]
             });
         });
+	}
 
         $(document).ready(function () {
             $('#InvoiceColumn').DataTable({
@@ -1403,6 +1261,7 @@
                 responsive: true,
                 "dom": '<"top">rt<"bottom"lip><"clear">',
                 "aaSorting": [],
+                "order": [[ 0, "desc" ]],
                 columnDefs: [{
                     orderable: false,
                     targets: 4
@@ -1428,7 +1287,8 @@
         }
 
         // Get the element with id="defaultOpen" and click on it
-        document.getElementById("defaultOpen").click();
+     	 document.getElementById("realtimedashboard").click(); 
+      
     </script>
 
 	<script>
@@ -1624,9 +1484,236 @@
 		});
 	}
   
+  window.onload = dashboard();
   
+   function dashboard() {
+	  $.ajax({
+  		type:"GET",
+  		url:"/helperland/displaydashboard",
+  		contentType: "application/json",
+  		success:function(response){
+  			var result = '<table id="dashboardtable" class="display table nowrap" cellspacing="0" style="width: 100%"><thead><tr><th scope="col" class="serviceidrow">Service ID</th><th scope="col" class="servicedate">Service date</th><th scope="col" class="provider">Service Provider</th><th scope="col" class="payment">Payment</th><th scope="col" class="action">Actions</th></tr></thead>'
+  				result += "<tbody>";
+  				$.each(response, function(k, v) {
+  					
+  					
+  					
+  					console.log(v.service_start_time);
+  					
+  					
+  					
+  					//console.log(v.state);
+  					//document.getElementById("showadd").innerHTML = document.getElementById("showadd").innerHTML + v.addressLine1;
+  					result += "<tr>";
+  					result += '<td scope="row text-color-table number-and-km">';
+  					result +='<a href="#" data-toggle="modal" data-target="#withoutServiceProviderdashboardModalCenter" onclick="openModaldetails('+v.service_req_id+')" class="text-decoration-none link-text">'+v.service_req_id+'</a>';
+  					result += "</td>";
+  					result += "<td>";
+  					result += '<div class="col"><div class="d-flex custom-margin-table"><img src="<c:url value="/resources/images/calculator.png" />" class="calander-img"><a href="#"  data-toggle="modal" data-target="#withoutServiceProviderdashboardModalCenter" onclick="openModaldetails('+v.service_req_id+')" class="text-decoration-none link-text"><strong>'+v.service_start_date+'</strong></a></div><div class="d-flex"><img class="clock" src="<c:url value="/resources/images/layer-712.png" />"> <a href="#" data-toggle="modal" data-target="#withoutServiceProviderdashboardModalCenter" class="text-decoration-none link-text">12:00 - 18:00</a></div></div>';
+  					result += "</td>";
+  					result += "<td>";
+  					result += "</td>";
+  					result += '<td class="eurotext">';
+  					result += '<div class="d-flex flex-row custom-margin-table-two-data"><p class="euro-text">&euro;</p><p class="number-text">'+v.total_cost+'</p></div>';
+  					result += "</td>";
+  					result += "<td>";
+  					result += '<div class="d-flex flex-row"><button class="btn Reschedule-button" onclick="reschedulebtndashboard('+ v.service_req_id +')" data-toggle="modal" data-target="#rescheduleModalCenter">Reschedule</button><button class="btn Cancle-button" onclick="cancelbtndashboard('+ v.service_req_id +')" data-toggle="modal" data-target="#cancelModalCenter">Cancle</button></div>';
+  					result += "</td>";
+  					result += "</tr>";
+  				});
+  				console.log("SUCCESS: ", response);
+  				result += "</tbody>";
+  				result += '</table>';
+  				$("#displaydashboard").html(result);
+  				dashboardtable();
+  				
+  		},
+  		error: function(e){
+  			console.log("ERROR: ", e);
+  		},
+  		done: function(e){
+  			console.log("Done");
+  		}
+  	});
+  }
+  
+  function openModaldetails(servicerequestid){
+	  $.ajax({
+	  		type:"GET",
+	  		url:"/helperland/displaydashboardmodal/" + servicerequestid,
+	  		contentType: "application/json",
+	  		success:function(response){
+	  			var pet_stats = response.servicereqfinal.has_pets;
+	  			var servicetime= response.servicereqfinal.service_start_time + 3
+	  			console.log(servicetime);
+	  			var str = "";
+	  			if(pet_stats=="true"){
+	  				str = '<img src="<c:url value="/resources/images/haspets.png" />"> I have a pets';
+	  			}
+	  			else{
+	  				str = '<img src="<c:url value="/resources/images/notpets.png" />"> I don`t have pets';
+	  			}
+	  			console.log(servicerequestid);
+	  			console.log("SUCCESS: ", response);
+	  			
+	  				$("#serviceTotalTimeModal").html(response.servicereqfinal.service_start_time);
+	  			$("#ExtraServiceModal").html(response.allExtras);
+	  			$("#serviceStartDateModal").html(response.servicereqfinal.service_start_date);
+	  			$("#serviceIdModal").html(servicerequestid);
+	  			$("#NetAmountModal").html(response.servicereqfinal.total_cost);
+	  			$("#AddressLine1Modal").html(response.serviceRequestAddress.AddressLine1);
+	  			$("#AddressLine2Modal").html(response.serviceRequestAddress.AddressLine2);
+	  			
+	  			$("#MobileModal").html(response.serviceRequestAddress.Mobile);
+	  			$("#EmailModal").html(response.serviceRequestAddress.email);
+	  			$("#CommentsModal").html(response.servicereqfinal.comments);
+	  			$("#PetModal").html(str);
+	  		},
+	  		error: function(e){
+	  			console.log("ERROR: ", e);
+	  		},
+	  		done: function(e){
+	  			console.log("Done");
+	  		}
+	  	});
+  }
+  
+  function cancelbtndashboard(servicerequestid){
+	  console.log(servicerequestid);
+	  jQuery(document).ready(function($){
+			$("#cancelbtndashboardform").submit(function(event){
+				event.preventDefault();
+				cancelbtndashboardform(servicerequestid);
+			});
+		});
+  }
+  
+  function cancelbtndashboardform(servicerequestid){
+		console.log(servicerequestid + "Hiiiiiiiiiiiiiiiiiii");
+		$.ajax({
+			type:"GET",
+			url:"/helperland/cancelbtndashboard/" + servicerequestid,
+			success:function(data){
+				console.log("SUCCESS: ", data);
+				$("#closecanclemodal").click();
+				dashboard();
+			},
+			error: function(e){
+				console.log("ERROR: ", e);
+			},
+			done: function(e){
+				console.log("Done");
+			}
+		});
+	}
  
+  function reschedulebtndashboard(servicerequestid){
+	  console.log(servicerequestid);
+	  jQuery(document).ready(function($){
+			$("#reschedulebtndashboardform").submit(function(event){
+				event.preventDefault();
+				reschedulebtndashboardform(servicerequestid);
+			});
+		});
+  }
+  
+  function reschedulebtndashboardform(servicerequestid){
+		console.log(servicerequestid + "Hiiiiiiiiiiiiiiiiiii");
+		$.ajax({
+			type:"GET",
+			url:"/helperland/reschedulebtndashboard/" + servicerequestid + "," + $("#service_start_date").val() + "," + $("#startTime").val(),
+			success:function(data){
+				console.log("SUCCESS: ", data);
+				$("#closecanclemodal").click();
+				dashboard();
+				console.log("hiii");
+			},
+			error: function(e){
+				console.log("ERROR: ", e);
+			},
+			done: function(e){
+				console.log("Done");
+			}
+		});
+	}
+  
+  $(document).on('click','#realtimeservicehistory',function (){
+	  $.ajax({
+  		type:"GET",
+  		url:"/helperland/showserviceHistory",
+  		contentType: "application/json",
+  		success:function(response){
+  			var result = '<table id="selectedColumn" class="display table nowrap" cellspacing="0" style="width: 100%"><thead><tr><th scope="col">Service ID</th><th scope="col">Service date</th><th scope="col">Service Provider</th><th scope="col">Payment</th><th scope="col">Report</th><th scope="col">Status</th><th scope="col">Rate SP</th></tr></thead>'
+  				result += "<tbody>";
+  				$.each(response, function(k, v) {
+  					var status = "";
+  					if(v.status == "cancel"){
+  						status = "canceled";
+  					}
+  					else{
+  						status = "completed"
+  					}
+  					//console.log(v.state);
+  					//document.getElementById("showadd").innerHTML = document.getElementById("showadd").innerHTML + v.addressLine1;
+  					result += "<tr>";
+  					result += '<td scope="row text-color-table number-and-km">';
+  					result +='<a href="#"  data-toggle="modal" data-target="#withoutServiceProviderdashboardModalCenter" onclick="openModaldetails('+v.service_req_id+')" class="text-decoration-none link-text">'+v.service_req_id+'</a>';
+  					result += "</td>";
+  					result += "<td>";
+  					result += '<div class="col"><div class="d-flex custom-margin-table"><img src="<c:url value="/resources/images/calculator.png" />" class="calander-img"><a href="#"  data-toggle="modal" data-target="#withoutServiceProviderdashboardModalCenter" onclick="openModaldetails('+v.service_req_id+')" class="text-decoration-none link-text"><strong>'+v.service_start_date+'</strong></a></div><div class="d-flex"><img class="clock" src="<c:url value="/resources/images/layer-712.png" />"> <a  data-toggle="modal" data-target="#withoutServiceProviderdashboardModalCenter" class="text-decoration-none link-text">12:00 - 18:00</a></div></div>';
+  					result += "</td>";
+  					result += "<td>";
+  					result += "</td>";
+  					result += '<td class="eurotext">';
+  					result += '<div class="d-flex flex-row custom-margin-table-two-data"><p class="euro-text">&euro;</p><p class="number-text">'+v.total_cost+'</p></div>';
+  					result += "</td>";
+  					result += "<td>";
+  					result += '<img src="<c:url value="/resources/images/icons8-mail-64.png" />" alt="reportimg">';
+  					result += "</td>";
+  					result += "<td>";
+  					result += '<button class="Not-Applicable-button align-items-center justify-content-center custom-margin-table-two-data">'+status+'</button>'
+  					result += "</td>";
+  					result += "<td>";
+  					result += '<button class="btn custom-margin-table-two-data-button">Rate SP</button>';
+  					result += "</td>";
+  					result += "</tr>"
+  				});
+  				console.log("SUCCESS: ", response);
+  				result += "</tbody>";
+  				result += '</table>';
+  				$("#serviceHistory").html(result);
+  				serviceHistoryTable();
+  				
+  		},
+  		error: function(e){
+  			console.log("ERROR: ", e);
+  		},
+  		done: function(e){
+  			console.log("Done");
+  		}
+  	}); 
+  });
+  
 
+  $(document).on('click','#realtimedashboard',function (){
+	  dashboard();
+  });
+  
+  $(document).ready(function(){
+      var dtToday = new Date();
+      
+      var month = dtToday.getMonth() + 1;
+      var day = dtToday.getDate() + 1;
+      var year = dtToday.getFullYear();
+      if(month < 10)
+          month = '0' + month.toString();
+      if(day < 10)
+          day = '0' + day.toString();
+      
+      var minDate = year + '-' + month + '-' + day;
+      $('#service_start_date').attr('min', minDate);
+  });
+  
 </script>
 	
 	

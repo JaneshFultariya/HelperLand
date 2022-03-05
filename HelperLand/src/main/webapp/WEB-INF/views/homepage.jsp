@@ -13,8 +13,7 @@
 	integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn"
 	crossorigin="anonymous">
 <link rel="icon" type="image/x-icon"
-	href="/images/white-logo-transparent-background.png">
-
+	href="<c:url value="/resources/images/white-logo-transparent-background.png" />">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -71,7 +70,7 @@
 					</li>
 					<li class="nav-item" id="loginlink">
 						<div class="nav-btn" href="#">
-							<a class="nav-btn-item text-decoration-none" href="#"
+							<a class="nav-btn-item text-decoration-none" href="#" 
 								data-toggle="modal" data-target="#exampleModalCenter"> login
 							</a>
 						</div>
@@ -105,7 +104,7 @@
 					<strong style="padding-left: 15px;">First Customer</strong></span>
 					<div class="devider-line"></div>
 					<a class="dropdown-item text-color-nav text-decoration-none"
-						href="user">My Dashboard</a>  <a
+					href="${user_type == 2 ? 'serviceprovider' :  'user'}">My Dashboard</a>  <a
 						class="dropdown-item text-color-nav text-decoration-none"
 						href="logout">Log out</a>
 				</div>
@@ -116,6 +115,25 @@
 			</a>
 		</nav>
 
+<div class="position-absolute w-100 d-flex justify-content-center"
+		style="top: 10px; z-index: 100000;">
+		<div
+			class="alert alert-danger alert-dismissible fade show d-none w-75"
+			${displayError } role="alert">
+			${error }
+			<button type="button" class="btn-close" data-bs-dismiss="alert"
+				aria-label="Close"></button>
+		</div>
+		<div
+			class="alert alert-success alert-dismissible fade show d-none w-75"
+			${displaySuccess } role="alert">
+			${success }
+			<button type="button" class="btn-close" data-bs-dismiss="alert"
+				aria-label="Close"></button>
+		</div>
+
+
+	</div>
 
 		<section id="model">
 
@@ -137,7 +155,7 @@
 						</div>
 						<div class="modal-body">
 							<form action="login" method="post">
-								<div
+								<%-- <div
 									class="alert alert-danger alert-dismissible fade show d-none w-75"
 									${displayError } role="alert">
 									${error }
@@ -150,15 +168,15 @@
 									${success }
 									<button type="button" class="btn-close" data-bs-dismiss="alert"
 										aria-label="Close"></button>
-								</div>
+								</div> --%>
 								<div class="form-group">
 									<label for="exampleInputEmail1">Email address</label> <input
-										type="email" name="email" class="form-control"
+										type="email" name="email" class="form-control" required
 										id="exampleInputEmail1" aria-describedby="emailHelp"
 										placeholder="Enter email">
 								</div>
 								<div class="form-group">
-									<label for="exampleInputPassword1">Password</label> <input
+									<label for="exampleInputPassword1">Password</label> <input required
 										type="password" name="password" class="form-control"
 										id="exampleInputPassword1" placeholder="Password">
 								</div>
@@ -205,7 +223,7 @@
 						</div>
 						<div class="modal-body">
 							<form action="forgetpassword" method="post">
-								<div
+								<%-- <div
 									class="alert alert-danger alert-dismissible fade show d-none "
 									${displayError } role="alert">
 									${error }
@@ -218,7 +236,7 @@
 									${success }
 									<button type="button" class="btn-close" data-bs-dismiss="alert"
 										aria-label="Close"></button>
-								</div>
+								</div> --%>
 								<div class="form-group">
 									<input type="email" class="form-control"
 										id="exampleInputEmail1" aria-describedby="emailHelp" required
@@ -263,9 +281,9 @@
 									src="<c:url value="/resources/images/forma-1-copy-5.png" />">
 							</div>
 							<form class="mx-auto" style="margin-top: 15px;" method="post"
-								action="registerUser"
+								action="registerUser" id="createuseraccount"
 								oninput='confirmpassword.setCustomValidity(confirmpassword.value != password.value ? "Passwords do not match." : "")'>
-								<div
+								<%-- <div
 									class="alert alert-danger alert-dismissible fade show d-none "
 									${displayError } role="alert">
 									${error }
@@ -278,7 +296,7 @@
 									${success }
 									<button type="button" class="btn-close" data-bs-dismiss="alert"
 										aria-label="Close"></button>
-								</div>
+								</div> --%>
 								<div class="form-group">
 									<div class="row">
 										<div class="col">
@@ -304,7 +322,7 @@
 												</div>
 												<input type="text" class="form-control"
 													id="inlineFormInputGroup" name="mobile"
-													placeholder="Mobile number">
+													placeholder="Mobile number" required>
 											</div>
 										</div>
 									</div>
@@ -420,23 +438,23 @@
 
 			<ul class="side-nav">
 				<li class="side-items"><a
-					class="side-link text-decoration-none" href="bookservice">Book
+					class="side-link text-decoration-none" data-bs-dismiss="offcanvas" href="bookservice">Book
 						now</a></li>
 				<li class="side-items"><a
-					class="side-link text-decoration-none" href="price">Prices &
+					class="side-link text-decoration-none" data-bs-dismiss="offcanvas" href="price">Prices &
 						services</a></li>
 				<li class="side-items"><a
-					class="side-link text-decoration-none" href="#">Warranty</a></li>
+					class="side-link text-decoration-none" data-bs-dismiss="offcanvas" href="#">Warranty</a></li>
 				<li class="side-items"><a
-					class="side-link text-decoration-none" href="#">Blog</a></li>
+					class="side-link text-decoration-none" data-bs-dismiss="offcanvas" href="#">Blog</a></li>
 				<li class="side-items"><a
-					class="side-link text-decoration-none" href="contactUs">Contact</a>
+					class="side-link text-decoration-none" data-bs-dismiss="offcanvas" href="contactUs">Contact</a>
 				</li>
 				<li class="side-items"><a
-					class="side-link text-decoration-none" data-toggle="modal"
+					class="side-link text-decoration-none" data-toggle="modal" data-bs-dismiss="offcanvas"
 					data-target="#exampleModalCenter" href="#">Login</a></li>
 				<li class="side-items"><a
-					class="side-link text-decoration-none" href="becomeapro">Become
+					class="side-link text-decoration-none" data-bs-dismiss="offcanvas" href="becomeapro">Become
 						a cleaner</a></li>
 			</ul>
 
@@ -752,7 +770,6 @@
  		
 	}
 	</script>
-
 
 
 
