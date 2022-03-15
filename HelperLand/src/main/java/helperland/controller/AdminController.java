@@ -21,8 +21,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import helperland.model.ServiceRequest;
+import helperland.model.ServiceRequestAddress;
 import helperland.model.User;
 import helperland.service.AdminService;
+import helperland.service.UserService;
 
 @RestController
 @ComponentScan(basePackages={"helperland.dao,helperland.models,helperland.service,helperland.interceptors"})
@@ -30,6 +32,9 @@ public class AdminController {
 
 	@Autowired
 	AdminService adminService;
+	
+	@Autowired
+	UserService userService;
 	
 	@RequestMapping(value="/usermanagement",method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
 	 @ResponseBody
@@ -116,5 +121,54 @@ public class AdminController {
 		System.out.println(serviceRequests.toString()+"adminnnnnn");
 		
 		return serviceRequests;
+	}
+	@RequestMapping(value="/editserviceRequest/{srId},{service_start_date},{startTime},{AddressLine1},{AddressLine2},{Postal_Code},{City}",method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
+	 @ResponseBody
+	public void ajaxeditserviceRequest(@PathVariable("srId") int srId,
+			@PathVariable("service_start_date") String service_start_date,
+			@PathVariable("startTime") String startTime,
+			@PathVariable("AddressLine1") String AddressLine1,
+			@PathVariable("AddressLine2") String AddressLine2,
+			@PathVariable("Postal_Code") int Postal_Code,
+			@PathVariable("City") String City,
+			@ModelAttribute ServiceRequest serviceRequest,
+			@ModelAttribute ServiceRequestAddress serviceRequestAddress,
+			HttpServletRequest request) throws Exception {
+		
+		serviceRequest.setService_req_id(srId);
+		serviceRequest.setService_start_date(service_start_date);
+		serviceRequest.setService_start_time(startTime);
+
+		serviceRequestAddress.setServiceRequestId(srId);
+		serviceRequestAddress.setAddressLine1(AddressLine1);
+		serviceRequestAddress.setAddressLine2(AddressLine2);
+		serviceRequestAddress.setPostalCode(Postal_Code);
+		serviceRequestAddress.setCity(City);
+		
+		ServiceRequest servicedata = this.userService.getSErviceDetailsForReschedule(serviceRequest);
+
+		
+		if(servicedata.getService_provider_id() == 0) {
+			this.adminService.editServiceRequest(serviceRequest);
+			this.adminService.editServiceRequestAddress(serviceRequestAddress);
+		}
+		
+		else {
+			List<ServiceRequest> spDetails = this.userService.getSPDetails(servicedata.getService_provider_id());
+			
+			Iterator<ServiceRequest> iterator = spDetails.iterator();
+			
+			while(iterator.hasNext()) {
+				if(service_start_date.equals(iterator.next().getService_start_date())){
+					this.adminService.editServiceRequestifSpNotFree(serviceRequest);
+					this.adminService.editServiceRequestAddress(serviceRequestAddress);
+					break;
+				}
+				else {
+					this.adminService.editServiceRequest(serviceRequest);
+					this.adminService.editServiceRequestAddress(serviceRequestAddress);
+				}
+			}
+		}
 	}
 }

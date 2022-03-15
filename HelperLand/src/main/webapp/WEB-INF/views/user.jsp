@@ -1259,10 +1259,7 @@
 						<br>
 						<h5>Feedback on service provider</h5>
 						<textarea rows="2" style="width: 100%;"></textarea>
-
-<button type="button" class="btn btn-secondary"
-							data-bs-dismiss="modal">Close</button>
-						<button type="submit" class="btn btn-primary">Save
+						<button type="submit" class="btn Reschedule-button">Save
 							changes</button>
 												</form>
 					</div>
@@ -1277,6 +1274,8 @@
 	</section>
 
 	<div style="flex-grow: 1;"></div>
+
+	<input type="hidden" id="temppp">
 
 	<div class="footer_section w-100">
 		<div
@@ -1329,7 +1328,8 @@
 		integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2"
 		crossorigin="anonymous"></script>
 
-	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> -->
+	<script src="http://code.jquery.com/jquery-1.8.3.min.js "></script>
 	<script
 		src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 	<script
@@ -1357,11 +1357,10 @@
 		function dashboardtable() {
 			$(document).ready(function() {
 				$('#dashboardtable').DataTable({
-
 					responsive : true,
 					"dom" : '<"top">rt<"bottom"lip><"clear">',
 					"aaSorting" : [],
-					"order" : [ [ 0, "desc" ] ],
+					
 					columnDefs : [ {
 						orderable : false,
 						targets : 4
@@ -1369,14 +1368,13 @@
 				});
 			});
 		}
-
+	
 		function serviceHistoryTable() {
 			$(document).ready(function() {
 				$('#selectedColumn').DataTable({
 					responsive : true,
 					"dom" : '<"top">rt<"bottom"lip><"clear">',
 					"aaSorting" : [],
-					"order" : [ [ 0, "desc" ] ],
 					columnDefs : [ {
 						orderable : false,
 						targets : [ 4, 6 ]
@@ -1384,6 +1382,7 @@
 				});
 			});
 		}
+		
 
 		$(document).ready(function() {
 			$('#InvoiceColumn').DataTable({
@@ -1645,25 +1644,27 @@
 		window.onload = dashboard();
 
 		 
-		function ratingsavg(spid) {
-			return new Promise(function(resolve, reject) {
+		 function ratingsavg(spid,rowIndex) {
+			 if(spid !=undefined){
+			 console.log(spid, rowIndex , "ahgsfhgja");
+			 
 				$.ajax({
 					type : "GET",
 					url : "/helperland/ratingsavg/" + spid,
 					success : function(data) {
 						console.log("SUCCESS: ", data);
-						resolve(data);
+						$('#dashboardtable tbody tr:eq('+rowIndex+') td h6').text(data);
+						$('#selectedColumn tbody tr:eq('+rowIndex+') td h6').text(data);
 					},
 					error : function(e) {
 						console.log("ERROR: ", e);
-						reject(e);
 					},
 					done : function(e) {
 						console.log("Done");
 					}
 				});
-		    });
-		}
+			 }
+		} 
 		
 		function dashboard() {
 			$
@@ -1673,38 +1674,27 @@
 						url : "/helperland/displaydashboard",
 						contentType : "application/json",
 						success : function(response) {
-							var temp = "hello!!"
 							var result = '<table id="dashboardtable" class="display table nowrap" cellspacing="0" style="width: 100%"><thead><tr><th scope="col" class="serviceidrow">Service ID</th><th scope="col" class="servicedate">Service date</th><th scope="col" class="provider">Service Provider</th><th scope="col" class="payment">Payment</th><th scope="col" class="action">Actions</th></tr></thead>'
 							result += "<tbody>";
-							$
-									.each(
-											response,
-											function(k, v) {
-
+							$.each(response,function(k, v) {
 												var firstname = "";
 												var lastname = "";
 												var avatar = "";
-												var avg_rating = 0;
 												if (v[0].service_provider_id != 0) {
 													firstname = v[1].first_name;
 													lastname = v[1].last_name;
 													avatar = '<img class="img-custom-class" src="<c:url value="/resources/images/avatar-'+ v[1].user_profile_pic +'.png" />" alt="">';
-													ratingsavg(v[0].service_provider_id).then((data) => {
-														 console.log(data+'++++++++++---------');
-														 avg_rating = data;
-													 }).catch((e)=>{
-														 console.log(e);
-													 });
-													temp += "  hiii";
+													 
+													
 												} else {
 													firstname = "";
 													lastname = "";
 													avatar = "";
 												}
-												console.log(temp);
 												//console.log(v.state);
 												//document.getElementById("showadd").innerHTML = document.getElementById("showadd").innerHTML + v.addressLine1;
 												result += "<tr>";
+												result += "<input type='hidden' class='spidhidden' value='"+v[0].service_provider_id+"'>";
 												result += '<td scope="row text-color-table number-and-km">';
 												result += '<a href="#" data-toggle="modal" data-target="#withoutServiceProviderdashboardModalCenter" onclick="openModaldetails('
 														+ v[0].service_req_id
@@ -1726,7 +1716,7 @@
 														+ firstname
 														+ ' '
 														+ lastname
-														+avg_rating
+														+ '<h6 class="AvgRating"></h6>'
 														+ '</p></div></div></div>';
 												result += "</td>";
 												result += '<td class="eurotext">';
@@ -1747,6 +1737,14 @@
 							result += "</tbody>";
 							result += '</table>';
 							$("#displaydashboard").html(result);
+							$('#displaydashboard tr').each(function(index, tr) {
+								var sp_id = $(tr).find('input.spidhidden:hidden').val();
+								var ind = index-1;
+								if(sp_id != 0){
+								ratingsavg(sp_id,ind);
+								}
+								});
+							
 							dashboardtable();
 
 						},
@@ -1905,17 +1903,21 @@
 																}
 																
 																var status = "";
+																var colorcls = "";
 																if (v[0].status == "cancel") {
 																	disablebtn = "disabled";
 																	status = "canceled";
+																	colorcls = "Not-Applicable-button";
 																} else {
 																	disablebtn = "";
 																	status = "completed";
+																	colorcls = "complete-button";
 																}
 
 																//console.log(v.state);
 																//document.getElementById("showadd").innerHTML = document.getElementById("showadd").innerHTML + v.addressLine1;
 																result += "<tr>";
+																result += "<input type='hidden' class='spidhidden' value='"+v[0].service_provider_id+"'>";
 																result += '<td scope="row text-color-table number-and-km">';
 																result += '<a href="#"  data-toggle="modal" data-target="#withoutServiceProviderdashboardModalCenter" onclick="openModaldetails('
 																		+ v[0].service_req_id
@@ -1935,6 +1937,7 @@
 																		+ firstname
 																		+ ' '
 																		+ lastname
+																		+ '<h6 class="AvgRating"></h6>'
 																		+ '</p></div></div></div>';
 																result += "</td>";
 																result += '<td class="eurotext">';
@@ -1946,7 +1949,7 @@
 																result += '<img src="<c:url value="/resources/images/icons8-mail-64.png" />" alt="reportimg">';
 																result += "</td>";
 																result += "<td>";
-																result += '<button class="Not-Applicable-button align-items-center justify-content-center custom-margin-table-two-data">'
+																result += '<button class="'+colorcls+' align-items-center justify-content-center custom-margin-table-two-data">'
 																		+ status
 																		+ '</button>'
 																result += "</td>";
@@ -1959,8 +1962,17 @@
 											result += "</tbody>";
 											result += '</table>';
 											$("#serviceHistory").html(result);
-											serviceHistoryTable();
+											$('#serviceHistory tr').each(function(index, tr) {
+												var sp_id = $(tr).find('input.spidhidden:hidden').val();
+												var ind = index-1;
+												if(sp_id != 0){
+												ratingsavg(sp_id,ind);
+												}
+												});
+											
 
+											serviceHistoryTable();
+											
 										},
 										error : function(e) {
 											console.log("ERROR: ", e);

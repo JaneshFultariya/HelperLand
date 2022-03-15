@@ -103,8 +103,17 @@
 					<span style="padding-left: 15px;">Welcome,<br>
 					<strong style="padding-left: 15px;">First Customer</strong></span>
 					<div class="devider-line"></div>
-					<a class="dropdown-item text-color-nav text-decoration-none"
-					href="${user_type == 2 ? 'serviceprovider' :  'user'}">My Dashboard</a>  <a
+					<c:if test="${user_type == 2 }">
+									<a class="dropdown-item" href="serviceprovider">Dashboard</a>
+								</c:if>
+								
+								<c:if test="${user_type == 3 }">
+									<a class="dropdown-item" href="user">Dashboard</a>
+								</c:if>
+								
+								<c:if test="${user_type == 1 }">
+									<a class="dropdown-item text-color-nav text-decoration-none" href="admin">Dashboard</a>
+								</c:if>  <a
 						class="dropdown-item text-color-nav text-decoration-none"
 						href="logout">Log out</a>
 				</div>

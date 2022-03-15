@@ -593,13 +593,7 @@
                           <span id="CommentsModal"></span><br>
                            <span id="PetModal"></span>
                         </span>
-                        <hr>
-                        <div class="d-flex flex-row">
-                            <button class="btn Reschedule-button" data-toggle="modal" data-dismiss="modal"
-                            data-target="#rescheduleModalCenter">Reschedule</button>
-                            <button class="btn Cancle-button" data-toggle="modal" data-dismiss="modal"
-                            data-target="#cancelModalCenter">Cancel</button>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -709,61 +703,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            <%--  <c:forEach var="sp" items="${serviceDetails}">
-                                <tr>
-                                    <td scope="row text-color-table number-and-km">
-                                        <a href="#" data-toggle="modal"
-                                            data-target="#withoutServiceProviderdashboardModalCenter"
-                                            class="text-decoration-none link-text" onclick="openModaldetails(${sp[0].service_req_id })">35${sp[0].service_req_id }</a>
-                                    </td>
-                                   <td>
-                                        <div class="col">
-                                            <div class="d-flex custom-margin-table">
-                                                <img src="<c:url value="/resources/images/calculator.png" />" class="calander-img">
-                                                <a href="#" data-toggle="modal"
-                                                    data-target="#withoutServiceProviderdashboardModalCenter"
-                                                    class="text-decoration-none link-text"><strong>${sp[0].service_start_date }</strong></a>
-                                            </div>
-                                            <div class="d-flex">
-                                                <img class="clock" src="<c:url value="/resources/images/layer-712.png" />">
-                                                <a href="#" data-toggle="modal"
-                                                    data-target="#withoutServiceProviderdashboardModalCenter"
-                                                    class="text-decoration-none link-text">${sp[0].service_start_date }</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td style="padding: 0px; padding-top: 13px;">
-                                        <div class="col">
-                                            <div class="d-flex custom-margin-table">
-                                                <p>${sp[2].first_name } ${sp[2].last_name }</p>
-                                            </div>
-                                            <div class="d-flex">
-                                                <img src="<c:url value="/resources/images/layer-15.png" />"
-                                                    style="width: 20px; height: 22px; margin-right: 7px;">
-                                                <p>${sp[1].addressLine1},${sp[1].addressLine2}</p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="eurotext">
-                                        <div class="d-flex flex-row custom-margin-table-two-data">
-                                            <p class="euro-text">
-                                                &euro;
-                                            </p>
-                                            <p class="number-text">
-                                                ${sp[0].total_cost }
-                                            </p>
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td>
-                                        <div class="d-flex flex-row">
-                                            <button class="btn Reschedule-button" onclick="acceptbtndashboard(${sp[0].service_req_id })">Accept</button>
-                                        </div>
-                                    </td> 
-                                </tr>
-</c:forEach> --%>
-
-
                             </tbody>
                         </table>
                         </div>
@@ -797,71 +736,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <%-- <tr>
-                                    <td scope="row text-color-table number-and-km">323436</td>
-                                    <td style="padding: 0px; padding-top: 13px;">
-                                        <div class="col">
-                                            <div class="d-flex custom-margin-table">
-                                                <img src="<c:url value="/resources/images/calculator.png" />" class="calander-img">
-                                                <p>09/04/2018</p>
-                                            </div>
-                                            <div class="d-flex">
-                                                <img class="clock" src="<c:url value="/resources/images/layer-712.png" />">
-                                                <p>12:00 - 18:00</p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td style="padding: 0px; padding-top: 13px;">
-                                        <div class="col">
-                                            <div class="d-flex custom-margin-table">
-                                                <p>David Bough</p>
-                                            </div>
-                                            <div class="d-flex">
-                                                <img src="<c:url value="/resources/images/layer-15.png" />"
-                                                    style="width: 20px; height: 22px; margin-right: 7px;">
-                                                <p>Musterstrabe 5,12345 Bonn</p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>56,28€</td>
-                                    <td>15 km</td>
-                                    <td>
-                                        <button class="btn">Cancel</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td scope="row">323436</td>
-                                    <td style="padding: 0px; padding-top: 13px;">
-                                        <div class="col">
-                                            <div class="d-flex custom-margin-table">
-                                                <img src="<c:url value="/resources/images/calculator.png" />" class="calander-img">
-                                                <p>09/04/2018</p>
-                                            </div>
-                                            <div class="d-flex">
-                                                <img class="clock" src="<c:url value="/resources/images/layer-712.png" />">
-                                                <p>12:00 - 18:00</p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td style="padding: 0px; padding-top: 13px;">
-                                        <div class="col">
-                                            <div class="d-flex custom-margin-table">
-                                                <p>David Bough</p>
-                                            </div>
-                                            <div class="d-flex">
-                                                <img src="<c:url value="/resources/images/layer-15.png" />"
-                                                    style="width: 20px; height: 22px; margin-right: 7px;">
-                                                <p>Musterstrabe 5,12345 Bonn</p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>59,28€</td>
-                                    <td>15 km</td>
-                                    <td>
-                                        <button class="btn">Cancel</button>
-                                    </td>
-                                </tr> --%>
-
                             </tbody>
                         </table>
                         </div>
@@ -905,39 +779,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <%-- <tr>
-                                    <td scope="row text-color-table number-and-km"><a href="#" data-toggle="modal"
-                                            data-target="#withServiceProviderModalCenter"
-                                            class="text-decoration-none link-text">323436</a></td>
-                                    <td>
-                                        <div class="col">
-                                            <div class="d-flex custom-margin-table">
-                                                <img src="<c:url value="/resources/images/calculator.png" />" class="calander-img">
-                                                <a href="#" data-toggle="modal"
-                                                    data-target="#withServiceProviderModalCenter"
-                                                    class="text-decoration-none link-text"><strong>31/03/2018</strong></a>
-                                            </div>
-                                            <div class="d-flex">
-                                                <img class="clock" src="<c:url value="/resources/images/layer-712.png" />">
-                                                <a href="#" data-toggle="modal"
-                                                    data-target="#withServiceProviderModalCenter"
-                                                    class="text-decoration-none link-text">12:00 - 18:00</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="col">
-                                            <div class="d-flex custom-margin-table">
-                                                <p>David Bough</p>
-                                            </div>
-                                            <div class="d-flex">
-                                                <img src="<c:url value="/resources/images/layer-15.png" />"
-                                                    style="width: 20px; height: 22px; margin-right: 7px;">
-                                                <p>Musterstrabe 5,12345 Bonn</p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr> --%>
                             </tbody>
                         </table>
                         </div>

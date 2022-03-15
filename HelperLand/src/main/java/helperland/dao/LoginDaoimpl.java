@@ -23,9 +23,10 @@ public class LoginDaoimpl implements LoginDao {
 	public User getUser(User user) {
 		Session session = factory.getCurrentSession();
 		try {
-			  Query<User> query = session.createQuery("from user where (email =:userEmail AND password =:userPassword)",User.class);
+			  Query<User> query = session.createQuery("from user where (email =:userEmail AND password =:userPassword and is_approved =:is_approved)",User.class);
 			  query.setParameter("userEmail", user.getEmail());
 			  query.setParameter("userPassword", user.getPassword());
+			  query.setParameter("is_approved", 1);
 			  User loginuser = new User();
 			  loginuser = query.getSingleResult();
 			  int login_type = loginuser.getUser_type_id();

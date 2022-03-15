@@ -1205,3 +1205,11 @@ div.dataTables_info {
 	font-weight: bold;
 	font-size: 42px;
 }
+
+.complete-button {
+    background-color: #67b644;
+    color: white;
+    border: none;
+    width: 82px;
+    height: 22px;
+}

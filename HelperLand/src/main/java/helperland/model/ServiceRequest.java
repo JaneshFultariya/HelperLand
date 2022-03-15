@@ -2,10 +2,14 @@ package helperland.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -65,14 +69,7 @@ public class ServiceRequest {
 	private int has_issue;
 	private int payment_done;
 	private String record_version;
-	
-	private double avg_rating;
-	public double getAvg_rating() {
-		return avg_rating;
-	}
-	public void setAvg_rating(double avg_rating) {
-		this.avg_rating = avg_rating;
-	}
+
 	public int getService_req_id() {
 		return service_req_id;
 	}

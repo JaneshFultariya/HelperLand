@@ -193,7 +193,7 @@
 
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-12" id="allservicerequest">
                     <table id="example" class="display table nowrap" cellspacing="0" style="width:100%">
                         <thead>
                             <tr>
@@ -469,19 +469,24 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form id="editAndRescheduleForm" name="editAndRescheduleForm">
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputEmail4">Date</label>
-                                    <input type="email" class="form-control" id="inputEmail4" placeholder="30/09/2021">
+                                    <input type="date" class="link-text form-control datepicker"
+										style="width: 150px;" id="service_start_date"
+										name="service_start_date">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="inputState">Time</label>
-                                    <select id="inputState" class="form-control">
-                                        <option selected>12:30</option>
-                                        <option>1:00</option>
-                                        <option>1:30</option>
-                                    </select>
+                                    <select class="custom-select" id="startTime"
+										name="service_start_time">
+										<option value="8.00">8:00</option>
+										<option value="8.30">8:30</option>
+										<option value="9.00">9:00</option>
+										<option value="9.30">9:30</option>
+										<option value="10.00">10:00</option>
+									</select>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -490,60 +495,29 @@
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputEmail4">Street name</label>
-                                    <input type="email" class="form-control" id="inputEmail4" placeholder="Street name">
+                                    <input type="text" class="form-control" id="AddressLine1" placeholder="Street name">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="inputEmail4">House number</label>
-                                    <input type="email" class="form-control" id="inputEmail4" placeholder="111">
+                                    <input type="text" class="form-control" id="AddressLine2" placeholder="111">
                                 </div>
                             </div>
 
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputCity">Postal Code</label>
-                                    <input type="text" class="form-control" id="inputCity" placeholder="Postal Code">
+                                    <input type="text" class="form-control" id="Postal_Code" placeholder="Postal Code">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="inputState">City</label>
-                                    <select id="inputState" class="form-control">
-                                        <option selected>Choose</option>
-                                        <option>Berlin</option>
-                                        <option>Hamburg</option>
-                                        <option>München</option>
-                                        <option>Köln</option>
-                                        <option>Frankfurt am Main</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <span>Invoice Address</span>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="inputEmail4">Street name</label>
-                                    <input type="email" class="form-control" id="inputEmail4" placeholder="Street name">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="inputEmail4">House number</label>
-                                    <input type="email" class="form-control" id="inputEmail4" placeholder="111">
-                                </div>
-                            </div>
-
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="inputCity">Postal Code</label>
-                                    <input type="text" class="form-control" id="inputCity" placeholder="Postal Code">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="inputState">City</label>
-                                    <select id="inputState" class="form-control">
-                                        <option selected>Choose</option>
-                                        <option>Berlin</option>
-                                        <option>Hamburg</option>
-                                        <option>München</option>
-                                        <option>Köln</option>
-                                        <option>Frankfurt am Main</option>
-                                    </select>
+                                    <select
+										class="custom-select" id="City" name="City"
+										style="margin-left: 5px; width: 200px; height: 46px;">
+										<option selected value="ABC">ABC</option>
+										<option value="DEF">DEF</option>
+										<option value="GHI">GHI</option>
+										<option value="JKL">JKL</option>
+									</select>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -606,18 +580,22 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
    
     <script>
+    function servicerequestdatatable(){
         $(document).ready(function () {
             $('#example').DataTable({
 
-                responsive: true,
-                "dom": '<"top">rt<"bottom"lip><"clear">',
-                "aaSorting": [],
+            	"aLengthMenu": [[25, 50, 75, -1], [25, 50, 75, "All"]],
+                "pageLength": 50,
+                /* responsive: true, */
+                "dom": '<"top">rt<"bottom"lip><"clear">'
+                /* "aaSorting": [],
                 columnDefs: [{
                     orderable: false,
                     targets: [4, 5, 6, 8, 9],
-                }]
+                }] */
             });
         });
+    }
         
         function usermanagementdatatablequery() {
         $(document).ready(function () {
@@ -885,23 +863,91 @@
         
         window.onload = servicerequests();
         
+        function ratingsavg(spid,rowIndex) {
+			 if(spid !=undefined){
+			 console.log(spid, rowIndex , "ahgsfhgja");
+			 
+				$.ajax({
+					type : "GET",
+					url : "/helperland/ratingsavg/" + spid,
+					success : function(data) {
+						console.log("SUCCESS: ", data);
+						$('#example tbody tr:eq('+rowIndex+') td h6').text(data);
+					},
+					error : function(e) {
+						console.log("ERROR: ", e);
+					},
+					done : function(e) {
+						console.log("Done");
+					}
+				});
+			 }
+		} 
+        
         function servicerequests() {
         	$.ajax({
       			type:"GET",
       			url:"/helperland/servicerequests",
       			success:function(data){
       				console.log("SUCCESS: ", data);
-      				var result = '<table id="example" class="display table nowrap" cellspacing="0" style="width:100%"><thead><tr><th scope="col">Service ID</th><th scope="col">Service date</th><th scope="col">Customer details</th><th scope="col">Service Provider</th><th scope="col">Gross Amount</th><th scope="col">net Amount</th><th scope="col">Discount</th><th scope="col">Status</th><th scope="col">Payment Status</th><th scope="col">Actions</th></tr></thead>';
+      				var result = '<table id="example" class="display table nowrap" cellspacing="0" style="width:100%"><thead><tr><th scope="col">Service ID</th><th scope="col">Service date</th><th scope="col">Customer details</th><th scope="col">Service Provider</th><th scope="col">Total Amount</th><th scope="col">Status</th><th scope="col">Payment Status</th><th scope="col">Actions</th></tr></thead>';
       				result += "<tbody>";
-      				$.each(response, function(k, v) {
+      				 $.each(data, function(k, v) {
+      					 
+      					var firstname = "";
+						var lastname = "";
+						var avatar = "";
+						var avg_rating = 0;
+						if (v[0].service_provider_id != 0) {
+							firstname = v[2].first_name;
+							lastname = v[2].last_name;
+							avatar = '<img class="img-custom-class" src="<c:url value="/resources/images/avatar-'+ v[2].user_profile_pic +'.png" />" style="width: 50px; height: 50px;"  alt="">';
+						}
+						else{
+							var firstname = "";
+							var lastname = "";
+							var avatar = "";
+						}
+      					 
       					result += "<tr>";
+      					result += "<input type='hidden' class='spidhidden' value='"+v[0].service_provider_id+"'>";
       					result += '<td scope="row text-color-table number-and-km">'+v[0].service_req_id+'</td>';
-      					result += "<tr>";
-      					result += "<tr>";
-      					result += "<tr>";
-      					result += "<tr>";
-      					
-      				}
+      					result += '<td style="padding: 0px; padding-top: 13px;"><div class="col"><div class="d-flex custom-margin-table"><img src="<c:url value="/resources/images/calculator.png" />" class="calander-img"><p>'+v[0].service_start_date+'</p></div>';
+      					result += '<div class="d-flex"><img class="clock" src="<c:url value="/resources/images/layer-712.png" />"><p>'+v[0].service_start_time+' (Total Time: '+v[0].service_hours+')</p></div></div></td>';
+      					result += '<td style="padding: 0px; padding-top: 13px;"><div class="col"><div class="d-flex custom-margin-table"><p>'+v[1].first_name+' '+v[1].last_name+'</p></div><div class="d-flex"><img src="<c:url value="/resources/images/layer-15.png" />" style="width: 20px; height: 22px; margin-right: 7px;"><p>'+v[3].AddressLine1+', '+v[3].AddressLine2+'</p></div></div></td>';
+      					result += "<td>";
+						result += '<div class="d-flex flex-row">'
+								+ avatar
+								+ '<div class="col"><p class="link-text">'
+								+ firstname
+								+ ' '
+								+ lastname
+								+ '<h6 class="AvgRating"></h6>'
+								+ '</p></div></div></div>';
+						result += "</td>";
+      					result += '<td class="eurotext"><div class="d-flex flex-row custom-margin-table-two-data"><p class="euro-text">€</p><p class="number-text">'+v[0].total_cost+'</p></div></td>';
+      				 	result += '<td><button class="Expired-button align-items-center justify-content-center custom-margin-table-two-data">'+v[0].status+'</button></td>';
+      				 	result += '<td><button class="complete-button align-items-center justify-content-center custom-margin-table-two-data">'+v[0].payment_done+'</button></td>';
+      				 	result += '<td><div class="profile-dropedown nav-btnn-img"><a class="nav-link  dropdown-toggle text-decoration-none" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="<c:url value="/resources/images/icons8-menu-vertical-30.png" />"> </a><div class="dropdown-menu dropdown-menu-right dropdown-cyan text-color-nav" aria-labelledby="navbarDropdownMenuLink-4">';
+      				 	result += '<a class="dropdown-item text-color-nav text-decoration-none" data-toggle="modal" data-target="#exampleModalCenter" href="#" onclick="editserviceRequest('+v[0].service_req_id+')">Edit & Reschedule</a>';
+      				 	result += '<a class="dropdown-item text-color-nav text-decoration-none" href="#">Refund</a>';
+      				 	result += '<a class="dropdown-item text-color-nav text-decoration-none" href="#">Inquiry</a>';
+      				 	result += '<a class="dropdown-item text-color-nav text-decoration-none" href="#">History Log</a>';
+      				 	result += '<a class="dropdown-item text-color-nav text-decoration-none" href="#">Download Invoice</a>';
+      				 	result += '<a class="dropdown-item text-color-nav text-decoration-none" href="#">Other Transactions</a>';
+      				 	result += '</div></div></td></tr>';
+      				 }); 
+      				result += "</tbody>";
+    				result += '</table>';
+    				$("#allservicerequest").html(result);
+    				$('#allservicerequest tr').each(function(index, tr) {
+						var sp_id = $(tr).find('input.spidhidden:hidden').val();
+						var ind = index-1;
+						if(sp_id != 0){
+						ratingsavg(sp_id,ind);
+						}
+						});
+    				servicerequestdatatable();
       			},
       			error: function(e){
       				console.log("ERROR: ", e);
@@ -910,6 +956,33 @@
       				console.log("Done");
       			}
       		});
+		}
+        
+        
+        function editserviceRequest(srId) {
+        	jQuery(document).ready(function($) {
+				$("#editAndRescheduleForm").submit(function(event) {
+					event.preventDefault();
+					editandrescheduleserviceRequest(srId);
+				});
+			});
+		}
+        
+        function editandrescheduleserviceRequest(srId) {
+        	$.ajax({
+				type : "GET",
+				url : "/helperland/editserviceRequest/" + srId + "," + $("#service_start_date").val() + "," + $("#startTime").val() + "," + $("#AddressLine1").val() + "," +$("#AddressLine2").val() + "," + $("#Postal_Code").val() + "," + $("#City").val(),
+				success : function(data) {
+					console.log("SUCCESS: ", data);
+					servicerequests();
+				},
+				error : function(e) {
+					console.log("ERROR: ", e);
+				},
+				done : function(e) {
+					console.log("Done");
+				}
+			});
 		}
     </script>
 

@@ -134,11 +134,11 @@
 					aria-label="Close"></button>
 			</div>
         <div class="form-group" style="padding-top: 25px;">
-          <input type="text" class="form-control" id="exampleInputEmail1" name="first_name" aria-describedby="emailHelp"
+          <input type="text" class="form-control" id="" name="first_name"
             style="height: 46px;" placeholder="First name">
         </div>
         <div class="form-group input-text" style="padding-top: 15px;">
-          <input type="text" class="form-control" id="exampleInputEmail1" name="last_name" aria-describedby="emailHelp"
+          <input type="text" class="form-control" id="" name="last_name"
             style="height: 46px;" placeholder="Last name">
         </div>
         <div class="form-group" style="padding-top: 15px;">

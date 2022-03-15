@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import helperland.dao.AdminDao;
 import helperland.model.ServiceRequest;
+import helperland.model.ServiceRequestAddress;
 import helperland.model.User;
 
 @Service
@@ -33,6 +34,18 @@ public class AdminServiceImpl implements AdminService{
 
 	public List<ServiceRequest> getAllServiceRequest() {
 		return this.adminDao.getAllServiceRequest();
+	}
+
+	public int editServiceRequest(ServiceRequest serviceRequest) {
+		return this.adminDao.editServiceRequest(serviceRequest);
+	}
+
+	public int editServiceRequestifSpNotFree(ServiceRequest serviceRequest) {
+		return this.adminDao.editServiceRequestifSpNotFree(serviceRequest);
+	}
+
+	public int editServiceRequestAddress(ServiceRequestAddress serviceRequestAddress) {
+		return this.adminDao.editServiceRequestAddress(serviceRequestAddress);
 	}
 
 }

@@ -147,6 +147,7 @@ public class HomeController {
 			user.setCreated_date(dtf.format(date));
 			user.setModified_date(dtf.format(date));
 			user.setUser_type_id(3);
+			user.setIs_approved(1);
 			this.registerUserService.createRegisterUser(user);
 
 			return "homepage";
@@ -175,6 +176,7 @@ public class HomeController {
 			user.setModified_date(dtf.format(date));
 			user.setUser_type_id(2);
 			user.setUser_profile_pic("car");
+			user.setIs_approved(0);
 			userAddress.setAddressLine1(null);
 			userAddress.setAddressLine2(null);
 			userAddress.setCity(null);

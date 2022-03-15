@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import helperland.model.ServiceRequest;
+import helperland.model.ServiceRequestAddress;
 import helperland.model.User;
 
 @Repository
@@ -103,7 +104,7 @@ public class AdminDaoImpl implements AdminDao{
 	public List<ServiceRequest> getAllServiceRequest() {
 		Session session = factory.getCurrentSession();
 		try {
-			  Query<ServiceRequest> query = session.createQuery("from servicerequest as sr left join user as u1 on sr.user_id = u1.user_id left join user as u on sr.service_provider_id = u.user_id");			 
+			  Query<ServiceRequest> query = session.createQuery("from servicerequest as sr left join user as u1 on sr.user_id = u1.user_id left join user as u on sr.service_provider_id = u.user_id left join servicerequestaddress as ua on sr.service_req_id = ua.ServiceRequestId");			 
 			  
 			  User User = new User();
 			  List<ServiceRequest> userList = query.getResultList();  
@@ -113,6 +114,65 @@ public class AdminDaoImpl implements AdminDao{
 		catch(Exception e) {
 			System.out.println(e.getMessage());
 			return null;
+		}
+	}
+
+	@Transactional
+	public int editServiceRequest(ServiceRequest serviceRequest) {
+		Session session = factory.getCurrentSession();
+		try {
+			  Query query = session.createQuery("update servicerequest set "+"service_start_date=:service_start_date, "+"service_start_time=:service_start_time "+"where service_req_id=:service_req_id");
+			  query.setParameter("service_req_id", serviceRequest.getService_req_id());
+			  query.setParameter("service_start_date", serviceRequest.getService_start_date());
+			  query.setParameter("service_start_time", serviceRequest.getService_start_time());
+			  int state = query.executeUpdate();
+			  System.out.println(state);
+			  return state;
+			}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+			return 0;
+		}
+	}
+
+	@Transactional
+	public int editServiceRequestifSpNotFree(ServiceRequest serviceRequest) {
+		Session session = factory.getCurrentSession();
+		try {
+			  Query query = session.createQuery("update servicerequest set "+"service_start_date=:service_start_date, "+"service_start_time=:service_start_time, "+"status=:status, "+"service_provider_id=:service_provider_id, "+"sp_accepted_date=:sp_accepted_date "+"where service_req_id=:service_req_id");
+			  query.setParameter("service_req_id", serviceRequest.getService_req_id());
+			  query.setParameter("service_start_date", serviceRequest.getService_start_date());
+			  query.setParameter("service_start_time", serviceRequest.getService_start_time());
+			  query.setParameter("service_provider_id", 0);
+			  query.setParameter("status", "new");
+			  query.setParameter("sp_accepted_date", null);
+			  int state = query.executeUpdate();
+			  System.out.println(state);
+			  return state;
+			}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+			return 0;
+		}
+	}
+
+	@Transactional
+	public int editServiceRequestAddress(ServiceRequestAddress serviceRequestAddress) {
+		Session session = factory.getCurrentSession();
+		try {
+			  Query query = session.createQuery("update servicerequestaddress set "+"AddressLine1=:AddressLine1, "+"AddressLine2=:AddressLine2, "+"City=:City, "+"PostalCode=:PostalCode "+"where ServiceRequestId=:ServiceRequestId");
+			  query.setParameter("ServiceRequestId", serviceRequestAddress.getServiceRequestId());
+			  query.setParameter("AddressLine1", serviceRequestAddress.getAddressLine1());
+			  query.setParameter("AddressLine2", serviceRequestAddress.getAddressLine2());
+			  query.setParameter("City", serviceRequestAddress.getCity());
+			  query.setParameter("PostalCode", serviceRequestAddress.getPostalCode());
+			  int state = query.executeUpdate();
+			  System.out.println(state);
+			  return state;
+			}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+			return 0;
 		}
 	}
 

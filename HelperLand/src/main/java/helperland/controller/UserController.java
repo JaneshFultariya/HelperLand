@@ -225,6 +225,8 @@ public class UserController {
 		
 		List<ServiceRequest> serviceRequest2 = this.userService.getAllService(uid);
 		
+		
+		
 		System.out.println(serviceRequest2.getClass().getSimpleName());
 		
 		return serviceRequest2;

@@ -364,26 +364,21 @@ public class UserDaoImpl implements UserDao{
 		}
 	}
 
-	@Override
-	public double getavgsprating(String spid) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
-//	@Transactional
-//	public double getavgsprating(String spid) {
-//		Session session = factory.getCurrentSession();
-//		try {
-//			  Double query = (Double) session.createQuery("select avg(ratings) from rating where rating_to="+spid+"").getSingleResult();
-//
-//			  System.out.println(query);
-//			  
-//			  return query;
-//			}
-//		catch(Exception e) {
-//			System.out.println(e.getMessage());
-//			return 0;
-//		}
-//	}
+	@Transactional
+	public double getavgsprating(String spid) {
+		Session session = factory.getCurrentSession();
+		try {
+			  Double query = (Double) session.createQuery("select avg(ratings) from rating where rating_to="+spid+"").getSingleResult();
+
+			  System.out.println(query);
+			  
+			  return query;
+			}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+			return 0;
+		}
+	}
 
 }

@@ -330,15 +330,6 @@ public class ServiceProviderController {
 		
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	public void sendServiceRequestEmail(String message, String subject, String to, String from) {
 
 		String host = "smtp.gmail.com";

@@ -329,3 +329,10 @@ table {
 .modal-header{
     border-bottom: none !important;
 }
+
+.img-custom-class {
+	width: 50px !important;
+	height: 50px !important;
+	border: 1px solid #646464 !important;
+	border-radius: 50% !important;
+}
