@@ -75,13 +75,12 @@
                                 src="<c:url value="/resources/images/forma-1-1-1.png" />"> </a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-cyan text-color-nav"
                             aria-labelledby="navbarDropdownMenuLink-4">
-                            <span style="padding-left: 15px;">Welcome,<br><strong style="padding-left: 15px;">First
-                                    Customer</strong></span>
+                            <span style="padding-left: 15px;">Welcome,<br><strong style="padding-left: 15px;"><span class="instantdisplayname">${htmlusername }!</span></strong></span>
                             <div class="devider-line"></div>
                             <a class="dropdown-item text-color-nav text-decoration-none" href="#">My Dashboard</a>
                             <a class="dropdown-item text-color-nav text-decoration-none"
                                 onclick="openCity(event, 'mySettings')" href="#">My Settings</a>
-                            <a class="dropdown-item text-color-nav text-decoration-none" href="#">Log out</a>
+                            <a class="dropdown-item text-color-nav text-decoration-none" href="logout">Log out</a>
                         </div>
                     </li>
                 </ul>
@@ -95,7 +94,7 @@
 
     <div class="offcanvas offcanvas-end" id="demo">
         <div class="offcanvas-header">
-            <p>welcome,<br> <strong>Abc</strong></p>
+            <p>welcome,<br> <strong><span class="instantdisplayname">${htmlusername }! </span></strong></p>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
 
@@ -167,7 +166,7 @@
 
     <section id="title" class="text-center">
         <div class="main-text">
-            <h2>Welcome, <strong>Sandip!</strong></h2>
+            <h2>Welcome, <strong><span class="instantdisplayname">${htmlusername }!</span></strong></h2>
         </div>
         <div class="div-line-below-user-profile"></div>
     </section>
@@ -624,7 +623,7 @@
 						<span class="link-text">Are you sure to cancel the service
 							request?</span>
 						<form id="cancelbtnspupcomingserviceform" name="cancelbtnspupcomingserviceform">
-							<button class="btn Cancle-button" >Cancel</button>
+							<button class="btn cancel-custom" >Cancel</button>
 						</form>
 					</div>
 				</div>
@@ -648,7 +647,7 @@
 						<span class="link-text">Are you sure to cancel the service
 							request?</span>
 						<form id="completebtnspupcomingserviceform" name="completebtnspupcomingserviceform">
-							<button class="btn Rechedule-button" >Complete</button>
+							<button class="btn Complete-button-Modal" >Complete</button>
 						</form>
 					</div>
 				</div>
@@ -659,18 +658,28 @@
     <section id="tab_data">
         <div class="tab">
             <button class="tablinks" onclick="openCity(event, 'Deshboard')">Deshboard</button>
-            <button class="tablinks" onclick="openCity(event, 'NewService')" id="defaultOpen">New Service
+            <button class="tablinks" onclick="openCity(event, 'NewService')" id="servicerequesttab">New Service
                 Request</button>
             <button class="tablinks" onclick="openCity(event, 'Upcoming')" id="realtimedashboard">Upcoming Service</button>
             <button class="tablinks" onclick="openCity(event, 'Schedule')">Service Schedule</button>
             <button class="tablinks" onclick="openCity(event, 'History')" id="realtimeservicehistorysp">Service History</button>
 
-            <button class="tablinks" onclick="openCity(event, 'ratings')">My Ratings</button>
+            <button class="tablinks" onclick="openCity(event, 'ratings')" id="realtimeratingssp">My Ratings</button>
             <button class="tablinks" onclick="openCity(event, 'block-cust')">Block Customer</button>
 
             <button class="tablinks" onclick="openCity(event, 'Invoices')">Invoices</button>
 
             <button class="tablinks" onclick="openCity(event, 'Notification')">Notifications</button>
+        </div>
+        
+        <div id="ratings" class="tabcontent">
+        	<div id="ratingData">
+        		<table class="display" id="ratingTablenormal" style="width:100%">
+        			<thead></thead>
+        			<tbody></tbody>
+        		</table>
+        	</div>
+       	
         </div>
 
 
@@ -681,6 +690,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
+                    <div id="dashboarddatashow">
                         <table id="example" class="display table nowrap" cellspacing="0" style="width:100%">
                             <thead>
                                 <tr>
@@ -699,7 +709,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                             <c:forEach var="sp" items="${serviceDetails}">
+                            <%--  <c:forEach var="sp" items="${serviceDetails}">
                                 <tr>
                                     <td scope="row text-color-table number-and-km">
                                         <a href="#" data-toggle="modal"
@@ -751,11 +761,12 @@
                                         </div>
                                     </td> 
                                 </tr>
-</c:forEach>
+</c:forEach> --%>
 
 
                             </tbody>
                         </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -875,7 +886,7 @@
                     <h3 class="link-text">Service History</h3>
                 </div>
 
-                <button class="btn addrequestbuttton" style="width: 200px;">Export</button>
+                <button class="btn addrequestbuttton" id="exporttabledata" style="width: 200px;">Export</button>
             </div>
             <div class="container">
                 <div class="row">
@@ -1083,6 +1094,7 @@
                     <!-- Tab panes -->
                     <div class="tab-content">
                         <div id="mydetails" class="container tab-pane active"><br>
+                        <form id="spdetailsform">
                             <span><strong>Account Status:</strong>Active</span>
 
                             <div class="d-flex flex-row">
@@ -1090,93 +1102,166 @@
                                     <span>Basic details</span>
                                     <div class="mydetails-devider-line"></div>
                                 </div>
-                                <div>
-                                    <img src="<c:url value="/resources/images/avatar-iron.png" />" alt="">
+                                <div id="change">
+                                    <img src="<c:url value="/resources/images/avatar-${htmlavatar }.png" />" alt="">
                                 </div>
                             </div>
 
-                            <form>
+                            
                                 <div class="form-row name-form">
                                     <div class="col">
                                         <label for="exampleFormControlInput1">First name</label>
-                                        <input type="text" class="form-control" placeholder="First name">
+                                        <input type="text" class="form-control" placeholder="First name" value= ${htmlusername } required id="firstname">
                                     </div>
                                     <div class="col">
                                         <label for="exampleFormControlInput1">Last name</label>
-                                        <input type="text" class="form-control" placeholder="First name">
+                                        <input type="text" class="form-control" placeholder="Last name" value= ${htmllastname } required id="lastname">
                                     </div>
                                     <div class="col">
                                         <fieldset disabled>
                                             <label for="exampleFormControlInput1">E-mail address</label>
-                                            <input type="text" id="disabledTextInput" class="form-control"
+                                            <input type="email" id="disabledTextInput" value= ${htmluseremail } required class="form-control"
                                                 placeholder="Disabled input">
 
                                         </fieldset>
                                     </div>
                                 </div>
                                 <div class="form-row">
-                                    <div class="justify-content-center form-group col-md-4" style="padding-top: 5px;">
-                                        <label for="exampleFormControlInput1">Mobile Number</label>
-                                        <div class="number_input d-flex">
-                                            <input type="text" id="form3Example1"
-                                                class="form-control float-right country_number" placeholder="+42"
-                                                style="height: 46px; width: 54px; background-color: #f4f4f4;" />
-
-                                            <input type="text" id="form3Example1" class="form-control"
-                                                placeholder="Mobile number" style="height: 46px;" />
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4" style="padding-top: 5px;">
-                                        <label for="exampleFormControlInput1">Date of birth</label>
-                                        <div class="d-flex flex-row">
-                                            <select class="custom-select date-select" id="inlineFormCustomSelectPref"
-                                                style="width: 150px; height: 46px;">
-                                                <option selected>Choose...</option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
-                                            </select>
-                                            <select class="custom-select month-select" id="inlineFormCustomSelectPref"
-                                                style="margin-left: 5px; width: 200px; height: 46px;">
-                                                <option selected>Choose...</option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
-                                            </select>
-                                            <select class="custom-select year-select" id="inlineFormCustomSelectPref"
-                                                style="margin-left: 5px; width: 150px; height: 46px;">
-                                                <option selected>Choose...</option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
+									<div class="justify-content-center col-md-4"
+										style="padding-top: 5px;">
+										<label for="exampleFormControlInput1">Mobile Number</label>
+										<div class="number_input d-flex">
+											<div class="input-group mb-2">
+												<div class="input-group-prepend">
+													<div class="input-group-text">+91</div>
+												</div>
+												<input type="text" class="form-control" name="mobile" required
+													id="updtmobile" value= ${htmlMobile }>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-4" style="padding-top: 5px;">
+										<label for="exampleFormControlInput1">Date of birth</label>
+										<div class="d-flex flex-row">
+											<select class="custom-select select-dob-date" required
+												id="updtbdate" name="date_of_birth">
+												<option value>Day</option>
+												<option value="1">01</option>
+												<option value="2">02</option>
+												<option value="3">03</option>
+												<option value="4">04</option>
+												<option value="5">05</option>
+												<option value="6">06</option>
+												<option value="7">07</option>
+												<option value="8">08</option>
+												<option value="9">09</option>
+												<option value="10">10</option>
+												<option value="11">11</option>
+												<option value="12">12</option>
+												<option value="13">13</option>
+												<option value="14">14</option>
+												<option value="15">15</option>
+												<option value="16">16</option>
+												<option value="17">17</option>
+												<option value="18">18</option>
+												<option value="19">19</option>
+												<option value="20">20</option>
+												<option value="21">21</option>
+												<option value="22">22</option>
+												<option value="23">23</option>
+												<option value="24">24</option>
+												<option value="25">25</option>
+												<option value="26">26</option>
+												<option value="27">27</option>
+												<option value="28">28</option>
+												<option value="29">29</option>
+												<option value="30">30</option>
+												<option value="31">31</option>
+											</select> <select class="custom-select select-dob-month ml-2" required
+												id="updtbmonth" name="date_of_birth">
+												<option value>Month</option>
+												<option value="January">January</option>
+												<option value="February">February</option>
+												<option value="March">March</option>
+												<option value="April">April</option>
+												<option value="May">May</option>
+												<option value="June">June</option>
+												<option value="July">July</option>
+												<option value="August">August</option>
+												<option value="September">September</option>
+												<option value="October">October</option>
+												<option value="November">November</option>
+												<option value="December">December</option>
+											</select> <select class="custom-select select-dob-year ml-2" required
+												id="updtbyear" name="date_of_birth">
+												<option value>Year</option>
+												<option value="2022">2022</option>
+												<option value="2021">2021</option>
+												<option value="2020">2020</option>
+												<option value="2019">2019</option>
+												<option value="2018">2018</option>
+												<option value="2017">2017</option>
+												<option value="2016">2016</option>
+												<option value="2015">2015</option>
+												<option value="2014">2014</option>
+												<option value="2013">2013</option>
+												<option value="2012">2012</option>
+												<option value="2011">2011</option>
+												<option value="2010">2010</option>
+												<option value="2009">2009</option>
+												<option value="2008">2008</option>
+												<option value="2007">2007</option>
+												<option value="2006">2006</option>
+												<option value="2005">2005</option>
+												<option value="2004">2004</option>
+												<option value="2003">2003</option>
+												<option value="2002">2002</option>
+												<option value="2001">2001</option>
+												<option value="2000">2000</option>
+												<option value="1999">1999</option>
+												<option value="1998">1998</option>
+												<option value="1997">1997</option>
+												<option value="1996">1996</option>
+												<option value="1995">1995</option>
+												<option value="1994">1994</option>
+												<option value="1993">1993</option>
+												<option value="1992">1992</option>
+												<option value="1991">1991</option>
+												<option value="1990">1990</option>
+												<option value="1989">1989</option>
+												<option value="1988">1988</option>
+												<option value="1987">1987</option>
+												<option value="1986">1986</option>
+												<option value="1985">1985</option>
+												<option value="1984">1984</option>
+												<option value="1983">1983</option>
+												<option value="1982">1982</option>
+											</select>
+										</div>
+									</div>
+                                    <div class="col-md-4 mt-1">
                                         <label for="exampleFormControlInput1">Nationality</label>
-                                        <select class="custom-select Nationality-select" id="inlineFormCustomSelectPref">
-                                            <option selected>Choose...</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
+                                        <select id="updtnationality" class="custom-select Nationality-select">
+                                            <option selected value="Indian">Indian</option>
+                                            <option value="German">German</option>
                                         </select>
                                     </div>
                                 </div>
-                                <div class="form-row">
-
+                                <div>
+									<p>Gender</p>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio1" value="option1">
+                                        <input class="form-check-input" type="radio" name="gender"
+                                            id="inlineRadio1" value="Male">
                                         <label class="form-check-label" for="inlineRadio1">Male</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio2" value="option2">
+                                        <input class="form-check-input" type="radio" name="gender"
+                                            id="inlineRadio2" value="Female">
                                         <label class="form-check-label" for="inlineRadio2">Female</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio3" value="option3">
+                                        <input class="form-check-input" type="radio" name="gender"
+                                            id="inlineRadio3" value="Rather not to say">
                                         <label class="form-check-label" for="inlineRadio3">Rather not to say</label>
                                     </div>
                                 </div>
@@ -1185,32 +1270,50 @@
                                     style="padding-bottom: 41px; padding-top: 30px;">
                                     <div class="flex-column col d-flex justify-content-center align-items-center">
                                         <div class="img-col d-flex justify-content-center align-items-center">
-                                            <img src="<c:url value="/resources/images/avatar-car.png" />">
+                                        <input type="radio" name="avatar" id="car" class="input-hidden" value="car"/>
+						                <label for="car">
+						                    <img src="<c:url value="/resources/images/avatar-car.png" />" alt="Car" class="avatarimg" />
+						                </label>
                                         </div>
                                     </div>
                                     <div class="flex-column col d-flex justify-content-center align-items-center">
                                         <div class="img-col d-flex justify-content-center align-items-center">
-                                            <img src="<c:url value="/resources/images/avatar-female.png" />">
+                                        <input type="radio" name="avatar" id="female" class="input-hidden" value="female"/>
+						                <label for="female">
+						                    <img src="<c:url value="/resources/images/avatar-female.png" />" alt="female" class="avatarimg" />
+						                </label>
                                         </div>
                                     </div>
                                     <div class="flex-column col d-flex justify-content-center align-items-center">
                                         <div class="img-col d-flex justify-content-center align-items-center">
-                                            <img src="<c:url value="/resources/images/avatar-hat.png" />">
+                                        <input type="radio" name="avatar" id="hat" class="input-hidden" value="hat"/>
+						                <label for="hat">
+						                    <img src="<c:url value="/resources/images/avatar-hat.png" />" alt="hat" class="avatarimg" />
+						                </label>
                                         </div>
                                     </div>
                                     <div class="flex-column col d-flex justify-content-center align-items-center">
                                         <div class="img-col d-flex justify-content-center align-items-center">
-                                            <img src="<c:url value="/resources/images/avatar-iron.png" />">
+                                        <input type="radio" name="avatar" id="iron" class="input-hidden" value="iron"/>
+						                <label for="iron">
+						                    <img src="<c:url value="/resources/images/avatar-iron.png" />" alt="iron" class="avatarimg" />
+						                </label>
                                         </div>
                                     </div>
                                     <div class="flex-column col d-flex justify-content-center align-items-center">
                                         <div class="img-col d-flex justify-content-center align-items-center">
-                                            <img src="<c:url value="/resources/images/avatar-male.png" />">
+                                        <input type="radio" name="avatar" id="male" class="input-hidden" value="male"/>
+						                <label for="male">
+						                    <img src="<c:url value="/resources/images/avatar-male.png" />" alt="male" class="avatarimg" />
+						                </label>
                                         </div>
                                     </div>
                                     <div class="flex-column col d-flex justify-content-center align-items-center">
                                         <div class="img-col d-flex justify-content-center align-items-center">
-                                            <img src="<c:url value="/resources/images/avatar-ship.png" />">
+                                        <input type="radio" name="avatar" id="ship" class="input-hidden" value="ship"/>
+						                <label for="ship">
+						                    <img src="<c:url value="/resources/images/avatar-ship.png" />" alt="ship" class="avatarimg" />
+						                </label>
                                         </div>
                                     </div>
                                 </div>
@@ -1219,21 +1322,21 @@
                                 <div class="form-row">
                                     <div class="col">
                                         <label for="exampleFormControlInput1">Street name</label>
-                                        <input type="text" class="form-control" placeholder="Street name">
+                                        <input type="text" class="form-control" placeholder="Street name" value=${htmladdline1 } required id="AddressLine1">
                                     </div>
                                     <div class="col">
                                         <label for="exampleFormControlInput1">House number</label>
-                                        <input type="text" class="form-control" placeholder="House number">
+                                        <input type="text" class="form-control" placeholder="House number" value=${htmladdline2 } required id="AddressLine2">
                                     </div>
                                     <div class="col">
                                         <label for="exampleFormControlInput1">Postal code</label>
-                                        <input type="text" class="form-control" placeholder="Postal code">
+                                        <input type="text" class="form-control" placeholder="Postal code" value=${htmlpostalcode } required id="PostalCode">
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="col-lg-4">
                                         <label for="exampleFormControlInput1">City</label>
-                                        <input type="text" class="form-control" placeholder="City name">
+                                        <input type="text" class="form-control" placeholder="City name" value=${htmlcity } required id="City">
                                     </div>
                                 </div>
 
@@ -1346,6 +1449,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
+    function dashboarddatatable(){
         $(document).ready(function () {
             $('#example').DataTable({
                 responsive: true,
@@ -1358,6 +1462,7 @@
                 }]
             });
         });
+    }
         function upcomingdatatable(){
         $(document).ready(function () {
             $('#upcoming').DataTable({
@@ -1394,7 +1499,8 @@
             });
         });
         
-   /* window.onload = dashboard();
+        
+    window.onload = dashboard();
         
         function dashboard() {
      	  $.ajax({
@@ -1402,7 +1508,35 @@
        		url:"/helperland/displayspdashboard",
        		contentType: "application/json",
        		success:function(response){
-       				console.log("SUCCESS: ", response);	
+       			var result = '<table id="example" class="display table nowrap" cellspacing="0" style="width:100%"><thead><tr><th scope="col" class="serviceidrow">Service ID</th><th scope="col" class="servicedate">Service date</th><th scope="col" class="provider">Customer Details</th><th scope="col" class="payment">Payment</th><th scope="col" class="payment">Time Conflict</th><th scope="col" class="action">Actions</th></tr></thead>';
+    				result += "<tbody>";
+    				$.each(response, function(k, v) {
+						result += "<tr>";
+    					result += '<td scope="row text-color-table number-and-km">';
+    					result +='<a href="#"  data-toggle="modal" data-target="#withoutServiceProviderdashboardModalCenter" onclick="openModaldetails('+v[0].service_req_id+')" class="text-decoration-none link-text">'+v[0].service_req_id+'</a>';
+    					result += "</td>";
+						result += "<td>";
+    					result += '<div class="col"><div class="d-flex custom-margin-table"><img src="<c:url value="/resources/images/calculator.png" />" class="calander-img"><a href="#"  data-toggle="modal" data-target="#withoutServiceProviderdashboardModalCenter" onclick="openModaldetails('+v[0].service_req_id+')" class="text-decoration-none link-text"><strong>'+v[0].service_start_date+'</strong></a></div><div class="d-flex"><img class="clock" src="<c:url value="/resources/images/layer-712.png" />"> <a  data-toggle="modal" data-target="#withoutServiceProviderdashboardModalCenter" class="text-decoration-none link-text">'+v[0].service_start_time+' (Total Time: '+v[0].service_hours+')</a></div></div>';
+    					result += "</td>";
+    					result += '<td style="padding: 0px; padding-top: 13px;">';
+    					result += '<div class="col"><div class="d-flex custom-margin-table"><p>'+v[2].first_name+' '+v[2].last_name+'</p></div><div class="d-flex"><img src="<c:url value="/resources/images/layer-15.png" />" style="width: 20px; height: 22px; margin-right: 7px;"><p>'+v[1].addressLine1+', '+v[1].addressLine2+'</p></div></div>';
+    					result += "</td>";
+    					result += '<td>';
+    					result += '<p>'+v[0].total_cost+'€</p>';
+    					result += "</td>";
+    					result += "<td>";
+    					result += "</td>";
+    					result += "<td>";
+    					result += '<div class="d-flex flex-row"><button class="btn Reschedule-button" onclick="acceptbtndashboard('+v[0].service_req_id +')">Accept</button></div>';
+    					result += "</td>";  
+    					result += "</tr>"
+					
+				});
+    			console.log("SUCCESS: ", response);
+				 result += "</tbody>";
+ 				result += '</table>';
+ 				$("#dashboarddatashow").html(result);
+ 				dashboarddatatable();
        		},
        		error: function(e){
        			console.log("ERROR: ", e);
@@ -1411,7 +1545,7 @@
        			console.log("Done");
        		}
        	});
-       }  */
+       }  
         
         /* function acceptbtndashboard(servicerequestid){
       	  console.log(servicerequestid);
@@ -1424,6 +1558,7 @@
         } */
         
         function acceptbtndashboard(servicerequestid){
+        	event.preventDefault();
       		console.log(servicerequestid + "Hiiiiiiiiiiiiiiiiiii");
       		$.ajax({
       			type:"GET",
@@ -1432,7 +1567,8 @@
       				console.log("SUCCESS: ", data);
       				if(data == 1){
       					alert("You have accepted this service request!!!");
-      					location.reload(true);
+      					/* location.reload(true); */
+      					dashboard();
       				}
       				else{
       					alert("Please Try again!!!");
@@ -1502,7 +1638,7 @@
             					result +='<a href="#"  data-toggle="modal" data-target="#withoutServiceProviderdashboardModalCenter" onclick="openModaldetails('+v[0].service_req_id+')" class="text-decoration-none link-text">'+v[0].service_req_id+'</a>';
             					result += "</td>";
         						result += "<td>";
-            					result += '<div class="col"><div class="d-flex custom-margin-table"><img src="<c:url value="/resources/images/calculator.png" />" class="calander-img"><a href="#"  data-toggle="modal" data-target="#withoutServiceProviderdashboardModalCenter" onclick="openModaldetails('+v[0].service_req_id+')" class="text-decoration-none link-text"><strong>'+v[0].service_start_date+'</strong></a></div><div class="d-flex"><img class="clock" src="<c:url value="/resources/images/layer-712.png" />"> <a  data-toggle="modal" data-target="#withoutServiceProviderdashboardModalCenter" class="text-decoration-none link-text">12:00 - 18:00</a></div></div>';
+            					result += '<div class="col"><div class="d-flex custom-margin-table"><img src="<c:url value="/resources/images/calculator.png" />" class="calander-img"><a href="#"  data-toggle="modal" data-target="#withoutServiceProviderdashboardModalCenter" onclick="openModaldetails('+v[0].service_req_id+')" class="text-decoration-none link-text"><strong>'+v[0].service_start_date+'</strong></a></div><div class="d-flex"><img class="clock" src="<c:url value="/resources/images/layer-712.png" />"> <a  data-toggle="modal" data-target="#withoutServiceProviderdashboardModalCenter" class="text-decoration-none link-text">'+v[0].service_start_time+' (Total Time: '+v[0].service_hours+')</a></div></div>';
             					result += "</td>";
             					result += '<td style="padding: 0px; padding-top: 13px;">';
             					result += '<div class="col"><div class="d-flex custom-margin-table"><p>'+v[2].first_name+' '+v[2].last_name+'</p></div><div class="d-flex"><img src="<c:url value="/resources/images/layer-15.png" />" style="width: 20px; height: 22px; margin-right: 7px;"><p>'+v[1].addressLine1+', '+v[1].addressLine2+'</p></div></div>';
@@ -1624,7 +1760,7 @@
               					result +='<a href="#"  data-toggle="modal" data-target="#withoutServiceProviderdashboardModalCenter" onclick="openModaldetails('+v[0].service_req_id+')" class="text-decoration-none link-text">'+v[0].service_req_id+'</a>';
               					result += "</td>";
           						result += "<td>";
-              					result += '<div class="col"><div class="d-flex custom-margin-table"><img src="<c:url value="/resources/images/calculator.png" />" class="calander-img"><a href="#"  data-toggle="modal" data-target="#withoutServiceProviderdashboardModalCenter" onclick="openModaldetails('+v[0].service_req_id+')" class="text-decoration-none link-text"><strong>'+v[0].service_start_date+'</strong></a></div><div class="d-flex"><img class="clock" src="<c:url value="/resources/images/layer-712.png" />"> <a  data-toggle="modal" data-target="#withoutServiceProviderdashboardModalCenter" class="text-decoration-none link-text">12:00 - 18:00</a></div></div>';
+              					result += '<div class="col"><div class="d-flex custom-margin-table"><img src="<c:url value="/resources/images/calculator.png" />" class="calander-img"><a href="#"  data-toggle="modal" data-target="#withoutServiceProviderdashboardModalCenter" onclick="openModaldetails('+v[0].service_req_id+')" class="text-decoration-none link-text"><strong>'+v[0].service_start_date+'</strong></a></div><div class="d-flex"><img class="clock" src="<c:url value="/resources/images/layer-712.png" />"> <a  data-toggle="modal" data-target="#withoutServiceProviderdashboardModalCenter" class="text-decoration-none link-text">'+v[0].service_start_time+' (Total Time: '+v[0].service_hours+')</a></div></div>';
               					result += "</td>";
               					result += '<td style="padding: 0px; padding-top: 13px;">';
               					result += '<div class="col"><div class="d-flex custom-margin-table"><p>'+v[2].first_name+' '+v[2].last_name+'</p></div><div class="d-flex"><img src="<c:url value="/resources/images/layer-15.png" />" style="width: 20px; height: 22px; margin-right: 7px;"><p>'+v[1].addressLine1+', '+v[1].addressLine2+'</p></div></div>';
@@ -1697,9 +1833,146 @@
       		});
       	}
         
-    </script>
+      	
+      	$(document).on('click', '.input-hidden', function() {
+      		var temp = $('input[name="avatar"]:checked').val();
+    		var changedimg = '<img src="<c:url value="/resources/images/avatar-'+ temp +'.png" />" >';
+    		$('#change').html(changedimg);
+    	});
+      	
+      	
+      	
+      	
+      	jQuery(document).ready(function($){
+      		$("#spdetailsform").submit(function(event){
+      			event.preventDefault();
+      			spdetailsfunction();
+      		});
+      	});
 
+      	function spdetailsfunction(){
+      		
+      		
+      		$.ajax({
+      			type:"GET",
+      			url:"/helperland/updtspdetails/" + $("#firstname").val() + "," + $("#lastname").val() + "," + $("#updtmobile").val() + "," + $("#updtbdate").val() + "," + $("#updtbmonth").val() + "," + $("#updtbyear").val() + "," + $("#updtnationality").val() + "," + $('input[name="gender"]:checked').val() + "," + $('input[name="avatar"]:checked').val() + "," + $("#AddressLine1").val() + "," + $("#AddressLine2").val() + "," + $("#PostalCode").val() + "," + $("#City").val(),
+      			success:function(response){
+      				console.log("SUCCESS: ", response);
+      				$(".instantdisplayname").html($("#firstname").val()+"!");
+      			},
+      			error: function(e){
+      				console.log("ERROR: ", e);
+      			},
+      			done: function(e){
+      				console.log("Done");
+      			}
+      		});
+      	}
+      	
+      	
+      	$(function () {
+            $("#exporttabledata").click(function (e) {
+                console.log("hu chalu chu bhai");
+                var table = $("#selectedColumn");
+                if (table && table.length) {
+                    $(table).table2excel({
+                        exclude: ".noExl",
+                        name: "Excel Document Name",
+                        filename: "ServiceHistory" + new Date().toISOString().replace(/[\-\:\.]/g, "") + ".xls",
+                        fileext: ".xls",
+                        exclude_img: true,
+                        exclude_links: true,
+                        exclude_inputs: true,
+                        preserveColors: false
+                    });
+                }
+            });
+
+        });
+      	
+      	
+      	
+      	function realtimeratings(){
+      	  $.ajax({
+        		type:"GET",
+        		url:"/helperland/spratingsdetails",
+        		contentType: "application/json",
+        		success:function(response){
+        			var result = '<table class="display" style="width:100%"><thead></thead>'
+        				result += "<tbody>";
+        				 $.each(response, function(k, v) {
+        					 var rating_status = "";
+        					 if(v[0].ratings==5){
+        						 rating_status = "Excellent";
+        					 }
+        					 
+        					 else if(v[0].ratings==4){
+        						 rating_status = "Very Good";
+        					 }
+        					 
+        					 else if(v[0].ratings==3){
+        						 rating_status = "Good";
+        					 }
+        					 
+        					 else if(v[0].ratings==2){
+        						 rating_status = "Normal";
+        					 }
+        					 
+        					 else {
+        						 rating_status = "Poor";
+        					 }
+        					 
+        						result += "<tr>";
+        						result += "<td><div>"+v[0].service_req_id+"</div><div>"+v[1].first_name+" "+v[1].last_name+"</div></td>";
+        						result += "<td><div>"+v[2].service_start_date+"</div><div>"+v[2].service_start_time+"</div></td>";
+        						result += "<td><div>Rating</div><div>"+v[0].ratings+"/5 "+rating_status+"</div></td>";
+        						result += "</tr>";
+        						result += "<tr>";
+        						result += '<td colspan="3"><div><strong>Customer comment</strong></div><div>'+v[0].comments+'</div></td>';
+        						result += "</tr>";
+        						result += "<tr>";
+        						result += '<td colspan="3"></td>';
+        						result += "</tr>";
+        					
+        				}); 
+        				console.log("SUCCESS: ", response);
+        				 result += "</tbody>";
+        				result += '</table>';
+        				$("#ratingData").html(result);
+        				/* spservicehistorydatatable(); */
+        				/* $.each(response, function(k, v) {
+        					
+        					console.log(v[1].addressLine1);
+        					console.log(v[2].first_name);
+        					
+        					 $.each(v, function(m,l){
+        						if(l.AddressLine1 != null){
+        							 console.log(l.AddressLine1+"hiiii"); 
+        						}
+        						
+        						
+        					}); 
+        				}); */
+        		},
+        		error: function(e){
+        			console.log("ERROR: ", e);
+        		},
+        		done: function(e){
+        			console.log("Done");
+        		}
+        	}); 
+        }
+        
+
+        $(document).on('click','#realtimeratingssp',function (){
+        	realtimeratings();
+        });
+      	
+    </script>
+    
+    <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/jquery.table2excel.min.js"></script>
     <script>
+
         function openCity(evt, cityName) {
             var i, tabcontent, tablinks;
             tabcontent = document.getElementsByClassName("tabcontent");
@@ -1715,7 +1988,7 @@
         }
 
         // Get the element with id="defaultOpen" and click on it
-        document.getElementById("defaultOpen").click();
+         document.getElementById("servicerequesttab").click();
     </script>
 
 </body>

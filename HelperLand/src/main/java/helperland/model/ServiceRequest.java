@@ -46,7 +46,7 @@ public class ServiceRequest {
 	
 	private float payment_due;
 	private String job_status;
-	private float service_start_time;
+	private String service_start_time;
 	
 	private int service_provider_id;
 	private String sp_accepted_date;
@@ -61,11 +61,18 @@ public class ServiceRequest {
 	private int modified_by;
 	private float refunded_amount;
 
-	
 	private float distance;
 	private int has_issue;
 	private int payment_done;
 	private String record_version;
+	
+	private double avg_rating;
+	public double getAvg_rating() {
+		return avg_rating;
+	}
+	public void setAvg_rating(double avg_rating) {
+		this.avg_rating = avg_rating;
+	}
 	public int getService_req_id() {
 		return service_req_id;
 	}
@@ -236,10 +243,10 @@ public class ServiceRequest {
 	}
 	
 	
-	public float getService_start_time() {
+	public String getService_start_time() {
 		return service_start_time;
 	}
-	public void setService_start_time(float service_start_time) {
+	public void setService_start_time(String service_start_time) {
 		this.service_start_time = service_start_time;
 	}
 	

@@ -9,7 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import helperland.dao.ServiceProviderDao;
+import helperland.model.Rating;
 import helperland.model.ServiceRequest;
+import helperland.model.User;
+import helperland.model.UserAddress;
 
 @Service
 public class ServiceProviderServiceImpl implements ServiceProviderService {
@@ -54,6 +57,26 @@ public class ServiceProviderServiceImpl implements ServiceProviderService {
 
 	public int completespServiceRequest(ServiceRequest serviceRequest) {
 		return serviceProviderDao.completespServiceRequest(serviceRequest);
+	}
+
+	public List<User> getUserEmail(int service_req_id) {
+		return serviceProviderDao.getUserEmail(service_req_id);
+	}
+
+	public int updtspDetails(User user,UserAddress userAddress) {
+		return serviceProviderDao.updtspDetails(user,userAddress);
+	}
+
+	public UserAddress getAddress(int uid) {
+		return serviceProviderDao.getAddress(uid);
+	}
+
+	public User getOneEmail(int service_req_id) {
+		return serviceProviderDao.getOneEmail(service_req_id);
+	}
+
+	public List<Rating> getAllspRatings(int uid) {
+		return serviceProviderDao.getAllspRatings(uid);
 	}
 
 }

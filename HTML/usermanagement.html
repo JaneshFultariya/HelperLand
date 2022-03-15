@@ -135,7 +135,8 @@
             <div class="first-row">
                 <div class="row">
                     <div class="col">
-                        <input type="text" style="height: 46px;" class="form-control" placeholder="First name">
+                        <input type="text" style="height: 46px;" id="column3_search" class="form-control"
+                            placeholder="First name">
                     </div>
                     <div class="col">
                         <input type="text" class="form-control" style="height: 46px;" placeholder="Last name">
@@ -143,8 +144,8 @@
                     <div class="col">
                         <input type="text" class="form-control" style="height: 46px;" placeholder="Email">
                     </div>
-                    <div class="col">
-                        <select id="inputState" style="height: 46px;" class="form-control">
+                    <div class="col" id="abc">
+                        <select id="inputStateeeeeeee" style="height: 46px;" class="form-control">
                             <option selected>Choose...</option>
                             <option>...</option>
                         </select>
@@ -248,7 +249,7 @@
                                 <td style="padding: 0px; padding-top: 13px;">
                                     <div class="col">
                                         <div class="d-flex custom-margin-table">
-                                            <p>David Bough</p>
+                                            <p>Davi Bough</p>
                                         </div>
                                         <div class="d-flex">
                                             <img src="images/layer-15.png"
@@ -343,7 +344,7 @@
                                 <td style="padding: 0px; padding-top: 13px;">
                                     <div class="col">
                                         <div class="d-flex custom-margin-table">
-                                            <p>David Bough</p>
+                                            <p>avid Bough</p>
                                         </div>
                                         <div class="d-flex">
                                             <img src="images/layer-15.png"
@@ -718,7 +719,8 @@
                                             <img src="images/icons8-menu-vertical-30.png"> </a>
                                         <div class="dropdown-menu dropdown-menu-right dropdown-cyan text-color-nav"
                                             aria-labelledby="navbarDropdownMenuLink-4">
-                                            <a class="dropdown-item text-color-nav text-decoration-none" href="#">Delete</a>
+                                            <a class="dropdown-item text-color-nav text-decoration-none"
+                                                href="#">Delete</a>
                                         </div>
                                     </div>
                                 </td>
@@ -748,7 +750,8 @@
                                             <img src="images/icons8-menu-vertical-30.png"> </a>
                                         <div class="dropdown-menu dropdown-menu-right dropdown-cyan text-color-nav"
                                             aria-labelledby="navbarDropdownMenuLink-4">
-                                            <a class="dropdown-item text-color-nav text-decoration-none" href="#">Delete</a>
+                                            <a class="dropdown-item text-color-nav text-decoration-none"
+                                                href="#">Delete</a>
                                         </div>
                                     </div>
                                 </td>
@@ -778,7 +781,8 @@
                                             <img src="images/icons8-menu-vertical-30.png"> </a>
                                         <div class="dropdown-menu dropdown-menu-right dropdown-cyan text-color-nav"
                                             aria-labelledby="navbarDropdownMenuLink-4">
-                                            <a class="dropdown-item text-color-nav text-decoration-none" href="#">Delete</a>
+                                            <a class="dropdown-item text-color-nav text-decoration-none"
+                                                href="#">Delete</a>
                                         </div>
                                     </div>
                                 </td>
@@ -934,17 +938,20 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="exampleFormControlTextarea1">Why do you want to reschedule service request?</label>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Why do you want to reschedule service request?"></textarea>
+                                <label for="exampleFormControlTextarea1">Why do you want to reschedule service
+                                    request?</label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                                    placeholder="Why do you want to reschedule service request?"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="exampleFormControlTextarea1">Cell Center EMP Notes</label>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Enter Notes" rows="3"></textarea>
+                                <textarea class="form-control" id="exampleFormControlTextarea1"
+                                    placeholder="Enter Notes" rows="3"></textarea>
                             </div>
                             <button type="submit" class="btn btn-update">Update</button>
                         </form>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
@@ -993,7 +1000,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         $(document).ready(function () {
-            $('#example').DataTable({
+            var table = $('#example').DataTable({
 
                 responsive: true,
                 "dom": '<"top">rt<"bottom"lip><"clear">',
@@ -1003,7 +1010,27 @@
                     targets: [4, 5, 6, 8, 9],
                 }]
             });
+            $("#abc").each(function () {
+                var select = $('<select><option value=""></option></select>')
+                    .appendTo($(this).empty())
+                    .on('change', function () {
+                        table.column(0)
+                            .search($(this).val())
+                            .draw();
+                    });
+
+                table.column(0).data().unique().sort().each(function (d, j) {
+                    select.append('<option value="' + d + '">' + d + '</option>')
+                });
+            });
+            $('#column3_search').on('keyup', function () {
+                table
+                    .columns(2)
+                    .search(this.value)
+                    .draw();
+            });
         });
+
     </script>
 </body>
 

@@ -1,5 +1,6 @@
 package helperland.dao;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -12,6 +13,7 @@ import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import helperland.model.Rating;
 import helperland.model.ServiceRequest;
 import helperland.model.ServiceRequestAddress;
 import helperland.model.ServiceRequestExtra;
@@ -107,16 +109,38 @@ public class UserDaoImpl implements UserDao{
 	public List<ServiceRequest> getAllService(int uid) {
 		Session session = factory.getCurrentSession();
 		try {
-			  Query<ServiceRequest> query = session.createQuery("from servicerequest where user_id=:user_id and status=:status",ServiceRequest.class);
+			  Query query = session.createQuery("from servicerequest as sp left join user as u on sp.service_provider_id=u.user_id and sp.status=:statuss where sp.user_id=:user_id and sp.status in :status");
 			  query.setParameter("user_id", uid);
-			  query.setParameter("status", "new");
+			  query.setParameter("statuss", "Accepted");
+//			  query.setParameter("status", "new");
+//			  String[] tempppp = {"new","Accepted"};
+//			  List<String> l = Arrays.asList(tempppp);
+			  query.setParameter("status", Arrays.asList("new","Accepted"));
 			  
 			  ServiceRequest serviceRequest = new ServiceRequest();
-			  List<ServiceRequest> servicerequestList = query.getResultList();	  
+			  List<ServiceRequest> servicerequestList = query.getResultList();
+			  
+			  
+//			  for(int i =0;i<servicerequestList.size();i++) {
+//				  System.out.println(servicerequestList.get(i));
+//			  }
+//			  
+//			  servicerequestList.stream().forEach((eachservicerequest) -> {
+				  
+				  
+				  
+//				  int sp_id = eachservicerequest.getService_provider_id();
+//				  if(sp_id != 0) {
+//				  Double query1 = (Double) session.createQuery("select avg(ratings) from rating where rating_to="+sp_id+"").getSingleResult();
+//					  eachservicerequest.setAvg_rating(query1);
+//				  }
+//			  });
+			  
 			  System.out.println(servicerequestList.toString());
 			  return servicerequestList;
 			}
 		catch(Exception e) {
+			e.printStackTrace();
 			System.out.println(e.getMessage());
 			return null;
 		}
@@ -218,9 +242,11 @@ public class UserDaoImpl implements UserDao{
 	public List<ServiceRequest> getAllServiceHistory(int uid) {
 		Session session = factory.getCurrentSession();
 		try {
-			  Query<ServiceRequest> query = session.createQuery("from servicerequest where user_id=:user_id and status=:status",ServiceRequest.class);
+			  Query query = session.createQuery("from servicerequest as sp left join user as u on sp.service_provider_id=u.user_id where sp.user_id=:user_id and sp.status in :status");
 			  query.setParameter("user_id", uid);
-			  query.setParameter("status", "cancel");
+//			  query.setParameter("statuss", "Completed");
+//			  and sp.status=:statuss
+			  query.setParameter("status", Arrays.asList("cancel","Completed"));
 			  
 			  ServiceRequest serviceRequest = new ServiceRequest();
 			  List<ServiceRequest> servicerequestList = query.getResultList();	  
@@ -232,5 +258,132 @@ public class UserDaoImpl implements UserDao{
 			return null;
 		}
 	}
+
+	@Transactional
+	public int ratingService(Rating rating) {
+		int ratingid = (Integer) this.hibernateTemplate.save(rating);
+		return ratingid;
+	}
+
+	@Transactional
+	public Object[] getServiceDetailsForCancel(ServiceRequest serviceRequest) {
+		Session session = factory.getCurrentSession();
+		try {
+			  Query query = session.createQuery("from servicerequest as sr left join user as u on sr.service_provider_id= u.user_id where sr.service_req_id=:service_req_id");
+			  query.setParameter("service_req_id", serviceRequest.getService_req_id());
+
+			  
+			  ServiceRequest serviceRequest1 = new ServiceRequest();
+			  Object[] servicerequestList = (Object[]) query.getSingleResult();	  
+			  System.out.println(servicerequestList.toString());
+//			  System.out.println(servicerequestList[0]);
+			  
+//			  serviceRequest1 = (ServiceRequest) servicerequestList[0];
+//			  
+//			  System.out.println(serviceRequest1.toString());
+			  
+			  
+			  return servicerequestList;
+			}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+	}
+
+	@Transactional
+	public ServiceRequest getSErviceDetailsForReschedule(ServiceRequest serviceRequest) {
+		Session session = factory.getCurrentSession();
+		try {
+			  Query<ServiceRequest> query = session.createQuery("from servicerequest where service_req_id=:service_req_id",ServiceRequest.class);
+			  query.setParameter("service_req_id", serviceRequest.getService_req_id());
+
+			  
+			  ServiceRequest serviceRequest1 = new ServiceRequest();
+			  ServiceRequest servicerequestList = query.getSingleResult();	  
+			  System.out.println(servicerequestList.toString());
+//			  System.out.println(servicerequestList[0]);
+			  
+//			  serviceRequest1 = (ServiceRequest) servicerequestList[0];
+//			  
+//			  System.out.println(serviceRequest1.toString());
+			  
+			  
+			  return servicerequestList;
+			}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+	}
+
+	@Transactional
+	public List<ServiceRequest> getSPDetails(int service_provider_id) {
+		Session session = factory.getCurrentSession();
+		try {
+			  Query<ServiceRequest> query = session.createQuery("from servicerequest where service_provider_id=:service_provider_id",ServiceRequest.class);
+			  query.setParameter("service_provider_id", service_provider_id);
+
+			  
+			  ServiceRequest serviceRequest1 = new ServiceRequest();
+			  List<ServiceRequest> servicerequestList = query.getResultList();	  
+			  System.out.println(servicerequestList.toString());
+//			  System.out.println(servicerequestList[0]);
+			  
+//			  serviceRequest1 = (ServiceRequest) servicerequestList[0];
+//			  
+//			  System.out.println(serviceRequest1.toString());
+			  
+			  
+			  return servicerequestList;
+			}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+	}
+
+	@Transactional
+	public int rescheduleServiceRequestifSpNotFree(ServiceRequest serviceRequest) {
+		Session session = factory.getCurrentSession();
+		try {
+			  Query query = session.createQuery("update servicerequest set "+"service_start_date=:service_start_date, "+"service_start_time=:service_start_time, "+"status=:status, "+"service_provider_id=:service_provider_id, "+"sp_accepted_date=:sp_accepted_date "+"where service_req_id=:service_req_id");
+			  query.setParameter("service_req_id", serviceRequest.getService_req_id());
+			  query.setParameter("service_start_date", serviceRequest.getService_start_date());
+			  query.setParameter("service_start_time", serviceRequest.getService_start_time());
+			  query.setParameter("service_provider_id", 0);
+			  query.setParameter("status", "new");
+			  query.setParameter("sp_accepted_date", null);
+			  int state = query.executeUpdate();
+			  System.out.println(state);
+			  return state;
+			}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+			return 0;
+		}
+	}
+
+	@Override
+	public double getavgsprating(String spid) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+//	@Transactional
+//	public double getavgsprating(String spid) {
+//		Session session = factory.getCurrentSession();
+//		try {
+//			  Double query = (Double) session.createQuery("select avg(ratings) from rating where rating_to="+spid+"").getSingleResult();
+//
+//			  System.out.println(query);
+//			  
+//			  return query;
+//			}
+//		catch(Exception e) {
+//			System.out.println(e.getMessage());
+//			return 0;
+//		}
+//	}
 
 }

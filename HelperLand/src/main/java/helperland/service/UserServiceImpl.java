@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import helperland.dao.BookaServiceDao;
 import helperland.dao.UserDao;
+import helperland.model.Rating;
 import helperland.model.ServiceRequest;
 import helperland.model.User;
 import helperland.model.UserAddress;
@@ -55,6 +56,30 @@ public class UserServiceImpl implements UserService{
 
 	public List<ServiceRequest> getAllServiceHistory(int uid) {
 		return userDao.getAllServiceHistory(uid);
+	}
+
+	public int ratingService(Rating rating) {
+		return userDao.ratingService(rating);
+	}
+
+	public Object[] getSErviceDetailsForCancel(ServiceRequest serviceRequest) {
+		return userDao.getServiceDetailsForCancel(serviceRequest);
+	}
+
+	public ServiceRequest getSErviceDetailsForReschedule(ServiceRequest serviceRequest) {
+		return userDao.getSErviceDetailsForReschedule(serviceRequest);
+	}
+
+	public List<ServiceRequest> getSPDetails(int service_provider_id) {
+		return userDao.getSPDetails(service_provider_id);
+	}
+
+	public int rescheduleServiceRequestifSpNotFree(ServiceRequest serviceRequest) {
+		return userDao.rescheduleServiceRequestifSpNotFree(serviceRequest);
+	}
+
+	public double getavgsprating(String spid) {
+		return userDao.getavgsprating(spid);
 	}
 
 }

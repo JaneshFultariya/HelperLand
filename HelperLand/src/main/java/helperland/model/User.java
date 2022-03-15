@@ -37,9 +37,15 @@ public class User {
 	private String created_date;
 	private String modified_date;
 	
+	private String nationality;
+	
 	private String date_of_birth;
 	
 	private String language;
+	
+	private String user_profile_pic;
+	
+	private String gender;
 	
 	public String getLanguage() {
 		return language;
@@ -165,6 +171,36 @@ public class User {
 	public void setIs_online(int is_online) {
 		this.is_online = is_online;
 	}
+	
+	
+
+	public String getNationality() {
+		return nationality;
+	}
+
+	public void setNationality(String nationality) {
+		this.nationality = nationality;
+	}
+	
+	
+
+	public String getUser_profile_pic() {
+		return user_profile_pic;
+	}
+
+	public void setUser_profile_pic(String user_profile_pic) {
+		this.user_profile_pic = user_profile_pic;
+	}
+	
+	
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
 
 	@Override
 	public String toString() {
@@ -173,9 +209,12 @@ public class User {
 				+ ", is_registered_user=" + is_registered_user + ", works_with_pet=" + works_with_pet + ", modified_by="
 				+ modified_by + ", is_approved=" + is_approved + ", is_active=" + is_active + ", is_deleted="
 				+ is_deleted + ", is_online=" + is_online + ", created_date=" + created_date + ", modified_date="
-				+ modified_date + ", date_of_birth=" + date_of_birth + ", language=" + language + "]";
+				+ modified_date + ", nationality=" + nationality + ", date_of_birth=" + date_of_birth + ", language="
+				+ language + ", user_profile_pic=" + user_profile_pic + ", gender=" + gender + "]";
 	}
 
 	
+
 	
+
 }

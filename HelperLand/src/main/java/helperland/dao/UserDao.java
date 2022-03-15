@@ -3,6 +3,7 @@ package helperland.dao;
 import java.util.HashMap;
 import java.util.List;
 
+import helperland.model.Rating;
 import helperland.model.ServiceRequest;
 import helperland.model.ServiceRequestExtra;
 import helperland.model.User;
@@ -29,4 +30,22 @@ public interface UserDao {
 	public int rescheduleServiceRequest(ServiceRequest serviceRequest);
 	
 	public List<ServiceRequest> getAllServiceHistory(int uid);
+	
+	
+	public int ratingService(Rating rating);
+	
+	
+	public Object[] getServiceDetailsForCancel(ServiceRequest serviceRequest);
+	
+	
+	public ServiceRequest getSErviceDetailsForReschedule(ServiceRequest serviceRequest);
+	
+	
+	public List<ServiceRequest> getSPDetails(int service_provider_id);
+	
+	
+	public int rescheduleServiceRequestifSpNotFree(ServiceRequest serviceRequest);
+	
+	
+	public double getavgsprating(String spid);
 }

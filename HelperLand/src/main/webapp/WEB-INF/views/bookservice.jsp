@@ -267,11 +267,11 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <select class="custom-select" name="servicetime" id="startTime" name="service_start_time">
-                                                <option value="8.0">8:00</option>
-                                                <option value="8.5">8:30</option>
-                                                <option value="9.0">9:00</option>
-                                                <option value="9.5">9:30</option>
-                                                <option value="10.0">10:00</option>
+                                                <option value="8.00">8:00</option>
+                                                <option value="8.30">8:30</option>
+                                                <option value="9.00">9:00</option>
+                                                <option value="9.30">9:30</option>
+                                                <option value="10.00">10:00</option>
                                             </select>
                                         </div>
                                     </div>
@@ -999,7 +999,7 @@ function finalcontinue(){
 	console.log(allitems);
 	$.ajax({
 		type:"GET",
-		url:"/helperland/finalsave/" + $('#address_id:checked').val()+ "," +$("#firstEuroValue").text() + "," + $("#EuroValue").text() + "," + $("#comments").val() + "," + $("#extratime").val() + "," + $("#postalcode").val() + "," + $("#service_start_date").val() +","+ $("#petcheck").is(":checked").toString() + "," + allitems + "," + $("#startTime").val(),
+		url:"/helperland/finalsave/" + $('#address_id:checked').val()+ "," +$("#firstEuroValue").text() + "," + $("#EuroValue").text() + "," + $("#comments").val() + "," + $("#extratime").val() + "," + $("#postalcode").val() + "," + $("#service_start_date").val() +","+ $("#petcheck").is(":checked").toString() + "," + allitems + "," + $("#startTime").val() + "," + $("#totaltime").text(),
 		success:function(response){
 			
 				console.log("SUCCESS: ", response);

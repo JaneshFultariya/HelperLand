@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import helperland.model.Contactus;
 import helperland.model.User;
+import helperland.model.UserAddress;
 
 @Repository
 public class RegisterUserDaoclass implements RegisterUserDao{
@@ -22,5 +23,11 @@ public class RegisterUserDaoclass implements RegisterUserDao{
 	public int saveRegisterUser(User user) {
 		int id = (Integer) this.hibernateTemplate.save(user);
 		return id;
+	}
+
+	@Transactional
+	public int createRegisterUserAddress(UserAddress userAddress) {
+		int id1 = (Integer) this.hibernateTemplate.save(userAddress);
+		return id1;
 	}
 }

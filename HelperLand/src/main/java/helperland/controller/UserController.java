@@ -1,8 +1,19 @@
 package helperland.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Properties;
 
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -19,7 +30,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import helperland.model.Rating;
 import helperland.model.ServiceRequest;
+import helperland.model.ServiceRequestExtra;
 import helperland.model.User;
 import helperland.model.UserAddress;
 import helperland.service.BookaService;
@@ -60,6 +73,7 @@ public class UserController {
 			
 			model.addAttribute("success" , "Your response submitted. Thank you!");
 			model.addAttribute("displaySuccess" , "style='display: block !important;'");
+			
 			
 			
 			String dob = edtbdate + "-" + edtbmonth + "-" + edtbyear; 
@@ -216,8 +230,20 @@ public class UserController {
 		return serviceRequest2;
 	}
 	
-	@RequestMapping(value="/displaydashboardmodal/{servicerequestid}",method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value="/ratingsavg/{spid}",method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
 	 @ResponseBody
+	public double ajaxratingsavg(HttpServletRequest request,
+			@PathVariable("spid") String spid) throws Exception {
+		
+		
+		 double avgrating = this.userService.getavgsprating(spid);
+
+		
+		return avgrating;
+	}
+	
+	@RequestMapping(value="/displaydashboardmodal/{servicerequestid}",method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
 	public HashMap<String,Object> ajaxdisplaydashboardmodal(
 			@PathVariable("servicerequestid") int servicerequestid,
 			HttpServletRequest request) throws Exception {
@@ -249,14 +275,39 @@ public class UserController {
 		
 		
 		this.userService.cancelServiceRequest(serviceRequest);
-
+		
+		Object[] emailObj = this.userService.getSErviceDetailsForCancel(serviceRequest);
+		
+		ServiceRequest serviceRequest2 = (ServiceRequest) emailObj[0];
+		
+		User user = (User) emailObj[1];
+		
+		System.out.println(serviceRequest2.getService_id()+"--------------------------------");
+		
+		
+		if(serviceRequest2.getService_provider_id() != 0) {
+			
+			String message = "";
+			String from = "helperland.janesh@gmail.com";
+			String subject = "";
+			String to = user.getEmail();
+			
+			sendEmail(message, subject, to, from);
+		}
+		
+		System.out.println(serviceRequest2.toString());
+		
+		
+		
+		System.out.println();
+		
 	}
 	
 	@RequestMapping(value="/reschedulebtndashboard/{service_req_id},{service_start_date},{startTime}",method = RequestMethod.GET)
 	public @ResponseBody void ajaxreschedulebtndashboard(
 			@PathVariable("service_req_id") int service_req_id,
 			@PathVariable("service_start_date") String service_start_date,
-			@PathVariable("startTime") float startTime,
+			@PathVariable("startTime") String startTime,
 			@ModelAttribute ServiceRequest serviceRequest, 
 			BindingResult br , Model model,
 			HttpServletRequest request) throws Exception {
@@ -266,7 +317,28 @@ public class UserController {
 		serviceRequest.setService_start_time(startTime);
 		
 		
-		this.userService.rescheduleServiceRequest(serviceRequest);
+		ServiceRequest servicedata = this.userService.getSErviceDetailsForReschedule(serviceRequest);
+		
+		if(servicedata.getService_provider_id() == 0) {
+			this.userService.rescheduleServiceRequest(serviceRequest);
+		}
+		
+		else {
+			List<ServiceRequest> spDetails = this.userService.getSPDetails(servicedata.getService_provider_id());
+			
+			Iterator<ServiceRequest> iterator = spDetails.iterator();
+			
+			while(iterator.hasNext()) {
+				if(service_start_date.equals(iterator.next().getService_start_date())){
+					this.userService.rescheduleServiceRequestifSpNotFree(serviceRequest);
+					break;
+				}
+				else {
+					this.userService.rescheduleServiceRequest(serviceRequest);
+				}
+			}
+		}
+		
 
 	}
 	
@@ -284,5 +356,85 @@ public class UserController {
 		System.out.println(serviceRequest2.getClass().getSimpleName());
 		
 		return serviceRequest2;
+	}
+	
+	@RequestMapping(value="/ratingserviceurl/{sp_id},{on_time_arriaval},{friendly},{quality_of_service},{sr_id}",method = RequestMethod.GET)
+	public @ResponseBody void ajaxratingservice(
+			@PathVariable("sp_id") int sp_id,
+			@PathVariable("on_time_arriaval") int on_time_arriaval,
+			@PathVariable("friendly") int friendly,
+			@PathVariable("quality_of_service") int quality_of_service,
+			@PathVariable("sr_id") int sr_id,
+			@ModelAttribute ServiceRequest serviceRequest, 
+			BindingResult br , Model model,
+			HttpServletRequest request) throws Exception {
+		
+//		serviceRequest.setService_req_id(sp_id);
+		
+		float avg_rating = (on_time_arriaval + friendly + quality_of_service) /3;
+		
+		int ratings = Math.round(avg_rating);
+		
+		SimpleDateFormat dtf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date date = new Date();
+		
+		HttpSession session = request.getSession();
+		String temp = "" + session.getAttribute("loginUser");
+		int uid = Integer.parseInt(temp);
+		Rating rating = new Rating();
+		rating.setRating_from(uid);
+		rating.setRating_to(sp_id);
+		rating.setOn_time_arrival(on_time_arriaval);
+		rating.setFriendly(friendly);
+		rating.setQuality_of_service(quality_of_service);
+		rating.setRating_date(dtf.format(date));
+		rating.setRatings(ratings);
+		rating.setService_req_id(sr_id);
+		
+		this.userService.ratingService(rating);
+
+	}
+	
+	public void sendEmail(String message, String subject, String to, String from) {
+
+		String host = "smtp.gmail.com";
+
+		Properties properties = System.getProperties();
+		System.out.println("PROPERTIES " + properties);
+
+		properties.put("mail.smtp.host", host);
+		properties.put("mail.smtp.port", "465");
+		properties.put("mail.smtp.ssl.enable", "true");
+		properties.put("mail.smtp.auth", "true");
+
+		Session session = Session.getInstance(properties, new Authenticator() {
+			@Override
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication("helperland.janesh@gmail.com", "SzaxTN2rudg9fbt");
+			}
+
+		});
+
+		session.setDebug(true);
+
+		MimeMessage m = new MimeMessage(session);
+
+		try {
+
+			m.setFrom(from);
+
+			m.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+
+			m.setSubject(subject);
+
+			m.setText(message);
+
+			Transport.send(m);
+
+			System.out.println("Sent success...................");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

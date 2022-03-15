@@ -76,6 +76,7 @@
 				<value>helperland.model.ServiceRequest</value>
 				<value>helperland.model.ServiceRequestExtra</value>
 				<value>helperland.model.Tempclass</value>
+				<value>helperland.model.Rating</value>
 			</list>
 		</property>
 

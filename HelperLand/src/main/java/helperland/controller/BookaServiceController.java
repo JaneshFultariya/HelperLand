@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import javax.mail.Authenticator;
 import javax.mail.Message;
@@ -88,13 +90,13 @@ public class BookaServiceController {
 		return userAddress2;
 	}
 
-	@RequestMapping(value = "/finalsave/{address_id},{total_cost},{sub_total},{comments},{extratime},{postalcode},{service_start_date},{petcheck},{listArray},{startTime}", method = RequestMethod.GET)
+	@RequestMapping(value = "/finalsave/{address_id},{total_cost},{sub_total},{comments},{extratime},{postalcode},{service_start_date},{petcheck},{listArray},{startTime},{totaltime}", method = RequestMethod.GET)
 	public @ResponseBody String ajaxsaverequest(HttpServletRequest request, @PathVariable("address_id") int address_id,
 			@PathVariable("total_cost") float total_cost, @PathVariable("sub_total") float sub_total,
 			@PathVariable("comments") String comments, @PathVariable("extratime") float extratime,
 			@PathVariable("postalcode") int postalcode, @PathVariable("service_start_date") String service_start_date,
 			@PathVariable("petcheck") String petcheck, @PathVariable("listArray") String listArray,
-			@PathVariable("startTime") float startTime) throws Exception {
+			@PathVariable("startTime") String startTime,@PathVariable("totaltime") float totaltime) throws Exception {
 
 		System.out.println(petcheck);
 		System.out.println(petcheck.getClass().getSimpleName());
@@ -120,11 +122,12 @@ public class BookaServiceController {
 		serviceRequest.setCreated_date(dtf.format(date));
 		serviceRequest.setHas_pets(petcheck);
 		serviceRequest.setPayment_transaction_ref_no("0");
-//		serviceRequest.setUser_id(uid);
+		serviceRequest.setUser_id(uid);
 		serviceRequest.setStatus("new");
 		serviceRequest.setJob_status("hiii");
 		serviceRequest.setRecord_version("1");
 		serviceRequest.setService_start_time(startTime);
+		serviceRequest.setService_hours(totaltime);
 		int servicerequestid = this.bookaService.saveServiceRequest(serviceRequest);
 
 		System.out.println(servicerequestid + "hiiii");
@@ -165,11 +168,16 @@ public class BookaServiceController {
 					+ "\n" + "Mobile No.:" + seleteduseraddress.getMobile() + "\n" + "Extra Service: " + listArray +"\n"+"Pet Status:" +petcheck
 					+ "\n" + "Total Payment:" + sub_total;
 			List<User> emaillist = this.bookaService.getAllEmail(uid);
-			Iterator<User> iterator = emaillist.iterator();
-			while (iterator.hasNext()) {
-				String to = iterator.next().getEmail();
-				sendServiceRequestEmail(message, subject, to, from);
-			}
+//			Iterator<User> iterator = emaillist.iterator();
+//			while (iterator.hasNext()) {
+//				String to = iterator.next().getEmail();
+//				
+//			}
+			String to = emaillist.stream().map(User::getEmail).collect(Collectors.joining(","));
+			sendServiceRequestEmail(message, subject, to, from);
+			
+			String to1 = session.getAttribute("useremail") + "";
+			sendServiceRequestEmail(message, subject, to1, from);
 
 		}
 
@@ -204,7 +212,7 @@ public class BookaServiceController {
 
 			m.setFrom(from);
 
-			m.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+			m.addRecipients(Message.RecipientType.TO, to);
 
 			m.setSubject(subject);
 

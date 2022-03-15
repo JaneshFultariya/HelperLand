@@ -178,7 +178,7 @@ justify-content: center;
 
 
 .nav-tabs .nav-item {
-    width: 25%;
+    width: 50%;
 }
 
 .nav-tabs .nav-link {
@@ -193,9 +193,6 @@ justify-content: center;
     
 }
 
-.nav-tabs{
-    border-bottom: 4px solid #e1e1e1 !important;
-}
 
 .nav-tabs .nav-link.active {
     color: #146371 !important;
@@ -826,12 +823,12 @@ table td p{
     /* justify-content: center !important; */
 }
 
-.img-col{
+/* .img-col{
     width: 108px;
     height: 108px;
     border: 1px solid #646464;
     border-radius: 50%;
-}
+} */
 
 /* .extra-services-img{
     max-width: 900px;
@@ -1095,3 +1092,57 @@ div.dataTables_length select{
 	width: 300px !important;
 }
 
+
+.input-hidden {
+	position: absolute;
+	left: -9999px;
+}
+
+.input-hidden:checked+label>img {
+	border: 3.5px solid #1d7a8c;
+	border-radius: 50%;
+}
+
+.cancel-custom{
+	 background-color: #FF7B6D !important;
+    width: 100% !important;
+    height: 32px !important;
+    text-align: center !important;
+    padding: 3px !important;
+    margin-top: 15px !important;
+}
+
+.cancel-custom:hover{
+    background-color: #cc5656 !important;
+    width: 100% !important;
+    height: 38px !important;
+    text-align: center !important;
+    padding: 3px !important;
+    margin-top: 15px !important;
+}
+
+.Complete-button-Modal{
+	background-color: #1d7a8c !important;
+    width: 100% !important;
+    height: 38px !important;
+    text-align: center !important;
+    padding: 3px !important;
+    margin-top: 15px !important;
+}
+.Complete-button-Modal:hover{
+	background-color: #146371 !important;
+    width: 100% !important;
+    height: 38px !important;
+    text-align: center !important;
+    padding: 3px !important;
+    margin-top: 15px !important;
+}
+
+#ratingData tr{
+	border-bottom-width: 1px !important;
+	border-top-width: 1px !important;
+}
+
+#ratingData table td{
+	padding: 10px 10px !important;
+}

@@ -3,7 +3,10 @@ package helperland.dao;
 import java.util.HashMap;
 import java.util.List;
 
+import helperland.model.Rating;
 import helperland.model.ServiceRequest;
+import helperland.model.User;
+import helperland.model.UserAddress;
 
 public interface ServiceProviderDao {
 
@@ -21,4 +24,17 @@ public interface ServiceProviderDao {
 	public List<ServiceRequest> getAllspservicehistory(int uid);
 	
 	public int completespServiceRequest(ServiceRequest serviceRequest);
+	
+	public List<User> getUserEmail(int service_req_id);
+	
+	public int updtspDetails(User user, UserAddress userAddress);
+	
+	
+	public UserAddress getAddress(int uid);
+	
+	
+	public User getOneEmail(int service_req_id);
+	
+	
+	public List<Rating> getAllspRatings(int uid);
 }

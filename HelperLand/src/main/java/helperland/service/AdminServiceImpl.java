@@ -1,0 +1,38 @@
+package helperland.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import helperland.dao.AdminDao;
+import helperland.model.ServiceRequest;
+import helperland.model.User;
+
+@Service
+public class AdminServiceImpl implements AdminService{
+
+	@Autowired
+	AdminDao adminDao;
+
+	public List<User> getAllUsers() {
+		return this.adminDao.getAllUsers();
+	}
+
+	public int adminstatus(User user) {
+		return this.adminDao.adminstatus(user);
+	}
+
+	public int adminapproval(User user) {
+		return this.adminDao.adminapproval(user);
+	}
+
+	public int adminuserdelete(User user) {
+		return this.adminDao.adminuserdelete(user);
+	}
+
+	public List<ServiceRequest> getAllServiceRequest() {
+		return this.adminDao.getAllServiceRequest();
+	}
+
+}

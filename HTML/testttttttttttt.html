@@ -1,34 +1,285 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "
-http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <script type="text/javascript" language="javascript" src="
-      http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js">
-    </script>
-    <script>
-        $(document).ready(function () {
-            // Check All
-            $('.checkall').click(function () {
-                $(":checkbox").attr("checked", true);
-            });
-            // Uncheck All
-            $('.uncheckall').click(function () {
-                $(":checkbox").attr("checked", false);
-            });
-        });
-    </script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <title>Document</title>
+
+    <style>
+        .rating-star {
+            direction: rtl;
+            font-size: 30px;
+            unicode-bidi: bidi-override;
+            display: inline-block;
+        }
+
+        .rating-star input {
+            opacity: 0;
+            position: relative;
+            left: -20px;
+            z-index: 2;
+            cursor: pointer;
+        }
+
+        .rating-star span.star:before {
+            color: #777777;
+        }
+
+        .rating-star span.star {
+            display: inline-block;
+            font-family: FontAwesome;
+            font-style: normal;
+            font-weight: normal;
+            position: relative;
+            z-index: 1;
+        }
+/* 
+        .rating-star span {
+            margin-left: -30px;
+        } */
+
+        .rating-star span.star:before {
+            color: #777777;
+            content: "\f006";
+        }
+
+        .rating-star input:hover+span.star:before,
+        .rating-star input:hover+span.star~span.star:before,
+        .rating-star input:checked+span.star:before,
+        .rating-star input:checked+span.star~span.star:before {
+            color: #ffd100;
+            content: "\f005";
+        }
+
+        .selected-rating {
+            color: #ffd100;
+            font-weight: bold;
+            font-size: 42px;
+        }
+
+        /* ------- */
+
+        .rating-star1 {
+            direction: rtl;
+            font-size: 30px;
+            unicode-bidi: bidi-override;
+            display: inline-block;
+        }
+
+        .rating-star1 input {
+            opacity: 0;
+            position: relative;
+            left: -20px;
+            z-index: 2;
+            cursor: pointer;
+        }
+
+        .rating-star1 span.star:before {
+            color: #777777;
+        }
+
+        .rating-star1 span.star {
+            display: inline-block;
+            font-family: FontAwesome;
+            font-style: normal;
+            font-weight: normal;
+            position: relative;
+            z-index: 1;
+        }
+/* 
+        .rating-star span {
+            margin-left: -30px;
+        } */
+
+        .rating-star1 span.star:before {
+            color: #777777;
+            content: "\f006";
+        }
+
+        .rating-star1 input:hover+span.star:before,
+        .rating-star1 input:hover+span.star~span.star:before,
+        .rating-star1 input:checked+span.star:before,
+        .rating-star1 input:checked+span.star~span.star:before {
+            color: #ffd100;
+            content: "\f005";
+        }
+
+        .selected-rating1 {
+            color: #ffd100;
+            font-weight: bold;
+            font-size: 42px;
+        }
+
+         /* ------- */
+
+         .rating-star2 {
+            direction: rtl;
+            font-size: 30px;
+            unicode-bidi: bidi-override;
+            display: inline-block;
+        }
+
+        .rating-star2 input {
+            opacity: 0;
+            position: relative;
+            left: -20px;
+            z-index: 2;
+            cursor: pointer;
+        }
+
+        .rating-star2 span.star:before {
+            color: #777777;
+        }
+
+        .rating-star2 span.star {
+            display: inline-block;
+            font-family: FontAwesome;
+            font-style: normal;
+            font-weight: normal;
+            position: relative;
+            z-index: 1;
+        }
+/* 
+        .rating-star span {
+            margin-left: -30px;
+        } */
+
+        .rating-star2 span.star:before {
+            color: #777777;
+            content: "\f006";
+        }
+
+        .rating-star2 input:hover+span.star:before,
+        .rating-star2 input:hover+span.star~span.star:before,
+        .rating-star2 input:checked+span.star:before,
+        .rating-star2 input:checked+span.star~span.star:before {
+            color: #ffd100;
+            content: "\f005";
+        }
+
+        .selected-rating2 {
+            color: #ffd100;
+            font-weight: bold;
+            font-size: 42px;
+        }
+    </style>
 </head>
 
 <body>
-    <a class="checkall" href="#"> Check All</a> <a class="uncheckall" href="#"> Uncheck All</a>
-    </br>
-    <input type="checkbox" />One</br>
-    <input type="checkbox" />Two</br>
-    <input type="checkbox" />Three</br>
-    <input type="checkbox" />Four</br>
-    <input type="checkbox" />Five</br>
-    <input type="checkbox" />Six</br>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ratingmodal">
+        Rating
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="ratingmodal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="d-flex">
+                        <img src="avatar-hat.png">
+                        <div>
+                            <h5 class="modal-title">Sandip Patel</h5>
+                            <div id="rating-form">
+                                <span class="rating-star">
+                                    <input type="radio" name="rating" value="5"><span class="star"></span>
+
+                                    <input type="radio" name="rating" value="4"><span class="star"></span>
+
+                                    <input type="radio" name="rating" value="3"><span class="star"></span>
+
+                                    <input type="radio" name="rating" value="2"><span class="star"></span>
+
+                                    <input type="radio" name="rating" value="1"><span class="star"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" >
+                    <h4>Rate your Service Provider</h4>
+                    <hr>
+                    <div>
+                        <h5 class="d-flex align-items-center">On time arrival</h5>
+                        <div id="rating-form">
+                            <span class="rating-star">
+                                <input type="radio" name="rating" value="5"><span class="star"></span>
+    
+                                <input type="radio" name="rating" value="4"><span class="star"></span>
+    
+                                <input type="radio" name="rating" value="3"><span class="star"></span>
+    
+                                <input type="radio" name="rating" value="2"><span class="star"></span>
+    
+                                <input type="radio" name="rating" value="1"><span class="star"></span>
+                            </span>
+                        </div>
+                    </div>
+                    <br>
+                    <div>
+                        <h5 class="d-flex align-items-center">Friendly</h5>
+                        <div id="rating-form1">
+                            <span class="rating-star1">
+                                <input type="radio" name="rating1" value="5"><span class="star"></span>
+    
+                                <input type="radio" name="rating1" value="4"><span class="star"></span>
+    
+                                <input type="radio" name="rating1" value="3"><span class="star"></span>
+    
+                                <input type="radio" name="rating1" value="2"><span class="star"></span>
+    
+                                <input type="radio" name="rating1" value="1"><span class="star"></span>
+                            </span>
+                        </div>
+                    </div>
+                    <br>
+                    <div>
+                        <h5 class="d-flex align-items-center">Quality Of Service</h5>
+                        <div id="rating-form2">
+                            <span class="rating-star2">
+                                <input type="radio" name="rating2" value="5"><span class="star"></span>
+    
+                                <input type="radio" name="rating2" value="4"><span class="star"></span>
+    
+                                <input type="radio" name="rating2" value="3"><span class="star"></span>
+    
+                                <input type="radio" name="rating2" value="2"><span class="star"></span>
+    
+                                <input type="radio" name="rating2" value="1"><span class="star"></span>
+                            </span>
+                        </div>
+                    </div>
+                    <br>
+                    <h5>Feedback on service provider</h5>
+                    <textarea rows="2" style="width: 100%;"></textarea>
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script>
+        $('#rating-form').on('change', '[name="rating"]', function () {
+            $('#selected-rating').text($('[name="rating"]:checked').val());
+        });
+    </script>
+
 </body>
 
 </html>

@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+encoding//src/main/webapp/WEB-INF/views/admin.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/bookservice.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/serviceprovider.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/user.jsp=UTF-8
