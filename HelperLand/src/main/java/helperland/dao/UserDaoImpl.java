@@ -109,35 +109,42 @@ public class UserDaoImpl implements UserDao{
 	public List<ServiceRequest> getAllService(int uid) {
 		Session session = factory.getCurrentSession();
 		try {
-			  Query query = session.createQuery("from servicerequest as sp left join user as u on sp.service_provider_id=u.user_id and sp.status=:statuss where sp.user_id=:user_id and sp.status in :status");
-			  query.setParameter("user_id", uid);
-			  query.setParameter("statuss", "Accepted");
-//			  query.setParameter("status", "new");
-//			  String[] tempppp = {"new","Accepted"};
-//			  List<String> l = Arrays.asList(tempppp);
-			  query.setParameter("status", Arrays.asList("new","Accepted"));
-			  
-			  ServiceRequest serviceRequest = new ServiceRequest();
-			  List<ServiceRequest> servicerequestList = query.getResultList();
-			  
-			  
-//			  for(int i =0;i<servicerequestList.size();i++) {
-//				  System.out.println(servicerequestList.get(i));
-//			  }
+//			  Query query = session.createQuery("from servicerequest as sp left join user as u on sp.service_provider_id=u.user_id and sp.status=:statuss where sp.user_id=:user_id and sp.status in :status");
+//			  query.setParameter("user_id", uid);
+//			  query.setParameter("statuss", "Accepted");
+////			  query.setParameter("status", "new");
+////			  String[] tempppp = {"new","Accepted"};
+////			  List<String> l = Arrays.asList(tempppp);
+//			  query.setParameter("status", Arrays.asList("new","Accepted"));
 //			  
-//			  servicerequestList.stream().forEach((eachservicerequest) -> {
-				  
-				  
-				  
-//				  int sp_id = eachservicerequest.getService_provider_id();
-//				  if(sp_id != 0) {
-//				  Double query1 = (Double) session.createQuery("select avg(ratings) from rating where rating_to="+sp_id+"").getSingleResult();
-//					  eachservicerequest.setAvg_rating(query1);
-//				  }
-//			  });
-			  
-			  System.out.println(servicerequestList.toString());
-			  return servicerequestList;
+//			  ServiceRequest serviceRequest = new ServiceRequest();
+//			  List<ServiceRequest> servicerequestList = query.getResultList();
+//			  
+//			  
+////			  for(int i =0;i<servicerequestList.size();i++) {
+////				  System.out.println(servicerequestList.get(i));
+////			  }
+////			  
+////			  servicerequestList.stream().forEach((eachservicerequest) -> {
+//				  
+//				  
+//				  
+////				  int sp_id = eachservicerequest.getService_provider_id();
+////				  if(sp_id != 0) {
+////				  Double query1 = (Double) session.createQuery("select avg(ratings) from rating where rating_to="+sp_id+"").getSingleResult();
+////					  eachservicerequest.setAvg_rating(query1);
+////				  }
+////			  });
+//			  
+//			  System.out.println(servicerequestList.toString());
+			
+			List<ServiceRequest> query = (List<ServiceRequest>) session.createSQLQuery("select sp.user_id, sp.service_req_id, sp.service_start_date,sp.service_start_time,sp.service_hours,u1.first_name,u1.last_name, "
+					+ "avg(ratings) as avgrating, sp.total_cost,sp.status,u1.user_profile_pic,sp.service_provider_id from servicerequest as sp "
+					+ "left join user as u1 on sp.service_provider_id=u1.user_id and sp.status= 'Accepted' "
+					+ "left join rating as rt on sp.service_provider_id = rt.rating_to "
+					+ "where sp.user_id="+uid+" and sp.status in ('new','Accepted') "
+					+ "group by(sp.service_req_id)").getResultList();
+			  return query;
 			}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -173,20 +180,6 @@ public class UserDaoImpl implements UserDao{
 			  ServiceRequest serviceRequestfinal = new ServiceRequest();
 			  serviceRequestfinal = query2.getSingleResult();
 			  
-			  System.out.println(serviceRequestAddress.toString()+"---------"+allExtras);
-			  
-//			  ServiceRequest serviceRequest = new ServiceRequest();
-//			  List<ServiceRequest> servicerequestList = query.getResultList();	  
-//			  System.out.println(servicerequestList.toString());
-//			  ServiceRequestAddress requestAddress;
-//			  List temppp = query.getResultList();
-//			  Iterator iterator = temppp.iterator();
-//				while(iterator.hasNext()) {
-//					Object object[] = (Object[]) iterator.next();
-//					requestAddress = (ServiceRequestAddress) object[0];
-//				}
-			  
-			  
 			  HashMap<String, Object> serviceRequestData = new HashMap<String, Object>();
 			  serviceRequestData.put("serviceRequestAddress", serviceRequestAddress);
 			  serviceRequestData.put("allExtras", allExtras);
@@ -211,7 +204,6 @@ public class UserDaoImpl implements UserDao{
 			  query.setParameter("status", "cancel");
 			  
 			  int state = query.executeUpdate();
-			  System.out.println(state);
 			  return state;
 			}
 		catch(Exception e) {
@@ -229,7 +221,6 @@ public class UserDaoImpl implements UserDao{
 			  query.setParameter("service_start_date", serviceRequest.getService_start_date());
 			  query.setParameter("service_start_time", serviceRequest.getService_start_time());
 			  int state = query.executeUpdate();
-			  System.out.println(state);
 			  return state;
 			}
 		catch(Exception e) {
@@ -241,17 +232,11 @@ public class UserDaoImpl implements UserDao{
 	@Transactional
 	public List<ServiceRequest> getAllServiceHistory(int uid) {
 		Session session = factory.getCurrentSession();
-		try {
-			  Query query = session.createQuery("from servicerequest as sp left join user as u on sp.service_provider_id=u.user_id where sp.user_id=:user_id and sp.status in :status");
-			  query.setParameter("user_id", uid);
-//			  query.setParameter("statuss", "Completed");
-//			  and sp.status=:statuss
-			  query.setParameter("status", Arrays.asList("cancel","Completed"));
-			  
-			  ServiceRequest serviceRequest = new ServiceRequest();
-			  List<ServiceRequest> servicerequestList = query.getResultList();	  
-			  System.out.println(servicerequestList.toString());
-			  return servicerequestList;
+		try {	
+			  List<ServiceRequest> query = (List<ServiceRequest>) session.createSQLQuery("select sp.user_id, sp.service_req_id, sp.service_start_date,sp.service_start_time,sp.service_hours,u1.first_name,u1.last_name,"
+			  		+ " avg(ratings) as avgrating,sp.total_cost,sp.status,u1.user_profile_pic,sp.service_provider_id from servicerequest as sp left join user as u1 on sp.service_provider_id=u1.user_id and sp.status in ('Completed','cancel') left join rating"
+			  		+ " as rt on sp.service_provider_id = rt.rating_to where sp.user_id="+uid+" and sp.status in ('cancel','Completed') group by(sp.service_req_id)").getResultList();
+			  return query;
 			}
 		catch(Exception e) {
 			System.out.println(e.getMessage());
@@ -274,15 +259,8 @@ public class UserDaoImpl implements UserDao{
 
 			  
 			  ServiceRequest serviceRequest1 = new ServiceRequest();
-			  Object[] servicerequestList = (Object[]) query.getSingleResult();	  
-			  System.out.println(servicerequestList.toString());
-//			  System.out.println(servicerequestList[0]);
-			  
-//			  serviceRequest1 = (ServiceRequest) servicerequestList[0];
-//			  
-//			  System.out.println(serviceRequest1.toString());
-			  
-			  
+			  Object[] servicerequestList = (Object[]) query.getSingleResult();
+
 			  return servicerequestList;
 			}
 		catch(Exception e) {
@@ -300,15 +278,8 @@ public class UserDaoImpl implements UserDao{
 
 			  
 			  ServiceRequest serviceRequest1 = new ServiceRequest();
-			  ServiceRequest servicerequestList = query.getSingleResult();	  
-			  System.out.println(servicerequestList.toString());
-//			  System.out.println(servicerequestList[0]);
-			  
-//			  serviceRequest1 = (ServiceRequest) servicerequestList[0];
-//			  
-//			  System.out.println(serviceRequest1.toString());
-			  
-			  
+			  ServiceRequest servicerequestList = query.getSingleResult();
+
 			  return servicerequestList;
 			}
 		catch(Exception e) {
@@ -326,14 +297,7 @@ public class UserDaoImpl implements UserDao{
 
 			  
 			  ServiceRequest serviceRequest1 = new ServiceRequest();
-			  List<ServiceRequest> servicerequestList = query.getResultList();	  
-			  System.out.println(servicerequestList.toString());
-//			  System.out.println(servicerequestList[0]);
-			  
-//			  serviceRequest1 = (ServiceRequest) servicerequestList[0];
-//			  
-//			  System.out.println(serviceRequest1.toString());
-			  
+			  List<ServiceRequest> servicerequestList = query.getResultList();
 			  
 			  return servicerequestList;
 			}
@@ -355,7 +319,6 @@ public class UserDaoImpl implements UserDao{
 			  query.setParameter("status", "new");
 			  query.setParameter("sp_accepted_date", null);
 			  int state = query.executeUpdate();
-			  System.out.println(state);
 			  return state;
 			}
 		catch(Exception e) {
@@ -371,7 +334,6 @@ public class UserDaoImpl implements UserDao{
 		try {
 			  Double query = (Double) session.createQuery("select avg(ratings) from rating where rating_to="+spid+"").getSingleResult();
 
-			  System.out.println(query);
 			  
 			  return query;
 			}

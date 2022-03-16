@@ -40,7 +40,6 @@ public class ContactusDaoIclass implements ContactusDao {
 			  User user = new User();
 			  user = query.getSingleResult();
 			  int userId = user.getUser_id();
-			  System.out.println(user.getUser_id());
 			  return userId;
 			}
 		catch(Exception e) {

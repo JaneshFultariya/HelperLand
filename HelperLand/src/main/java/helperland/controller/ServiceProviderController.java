@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
+import java.util.stream.Collectors;
 
 import javax.mail.Authenticator;
 import javax.mail.Message;
@@ -54,7 +55,6 @@ public class ServiceProviderController {
 	public List<ServiceRequest> ajaxdisplayspdashboard(HttpServletRequest request) throws Exception {
 		
 		HttpSession session = request.getSession();
-		System.out.println(session.getAttribute("loginUser").getClass().getSimpleName());
 		String temp = "" + session.getAttribute("loginUser");
 		int uid = Integer.parseInt(temp);
 		
@@ -72,7 +72,6 @@ public class ServiceProviderController {
 		serviceRequest.setService_req_id(service_req_id);
 		
 		HttpSession session = request.getSession();
-		System.out.println(session.getAttribute("loginUser"));
 		
 		int uid = Integer.parseInt(session.getAttribute("loginUser")+"");
 		
@@ -85,24 +84,30 @@ public class ServiceProviderController {
 		int accept_state = this.serviceProviderService.acceptService(serviceRequest);
 		
 		if(accept_state == 1) {
-			List<User> email = this.serviceProviderService.getUserEmail(service_req_id);
+			List<User> email1 = this.serviceProviderService.getUserEmail(service_req_id);
+			
+			String message1 = "Service REquest with id =" +service_req_id+" is now accepted";
+			String subject1 = "Your Service Request Accepted";
+			String from1 = "helperland.janesh@gmail.com";
+			
+			String to = email1.stream().map(User::getEmail).collect(Collectors.joining(","));
+			sendServiceRequestEmail(message1, subject1, to, from1);
+			
+			
+//			Iterator<User> iterator = email1.iterator();
+//			while (iterator.hasNext()) {
+//				String to = iterator.next().getEmail();
+//				sendServiceRequestEmail(message, subject, to, from);
+//			}
+			
 			
 			String message = "Your Request has been accepted by " + session.getAttribute("username") + session.getAttribute("userlastname") + "\n"+"Your service provider's contact informations are as below:\n" + "Email: " + session.getAttribute("useremail") + "Mobile Number: " + session.getAttribute("usermobile") +"\nFor more information visit your Dashboard.";
 			String subject = "Your Service Request Accepted";
 			String from = "helperland.janesh@gmail.com";
-			
-			Iterator<User> iterator = email.iterator();
-			while (iterator.hasNext()) {
-				String to = iterator.next().getEmail();
-				sendServiceRequestEmail(message, subject, to, from);
-			}
-			
-			
-			this.serviceProviderService.getOneEmail(service_req_id);
-			
-//			String useremail = email.getEmail();
-			
-//			sendServiceRequestEmail(message, subject, email, from);
+			 String useremail = this.serviceProviderService.getOneEmail(service_req_id);
+			 sendServiceRequestEmail(message, subject, useremail, from);
+
+
 		}
 		
 		return accept_state;
@@ -115,17 +120,10 @@ public class ServiceProviderController {
 			HttpServletRequest request) throws Exception {
 		
 		HttpSession session = request.getSession();
-		System.out.println(session.getAttribute("loginUser").getClass().getSimpleName());
 		String temp = "" + session.getAttribute("loginUser");
 		int uid = Integer.parseInt(temp);
 		
 		HashMap<String, Object> finalData= this.serviceProviderService.getAllCustomerServiceDetails(servicerequestid);
-		
-		
-		System.out.println(finalData);
-		
-		
-//		System.out.println(serviceRequest2.getClass().getSimpleName());
 		
 		return finalData;
 	}
@@ -137,17 +135,10 @@ public class ServiceProviderController {
 			HttpServletRequest request) throws Exception {
 		
 		HttpSession session = request.getSession();
-		System.out.println(session.getAttribute("loginUser").getClass().getSimpleName());
 		String temp = "" + session.getAttribute("loginUser");
 		int uid = Integer.parseInt(temp);
 		
 		List<ServiceRequest> upcomingservicceData= this.serviceProviderService.getAllUpcomingServices(uid);
-		
-		
-		System.out.println(upcomingservicceData);
-		
-		
-//		System.out.println(serviceRequest2.getClass().getSimpleName());
 		
 		return upcomingservicceData;
 	}
@@ -160,10 +151,34 @@ public class ServiceProviderController {
 			BindingResult br , Model model,
 			HttpServletRequest request) throws Exception {
 		
+		this.serviceProviderService.cancelspServiceRequest(serviceRequest);
+		
 		serviceRequest.setService_req_id(service_req_id);
 		
 		
-		this.serviceProviderService.cancelspServiceRequest(serviceRequest);
+		String message1 = "Service REquest with id =" +service_req_id+" is available again";
+		String subject1 = "Your Service Request Accepted";
+		String from1 = "helperland.janesh@gmail.com";
+		
+		List<User> email1 = this.serviceProviderService.getUserEmail(service_req_id);
+		String to = email1.stream().map(User::getEmail).collect(Collectors.joining(","));
+		sendServiceRequestEmail(message1, subject1, to, from1);
+		
+		
+//		Iterator<User> iterator = email1.iterator();
+//		while (iterator.hasNext()) {
+//			String to = iterator.next().getEmail();
+//			sendServiceRequestEmail(message, subject, to, from);
+//		}
+		
+		
+		String message = "Your Request has been canceled by you service provider !!!";
+		String subject = "Your Service Request canceled";
+		String from = "helperland.janesh@gmail.com";
+		 String useremail = this.serviceProviderService.getOneEmail(service_req_id);
+		 sendServiceRequestEmail(message, subject, useremail, from);
+		
+		
 
 	}
 	
@@ -175,10 +190,15 @@ public class ServiceProviderController {
 			HttpServletRequest request) throws Exception {
 		
 		serviceRequest.setService_req_id(service_req_id);
-		
-		
+		serviceRequest.setPayment_done("Completed");
+	
 		this.serviceProviderService.completespServiceRequest(serviceRequest);
 
+		String message = "Your Request has been Completed by you service provider !!!";
+		String subject = "Your Service Request Completed";
+		String from = "helperland.janesh@gmail.com";
+		 String useremail = this.serviceProviderService.getOneEmail(service_req_id);
+		 sendServiceRequestEmail(message, subject, useremail, from);
 	}
 	
 	
@@ -188,17 +208,10 @@ public class ServiceProviderController {
 			HttpServletRequest request) throws Exception {
 		
 		HttpSession session = request.getSession();
-		System.out.println(session.getAttribute("loginUser").getClass().getSimpleName());
 		String temp = "" + session.getAttribute("loginUser");
 		int uid = Integer.parseInt(temp);
 		
 		List<ServiceRequest> upcomingservicceData= this.serviceProviderService.getAllspservicehistory(uid);
-		
-		
-		System.out.println(upcomingservicceData);
-		
-		
-//		System.out.println(serviceRequest2.getClass().getSimpleName());
 		
 		return upcomingservicceData;
 	}
@@ -209,17 +222,10 @@ public class ServiceProviderController {
 			HttpServletRequest request) throws Exception {
 		
 		HttpSession session = request.getSession();
-		System.out.println(session.getAttribute("loginUser").getClass().getSimpleName());
 		String temp = "" + session.getAttribute("loginUser");
 		int uid = Integer.parseInt(temp);
 		
 		List<Rating> upcomingservicceData= this.serviceProviderService.getAllspRatings(uid);
-		
-		
-		System.out.println(upcomingservicceData);
-		
-		
-//		System.out.println(serviceRequest2.getClass().getSimpleName());
 		
 		return upcomingservicceData;
 	}
@@ -236,7 +242,6 @@ public class ServiceProviderController {
 		    for (FieldError error : errors ) {
 		        System.out.println (error.getObjectName() + " - " + error.getDefaultMessage());
 		    }
-			System.out.println("errors");
 			model.addAttribute("error" , "please enter all fields to submit form");
 			model.addAttribute("displayError" , "style='display: block !important;'");
 			
@@ -275,7 +280,6 @@ public class ServiceProviderController {
 		    for (FieldError error : errors ) {
 		        System.out.println (error.getObjectName() + " - " + error.getDefaultMessage());
 		    }
-			System.out.println("errors");
 			model.addAttribute("error" , "please enter all fields to submit form");
 			model.addAttribute("displayError" , "style='display: block !important;'");
 			
@@ -335,7 +339,6 @@ public class ServiceProviderController {
 		String host = "smtp.gmail.com";
 
 		Properties properties = System.getProperties();
-		System.out.println("PROPERTIES " + properties);
 
 		properties.put("mail.smtp.host", host);
 		properties.put("mail.smtp.port", "465");
@@ -345,7 +348,7 @@ public class ServiceProviderController {
 		Session session = Session.getInstance(properties, new Authenticator() {
 			@Override
 			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication("helperland.janesh@gmail.com", "SzaxTN2rudg9fbt");
+				return new PasswordAuthentication("helperland.janesh@gmail.com", "");
 			}
 
 		});
@@ -365,8 +368,6 @@ public class ServiceProviderController {
 			m.setText(message);
 
 			Transport.send(m);
-
-			System.out.println("Sent success...................");
 
 		} catch (Exception e) {
 			e.printStackTrace();

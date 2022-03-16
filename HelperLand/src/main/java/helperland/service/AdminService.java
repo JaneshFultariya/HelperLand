@@ -24,4 +24,6 @@ public interface AdminService {
 
 	public int editServiceRequestAddress(ServiceRequestAddress serviceRequestAddress);
 
+	public ServiceRequestAddress getServiceRequestAddress(int srId);
+
 }

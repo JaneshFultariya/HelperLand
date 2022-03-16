@@ -33,8 +33,7 @@ public class AdminDaoImpl implements AdminDao{
 			 
 			  
 			  User User = new User();
-			  List<User> userList = query.getResultList();	  
-			  System.out.println(userList.toString());
+			  List<User> userList = query.getResultList();
 			  return userList;
 			}
 		catch(Exception e) {
@@ -52,7 +51,6 @@ public class AdminDaoImpl implements AdminDao{
 			  query.setParameter("is_active", user.getIs_active());
 			  
 			  int state = query.executeUpdate();
-			  System.out.println(state);
 			  return state;
 			}
 		catch(Exception e) {
@@ -70,7 +68,6 @@ public class AdminDaoImpl implements AdminDao{
 			  query.setParameter("is_approved", user.getIs_approved());
 			  
 			  int state = query.executeUpdate();
-			  System.out.println(state);
 			  return state;
 			}
 		catch(Exception e) {
@@ -91,7 +88,6 @@ public class AdminDaoImpl implements AdminDao{
 			  
 			  
 			  int state = query.executeUpdate();
-			  System.out.println(state);
 			  return state;
 			}
 		catch(Exception e) {
@@ -104,12 +100,11 @@ public class AdminDaoImpl implements AdminDao{
 	public List<ServiceRequest> getAllServiceRequest() {
 		Session session = factory.getCurrentSession();
 		try {
-			  Query<ServiceRequest> query = session.createQuery("from servicerequest as sr left join user as u1 on sr.user_id = u1.user_id left join user as u on sr.service_provider_id = u.user_id left join servicerequestaddress as ua on sr.service_req_id = ua.ServiceRequestId");			 
-			  
-			  User User = new User();
-			  List<ServiceRequest> userList = query.getResultList();  
-			  System.out.println(userList.toString());
-			  return userList;
+			  List<ServiceRequest> query = session.createSQLQuery("select sr.service_req_id, sr.service_start_date,sr.service_start_time,sr.service_hours,u1.first_name as UserFirstName,u1.last_name as UserLastName,"
+			  		+ " avg(rt.ratings) as avgrating, u.first_name,u.last_name,u.user_profile_pic,ua.AddressLine1,ua.AddressLine2,ua.City,ua.PostalCode,sr.total_cost,sr.status,sr.payment_done, sr.service_provider_id"
+			  		+ " from servicerequest as sr left join user as u1 on sr.user_id = u1.user_id left join user as u on sr.service_provider_id = u.user_id left join servicerequestaddress as ua on sr.service_req_id = ua.ServiceRequestId left join rating as rt on sr.service_provider_id=rt.rating_to "
+			  		+ "group by(sr.service_req_id)").getResultList();
+			  return query;
 			}
 		catch(Exception e) {
 			System.out.println(e.getMessage());
@@ -126,7 +121,6 @@ public class AdminDaoImpl implements AdminDao{
 			  query.setParameter("service_start_date", serviceRequest.getService_start_date());
 			  query.setParameter("service_start_time", serviceRequest.getService_start_time());
 			  int state = query.executeUpdate();
-			  System.out.println(state);
 			  return state;
 			}
 		catch(Exception e) {
@@ -147,7 +141,6 @@ public class AdminDaoImpl implements AdminDao{
 			  query.setParameter("status", "new");
 			  query.setParameter("sp_accepted_date", null);
 			  int state = query.executeUpdate();
-			  System.out.println(state);
 			  return state;
 			}
 		catch(Exception e) {
@@ -167,12 +160,29 @@ public class AdminDaoImpl implements AdminDao{
 			  query.setParameter("City", serviceRequestAddress.getCity());
 			  query.setParameter("PostalCode", serviceRequestAddress.getPostalCode());
 			  int state = query.executeUpdate();
-			  System.out.println(state);
 			  return state;
 			}
 		catch(Exception e) {
 			System.out.println(e.getMessage());
 			return 0;
+		}
+	}
+
+	@Transactional
+	public ServiceRequestAddress getServiceRequestAddress(int srId) {
+		Session session = factory.getCurrentSession();
+		try {
+			  Query<ServiceRequestAddress> query = session.createQuery("from servicerequestaddress where ServiceRequestId=:ServiceRequestId");
+			  query.setParameter("ServiceRequestId", srId);
+			 
+			  
+			  ServiceRequestAddress serviceRequestAddress = new ServiceRequestAddress();
+			  ServiceRequestAddress serviceRequestAddress1 = query.getSingleResult();	  
+			  return serviceRequestAddress1;
+			}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+			return null;
 		}
 	}
 

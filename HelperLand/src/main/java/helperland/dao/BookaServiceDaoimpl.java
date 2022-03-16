@@ -56,8 +56,7 @@ public class BookaServiceDaoimpl implements BookaServiceDao{
 			  query.setParameter("userid", uid);
 			  
 			  UserAddress useraddress = new UserAddress();
-			  List<UserAddress> useraddList = query.getResultList();	  
-			  System.out.println(useraddList.toString());
+			  List<UserAddress> useraddList = query.getResultList();
 			  return useraddList;
 			}
 		catch(Exception e) {
@@ -76,7 +75,6 @@ public class BookaServiceDaoimpl implements BookaServiceDao{
 			  
 			  UserAddress reqstedaddress = new UserAddress();
 			  reqstedaddress = query.getSingleResult();
-			  System.out.println(reqstedaddress.toString());
 			  return reqstedaddress;
 			}
 		catch(Exception e) {
@@ -118,7 +116,6 @@ public class BookaServiceDaoimpl implements BookaServiceDao{
 			  User user = new User();
 			  List<User> useremaillist = query.getResultList();
 			  String[] allemailaddress = {};
-			  System.out.println(allemailaddress);
 			  return useremaillist;
 			}
 		catch(Exception e) {

@@ -185,6 +185,9 @@ public class HomeController {
 			userAddress.setUserid(uid);
 			userAddress.setMobile(null);
 			this.registerUserService.createRegisterUserAddress(userAddress);
+			
+			
+			
 			return "homepage";
 		}
 	}
@@ -197,7 +200,6 @@ public class HomeController {
 			for (FieldError error : errors) {
 				System.out.println(error.getObjectName() + " - " + error.getDefaultMessage());
 			}
-			System.out.println("errors");
 			model.addAttribute("error", "please enter all fields to submit form");
 			model.addAttribute("displayError", "style='display: block !important;'");
 			return "homepage";
@@ -230,11 +232,6 @@ public class HomeController {
 				}
 
 				else if (login_user.getUser_type_id() == 2) {
-//					java.util.List<ServiceRequest> serviceRequest2 = this.serviceProviderService.getAllServiceRequest();
-//
-//					System.out.println(serviceRequest2.toString());
-//
-//					model.addAttribute("serviceDetails", serviceRequest2);
 					return "redirect:serviceprovider";
 				}
 
@@ -264,22 +261,15 @@ public class HomeController {
 			for (FieldError error : errors) {
 				System.out.println(error.getObjectName() + " - " + error.getDefaultMessage());
 			}
-			System.out.println("errors");
 			model.addAttribute("error", "please enter all fields to submit form");
 			model.addAttribute("displayError", "style='display: block !important;'");
 			return "homepage";
 		} else {
 
-			System.out.println(user.getEmail());
-
-			System.out.println("preparing to send message ...");
-
 			String subject = "Reset Password";
 			String from = "helperland.janesh@gmail.com";
 
 			String forgotpasswordService = this.forgotpasswordService.getForgotUser(user);
-
-			System.out.println(forgotpasswordService);
 
 			if (user.getEmail().trim().equals(forgotpasswordService.trim())) {
 
@@ -302,7 +292,6 @@ public class HomeController {
 		String host = "smtp.gmail.com";
 
 		Properties properties = System.getProperties();
-		System.out.println("PROPERTIES " + properties);
 
 		properties.put("mail.smtp.host", host);
 		properties.put("mail.smtp.port", "465");
@@ -337,74 +326,13 @@ public class HomeController {
 
 			int update_status = this.forgotpasswordService.updateForgotUser(updateUser);
 
-			System.out.println(update_status);
-
 			Transport.send(m);
-
-			System.out.println("Sent success...................");
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 	}
-
-//	public void sendEmail(String email, String pass) {
-//
-//		Properties prop = new Properties();
-//		prop.put("mail.smtp.auth", true);
-//		prop.put("mail.smtp.host", "smtp.mailtrap.io");
-//		prop.put("mail.smtp.port", "2525");
-//		prop.put("mail.smtp.ssl.trust", "smtp.mailtrap.io");
-//		
-//		
-//		Session session = Session.getInstance(prop, new Authenticator() {
-//		    @Override
-//		    protected PasswordAuthentication getPasswordAuthentication() {
-//		        return new PasswordAuthentication("f773758cd3ae4c", "4bef7c8b37b133");
-//		    }
-//		});
-//		
-//		session.setDebug(true);
-//		
-//		
-//		try {
-//			String recieverEmail = email;
-//			
-//			Message message = new MimeMessage(session);
-//			message.setFrom(new InternetAddress("helperland@gmail.com"));
-//			message.setRecipients(
-//					  Message.RecipientType.TO, InternetAddress.parse(recieverEmail));
-//					message.setSubject("Mail Subject");
-//
-//					String msg = "Your new Password:-" + pass;
-//					MimeBodyPart mimeBodyPart = new MimeBodyPart();
-//					mimeBodyPart.setContent(msg, "text/html; charset=utf-8");
-//
-//					Multipart multipart = new MimeMultipart();
-//					multipart.addBodyPart(mimeBodyPart);
-//
-//					message.setContent(multipart);
-//
-//					Transport.send(message);
-//					
-//					System.out.println("Success");
-//					
-//					User updateUser = new User();
-//					updateUser.setEmail(email);
-//					updateUser.setPassword(pass);
-//					
-//					int update_status = this.forgotpasswordService.updateForgotUser(updateUser);
-//					
-//					System.out.println(update_status);
-//					
-//					
-//		} catch (AddressException e) {
-//			e.printStackTrace();
-//		} catch (MessagingException e) {
-//			e.printStackTrace();
-//		}
-//	}
 
 	public String randomPasswordGenerator() {
 
@@ -431,7 +359,6 @@ public class HomeController {
 	public String faq(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		request.setAttribute("hideshow", session.getAttribute("loginUser"));
-		System.out.println("url");
 		return "faq";
 	}
 
@@ -439,7 +366,6 @@ public class HomeController {
 	public String price(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		request.setAttribute("hideshow", session.getAttribute("loginUser"));
-		System.out.println("url");
 		return "price";
 	}
 
@@ -447,7 +373,6 @@ public class HomeController {
 	public String becomeapro(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		request.setAttribute("hideshow", session.getAttribute("loginUser"));
-		System.out.println("url");
 		return "becomeapro";
 	}
 
@@ -456,11 +381,8 @@ public class HomeController {
 
 		HttpSession session = request.getSession();
 		request.setAttribute("hideshow", session.getAttribute("loginUser"));
-		System.out.println(session.getAttribute("loginUser"));
 
 		if (session.getAttribute("loginUser") != null && session.getAttribute("loginUsertype").equals("3")) {
-			System.out.println(session.getAttribute("loginUsertype").getClass().getSimpleName());
-			System.out.println("url");
 			return "bookservice";
 		} else {
 
@@ -480,17 +402,9 @@ public class HomeController {
 		return "homepage";
 	}
 
-//	@RequestMapping("/admin")
-//	public String admin() {
-//		System.out.println("url");
-//		return "admin";
-//	}
-//	
 	@RequestMapping(value = "/user")
 	public String user(HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession();
-		System.out.println(session.getAttribute("loginUser"));
-
 		if (session.getAttribute("loginUser") != null && session.getAttribute("loginUsertype").equals("3")) {
 			model.addAttribute("htmluseremail", session.getAttribute("useremail"));
 			model.addAttribute("htmlusername", session.getAttribute("username"));
@@ -499,8 +413,6 @@ public class HomeController {
 			model.addAttribute("UserType", session.getAttribute("loginUsertype"));
 			model.addAttribute("success", "You Login successfully. Thank you!");
 			model.addAttribute("displaySuccess", "style='display: block !important;'");
-			System.out.println(session.getAttribute("loginUsertype").getClass().getSimpleName());
-			System.out.println("url");
 			return "user";
 		} else {
 
@@ -513,7 +425,6 @@ public class HomeController {
 	@RequestMapping(value = "/serviceprovider")
 	public String serviceprovider(HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession();
-		System.out.println(session.getAttribute("loginUser"));
 
 		if (session.getAttribute("loginUser") != null && session.getAttribute("loginUsertype").equals("2")) {
 			model.addAttribute("htmluseremail", session.getAttribute("useremail"));
@@ -522,11 +433,8 @@ public class HomeController {
 			model.addAttribute("htmlMobile", session.getAttribute("usermobile"));
 			model.addAttribute("UserType", session.getAttribute("loginUsertype"));
 			model.addAttribute("htmlavatar", session.getAttribute("userAvatar"));
-			System.out.println(session.getAttribute("userAvatar") + "+++++++++++++++++++++++++");
 			model.addAttribute("success", "You Login successfully. Thank you!");
 			model.addAttribute("displaySuccess", "style='display: block !important;'");
-			System.out.println(session.getAttribute("loginUsertype").getClass().getSimpleName());
-			System.out.println("url");
 
 			UserAddress useraddress1 = this.serviceProviderService
 					.getAddress(Integer.parseInt(session.getAttribute("loginUser") + ""));
@@ -535,12 +443,6 @@ public class HomeController {
 			model.addAttribute("htmladdline2", useraddress1.getAddressLine2());
 			model.addAttribute("htmlcity", useraddress1.getCity());
 			model.addAttribute("htmlpostalcode", useraddress1.getPostalcode());
-
-//			java.util.List<ServiceRequest> serviceRequest2 = this.serviceProviderService.getAllServiceRequest();
-//
-//			System.out.println(serviceRequest2.toString());
-//
-//			model.addAttribute("serviceDetails", serviceRequest2);
 
 			return "serviceprovider";
 		} else {
@@ -554,7 +456,6 @@ public class HomeController {
 	@RequestMapping(value = "/admin")
 	public String admin(HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession();
-		System.out.println(session.getAttribute("loginUser"));
 
 		if (session.getAttribute("loginUser") != null && session.getAttribute("loginUsertype").equals("1")) {
 			model.addAttribute("htmluseremail", session.getAttribute("useremail"));
@@ -564,8 +465,6 @@ public class HomeController {
 			model.addAttribute("UserType", session.getAttribute("loginUsertype"));
 			model.addAttribute("success", "You Login successfully. Thank you!");
 			model.addAttribute("displaySuccess", "style='display: block !important;'");
-			System.out.println(session.getAttribute("loginUsertype").getClass().getSimpleName());
-			System.out.println("url");
 			return "admin";
 		} else {
 

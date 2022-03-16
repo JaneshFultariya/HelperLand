@@ -30,8 +30,6 @@ public class LoginDaoimpl implements LoginDao {
 			  User loginuser = new User();
 			  loginuser = query.getSingleResult();
 			  int login_type = loginuser.getUser_type_id();
-			  System.out.println(loginuser.toString());
-			  System.out.println(loginuser.getUser_id());
 			  return loginuser;
 			}
 		catch(Exception e) {

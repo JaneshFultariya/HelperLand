@@ -39,7 +39,6 @@ public class ServiceProviderDaoImpl implements ServiceProviderDao {
 			  
 			  ServiceRequest serviceRequest = new ServiceRequest();
 			  List<ServiceRequest> servicerequestList = query.getResultList();	  
-			  System.out.println(servicerequestList.toString());
 			  return servicerequestList;
 			}
 		catch(Exception e) {
@@ -59,7 +58,6 @@ public class ServiceProviderDaoImpl implements ServiceProviderDao {
 			  query.setParameter("status", "Accepted");
 			  
 			  int state = query.executeUpdate();
-			  System.out.println(state);
 			  return state;
 			}
 		catch(Exception e) {
@@ -95,20 +93,6 @@ public class ServiceProviderDaoImpl implements ServiceProviderDao {
 			  ServiceRequest serviceRequestfinal = new ServiceRequest();
 			  serviceRequestfinal = query2.getSingleResult();
 			  
-			  System.out.println(serviceRequestAddress.toString()+"---------"+allExtras);
-			  
-//			  ServiceRequest serviceRequest = new ServiceRequest();
-//			  List<ServiceRequest> servicerequestList = query.getResultList();	  
-//			  System.out.println(servicerequestList.toString());
-//			  ServiceRequestAddress requestAddress;
-//			  List temppp = query.getResultList();
-//			  Iterator iterator = temppp.iterator();
-//				while(iterator.hasNext()) {
-//					Object object[] = (Object[]) iterator.next();
-//					requestAddress = (ServiceRequestAddress) object[0];
-//				}
-			  
-			  
 			  HashMap<String, Object> serviceRequestData = new HashMap<String, Object>();
 			  serviceRequestData.put("serviceRequestAddress", serviceRequestAddress);
 			  serviceRequestData.put("allExtras", allExtras);
@@ -128,15 +112,12 @@ public class ServiceProviderDaoImpl implements ServiceProviderDao {
 		Session session = factory.getCurrentSession();
 		try {
 			  Query query = session.createQuery("from servicerequest as sp join servicerequestaddress as spa on sp.service_req_id=spa.ServiceRequestId join user as u on sp.user_id=u.user_id where sp.service_provider_id=:service_provider_id and sp.status=:status");
-//			 String sql = "select first_name,AddressLine1,service_req_id from servicerequest inner join servicerequestaddress on service_req_id=ServiceRequestId inner join user on servicerequest.user_id=user.user_id where status='new' and service_provider_id=0";
-			
+
 			  query.setParameter("service_provider_id", uid);
 			  query.setParameter("status", "Accepted");
-		  
-//			 List<ServiceRequestDto> employees = (List<ServiceRequestDto>) session.createSQLQuery(sql).getResultList();
+
 			  ServiceRequest serviceRequest = new ServiceRequest();
 			  List<ServiceRequest> servicerequestList = query.getResultList();	  
-//			  System.out.println(employees);
 			  return servicerequestList;
 			}
 		catch(Exception e) {
@@ -155,7 +136,6 @@ public class ServiceProviderDaoImpl implements ServiceProviderDao {
 			  query.setParameter("service_provider_id", 0);
 			  
 			  int state = query.executeUpdate();
-			  System.out.println(state);
 			  return state;
 			}
 		catch(Exception e) {
@@ -169,15 +149,10 @@ public class ServiceProviderDaoImpl implements ServiceProviderDao {
 		Session session = factory.getCurrentSession();
 		try {
 			  Query query = session.createQuery("from servicerequest as sp join servicerequestaddress as spa on sp.service_req_id=spa.ServiceRequestId join user as u on sp.user_id=u.user_id where sp.service_provider_id=:service_provider_id and sp.status=:status");
-//			 String sql = "select first_name,AddressLine1,service_req_id from servicerequest inner join servicerequestaddress on service_req_id=ServiceRequestId inner join user on servicerequest.user_id=user.user_id where status='new' and service_provider_id=0";
-			
 			  query.setParameter("service_provider_id", uid);
 			  query.setParameter("status", "Completed");
-		  
-//			 List<ServiceRequestDto> employees = (List<ServiceRequestDto>) session.createSQLQuery(sql).getResultList();
 			  ServiceRequest serviceRequest = new ServiceRequest();
-			  List<ServiceRequest> servicerequestList = query.getResultList();	  
-//			  System.out.println(employees);
+			  List<ServiceRequest> servicerequestList = query.getResultList();
 			  return servicerequestList;
 			}
 		catch(Exception e) {
@@ -195,7 +170,6 @@ public class ServiceProviderDaoImpl implements ServiceProviderDao {
 			  query.setParameter("status", "Completed");
 			  
 			  int state = query.executeUpdate();
-			  System.out.println(state);
 			  return state;
 			}
 		catch(Exception e) {
@@ -214,7 +188,6 @@ public class ServiceProviderDaoImpl implements ServiceProviderDao {
 			  User user = new User();
 			  List<User> useremaillist = query.getResultList();
 			  String[] allemailaddress = {};
-			  System.out.println(allemailaddress);
 			  return useremaillist;
 			}
 		catch(Exception e) {
@@ -226,7 +199,6 @@ public class ServiceProviderDaoImpl implements ServiceProviderDao {
 	@Transactional
 	public int updtspDetails(User user,UserAddress userAddress) {
 		Session session = factory.getCurrentSession();
-		System.out.println(user.getFirst_name()+"-------------"+user.getUser_id());
 		try {
 			  Query query = session.createQuery("update user set first_name=:first_name,"+ "last_name=:last_name, "+"mobile=:mobile, "+"date_of_birth=:date_of_birth, "+"nationality=:nationality, "+"user_profile_pic=:user_profile_pic, "+"gender=:gender " +"where user_id=:user_id");
 			  query.setParameter("user_id", user.getUser_id());
@@ -239,7 +211,6 @@ public class ServiceProviderDaoImpl implements ServiceProviderDao {
 			  query.setParameter("gender", user.getGender());
 			  
 			  int state = query.executeUpdate();
-			  System.out.println(state);
 			  
 			  Query query1 = session.createQuery("update useraddress set "+"AddressLine1=:AddressLine1, "+"AddressLine2=:AddressLine2, "+"postalcode=:postalcode, "+"City=:City, "+"Mobile=:Mobile "+"where userid=:userid");
 			  query1.setParameter("AddressLine1", userAddress.getAddressLine1());
@@ -278,7 +249,6 @@ public class ServiceProviderDaoImpl implements ServiceProviderDao {
 			  
 			  UserAddress userAddress = new UserAddress();
 			  UserAddress useraddress = query.getSingleResult();
-			  System.out.println(useraddress.toString()+"---------------------------------");
 			  return useraddress;
 			}
 		catch(Exception e) {
@@ -288,16 +258,12 @@ public class ServiceProviderDaoImpl implements ServiceProviderDao {
 	}
 	
 	@Transactional
-	public User getOneEmail(int service_req_id) {
+	public String getOneEmail(int service_req_id) {
 		Session session = factory.getCurrentSession();
 		try {
-			  Query<User> query = session.createQuery("from user as u inner join servicerequest as sp on u.user_id=sp.user_id where service_req_id =:service_req_id",User.class);
-			  query.setParameter("service_req_id", service_req_id);
-			  
-			  UserAddress userAddress = new UserAddress();
-			  String user = query.getSingleResult().getEmail();
-			  System.out.println(user+"------");
-			  return null;
+			  String query = (String) session.createSQLQuery("select email from user as u inner join servicerequest as sr on sr.user_id=u.user_id where service_req_id="+service_req_id+"").getSingleResult();
+
+			  return query;
 			}
 		catch(Exception e) {
 			System.out.println(e.getMessage());
@@ -310,14 +276,9 @@ public class ServiceProviderDaoImpl implements ServiceProviderDao {
 		Session session = factory.getCurrentSession();
 		try {
 			  Query query = session.createQuery("from rating as r inner join user as u on r.rating_from=u.user_id inner join servicerequest sr on r.service_req_id=sr.service_req_id where r.rating_to=:rating_to");
-//			 String sql = "select first_name,AddressLine1,service_req_id from servicerequest inner join servicerequestaddress on service_req_id=ServiceRequestId inner join user on servicerequest.user_id=user.user_id where status='new' and service_provider_id=0";
-			
 			  query.setParameter("rating_to", uid);
-		  
-//			 List<ServiceRequestDto> employees = (List<ServiceRequestDto>) session.createSQLQuery(sql).getResultList();
 			  Rating rating = new Rating();
-			  List<Rating> ratingList = query.getResultList();	  
-//			  System.out.println(employees);
+			  List<Rating> ratingList = query.getResultList();
 			  return ratingList;
 			}
 		catch(Exception e) {

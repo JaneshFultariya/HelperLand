@@ -39,16 +39,9 @@ public class AdminController {
 	@RequestMapping(value="/usermanagement",method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
 	 @ResponseBody
 	public List<User> ajaxdisplayusermanagement(HttpServletRequest request) throws Exception {
-		
-//		HttpSession session = request.getSession();
-//		System.out.println(session.getAttribute("loginUser").getClass().getSimpleName());
-//		String temp = "" + session.getAttribute("loginUser");
-//		int uid = Integer.parseInt(temp);
-		
+	
 		List<User> users = this.adminService.getAllUsers();
-		
-		System.out.println(users.toString()+"adminnnnnn");
-		
+
 		return users;
 	}
 	
@@ -61,8 +54,7 @@ public class AdminController {
 			HttpServletRequest request) throws Exception{
 		
 		user.setUser_id(uid);
-		
-		
+
 		if(activestatus == 1) {
 			user.setIs_active(0);
 		}
@@ -111,17 +103,21 @@ public class AdminController {
 	 @ResponseBody
 	public List<ServiceRequest> ajaxdisplayservicerequests(HttpServletRequest request) throws Exception {
 		
-//		HttpSession session = request.getSession();
-//		System.out.println(session.getAttribute("loginUser").getClass().getSimpleName());
-//		String temp = "" + session.getAttribute("loginUser");
-//		int uid = Integer.parseInt(temp);
-		
 		List<ServiceRequest> serviceRequests = this.adminService.getAllServiceRequest();
-		
-		System.out.println(serviceRequests.toString()+"adminnnnnn");
 		
 		return serviceRequests;
 	}
+	
+	@RequestMapping(value="/getServiceREquestAddress/{srId}",method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
+	 @ResponseBody
+	public ServiceRequestAddress ajaxgetServiceREquestAddress(@PathVariable("srId") int srId,
+			HttpServletRequest request) throws Exception {
+		
+		ServiceRequestAddress serviceRequestAddress = this.adminService.getServiceRequestAddress(srId);
+
+		return serviceRequestAddress;
+	}
+	
 	@RequestMapping(value="/editserviceRequest/{srId},{service_start_date},{startTime},{AddressLine1},{AddressLine2},{Postal_Code},{City}",method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
 	 @ResponseBody
 	public void ajaxeditserviceRequest(@PathVariable("srId") int srId,

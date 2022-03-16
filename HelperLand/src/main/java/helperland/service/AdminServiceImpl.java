@@ -48,4 +48,8 @@ public class AdminServiceImpl implements AdminService{
 		return this.adminDao.editServiceRequestAddress(serviceRequestAddress);
 	}
 
+	public ServiceRequestAddress getServiceRequestAddress(int srId) {
+		return this.adminDao.getServiceRequestAddress(srId);
+	}
+
 }

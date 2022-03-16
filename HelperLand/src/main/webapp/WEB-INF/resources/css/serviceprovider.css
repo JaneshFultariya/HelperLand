@@ -1146,3 +1146,7 @@ div.dataTables_length select{
 #ratingData table td{
 	padding: 10px 10px !important;
 }
+
+.dropdown-item.active {
+  background-color: transparent !important;
+}

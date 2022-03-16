@@ -71,7 +71,7 @@ public class ServiceProviderServiceImpl implements ServiceProviderService {
 		return serviceProviderDao.getAddress(uid);
 	}
 
-	public User getOneEmail(int service_req_id) {
+	public String getOneEmail(int service_req_id) {
 		return serviceProviderDao.getOneEmail(service_req_id);
 	}
 

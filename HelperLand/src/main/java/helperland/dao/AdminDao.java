@@ -23,4 +23,6 @@ public interface AdminDao {
 	public int editServiceRequestifSpNotFree(ServiceRequest serviceRequest);
 	
 	public int editServiceRequestAddress(ServiceRequestAddress serRequestAddress);
+	
+	public ServiceRequestAddress getServiceRequestAddress(int srId);
 }

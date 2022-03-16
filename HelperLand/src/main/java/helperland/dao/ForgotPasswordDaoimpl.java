@@ -29,7 +29,6 @@ public class ForgotPasswordDaoimpl implements ForgotPasswordDao {
 			  User forgotuser = new User();
 			  forgotuser = query.getSingleResult();
 			  String forgotemail = forgotuser.getEmail();
-			  System.out.println(forgotuser.getEmail());
 			  return forgotemail;
 			}
 		catch(Exception e) {

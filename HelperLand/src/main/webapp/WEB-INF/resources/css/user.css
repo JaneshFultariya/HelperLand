@@ -1035,7 +1035,7 @@ ul {
 }
 
 #serviceHistory .bottom {
-	display: flex !important;
+	display: block !important;
 	justify-content: space-between !important;
 	padding-top: 15px !important;
 }
@@ -1045,7 +1045,7 @@ div.dataTables_info {
 }
 
 #displaydashboard .bottom {
-	display: flex !important;
+	display: block !important;
 	justify-content: space-between !important;
 	padding-top: 15px !important;
 }
@@ -1210,6 +1210,14 @@ div.dataTables_info {
     background-color: #67b644;
     color: white;
     border: none;
-    width: 82px;
+    width: 110px;
     height: 22px;
+}
+
+
+
+@media screen and (max-width:730px) {
+	#displaydashboard .bottom{
+	display: block !important;
+	}
 }

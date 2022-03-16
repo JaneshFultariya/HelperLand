@@ -65,10 +65,8 @@ public class BookaServiceController {
 			@ModelAttribute UserAddress userAddress, BindingResult br, Model model, HttpServletRequest request)
 			throws Exception {
 		HttpSession session = request.getSession();
-		System.out.println(session.getAttribute("loginUser").getClass().getSimpleName());
 		String temp = "" + session.getAttribute("loginUser");
 		int uid = Integer.parseInt(temp);
-		System.out.println(uid);
 		userAddress.setUserid(uid);
 		int pin = this.bookaService.addAddress(userAddress);
 
@@ -79,13 +77,10 @@ public class BookaServiceController {
 	public List<UserAddress> ajaxshowAddress(HttpServletRequest request) throws Exception {
 
 		HttpSession session = request.getSession();
-		System.out.println(session.getAttribute("loginUser").getClass().getSimpleName());
 		String temp = "" + session.getAttribute("loginUser");
 		int uid = Integer.parseInt(temp);
 
 		List<UserAddress> userAddress2 = this.bookaService.getUserallAddress(uid);
-
-		System.out.println(userAddress2.getClass().getSimpleName());
 
 		return userAddress2;
 	}
@@ -98,14 +93,7 @@ public class BookaServiceController {
 			@PathVariable("petcheck") String petcheck, @PathVariable("listArray") String listArray,
 			@PathVariable("startTime") String startTime,@PathVariable("totaltime") float totaltime) throws Exception {
 
-		System.out.println(petcheck);
-		System.out.println(petcheck.getClass().getSimpleName());
-
 		String[] extraService = listArray.split(" ", 0);
-
-		for (int i = 0; i < extraService.length; i++) {
-			System.out.println(extraService[i]);
-		}
 
 		HttpSession session = request.getSession();
 		String temp = "" + session.getAttribute("loginUser");
@@ -128,9 +116,8 @@ public class BookaServiceController {
 		serviceRequest.setRecord_version("1");
 		serviceRequest.setService_start_time(startTime);
 		serviceRequest.setService_hours(totaltime);
+		serviceRequest.setPayment_done("pending");
 		int servicerequestid = this.bookaService.saveServiceRequest(serviceRequest);
-
-		System.out.println(servicerequestid + "hiiii");
 
 		UserAddress seleteduseraddress = this.bookaService.getSelectedAddress(address_id);
 
@@ -168,11 +155,7 @@ public class BookaServiceController {
 					+ "\n" + "Mobile No.:" + seleteduseraddress.getMobile() + "\n" + "Extra Service: " + listArray +"\n"+"Pet Status:" +petcheck
 					+ "\n" + "Total Payment:" + sub_total;
 			List<User> emaillist = this.bookaService.getAllEmail(uid);
-//			Iterator<User> iterator = emaillist.iterator();
-//			while (iterator.hasNext()) {
-//				String to = iterator.next().getEmail();
-//				
-//			}
+
 			String to = emaillist.stream().map(User::getEmail).collect(Collectors.joining(","));
 			sendServiceRequestEmail(message, subject, to, from);
 			
@@ -199,7 +182,7 @@ public class BookaServiceController {
 		Session session = Session.getInstance(properties, new Authenticator() {
 			@Override
 			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication("helperland.janesh@gmail.com", "SzaxTN2rudg9fbt");
+				return new PasswordAuthentication("helperland.janesh@gmail.com", "");
 			}
 
 		});
@@ -219,8 +202,6 @@ public class BookaServiceController {
 			m.setText(message);
 
 			Transport.send(m);
-
-			System.out.println("Sent success...................");
 
 		} catch (Exception e) {
 			e.printStackTrace();

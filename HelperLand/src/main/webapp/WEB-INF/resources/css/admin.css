@@ -203,7 +203,7 @@ li {
     background-color: #67b644;
     color: white;
     border: none;
-    width: 82px;
+    width: 90px;
     height: 22px;
 }
 
@@ -211,7 +211,15 @@ li {
     background-color: #f2bb37;
     color: white;
     border: none;
-    width: 50px;
+    width: 90px;
+    height: 22px;
+}
+
+.Accepted-button{
+    background-color: #1fb6ff;;
+    color: white;
+    border: none;
+    width: 90px;
     height: 22px;
 }
 

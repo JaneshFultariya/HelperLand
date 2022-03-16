@@ -124,66 +124,33 @@
             <div class="first-row">
                 <div class="row">
                     <div class="col">
-                        <input type="text" style="height: 46px;" class="form-control" placeholder="First name">
+                        <input type="text" style="height: 46px;" id="serviceId" class="form-control" placeholder="Service Id">
                     </div>
                     <div class="col">
-                        <input type="text" class="form-control" style="height: 46px;" placeholder="Last name">
+                        <input type="text" class="form-control" style="height: 46px;" id="postalCode" placeholder="Postal Code">
                     </div>
                     <div class="col">
-                        <input type="text" class="form-control" style="height: 46px;" placeholder="Email">
+                        <input type="text" class="form-control" style="height: 46px;" id="customerName" placeholder="Customer name">
                     </div>
                     <div class="col">
-                        <select id="inputState" style="height: 46px;" class="form-control">
+                        <input type="text" class="form-control" style="height: 46px;" id="serviceProviderName" placeholder="Service Provider name">
+                    </div>
+                    <div class="col">
+                        <select id="status" style="height: 46px;" class="form-control">
                             <option selected>Choose...</option>
                             <option>...</option>
                         </select>
                     </div>
-                    <div class="col">
-                        <select id="inputState" style="height: 46px;" class="form-control">
-                            <option selected>Choose...</option>
-                            <option>...</option>
-                        </select>
-                    </div>
-                    <div class="col">
-                        <select id="inputState" style="height: 46px;" class="form-control">
-                            <option selected>Choose...</option>
-                            <option>...</option>
-                        </select>
-                    </div>
-                    <div class="col">
-                        <select id="inputState" style="height: 46px;" class="form-control">
-                            <option selected>Choose...</option>
-                            <option>...</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="">
-                <div class="row">
+                
 
-                    <div class="col" style="max-width: 200px;">
-                        <select id="inputState" style="height: 46px;" class="form-control">
-                            <option selected>Choose...</option>
-                            <option>...</option>
-                        </select>
-                    </div>
-                    <div class="col" style="max-width: 150px;">
-                        <div class="form-check">
-                            <input class="form-check-input" style="margin-top: 15px;" type="checkbox" id="gridCheck1">
-                            <label class="form-check-label" style="margin-top: 12px;" for="gridCheck1">
-                                Has Issue
-                            </label>
-                        </div>
+                    
+                    <!-- <div class="col" style="max-width: 140px;">
+                        <input type="text" id="From_Date" style="height: 46px;" placeholder="From Date" onfocus="(this.type='date')" onblur="(this.type='text')">
                     </div>
                     <div class="col" style="max-width: 140px;">
-                        <input type="text" style="height: 46px;" class="form-control" placeholder="From Date">
-                    </div>
-                    <div class="col" style="max-width: 140px;">
-                        <input type="text" style="height: 46px;" class="form-control" placeholder="To Date">
-                    </div>
-                    <div class="col-auto">
-                        <button type="submit" style="height: 46px;" class="btn btn-primary mb-2">Serach</button>
-                    </div>
+                         <input type="text" id="To_Date" style="height: 46px;" placeholder="To Date" onfocus="(this.type='date')" onblur="(this.type='text')">
+                    </div> -->
+                    
                     <div class="col-auto">
                         <button type="submit" style="height: 46px;" class="btn btn-primary mb-2">clear</button>
                     </div>
@@ -261,14 +228,14 @@
                     <div class="col">
                         <input type="text" id="Email" style="height: 46px;" class="form-control" placeholder="Email">
                     </div>
-                    <div class="col">
-                        <!-- <input type="date" class="link-text form-control" style="width: 150px; margin-right: 20px;"
-													id="startdate_to" placeholder="From Date"> -->
+                    <!-- <div class="col">
+                        <input type="date" class="link-text form-control" style="width: 150px; margin-right: 20px;"
+													id="startdate_to" placeholder="From Date">
 						<input type="text" id="From_Date" style="height: 46px;" placeholder="From Date" onfocus="(this.type='date')" onblur="(this.type='text')">
                     </div>
                     <div class="col">
                         <input type="text" id="To_Date" style="height: 46px;" placeholder="To Date" onfocus="(this.type='date')" onblur="(this.type='text')">
-                    </div>
+                    </div> -->
                     <!-- <div class="col-auto">
                         <button type="submit" style="height: 46px;" class="btn btn-primary mb-2">Serach</button>
                     </div> -->
@@ -582,10 +549,11 @@
     <script>
     function servicerequestdatatable(){
         $(document).ready(function () {
-            $('#example').DataTable({
+        	var table = $('#example').DataTable({
 
             	"aLengthMenu": [[25, 50, 75, -1], [25, 50, 75, "All"]],
-                "pageLength": 50,
+                "pageLength": 25,
+                "order": [[ 0, "desc" ]],
                 /* responsive: true, */
                 "dom": '<"top">rt<"bottom"lip><"clear">'
                 /* "aaSorting": [],
@@ -593,7 +561,58 @@
                     orderable: false,
                     targets: [4, 5, 6, 8, 9],
                 }] */
-            });
+        	});
+                	$('#serviceId').on('keyup', function () {
+                        table
+                            .columns(0)
+                            .search(this.value)
+                            .draw();
+                    });
+                	$('#postalCode').on('keyup', function () {
+                        table
+                            .columns(2)
+                            .search(this.value)
+                            .draw();
+                    });
+                	/* $('#From_Date').on('keyup', function () {
+                        table
+                            .columns(1)
+                            .search(this.value)
+                            .draw();
+                    });
+                	$('#To_Date').on('keyup', function () {
+                        table
+                            .columns(1)
+                            .search(this.value)
+                            .draw();
+                    }); */
+                	
+                	$('#customerName').on('keyup', function () {
+                        table
+                            .columns(2)
+                            .search(this.value)
+                            .draw();
+                    });
+                	$('#serviceProviderName').on('keyup', function () {
+                        table
+                            .columns(3)
+                            .search(this.value)
+                            .draw();
+                    });
+                	$("#status").each(function () {
+                        var select = $('<select style="height: 46px;"><option value=""></option></select>')
+                            .appendTo($(this).empty())
+                            .on('change', function () {
+                                table.column(5)
+                                    .search($(this).val())
+                                    .draw();
+                            });
+
+                        table.column(5).data().unique().sort().each(function (d, j) {
+                            select.append('<option value="' + d + '">' + d + '</option>')
+                        });
+                    });
+            
         });
     }
         
@@ -609,6 +628,7 @@
                     targets: [4, 5, 6, 8, 9],
                 }] */
             	"dom": '<"top">rt<"bottom"lip><"clear">',
+            	"order": [[ 1, "desc" ]]
             });
         	$('#Postalcode').on('keyup', function () {
                 table
@@ -622,7 +642,7 @@
                     .search(this.value)
                     .draw();
             });
-        	$('#From_Date').on('keyup', function () {
+        	/* $('#From_Date').on('keyup', function () {
                 table
                     .columns(1)
                     .search(this.value)
@@ -633,7 +653,7 @@
                     .columns(1)
                     .search(this.value)
                     .draw();
-            });
+            }); */
         	
         	$('#namesearch').on('keyup', function () {
                 table
@@ -757,20 +777,7 @@
         				result += '</table>';
         				$("#displayusersdata").html(result);
         				usermanagementdatatablequery();
-        				/* spservicehistorydatatable();  */
-        				/* $.each(response, function(k, v) {
-        					
-        					console.log(v[1].addressLine1);
-        					console.log(v[2].first_name);
-        					
-        					 $.each(v, function(m,l){
-        						if(l.AddressLine1 != null){
-        							 console.log(l.AddressLine1+"hiiii"); 
-        						}
-        						
-        						
-        					}); 
-        				}); */
+        				
         		},
         		error: function(e){
         			console.log("ERROR: ", e);
@@ -862,28 +869,7 @@
 		});
         
         window.onload = servicerequests();
-        
-        function ratingsavg(spid,rowIndex) {
-			 if(spid !=undefined){
-			 console.log(spid, rowIndex , "ahgsfhgja");
-			 
-				$.ajax({
-					type : "GET",
-					url : "/helperland/ratingsavg/" + spid,
-					success : function(data) {
-						console.log("SUCCESS: ", data);
-						$('#example tbody tr:eq('+rowIndex+') td h6').text(data);
-					},
-					error : function(e) {
-						console.log("ERROR: ", e);
-					},
-					done : function(e) {
-						console.log("Done");
-					}
-				});
-			 }
-		} 
-        
+
         function servicerequests() {
         	$.ajax({
       			type:"GET",
@@ -893,28 +879,62 @@
       				var result = '<table id="example" class="display table nowrap" cellspacing="0" style="width:100%"><thead><tr><th scope="col">Service ID</th><th scope="col">Service date</th><th scope="col">Customer details</th><th scope="col">Service Provider</th><th scope="col">Total Amount</th><th scope="col">Status</th><th scope="col">Payment Status</th><th scope="col">Actions</th></tr></thead>';
       				result += "<tbody>";
       				 $.each(data, function(k, v) {
-      					 
+      					
       					var firstname = "";
 						var lastname = "";
 						var avatar = "";
-						var avg_rating = 0;
-						if (v[0].service_provider_id != 0) {
-							firstname = v[2].first_name;
-							lastname = v[2].last_name;
-							avatar = '<img class="img-custom-class" src="<c:url value="/resources/images/avatar-'+ v[2].user_profile_pic +'.png" />" style="width: 50px; height: 50px;"  alt="">';
+						var avg_rating = "";
+						if (v[17] != 0) {
+							firstname = v[7];
+							lastname = v[8];
+							avatar = '<img class="img-custom-class" src="<c:url value="/resources/images/avatar-'+ v[9] +'.png" />" style="width: 50px; height: 50px;"  alt="">';
+							avg_rating = '<p>Avg ratings: '+v[6]+'/5</p>';
 						}
 						else{
-							var firstname = "";
-							var lastname = "";
-							var avatar = "";
+							firstname = "";
+							lastname = "";
+							avatar = "";
+							avg_rating = "";
+						}
+						
+						var editandrescheduledropedown = "";
+						if(v[15] == "cancel" || v[15] == "Completed"){
+							editandrescheduledropedown = "";
+						}
+						else{
+							editandrescheduledropedown = '<a class="dropdown-item text-color-nav text-decoration-none" data-toggle="modal" data-target="#exampleModalCenter" href="#" onclick="editserviceRequest('+v[0]+')">Edit & Reschedule</a>';
+						}
+						
+						var addClass = ""
+						if(v[15] == "new"){
+							addClass = "new-button";
+						}
+						else if(v[15] == "Accepted"){
+							addClass = "addClass";
+						}
+						else if(v[15] == "cancel"){
+							addClass = "Refunded-button";
+						}
+						else{
+							addClass = "complete-button";
+						}
+						
+						var addPaymentStatusClass = "";
+						if(v[16] == "Completed"){
+							addPaymentStatusClass = "complete-button";
+						}
+						else if(v[16] == "cancel"){
+							addPaymentStatusClass = "Refunded-button";
+						}
+						else{
+							addPaymentStatusClass = "Expired-button";
 						}
       					 
       					result += "<tr>";
-      					result += "<input type='hidden' class='spidhidden' value='"+v[0].service_provider_id+"'>";
-      					result += '<td scope="row text-color-table number-and-km">'+v[0].service_req_id+'</td>';
-      					result += '<td style="padding: 0px; padding-top: 13px;"><div class="col"><div class="d-flex custom-margin-table"><img src="<c:url value="/resources/images/calculator.png" />" class="calander-img"><p>'+v[0].service_start_date+'</p></div>';
-      					result += '<div class="d-flex"><img class="clock" src="<c:url value="/resources/images/layer-712.png" />"><p>'+v[0].service_start_time+' (Total Time: '+v[0].service_hours+')</p></div></div></td>';
-      					result += '<td style="padding: 0px; padding-top: 13px;"><div class="col"><div class="d-flex custom-margin-table"><p>'+v[1].first_name+' '+v[1].last_name+'</p></div><div class="d-flex"><img src="<c:url value="/resources/images/layer-15.png" />" style="width: 20px; height: 22px; margin-right: 7px;"><p>'+v[3].AddressLine1+', '+v[3].AddressLine2+'</p></div></div></td>';
+      					result += '<td scope="row text-color-table number-and-km">'+v[0]+'</td>';
+      					result += '<td style="padding: 0px; padding-top: 13px;"><div class="col"><div class="d-flex custom-margin-table"><img src="<c:url value="/resources/images/calculator.png" />" class="calander-img"><p>'+v[1]+'</p></div>';
+      					result += '<div class="d-flex"><img class="clock" src="<c:url value="/resources/images/layer-712.png" />"><p>'+v[2]+' (Total Time: '+v[3]+')</p></div></div></td>';
+      					result += '<td style="padding: 0px; padding-top: 13px;"><div class="col"><div class="d-flex custom-margin-table"><p>'+v[4]+' '+v[5]+'</p></div><div class="d-flex"><img src="<c:url value="/resources/images/layer-15.png" />" style="width: 20px; height: 22px; margin-right: 7px;"><p>'+v[10]+', '+v[11]+'</p></div><p style="margin-left:25px">'+v[12]+' '+v[13]+'</p></div></td>';
       					result += "<td>";
 						result += '<div class="d-flex flex-row">'
 								+ avatar
@@ -922,14 +942,14 @@
 								+ firstname
 								+ ' '
 								+ lastname
-								+ '<h6 class="AvgRating"></h6>'
+								+ avg_rating
 								+ '</p></div></div></div>';
 						result += "</td>";
-      					result += '<td class="eurotext"><div class="d-flex flex-row custom-margin-table-two-data"><p class="euro-text">€</p><p class="number-text">'+v[0].total_cost+'</p></div></td>';
-      				 	result += '<td><button class="Expired-button align-items-center justify-content-center custom-margin-table-two-data">'+v[0].status+'</button></td>';
-      				 	result += '<td><button class="complete-button align-items-center justify-content-center custom-margin-table-two-data">'+v[0].payment_done+'</button></td>';
+      					result += '<td class="eurotext"><div class="d-flex flex-row custom-margin-table-two-data"><p class="euro-text">&euro;</p><p class="number-text">'+v[14]+'</p></div></td>';
+      				 	result += '<td><button class="'+addClass+' align-items-center justify-content-center custom-margin-table-two-data">'+v[15]+'</button></td>';
+      				 	result += '<td><button class="'+addPaymentStatusClass+' align-items-center justify-content-center custom-margin-table-two-data">'+v[16]+'</button></td>';
       				 	result += '<td><div class="profile-dropedown nav-btnn-img"><a class="nav-link  dropdown-toggle text-decoration-none" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="<c:url value="/resources/images/icons8-menu-vertical-30.png" />"> </a><div class="dropdown-menu dropdown-menu-right dropdown-cyan text-color-nav" aria-labelledby="navbarDropdownMenuLink-4">';
-      				 	result += '<a class="dropdown-item text-color-nav text-decoration-none" data-toggle="modal" data-target="#exampleModalCenter" href="#" onclick="editserviceRequest('+v[0].service_req_id+')">Edit & Reschedule</a>';
+      				 	result += editandrescheduledropedown;
       				 	result += '<a class="dropdown-item text-color-nav text-decoration-none" href="#">Refund</a>';
       				 	result += '<a class="dropdown-item text-color-nav text-decoration-none" href="#">Inquiry</a>';
       				 	result += '<a class="dropdown-item text-color-nav text-decoration-none" href="#">History Log</a>';
@@ -940,13 +960,7 @@
       				result += "</tbody>";
     				result += '</table>';
     				$("#allservicerequest").html(result);
-    				$('#allservicerequest tr').each(function(index, tr) {
-						var sp_id = $(tr).find('input.spidhidden:hidden').val();
-						var ind = index-1;
-						if(sp_id != 0){
-						ratingsavg(sp_id,ind);
-						}
-						});
+    				
     				servicerequestdatatable();
       			},
       			error: function(e){
@@ -960,6 +974,23 @@
         
         
         function editserviceRequest(srId) {
+        	$.ajax({
+				type : "GET",
+				url : "/helperland/getServiceREquestAddress/" + srId,
+				success : function(data) {
+					console.log("SUCCESS: ", data);
+					$("#AddressLine1").val(data.AddressLine1);
+					$("#AddressLine2").val(data.AddressLine2);
+					$("#Postal_Code").val(data.PostalCode);
+					$("#City").val(data.City);
+				},
+				error : function(e) {
+					console.log("ERROR: ", e);
+				},
+				done : function(e) {
+					console.log("Done");
+				}
+			});
         	jQuery(document).ready(function($) {
 				$("#editAndRescheduleForm").submit(function(event) {
 					event.preventDefault();

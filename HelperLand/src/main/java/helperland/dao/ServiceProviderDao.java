@@ -33,7 +33,7 @@ public interface ServiceProviderDao {
 	public UserAddress getAddress(int uid);
 	
 	
-	public User getOneEmail(int service_req_id);
+	public String getOneEmail(int service_req_id);
 	
 	
 	public List<Rating> getAllspRatings(int uid);

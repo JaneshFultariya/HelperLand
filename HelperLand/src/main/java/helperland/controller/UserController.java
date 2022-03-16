@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
+import java.util.stream.Collectors;
 
 import javax.mail.Authenticator;
 import javax.mail.Message;
@@ -64,7 +65,6 @@ public class UserController {
 		    for (FieldError error : errors ) {
 		        System.out.println (error.getObjectName() + " - " + error.getDefaultMessage());
 		    }
-			System.out.println("errors");
 			model.addAttribute("error" , "please enter all fields to submit form");
 			model.addAttribute("displayError" , "style='display: block !important;'");
 			
@@ -105,7 +105,6 @@ public class UserController {
 		    for (FieldError error : errors ) {
 		        System.out.println (error.getObjectName() + " - " + error.getDefaultMessage());
 		    }
-			System.out.println("errors");
 			model.addAttribute("error" , "please enter all fields to submit form");
 			model.addAttribute("displayError" , "style='display: block !important;'");
 			
@@ -138,10 +137,8 @@ public class UserController {
 			BindingResult br , Model model,
 			HttpServletRequest request) throws Exception {
 		HttpSession session = request.getSession();
-		System.out.println(session.getAttribute("loginUser").getClass().getSimpleName());
 		String temp = "" + session.getAttribute("loginUser");
 		int uid = Integer.parseInt(temp);
-		System.out.println(uid);
 		userAddress.setUserid(uid);
 		String uemail = session.getAttribute("useremail") + "" ;
 		userAddress.setEmail(uemail);
@@ -154,13 +151,10 @@ public class UserController {
 	public List<UserAddress> ajaxshowaddresssettings(HttpServletRequest request) throws Exception {
 		
 		HttpSession session = request.getSession();
-		System.out.println(session.getAttribute("loginUser").getClass().getSimpleName());
 		String temp = "" + session.getAttribute("loginUser");
 		int uid = Integer.parseInt(temp);
 		
 		List<UserAddress> userAddress2 = this.bookaService.getUserallAddress(uid);
-		
-		System.out.println(userAddress2.getClass().getSimpleName());
 		
 		return userAddress2;
 	}
@@ -176,10 +170,8 @@ public class UserController {
 			BindingResult br , Model model,
 			HttpServletRequest request) throws Exception {
 		HttpSession session = request.getSession();
-		System.out.println(session.getAttribute("loginUser").getClass().getSimpleName());
 		String temp = "" + session.getAttribute("loginUser");
 		int uid = Integer.parseInt(temp);
-		System.out.println(uid);
 		userAddress.setUserid(uid);
 		String uemail = session.getAttribute("useremail") + "" ;
 		userAddress.setEmail(uemail);
@@ -200,10 +192,8 @@ public class UserController {
 			BindingResult br , Model model,
 			HttpServletRequest request) throws Exception {
 		HttpSession session = request.getSession();
-		System.out.println(session.getAttribute("loginUser").getClass().getSimpleName());
 		String temp = "" + session.getAttribute("loginUser");
 		int uid = Integer.parseInt(temp);
-		System.out.println(uid);
 		userAddress.setUserid(uid);
 		
 		int adressId = Integer.parseInt(user_address_id);
@@ -219,15 +209,10 @@ public class UserController {
 	public List<ServiceRequest> ajaxdisplaydashboard(HttpServletRequest request) throws Exception {
 		
 		HttpSession session = request.getSession();
-		System.out.println(session.getAttribute("loginUser").getClass().getSimpleName());
 		String temp = "" + session.getAttribute("loginUser");
 		int uid = Integer.parseInt(temp);
 		
 		List<ServiceRequest> serviceRequest2 = this.userService.getAllService(uid);
-		
-		
-		
-		System.out.println(serviceRequest2.getClass().getSimpleName());
 		
 		return serviceRequest2;
 	}
@@ -251,17 +236,11 @@ public class UserController {
 			HttpServletRequest request) throws Exception {
 		
 		HttpSession session = request.getSession();
-		System.out.println(session.getAttribute("loginUser").getClass().getSimpleName());
 		String temp = "" + session.getAttribute("loginUser");
 		int uid = Integer.parseInt(temp);
 		
 		HashMap<String, Object> finalData= this.userService.getAllServiceDetails(servicerequestid);
 		
-		
-		System.out.println(finalData);
-		
-		
-//		System.out.println(serviceRequest2.getClass().getSimpleName());
 		
 		return finalData;
 	}
@@ -274,7 +253,7 @@ public class UserController {
 			HttpServletRequest request) throws Exception {
 		
 		serviceRequest.setService_req_id(service_req_id);
-		
+		serviceRequest.setPayment_done("cancel");
 		
 		this.userService.cancelServiceRequest(serviceRequest);
 		
@@ -283,9 +262,6 @@ public class UserController {
 		ServiceRequest serviceRequest2 = (ServiceRequest) emailObj[0];
 		
 		User user = (User) emailObj[1];
-		
-		System.out.println(serviceRequest2.getService_id()+"--------------------------------");
-		
 		
 		if(serviceRequest2.getService_provider_id() != 0) {
 			
@@ -296,13 +272,6 @@ public class UserController {
 			
 			sendEmail(message, subject, to, from);
 		}
-		
-		System.out.println(serviceRequest2.toString());
-		
-		
-		
-		System.out.println();
-		
 	}
 	
 	@RequestMapping(value="/reschedulebtndashboard/{service_req_id},{service_start_date},{startTime}",method = RequestMethod.GET)
@@ -323,6 +292,15 @@ public class UserController {
 		
 		if(servicedata.getService_provider_id() == 0) {
 			this.userService.rescheduleServiceRequest(serviceRequest);
+			String subject = "New Service Request";
+			String from = "helperland.janesh@gmail.com";
+			String message = "service Request Id = " + service_req_id +"is reschedule";
+			int uid=0;
+			List<User> emaillist = this.bookaService.getAllEmail(uid);
+			String to = emaillist.stream().map(User::getEmail).collect(Collectors.joining(","));
+			sendEmail(message, subject, to, from);
+			
+			
 		}
 		
 		else {
@@ -333,10 +311,25 @@ public class UserController {
 			while(iterator.hasNext()) {
 				if(service_start_date.equals(iterator.next().getService_start_date())){
 					this.userService.rescheduleServiceRequestifSpNotFree(serviceRequest);
+
+						String subject = "New Service Request";
+						String from = "helperland.janesh@gmail.com";
+						String message = "service Request Id = 35" + service_req_id +"is reschedule";
+						int uid=0;
+						List<User> emaillist = this.bookaService.getAllEmail(uid);
+						String to = emaillist.stream().map(User::getEmail).collect(Collectors.joining(","));
+						sendEmail(message, subject, to, from);
 					break;
 				}
 				else {
 					this.userService.rescheduleServiceRequest(serviceRequest);
+					String subject = "New Service Request";
+					String from = "helperland.janesh@gmail.com";
+					String message = "service Request Id = " + service_req_id +"is reschedule";
+					int uid=0;
+					List<User> emaillist = this.bookaService.getAllEmail(uid);
+					String to = emaillist.stream().map(User::getEmail).collect(Collectors.joining(","));
+					sendEmail(message, subject, to, from);
 				}
 			}
 		}
@@ -349,13 +342,10 @@ public class UserController {
 	public List<ServiceRequest> ajaxshowserviceHistory(HttpServletRequest request) throws Exception {
 		
 		HttpSession session = request.getSession();
-		System.out.println(session.getAttribute("loginUser").getClass().getSimpleName());
 		String temp = "" + session.getAttribute("loginUser");
 		int uid = Integer.parseInt(temp);
 		
 		List<ServiceRequest> serviceRequest2 = this.userService.getAllServiceHistory(uid);
-		
-		System.out.println(serviceRequest2.getClass().getSimpleName());
 		
 		return serviceRequest2;
 	}
@@ -371,7 +361,6 @@ public class UserController {
 			BindingResult br , Model model,
 			HttpServletRequest request) throws Exception {
 		
-//		serviceRequest.setService_req_id(sp_id);
 		
 		float avg_rating = (on_time_arriaval + friendly + quality_of_service) /3;
 		
@@ -402,7 +391,6 @@ public class UserController {
 		String host = "smtp.gmail.com";
 
 		Properties properties = System.getProperties();
-		System.out.println("PROPERTIES " + properties);
 
 		properties.put("mail.smtp.host", host);
 		properties.put("mail.smtp.port", "465");
@@ -433,7 +421,6 @@ public class UserController {
 
 			Transport.send(m);
 
-			System.out.println("Sent success...................");
 
 		} catch (Exception e) {
 			e.printStackTrace();

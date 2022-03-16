@@ -167,7 +167,7 @@
 
 	</section>
 
-	<div class="position-absolute w-100 d-flex justify-content-center"
+	<%-- <div class="position-absolute w-100 d-flex justify-content-center"
 		style="top: 10px; z-index: 100000;">
 		<div
 			class="alert alert-danger alert-dismissible fade show d-none w-75"
@@ -185,7 +185,7 @@
 		</div>
 
 
-	</div>
+	</div> --%>
 
 	<section id="title" class="text-center">
 		<div class="main-text">
@@ -1360,7 +1360,7 @@
 					responsive : true,
 					"dom" : '<"top">rt<"bottom"lip><"clear">',
 					"aaSorting" : [],
-					
+					"order": [[ 0, "desc" ]],
 					columnDefs : [ {
 						orderable : false,
 						targets : 4
@@ -1369,12 +1369,14 @@
 			});
 		}
 	
+		
 		function serviceHistoryTable() {
 			$(document).ready(function() {
 				$('#selectedColumn').DataTable({
 					responsive : true,
 					"dom" : '<"top">rt<"bottom"lip><"clear">',
 					"aaSorting" : [],
+					"order": [[ 0, "desc" ]],
 					columnDefs : [ {
 						orderable : false,
 						targets : [ 4, 6 ]
@@ -1644,7 +1646,7 @@
 		window.onload = dashboard();
 
 		 
-		 function ratingsavg(spid,rowIndex) {
+		 /* function ratingsavg(spid,rowIndex) {
 			 if(spid !=undefined){
 			 console.log(spid, rowIndex , "ahgsfhgja");
 			 
@@ -1654,7 +1656,6 @@
 					success : function(data) {
 						console.log("SUCCESS: ", data);
 						$('#dashboardtable tbody tr:eq('+rowIndex+') td h6').text(data);
-						$('#selectedColumn tbody tr:eq('+rowIndex+') td h6').text(data);
 					},
 					error : function(e) {
 						console.log("ERROR: ", e);
@@ -1664,7 +1665,7 @@
 					}
 				});
 			 }
-		} 
+		}  */
 		
 		function dashboard() {
 			$
@@ -1674,40 +1675,42 @@
 						url : "/helperland/displaydashboard",
 						contentType : "application/json",
 						success : function(response) {
-							var result = '<table id="dashboardtable" class="display table nowrap" cellspacing="0" style="width: 100%"><thead><tr><th scope="col" class="serviceidrow">Service ID</th><th scope="col" class="servicedate">Service date</th><th scope="col" class="provider">Service Provider</th><th scope="col" class="payment">Payment</th><th scope="col" class="action">Actions</th></tr></thead>'
+							 var result = '<table id="dashboardtable" class="display table nowrap" cellspacing="0" style="width: 100%"><thead><tr><th scope="col" class="serviceidrow">Service ID</th><th scope="col" class="servicedate">Service date</th><th scope="col" class="provider">Service Provider</th><th scope="col" class="payment">Payment</th><th scope="col" class="action">Actions</th></tr></thead>'
 							result += "<tbody>";
 							$.each(response,function(k, v) {
 												var firstname = "";
 												var lastname = "";
 												var avatar = "";
-												if (v[0].service_provider_id != 0) {
-													firstname = v[1].first_name;
-													lastname = v[1].last_name;
-													avatar = '<img class="img-custom-class" src="<c:url value="/resources/images/avatar-'+ v[1].user_profile_pic +'.png" />" alt="">';
-													 
-													
-												} else {
+												var avgRatings = "";
+												if (v[11] == 0) {
 													firstname = "";
 													lastname = "";
 													avatar = "";
+													avgRatings = "";
+													
+													
+												} else {
+													firstname = v[5];
+													lastname = v[6];
+													avatar = '<img class="img-custom-class" src="<c:url value="/resources/images/avatar-'+ v[10] +'.png" />" alt="">';
+													avgRatings = '<p>Avg ratings: '+v[7]+'/5</p>';
 												}
 												//console.log(v.state);
 												//document.getElementById("showadd").innerHTML = document.getElementById("showadd").innerHTML + v.addressLine1;
 												result += "<tr>";
-												result += "<input type='hidden' class='spidhidden' value='"+v[0].service_provider_id+"'>";
 												result += '<td scope="row text-color-table number-and-km">';
 												result += '<a href="#" data-toggle="modal" data-target="#withoutServiceProviderdashboardModalCenter" onclick="openModaldetails('
-														+ v[0].service_req_id
+														+ v[1]
 														+ ')" class="text-decoration-none link-text">'
-														+ v[0].service_req_id
+														+ v[1]
 														+ '</a>';
 												result += "</td>";
 												result += "<td>";
 												result += '<div class="col"><div class="d-flex custom-margin-table"><img src="<c:url value="/resources/images/calculator.png" />" class="calander-img"><a href="#"  data-toggle="modal" data-target="#withoutServiceProviderdashboardModalCenter" onclick="openModaldetails('
-														+ v[0].service_req_id
+														+ v[1]
 														+ ')" class="text-decoration-none link-text"><strong>'
-														+ v[0].service_start_date
-														+ '</strong></a></div><div class="d-flex"><img class="clock" src="<c:url value="/resources/images/layer-712.png" />"> <a href="#" data-toggle="modal" data-target="#withoutServiceProviderdashboardModalCenter" class="text-decoration-none link-text">'+v[0].service_start_time+' (Total Time: '+v[0].service_hours+')</a></div></div>';
+														+ v[2]
+														+ '</strong></a></div><div class="d-flex"><img class="clock" src="<c:url value="/resources/images/layer-712.png" />"> <a href="#" data-toggle="modal" data-target="#withoutServiceProviderdashboardModalCenter" class="text-decoration-none link-text">'+v[3]+' (Total Time: '+v[4]+')</a></div></div>';
 												result += "</td>";
 												result += "<td>";
 												result += '<div class="d-flex flex-row">'
@@ -1716,19 +1719,19 @@
 														+ firstname
 														+ ' '
 														+ lastname
-														+ '<h6 class="AvgRating"></h6>'
+														+ avgRatings
 														+ '</p></div></div></div>';
 												result += "</td>";
 												result += '<td class="eurotext">';
 												result += '<div class="d-flex flex-row custom-margin-table-two-data"><p class="euro-text">&euro;</p><p class="number-text">'
-														+ v[0].total_cost
+														+ v[8]
 														+ '</p></div>';
 												result += "</td>";
 												result += "<td>";
 												result += '<div class="d-flex flex-row"><button class="btn Reschedule-button" onclick="reschedulebtndashboard('
-														+ v[0].service_req_id
+														+ v[1]
 														+ ')" data-toggle="modal" data-target="#rescheduleModalCenter">Reschedule</button><button class="btn Cancle-button" onclick="cancelbtndashboard('
-														+ v[0].service_req_id
+														+ v[1]
 														+ ')" data-toggle="modal" data-target="#cancelModalCenter">Cancle</button></div>';
 												result += "</td>";
 												result += "</tr>";
@@ -1737,15 +1740,9 @@
 							result += "</tbody>";
 							result += '</table>';
 							$("#displaydashboard").html(result);
-							$('#displaydashboard tr').each(function(index, tr) {
-								var sp_id = $(tr).find('input.spidhidden:hidden').val();
-								var ind = index-1;
-								if(sp_id != 0){
-								ratingsavg(sp_id,ind);
-								}
-								});
 							
-							dashboardtable();
+							
+							dashboardtable(); 
 
 						},
 						error : function(e) {
@@ -1887,24 +1884,23 @@
 																var firstname = "";
 																var lastname = "";
 																var avatar = "";
-
-																if (v[0].service_provider_id == 0) {
+																var avgrating = "";
+																if (v[11] == 0) {
 																	firstname = "";
 																	lastname = "";
 																	avatar = "";
-
+																	avgrating = "";
 																} else {
-																	console
-																			.log("hiiiiiiiiiiiiiiiiiiiiiiii");
-																	firstname = v[1].first_name;
-																	lastname = v[1].last_name;
-																	avatar = '<img class="img-custom-class" src="<c:url value="/resources/images/avatar-'+ v[1].user_profile_pic +'.png" />" alt="">';
-
+																	console.log("hiiiiiiiiiiiiiiiiiiiiiiii");
+																	firstname = v[5];
+																	lastname = v[6];
+																	avatar = '<img class="img-custom-class" src="<c:url value="/resources/images/avatar-'+ v[10] +'.png" />" alt="">';
+																	avgrating = '<p>Avg ratings: '+v[7]+'/5</p>';
 																}
 																
 																var status = "";
 																var colorcls = "";
-																if (v[0].status == "cancel") {
+																if (v[9] == "cancel") {
 																	disablebtn = "disabled";
 																	status = "canceled";
 																	colorcls = "Not-Applicable-button";
@@ -1917,18 +1913,17 @@
 																//console.log(v.state);
 																//document.getElementById("showadd").innerHTML = document.getElementById("showadd").innerHTML + v.addressLine1;
 																result += "<tr>";
-																result += "<input type='hidden' class='spidhidden' value='"+v[0].service_provider_id+"'>";
 																result += '<td scope="row text-color-table number-and-km">';
 																result += '<a href="#"  data-toggle="modal" data-target="#withoutServiceProviderdashboardModalCenter" onclick="openModaldetails('
-																		+ v[0].service_req_id
+																		+ v[1]
 																		+ ')" class="text-decoration-none link-text">'
-																		+ v[0].service_req_id
+																		+ v[1]
 																		+ '</a>';
 																result += "</td>";
 																result += "<td>";
-																result += '<div class="col"><div class="d-flex custom-margin-table"><img src="<c:url value="/resources/images/calculator.png" />" class="calander-img"><a href="#"  data-toggle="modal" data-target="#withoutServiceProviderdashboardModalCenter" onclick="openModaldetails(' + v[0].service_req_id+ ')" class="text-decoration-none link-text"><strong>'
-																		+ v[0].service_start_date
-																		+ '</strong></a></div><div class="d-flex"><img class="clock" src="<c:url value="/resources/images/layer-712.png" />"> <a  data-toggle="modal" data-target="#withoutServiceProviderdashboardModalCenter" class="text-decoration-none link-text">'+v[0].service_start_time+' (Total Time: '+v[0].service_hours+')</a></div></div>';
+																result += '<div class="col"><div class="d-flex custom-margin-table"><img src="<c:url value="/resources/images/calculator.png" />" class="calander-img"><a href="#"  data-toggle="modal" data-target="#withoutServiceProviderdashboardModalCenter" onclick="openModaldetails(' + v[1]+ ')" class="text-decoration-none link-text"><strong>'
+																		+ v[2]
+																		+ '</strong></a></div><div class="d-flex"><img class="clock" src="<c:url value="/resources/images/layer-712.png" />"> <a  data-toggle="modal" data-target="#withoutServiceProviderdashboardModalCenter" class="text-decoration-none link-text">'+v[3]+' (Total Time: '+v[4]+')</a></div></div>';
 																result += "</td>";
 																result += "<td>";
 																result += '<div class="d-flex flex-row">'
@@ -1937,12 +1932,12 @@
 																		+ firstname
 																		+ ' '
 																		+ lastname
-																		+ '<h6 class="AvgRating"></h6>'
+																		+ avgrating
 																		+ '</p></div></div></div>';
 																result += "</td>";
 																result += '<td class="eurotext">';
 																result += '<div class="d-flex flex-row custom-margin-table-two-data"><p class="euro-text">&euro;</p><p class="number-text">'
-																		+ v[0].total_cost
+																		+ v[8]
 																		+ '</p></div>';
 																result += "</td>";
 																result += "<td>";
@@ -1954,7 +1949,7 @@
 																		+ '</button>'
 																result += "</td>";
 																result += "<td>";
-																result += '<button '+disablebtn+' class="btn custom-margin-table-two-data-button" onclick="openModalratsp(' + v[0].service_provider_id + ','+v[0].service_req_id + ')" data-bs-toggle="modal" data-bs-target="#ratingmodal">Rate SP</button>';
+																result += '<button '+disablebtn+' class="btn custom-margin-table-two-data-button" onclick="openModalratsp(' + v[11] + ','+v[1] + ')" data-bs-toggle="modal" data-bs-target="#ratingmodal">Rate SP</button>';
 																result += "</td>";
 																result += "</tr>"
 															});
@@ -1962,16 +1957,19 @@
 											result += "</tbody>";
 											result += '</table>';
 											$("#serviceHistory").html(result);
-											$('#serviceHistory tr').each(function(index, tr) {
+											/* $('#serviceHistory tr').each(function(index, tr) {
 												var sp_id = $(tr).find('input.spidhidden:hidden').val();
 												var ind = index-1;
 												if(sp_id != 0){
 												ratingsavg(sp_id,ind);
 												}
-												});
+												}); */
 											
 
-											serviceHistoryTable();
+											serviceHistoryTable(); 
+											console.log("SUCCESS: ", response);
+											
+											
 											
 										},
 										error : function(e) {

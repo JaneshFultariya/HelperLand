@@ -67,7 +67,7 @@ public class ServiceRequest {
 
 	private float distance;
 	private int has_issue;
-	private int payment_done;
+	private String payment_done;
 	private String record_version;
 
 	public int getService_req_id() {
@@ -226,10 +226,10 @@ public class ServiceRequest {
 	public void setHas_issue(int has_issue) {
 		this.has_issue = has_issue;
 	}
-	public int getPayment_done() {
+	public String getPayment_done() {
 		return payment_done;
 	}
-	public void setPayment_done(int payment_done) {
+	public void setPayment_done(String payment_done) {
 		this.payment_done = payment_done;
 	}
 	public String getRecord_version() {

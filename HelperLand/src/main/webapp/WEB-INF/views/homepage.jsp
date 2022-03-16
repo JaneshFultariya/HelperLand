@@ -340,7 +340,7 @@
 									<div class="row">
 										<div class="col">
 											<input type="password" class="form-control"
-												id="exampleInputPassword1" required name="password"
+												id="password" required name="password"
 												placeholder="Password">
 										</div>
 										<div class="col">
@@ -357,7 +357,10 @@
 										class="privercypolicy text-decoration-none forgetpassword">privercy
 											policy</a></label>
 								</div>
-								<button type="submit" class="btn btn-primary btn-lg"
+								
+								<div class="mt-2 text-center mb-2" id="passwordvalidation"></div>
+								
+								<button type="submit" class="btn btn-primary btn-lg" 
 									title="Send">Register</button>
 								<div class="text-center">
 									<span>already register? <a
@@ -778,6 +781,31 @@
 		console.log("hiiiiiiiiiiiiiiiiiii");
  		
 	}
+	
+	$(document).ready(function() {
+		$("#password").on('keyup', function() {
+			var password = $("#password").val();
+			var regularExpression = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,14}$/;
+			if(!regularExpression.test(password)){
+				$('#passwordvalidation').html("Password must be in length 6-14<br>Should contain atleast one uppercase letter, lowercase letter, number and special character.<br><hr>").css("color", "red");
+			}
+			else{
+				$('#passwordvalidation').html("Password strength : Good<br><hr>").css("color", "green");
+			}
+		});
+	});
+	
+	
+	$("#createuseraccount").submit(function(event) {
+		var password = document.forms["createuseraccount"]["password"].value;
+		var regularExpression = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,14}$/;
+		if(!regularExpression.test(password)){
+			return false;
+		}
+		else{
+			return true;
+		}
+	});
 	</script>
 
 
