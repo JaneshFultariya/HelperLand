@@ -1732,7 +1732,7 @@
 														+ v[1]
 														+ ')" data-toggle="modal" data-target="#rescheduleModalCenter">Reschedule</button><button class="btn Cancle-button" onclick="cancelbtndashboard('
 														+ v[1]
-														+ ')" data-toggle="modal" data-target="#cancelModalCenter">Cancle</button></div>';
+														+ ')" data-toggle="modal" data-target="#cancelModalCenter">Cancel</button></div>';
 												result += "</td>";
 												result += "</tr>";
 											});

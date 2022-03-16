@@ -301,7 +301,7 @@ public class HomeController {
 		Session session = Session.getInstance(properties, new Authenticator() {
 			@Override
 			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication("helperland.janesh@gmail.com", "SzaxTN2rudg9fbt");
+				return new PasswordAuthentication("helperland.janesh@gmail.com", "");
 			}
 
 		});
