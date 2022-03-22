@@ -186,4 +186,20 @@ public class AdminDaoImpl implements AdminDao{
 		}
 	}
 
+	@Transactional
+	public String getUserEmail(int uid) {
+		Session session = factory.getCurrentSession();
+		try {
+			  Query<User> query = session.createQuery("from user where user_id=:user_id",User.class);
+			  query.setParameter("user_id", uid);
+			 
+			  String email = query.getSingleResult().getEmail();	  
+			  return email;
+			}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+	}
+
 }

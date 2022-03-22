@@ -9,8 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import helperland.dao.ServiceProviderDao;
+import helperland.dto.ServiceRequestDto;
+import helperland.model.Favoriteandblocked;
 import helperland.model.Rating;
 import helperland.model.ServiceRequest;
+import helperland.model.ServiceScheduleEntity;
 import helperland.model.User;
 import helperland.model.UserAddress;
 
@@ -77,6 +80,26 @@ public class ServiceProviderServiceImpl implements ServiceProviderService {
 
 	public List<Rating> getAllspRatings(int uid) {
 		return serviceProviderDao.getAllspRatings(uid);
+	}
+
+	public List<ServiceScheduleEntity> getServiceSchedule(int uid) {
+		return serviceProviderDao.getServiceSchedule(uid);
+	}
+
+	public List<User> getUserList(int uid) {
+		return serviceProviderDao.getUserList(uid);
+	}
+
+	public Favoriteandblocked getBlockCustomerList(int uid, int spid) {
+		return serviceProviderDao.getBlockCustomerList(uid, spid);
+	}
+
+	public int insertBlockCustomer(Favoriteandblocked favoriteandblocked) {
+		return serviceProviderDao.insertBlockCustomer(favoriteandblocked);
+	}
+
+	public int updateBlockCustomer(Favoriteandblocked favoriteandblocked) {
+		return serviceProviderDao.updateBlockCustomer(favoriteandblocked);
 	}
 
 }

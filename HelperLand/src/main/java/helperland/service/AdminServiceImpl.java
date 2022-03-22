@@ -52,4 +52,8 @@ public class AdminServiceImpl implements AdminService{
 		return this.adminDao.getServiceRequestAddress(srId);
 	}
 
+	public String getUserEmail(int uid) {
+		return this.adminDao.getUserEmail(uid);
+	}
+
 }

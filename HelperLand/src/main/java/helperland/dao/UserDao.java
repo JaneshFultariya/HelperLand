@@ -3,6 +3,7 @@ package helperland.dao;
 import java.util.HashMap;
 import java.util.List;
 
+import helperland.dto.ServiceRequestDto;
 import helperland.model.Rating;
 import helperland.model.ServiceRequest;
 import helperland.model.ServiceRequestExtra;

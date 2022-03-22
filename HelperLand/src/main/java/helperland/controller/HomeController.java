@@ -20,6 +20,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.swing.text.View;
@@ -128,7 +129,7 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/registerUser", method = RequestMethod.POST)
-	public String handleRegisterUser(@ModelAttribute User user, BindingResult br, Model model) {
+	public String handleRegisterUser(@ModelAttribute User user, BindingResult br, HttpServletRequest request, Model model) {
 
 		if (br.hasErrors()) {
 			java.util.List<FieldError> errors = br.getFieldErrors();
@@ -142,20 +143,29 @@ public class HomeController {
 		} else {
 			SimpleDateFormat dtf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			Date date = new Date();
-			model.addAttribute("success", "You Registered successfully.... Thank you!");
-			model.addAttribute("displaySuccess", "style='display: block !important;'");
+			
 			user.setCreated_date(dtf.format(date));
 			user.setModified_date(dtf.format(date));
 			user.setUser_type_id(3);
 			user.setIs_approved(1);
+			
+			User useremailCheck = this.registerUserService.getAllEmail(user.getEmail());
+			
+			if(useremailCheck != null) {
+				model.addAttribute("error", "please enter another email !!!");
+				model.addAttribute("displayError", "style='display: block !important;'");
+			}
+			else {
+				model.addAttribute("success", "You Registered successfully.... Thank you!");
+				model.addAttribute("displaySuccess", "style='display: block !important;'");
 			this.registerUserService.createRegisterUser(user);
-
+			}
 			return "homepage";
 		}
 	}
 
 	@RequestMapping(value = "/registerServiceProvider", method = RequestMethod.POST)
-	public String handleRegisterServiceProvider(@ModelAttribute User user, @ModelAttribute UserAddress userAddress,
+	public String handleRegisterServiceProvider(@ModelAttribute User user, @ModelAttribute UserAddress userAddress, HttpServletRequest request,
 			BindingResult br, Model model) {
 
 		if (br.hasErrors()) {
@@ -181,12 +191,30 @@ public class HomeController {
 			userAddress.setAddressLine2(null);
 			userAddress.setCity(null);
 			userAddress.setEmail(null);
-			int uid = this.registerUserService.createRegisterUser(user);
-			userAddress.setUserid(uid);
-			userAddress.setMobile(null);
-			this.registerUserService.createRegisterUserAddress(userAddress);
 			
 			
+			
+			User useremailCheck = this.registerUserService.getAllEmail(user.getEmail());
+			
+			if(useremailCheck != null) {
+				model.addAttribute("error", "please enter another email !!!");
+				model.addAttribute("displayError", "style='display: block !important;'");
+			}
+			else {
+				model.addAttribute("success", "You Registered successfully.... Thank you!");
+				model.addAttribute("displaySuccess", "style='display: block !important;'");
+				int uid = this.registerUserService.createRegisterUser(user);
+				userAddress.setUserid(uid);
+				userAddress.setMobile(null);
+				this.registerUserService.createRegisterUserAddress(userAddress);
+			}
+			
+			String to = "janeshfultariya@gmail.com";
+			String message = "New Service Provider is registered!!";
+			String subject = "New service provider!!!";
+			String from = "helperland.janesh@gmail.com";
+			
+			sendEmailAdmin(message, subject, to, from);
 			
 			return "homepage";
 		}
@@ -246,6 +274,8 @@ public class HomeController {
 					return "homepage";
 				}
 			} else {
+				model.addAttribute("error", "please enter all valid email and password");
+				model.addAttribute("displayError", "style='display: block !important;'");
 				return "homepage";
 			}
 
@@ -301,7 +331,7 @@ public class HomeController {
 		Session session = Session.getInstance(properties, new Authenticator() {
 			@Override
 			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication("helperland.janesh@gmail.com", "");
+				return new PasswordAuthentication("helperland.janesh@gmail.com", "SzaxTN2rudg9fbt");
 			}
 
 		});
@@ -325,6 +355,47 @@ public class HomeController {
 			updateUser.setPassword(pass);
 
 			int update_status = this.forgotpasswordService.updateForgotUser(updateUser);
+
+			Transport.send(m);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+	
+	public void sendEmailAdmin(String message, String subject, String to, String from) {
+
+		String host = "smtp.gmail.com";
+
+		Properties properties = System.getProperties();
+
+		properties.put("mail.smtp.host", host);
+		properties.put("mail.smtp.port", "465");
+		properties.put("mail.smtp.ssl.enable", "true");
+		properties.put("mail.smtp.auth", "true");
+
+		Session session = Session.getInstance(properties, new Authenticator() {
+			@Override
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication("helperland.janesh@gmail.com", "SzaxTN2rudg9fbt");
+			}
+
+		});
+
+		session.setDebug(true);
+
+		MimeMessage m = new MimeMessage(session);
+
+		try {
+
+			m.setFrom(from);
+
+			m.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+
+			m.setSubject(subject);
+
+			m.setText(message);
 
 			Transport.send(m);
 

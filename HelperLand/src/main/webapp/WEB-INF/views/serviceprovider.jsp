@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css"
 	href="<c:url value="/resources/css/serviceprovider.css" />">
+	<link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
         integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
@@ -22,6 +23,7 @@
     <link rel="icon" type="image/x-icon"
 	href="<c:url value="/resources/images/white-logo-transparent-background.png" />">
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    
     <title>Upcoming Services</title>
 </head>
 
@@ -40,22 +42,22 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
                         <div class="nav-btnn">
-                            <a class="nav-link" href="price.html">Prices & services</a>
+                            <a class="nav-link" href="price">Prices & services</a>
                         </div>
                     </li>
                     <li class="nav-item">
                         <div class="nav-btnn text-white">
-                            <a class="nav-link" href="#">Warranty</a>
+                            <a class="nav-link" href="#" style="width: 90px">Warranty</a>
                         </div>
                     </li>
                     <li class="nav-item">
                         <div class="nav-btnn">
-                            <a class="nav-link" href="#">Blog</a>
+                            <a class="nav-link" href="#" style="width: 90px">Blog</a>
                         </div>
                     </li>
                     <li class="nav-item">
                         <div class="nav-btnn">
-                            <a class="nav-link" href="contactUs.html">Contact</a>
+                            <a class="nav-link" href="contactUs" style="width: 90px">Contact</a>
                         </div>
                     </li>
                     <li class="nav-item">
@@ -106,26 +108,26 @@
                         href="#">Dashboard</a>
                 </li>
                 <li class="side-items">
-                    <a class="side-link text-decoration-none" onclick="openCity(event, 'History')" href="#">New Service
+                    <a class="side-link text-decoration-none" onclick="openCity(event, 'NewService')" href="#" id="newservicerequesttabcanva">New Service
                     </a>
                 </li>
                 <li class="side-items">
-                    <a class="side-link text-decoration-none" onclick="openCity(event, 'Upcoming')" href="#">Upcoming
+                    <a class="side-link text-decoration-none" onclick="openCity(event, 'Upcoming')" href="#" id="realtimedashboardcanva">Upcoming
                         Service</a>
                 </li>
                 <li class="side-items">
-                    <a class="side-link text-decoration-none" href="#" onclick="openCity(event, 'Schedule')">Service
+                    <a class="side-link text-decoration-none" href="#" onclick="openCity(event, 'Schedule')" id="serviceschedulecanva">Service
                         Schedule</a>
                 </li>
                 <li class="side-items">
-                    <a class="side-link text-decoration-none" onclick="openCity(event, 'History')" href="#">Service
+                    <a class="side-link text-decoration-none" onclick="openCity(event, 'History')" href="#" id="realtimeservicehistoryspcanva">Service
                         History</a>
                 </li>
                 <li class="side-items">
-                    <a class="side-link text-decoration-none" onclick="openCity(event, 'ratings')">My Ratings</a>
+                    <a class="side-link text-decoration-none" onclick="openCity(event, 'ratings')" id="realtimeratingsspcanva">My Ratings</a>
                 </li>
                 <li class="side-items">
-                    <a class="side-link text-decoration-none" onclick="openCity(event, 'block-cust')">Block Customer</a>
+                    <a class="side-link text-decoration-none" onclick="openCity(event, 'block-cust')" id="realtimeblockCustomercanva">Block Customer</a>
                 </li>
                 <li class="side-items">
                     <a class="side-link text-decoration-none" onclick="openCity(event, 'Invoices')"
@@ -139,16 +141,16 @@
                     <a class="side-link text-decoration-none" onclick="openCity(event, 'mySettings')" href="#">My Settings</a>
                 </li>
                 <li class="side-items">
-                    <a class="side-link text-decoration-none" href="#">Logout</a>
+                    <a class="side-link text-decoration-none" href="logout">Logout</a>
                 </li>
             </ul>
             <div class="devider-line"></div>
             <ul class="side-nav">
                 <li class="side-items">
-                    <a class="side-link text-decoration-none" href="bookservice.html">Book now</a>
+                    <a class="side-link text-decoration-none" href="bookservice">Book now</a>
                 </li>
                 <li class="side-items">
-                    <a class="side-link text-decoration-none" href="price.html">Prices & services</a>
+                    <a class="side-link text-decoration-none" href="price">Prices & services</a>
                 </li>
                 <li class="side-items">
                     <a class="side-link text-decoration-none" href="#">Warranty</a>
@@ -157,7 +159,7 @@
                     <a class="side-link text-decoration-none" href="#">Blog</a>
                 </li>
                 <li class="side-items">
-                    <a class="side-link text-decoration-none" href="contactUs.html">Contact</a>
+                    <a class="side-link text-decoration-none" href="contactUs">Contact</a>
                 </li>
             </ul>
 
@@ -281,15 +283,21 @@
             <button class="tablinks" onclick="openCity(event, 'NewService')" id="servicerequesttab">New Service
                 Request</button>
             <button class="tablinks" onclick="openCity(event, 'Upcoming')" id="realtimedashboard">Upcoming Service</button>
-            <button class="tablinks" onclick="openCity(event, 'Schedule')">Service Schedule</button>
+            <button class="tablinks" onclick="openCity(event, 'Schedule')" id="serviceschedule">Service Schedule</button>
             <button class="tablinks" onclick="openCity(event, 'History')" id="realtimeservicehistorysp">Service History</button>
 
             <button class="tablinks" onclick="openCity(event, 'ratings')" id="realtimeratingssp">My Ratings</button>
-            <button class="tablinks" onclick="openCity(event, 'block-cust')">Block Customer</button>
+            <button class="tablinks" onclick="openCity(event, 'block-cust')" id="realtimeblockCustomer">Block Customer</button>
 
             <button class="tablinks" onclick="openCity(event, 'Invoices')">Invoices</button>
 
             <button class="tablinks" onclick="openCity(event, 'Notification')">Notifications</button>
+        </div>
+        
+        <div id="Schedule" class="tabcontent">
+        <div class="container">
+        	<div id='calendar'></div>
+        	</div>
         </div>
         
         <div id="ratings" class="tabcontent">
@@ -525,7 +533,9 @@
         </div>
 
         <div id="block-cust" class="tabcontent">
-            <div class="d-flex flex-row">
+        <div id="blockCust">
+  			<div class= "row">
+  			<div class="col-lg-3 col-md-3 col-sm-12 blockbox">
                 <div class="card card-style">
                     <div class="card-body">
                         <div class="d-flex justify-content-center">
@@ -539,7 +549,24 @@
                         </div>
                     </div>
                 </div>
-            </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-12">
+				<div class="card card-style">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-center">
+                            <img src="<c:url value="/resources/images/hat.png" />" class="hat-img">
+                        </div>
+                        <div class="text-class-block d-flex justify-content-center">
+                            <span><strong>cust1 cust1</strong></span>
+                        </div>
+                        <div class="text-class-block d-flex justify-content-center">
+                            <button class="unblock-btn">Unblock</button>
+                        </div>
+                    </div>
+                </div>
+                </div>
+				</div>
+				</div>
         </div>
 
         <div id="mySettings" class="tabcontent">
@@ -811,6 +838,7 @@
 
                                 </div>
                                 <button class="settings-submit">Submit</button>
+                                <div id="mobilevalidationcheckupdt"></div>
                             </form>
                         </div>
 
@@ -835,6 +863,7 @@
 									<input type="password" class="form-control" required name="confirmpassword"
 										id="updtconfirmpassword" placeholder="Confirm Password">
 								</div>
+								<div id="passwordvalidation"></div>
 								<button class="save-btn" style="margin-left: 0px;">save</button>
 							</form>
                         </div>
@@ -914,6 +943,47 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js"></script>
+    <script>
+
+        function serviceSchedule() {
+          var calendarEl = document.getElementById('calendar');
+          var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            navLinks : true,
+            events: 'http://localhost:8080/helperland/serviceSchedule'
+          });
+          calendar.render();
+        }
+        
+        $(document).on('click','#serviceschedule',function (){
+        	serviceScheduleajax()
+        	serviceSchedule();
+        });
+        
+        $(document).on('click','#serviceschedulecanva',function (){
+        	serviceScheduleajax()
+        	serviceSchedule();
+        });
+  
+        
+        function serviceScheduleajax(){
+        	$.ajax({
+      			type:"GET",
+      			url:"/helperland/serviceSchedule",
+      			success:function(data){
+      				console.log("SUCCESS: ", data);
+      			},
+      			error: function(e){
+      				console.log("ERROR: ", e);
+      			},
+      			done: function(e){
+      				console.log("Done");
+      			}
+      		});
+        }
+      </script>
 
     <script>
     function dashboarddatatable(){
@@ -969,6 +1039,9 @@
         
     window.onload = dashboard();
         
+    $(document).on('click','#newservicerequesttabcanva',function (){
+  	  dashboard();
+    });
         function dashboard() {
      	  $.ajax({
        		type:"GET",
@@ -1142,6 +1215,10 @@
         	realtimeupcomingservicce();
         });
         
+        $(document).on('click','#realtimedashboardcanva',function (){
+        	realtimeupcomingservicce();
+        });
+        
         
         function cancelbtnspupcomingservice(servicerequestid){
       	  console.log(servicerequestid);
@@ -1257,6 +1334,10 @@
           $(document).on('click','#realtimeservicehistorysp',function (){
         	  realtimespservicehistory();
           });
+          $(document).on('click','#realtimeservicehistoryspcanva',function (){
+        	  realtimespservicehistory();
+          });
+          
           
           jQuery(document).ready(function($){
       		$("#settingspupdatepasswordform").submit(function(event){
@@ -1424,6 +1505,79 @@
         $(document).on('click','#realtimeratingssp',function (){
         	realtimeratings();
         });
+        $(document).on('click','#realtimeratingsspcanva',function (){
+        	realtimeratings();
+        });
+        
+        
+        function blockCustomers(){
+      	  $.ajax({
+        		type:"GET",
+        		url:"/helperland/blockCustomer",
+        		success:function(response){
+        			var result = '<div class= "row">';
+        				 $.each(response, function(k, v) {
+        					 var btnToggle = "";
+        					 if(v[2]== null){
+        						 console.log("hiiii");
+        						 btnToggle = '<button class="block-btn" onclick="blockCustomerAction('+ v[1].user_id +')">Block</button>';
+        					 }
+        					 else{
+        						 if(v[2].isBlocked == 1){
+        							 btnToggle = '<button class="unblock-btn" onclick="blockCustomerAction('+ v[1].user_id +')">Unblock</button>';
+        						 }
+        						 else{
+        							 btnToggle = '<button class="block-btn" onclick="blockCustomerAction('+ v[1].user_id +')">Block</button>';
+        						 }
+        					 }
+        					 
+        						result += '<div class="col-lg-3 col-md-3 col-sm-12 blockbox"><div class="card card-style"><div class="card-body"><div class="d-flex justify-content-center">';
+            					result += '<img src="<c:url value="/resources/images/hat.png" />" class="hat-img">';
+            					result +='</div>';
+            					result += '<div class="text-class-block d-flex justify-content-center">';
+        						result += '<span><strong>'+v[0].first_name+' '+v[0].last_name+'</strong></span>';
+            					result += '</div>';
+            					result += '<div class="text-class-block d-flex justify-content-center">';
+            					result += btnToggle;
+            					result += '</div></div></div></div>'
+        				}); 
+        				console.log("SUCCESS: ", response);
+        				 result += "</div>";
+        				$("#blockCust").html(result);
+        		},
+        		error: function(e){
+        			console.log("ERROR: ", e);
+        		},
+        		done: function(e){
+        			console.log("Done");
+        		}
+        	}); 
+        }
+        
+
+        $(document).on('click','#realtimeblockCustomer',function (){
+        	blockCustomers();
+        });
+        $(document).on('click','#realtimeblockCustomercanva',function (){
+        	blockCustomers();
+        });
+        
+        function blockCustomerAction(uid){
+        	  $.ajax({
+          		type:"GET",
+          		url:"/helperland/blockCustomerAction/" + uid,
+          		success:function(response){
+          			console.log("SUCCESS: ", response);
+          			blockCustomers();
+          		},
+          		error: function(e){
+          			console.log("ERROR: ", e);
+          		},
+          		done: function(e){
+          			console.log("Done");
+          		}
+          	}); 
+          }
       	
     </script>
     
@@ -1446,6 +1600,54 @@
 
         // Get the element with id="defaultOpen" and click on it
          document.getElementById("servicerequesttab").click();
+        
+         $("#spdetailsform").submit(function(event) {
+             var a = document.forms["spdetailsform"]["mobile"].value;
+             var filter = /[0-9]{10}/;
+             if(!filter.test(a)){
+                 return false;
+             }
+             else{
+                 return true;
+             }
+         });
+
+         $(document).ready(function() {
+             $("#updtmobile").on('keyup', function() {
+                 var a = document.forms["spdetailsform"]["mobile"].value;
+                 var filter = /[0-9]{10}/;
+                 if (!filter.test(a)) {
+                     $('#mobilevalidationcheckupdt').html("Enter Correct Phone number").css("color", "red");
+                 }
+                 else {
+                     $('#mobilevalidationcheckupdt').html("");
+                 }
+             });
+         })
+         
+         $(document).ready(function() {
+	        $("#updtpassword").on('keyup', function() {
+	            var password = $("#updtpassword").val();
+	            var regularExpression = /^(?=.[0-9])(?=.[!@#$%^&])[a-zA-Z0-9!@#$%^&]{6,14}$/;
+	            if(!regularExpression.test(password)){
+	                $('#passwordvalidation').html("Password must be in length 6-14<br>Should contain atleast one uppercase letter, lowercase letter, number and special character.<br><hr>").css("color", "red");
+	            }
+	            else{
+	                $('#passwordvalidation').html("Password strength : Good<br><hr>").css("color", "green");
+	            }
+
+	        });
+	});
+	$("#settingupdatepasswordform").click(function(event) {
+	        var password = document.forms["settingupdatepasswordform"]["password"].value;
+	        var regularExpression = /^(?=.[0-9])(?=.[!@#$%^&])[a-zA-Z0-9!@#$%^&]{6,14}$/;
+	        if(!regularExpression.test(password)){
+	            return false;
+	        }
+	        else{
+	            return true;
+	        }
+	    });
     </script>
 
 </body>

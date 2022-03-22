@@ -32,8 +32,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.gson.Gson;
+
+import helperland.dto.ServiceRequestDto;
+import helperland.model.Favoriteandblocked;
 import helperland.model.Rating;
 import helperland.model.ServiceRequest;
+import helperland.model.ServiceScheduleEntity;
 import helperland.model.User;
 import helperland.model.UserAddress;
 import helperland.service.EmailService;
@@ -115,7 +120,7 @@ public class ServiceProviderController {
 	
 	@RequestMapping(value="/displayspdashboardmodal/{servicerequestid}",method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
 	 @ResponseBody
-	public HashMap<String,Object> ajaxdisplaydashboardmodal(
+	public HashMap<String, Object> ajaxdisplaydashboardmodal(
 			@PathVariable("servicerequestid") int servicerequestid,
 			HttpServletRequest request) throws Exception {
 		
@@ -334,6 +339,72 @@ public class ServiceProviderController {
 		
 	}
 	
+	@RequestMapping(value="/serviceSchedule",method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
+	 @ResponseBody
+	public String ajaxshowserviceHistory(HttpServletRequest request) throws Exception {
+		
+		HttpSession session = request.getSession();
+		String temp = "" + session.getAttribute("loginUser");
+		int uid = Integer.parseInt(temp);
+		
+		List<ServiceScheduleEntity> serviceRequest2 = this.serviceProviderService.getServiceSchedule(uid);
+		
+		Gson gson = new Gson();
+		
+		return gson.toJson(serviceRequest2);
+	}
+	
+	@RequestMapping(value="/blockCustomer",method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
+	 @ResponseBody
+	public List<User> ajaxUserList(HttpServletRequest request) throws Exception {
+		
+		HttpSession session = request.getSession();
+		String temp = "" + session.getAttribute("loginUser");
+		int uid = Integer.parseInt(temp);
+		
+		List<User> userList = this.serviceProviderService.getUserList(uid);
+		
+		return userList;
+	}
+	
+	@RequestMapping(value="/blockCustomerAction/{uid}",method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
+	 @ResponseBody
+	public void ajaxblockCustomerAction(HttpServletRequest request,
+			@PathVariable("uid") int uid) throws Exception {
+		
+		HttpSession session = request.getSession();
+		String temp = "" + session.getAttribute("loginUser");
+		int spid = Integer.parseInt(temp);
+		
+		Favoriteandblocked blockcheck = this.serviceProviderService.getBlockCustomerList(uid , spid);
+		
+		if(blockcheck == null) {
+			Favoriteandblocked favoriteandblocked = new Favoriteandblocked();
+			favoriteandblocked.setUserId(spid);
+			favoriteandblocked.setTargetUserId(uid);
+			favoriteandblocked.setIsBlocked(1);
+			this.serviceProviderService.insertBlockCustomer(favoriteandblocked);
+		}
+		else {
+			if(blockcheck.getIsBlocked() == 0) {
+				Favoriteandblocked favoriteandblocked = new Favoriteandblocked();
+				favoriteandblocked.setUserId(spid);
+				favoriteandblocked.setTargetUserId(uid);
+				favoriteandblocked.setIsBlocked(1);
+				this.serviceProviderService.updateBlockCustomer(favoriteandblocked);
+			}
+			else {
+				Favoriteandblocked favoriteandblocked = new Favoriteandblocked();
+				favoriteandblocked.setUserId(spid);
+				favoriteandblocked.setTargetUserId(uid);
+				favoriteandblocked.setIsBlocked(0);
+				this.serviceProviderService.updateBlockCustomer(favoriteandblocked);
+			}
+		}
+	}
+	
+	
+	
 	public void sendServiceRequestEmail(String message, String subject, String to, String from) {
 
 		String host = "smtp.gmail.com";
@@ -348,7 +419,7 @@ public class ServiceProviderController {
 		Session session = Session.getInstance(properties, new Authenticator() {
 			@Override
 			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication("helperland.janesh@gmail.com", "");
+				return new PasswordAuthentication("helperland.janesh@gmail.com", "SzaxTN2rudg9fbt");
 			}
 
 		});
@@ -361,7 +432,7 @@ public class ServiceProviderController {
 
 			m.setFrom(from);
 
-			m.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+			m.addRecipients(Message.RecipientType.TO, to);
 
 			m.setSubject(subject);
 

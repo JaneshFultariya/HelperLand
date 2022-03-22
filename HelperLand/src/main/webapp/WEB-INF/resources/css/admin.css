@@ -344,3 +344,7 @@ table {
 	border: 1px solid #646464 !important;
 	border-radius: 50% !important;
 }
+
+.dropdown-toggle::after{
+	color: white !important;
+}

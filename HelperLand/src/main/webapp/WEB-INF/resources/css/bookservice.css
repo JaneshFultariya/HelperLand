@@ -686,3 +686,11 @@ label {
 .commentsection{
 	height: auto !important;
 }
+
+.success-booking-img{
+	display: inline-block;
+background: #67b644;
+padding: 25px;
+border-radius: 500px;
+margin-bottom: 25px;
+}

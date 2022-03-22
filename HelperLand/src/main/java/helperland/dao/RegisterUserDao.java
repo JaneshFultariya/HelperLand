@@ -9,5 +9,7 @@ public int saveRegisterUser(User user);
 	
 
 
+public User getAllEmail(String email);
+
 public int createRegisterUserAddress(UserAddress userAddress);
 }

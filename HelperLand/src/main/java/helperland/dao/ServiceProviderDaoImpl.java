@@ -1,22 +1,27 @@
 package helperland.dao;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import helperland.dto.ServiceRequestDto;
+import helperland.model.Favoriteandblocked;
 import helperland.model.Rating;
 import helperland.model.ServiceRequest;
 import helperland.model.ServiceRequestAddress;
 import helperland.model.ServiceRequestExtra;
+import helperland.model.ServiceScheduleEntity;
 import helperland.model.User;
 import helperland.model.UserAddress;
 
@@ -284,6 +289,114 @@ public class ServiceProviderDaoImpl implements ServiceProviderDao {
 		catch(Exception e) {
 			System.out.println(e.getMessage());
 			return null;
+		}
+	}
+
+
+	public List<ServiceScheduleEntity> getServiceSchedule(int uid) {
+		List<ServiceScheduleEntity> list = null;
+		Session session = null;
+		Transaction transaction = null;
+		
+//		Session session = factory.getCurrentSession();
+		try {
+//			  List<ServiceRequest> query = session.createSQLQuery("select service_req_id as id, service_start_date as start, status as status from servicerequest where status in ('Completed','Accepted') and service_provider_id="+uid+"").getResultList();
+//			  Query<ServiceRequest> query = session.createQuery("from servicerequest where status in :status and service_provider_id=:service_provider_id",ServiceRequest.class);
+//			  query.setParameter("service_provider_id", uid);
+//			  query.setParameter("status", Arrays.asList("Completed","Accepted"));
+//			  
+//			  List<ServiceRequest> lisServiceRequests = query.getResultList();
+			
+			session = factory.openSession();
+			transaction = session.beginTransaction();
+			
+			list = session.createQuery("select sr.service_req_id as id, "
+					+ "CONCAT(REPLACE(sr.service_start_time, '.', ':'), ' And Total Time:-', REPLACE(sr.service_hours,'.',':')) as title, "
+					+ "sr.service_start_date as start, "
+					+ "sr.service_start_date as end, "
+					+ "(CASE WHEN sr.status = 'Completed' THEN '#1d7a8c' ELSE '#efefef' END) as color, "
+					+ "(CASE WHEN sr.status = 'Completed' THEN 'white' ELSE 'black' END) as textColor "
+					+ "from servicerequest sr "
+					+ "where status in ('Completed','Accepted') and service_provider_id="+uid+"")
+					.setResultTransformer(
+							Transformers.aliasToBean(ServiceScheduleEntity.class))
+					.list();
+			
+			transaction.commit();
+			
+			}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+
+			list = null;
+			
+			if(transaction != null) {
+				transaction.rollback();
+			}
+		}
+		finally {
+			session.close();
+		}
+		return list;
+		
+	}
+
+	@Transactional
+	public List<User> getUserList(int uid) {
+		Session session = factory.getCurrentSession();
+		try {
+			  Query query = session.createQuery("from user as u inner join servicerequest as sr on sr.service_provider_id = u.user_id left join favoriteandblocked as fab on sr.service_provider_id = fab.UserId where sr.service_provider_id=:service_provider_id and sr.status=:status group by (sr.service_provider_id)");
+			  query.setParameter("service_provider_id", uid);
+			  query.setParameter("status", "Completed");
+			  User user = new User();
+			  List<User> userList = query.getResultList();
+			  return userList;
+			}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+	}
+
+	@Transactional
+	public Favoriteandblocked getBlockCustomerList(int uid, int spid) {
+		Session session = factory.getCurrentSession();
+		try {
+			Query<Favoriteandblocked> query = session.createQuery("from favoriteandblocked where UserId=:UserId and TargetUserId=:TargetUserId",Favoriteandblocked.class);
+			query.setParameter("UserId", spid);
+			query.setParameter("TargetUserId", uid);
+			
+			Favoriteandblocked favoriteandblocked = query.getSingleResult();
+			
+			return favoriteandblocked;
+		}
+		catch (Exception e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+	}
+
+	@Transactional
+	public int insertBlockCustomer(Favoriteandblocked favoriteandblocked) {
+		int id = (Integer) this.hibernateTemplate.save(favoriteandblocked);
+		return id;
+	}
+
+	@Transactional
+	public int updateBlockCustomer(Favoriteandblocked favoriteandblocked) {
+		Session session = factory.getCurrentSession();
+		try {
+			  Query query = session.createQuery("update favoriteandblocked set IsBlocked=:IsBlocked where UserId=:UserId and TargetUserId=:TargetUserId");
+			  query.setParameter("UserId", favoriteandblocked.getUserId());
+			  query.setParameter("TargetUserId", favoriteandblocked.getTargetUserId());
+			  query.setParameter("IsBlocked", favoriteandblocked.getIsBlocked());
+			  
+			  int state = query.executeUpdate();
+			  return state;
+			}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+			return 0;
 		}
 	}
 

@@ -4,7 +4,16 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Properties;
+import java.util.stream.Collectors;
 
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -24,6 +33,7 @@ import helperland.model.ServiceRequest;
 import helperland.model.ServiceRequestAddress;
 import helperland.model.User;
 import helperland.service.AdminService;
+import helperland.service.BookaService;
 import helperland.service.UserService;
 
 @RestController
@@ -35,6 +45,9 @@ public class AdminController {
 	
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	BookaService bookaService;
 	
 	@RequestMapping(value="/usermanagement",method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
 	 @ResponseBody
@@ -79,7 +92,13 @@ public class AdminController {
 		user.setIs_approved(1);
 		
 		int status = this.adminService.adminapproval(user);
-		
+		if(status == 1) {
+			String message = "You are approved by admin !!!";
+			String subject = "Approved";
+			String useremail = this.adminService.getUserEmail(uid);
+			String from = "helperland.janesh@gmail.com";
+			sendEmail(message, subject, useremail, from);
+		}
 		return status;
 	}
 	
@@ -95,6 +114,14 @@ public class AdminController {
 		user.setIs_deleted(1);
 		
 		int status = this.adminService.adminuserdelete(user);
+		
+		if(status == 1) {
+			String message = "Your account is deleted by admin !!!";
+			String subject = "Account Delete";
+			String useremail = this.adminService.getUserEmail(uid);
+			String from = "helperland.janesh@gmail.com";
+			sendEmail(message, subject, useremail, from);
+		}
 		
 		return status;
 	}
@@ -147,6 +174,13 @@ public class AdminController {
 		if(servicedata.getService_provider_id() == 0) {
 			this.adminService.editServiceRequest(serviceRequest);
 			this.adminService.editServiceRequestAddress(serviceRequestAddress);
+			String subject = "New Service Request";
+			String from = "helperland.janesh@gmail.com";
+			String message = "service Request Id = 35" + srId +"is reschedule";
+			int uid=0;
+			List<User> emaillist = this.bookaService.getAllEmail(uid);
+			String to = emaillist.stream().map(User::getEmail).collect(Collectors.joining(","));
+			sendEmail(message, subject, to, from);
 		}
 		
 		else {
@@ -158,13 +192,68 @@ public class AdminController {
 				if(service_start_date.equals(iterator.next().getService_start_date())){
 					this.adminService.editServiceRequestifSpNotFree(serviceRequest);
 					this.adminService.editServiceRequestAddress(serviceRequestAddress);
+					String subject = "New Service Request";
+					String from = "helperland.janesh@gmail.com";
+					String message = "service Request Id = 35" + srId +"is reschedule";
+					int uid=0;
+					List<User> emaillist = this.bookaService.getAllEmail(uid);
+					String to = emaillist.stream().map(User::getEmail).collect(Collectors.joining(","));
+					sendEmail(message, subject, to, from);
 					break;
 				}
 				else {
 					this.adminService.editServiceRequest(serviceRequest);
 					this.adminService.editServiceRequestAddress(serviceRequestAddress);
+					String subject = "New Service Request";
+					String from = "helperland.janesh@gmail.com";
+					String message = "service Request Id = 35" + srId +"is reschedule";
+					int uid=0;
+					List<User> emaillist = this.bookaService.getAllEmail(uid);
+					String to = emaillist.stream().map(User::getEmail).collect(Collectors.joining(","));
+					sendEmail(message, subject, to, from);
 				}
 			}
+		}
+	}
+	
+	public void sendEmail(String message, String subject, String to, String from) {
+
+		String host = "smtp.gmail.com";
+
+		Properties properties = System.getProperties();
+
+		properties.put("mail.smtp.host", host);
+		properties.put("mail.smtp.port", "465");
+		properties.put("mail.smtp.ssl.enable", "true");
+		properties.put("mail.smtp.auth", "true");
+
+		Session session = Session.getInstance(properties, new Authenticator() {
+			@Override
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication("helperland.janesh@gmail.com", "SzaxTN2rudg9fbt");
+			}
+
+		});
+
+		session.setDebug(true);
+
+		MimeMessage m = new MimeMessage(session);
+
+		try {
+
+			m.setFrom(from);
+
+			m.addRecipients(Message.RecipientType.TO,to);
+
+			m.setSubject(subject);
+
+			m.setText(message);
+
+			Transport.send(m);
+
+
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 }

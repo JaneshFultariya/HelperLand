@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import helperland.dto.ServiceRequestDto;
 import helperland.model.Rating;
 import helperland.model.ServiceRequest;
 import helperland.model.ServiceRequestExtra;
@@ -231,7 +232,7 @@ public class UserController {
 	
 	@RequestMapping(value="/displaydashboardmodal/{servicerequestid}",method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public HashMap<String,Object> ajaxdisplaydashboardmodal(
+	public HashMap<String, Object> ajaxdisplaydashboardmodal(
 			@PathVariable("servicerequestid") int servicerequestid,
 			HttpServletRequest request) throws Exception {
 		
@@ -400,7 +401,7 @@ public class UserController {
 		Session session = Session.getInstance(properties, new Authenticator() {
 			@Override
 			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication("helperland.janesh@gmail.com", "");
+				return new PasswordAuthentication("helperland.janesh@gmail.com", "SzaxTN2rudg9fbt");
 			}
 
 		});
@@ -413,7 +414,7 @@ public class UserController {
 
 			m.setFrom(from);
 
-			m.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+			m.addRecipients(Message.RecipientType.TO, to);
 
 			m.setSubject(subject);
 

@@ -18,6 +18,9 @@ public class RegisterUserDaoclass implements RegisterUserDao{
 
 	@Autowired
 	private HibernateTemplate hibernateTemplate;
+	
+	@Autowired
+	private SessionFactory factory;
 
 	@Transactional
 	public int saveRegisterUser(User user) {
@@ -29,5 +32,21 @@ public class RegisterUserDaoclass implements RegisterUserDao{
 	public int createRegisterUserAddress(UserAddress userAddress) {
 		int id1 = (Integer) this.hibernateTemplate.save(userAddress);
 		return id1;
+	}
+
+	@Transactional
+	public User getAllEmail(String email) {
+		Session session = factory.getCurrentSession();
+		try {
+			  Query<User> query = session.createQuery("from user where email =:userEmail",User.class);
+			  query.setParameter("userEmail", email);
+			  User loginuser = new User();
+			  loginuser = query.getSingleResult();
+			  return loginuser;
+			}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
 	}
 }

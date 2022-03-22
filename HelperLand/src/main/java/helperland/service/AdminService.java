@@ -26,4 +26,6 @@ public interface AdminService {
 
 	public ServiceRequestAddress getServiceRequestAddress(int srId);
 
+	public String getUserEmail(int uid);
+
 }

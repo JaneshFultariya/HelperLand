@@ -85,7 +85,7 @@
 					class="dropdown-menu dropdown-menu-right dropdown-cyan text-color-nav"
 					aria-labelledby="navbarDropdownMenuLink-4">
 					<span style="padding-left: 15px;">Welcome,<br>
-					<strong style="padding-left: 15px;">First Customer</strong></span>
+					<strong style="padding-left: 15px;">${htmlusername }</strong></span>
 					<div class="devider-line"></div>
 					<a class="dropdown-item text-color-nav text-decoration-none"
 						href="user">My Dashboard</a>  <a
@@ -122,13 +122,26 @@
             <li class="side-items">
               <a class="side-link text-decoration-none" href="contactUs ">Contact</a>
             </li>
-            <li class="side-items">
-              <a class="side-link text-decoration-none" data-toggle="modal"
-              data-target="#exampleModalCenter" href="#">Login</a>
-            </li>
-            <li class="side-items">
-              <a class="side-link text-decoration-none" href="becomeapro ">Become a cleaner</a>
-            </li>
+            <li class="side-items" id="offcanvasLogin"><a
+					class="side-link text-decoration-none" data-toggle="modal" data-bs-dismiss="offcanvas" 
+					data-target="#exampleModalCenter" href="#">Login</a></li>
+				<li class="side-items" id="offcanvasBecomeapro"><a 
+					class="side-link text-decoration-none" data-bs-dismiss="offcanvas" href="becomeapro">Become
+						a cleaner</a></li>
+						<li class="side-items" id="offcanvasDashboard"><c:if test="${user_type == 2 }">
+									<a class="side-link text-decoration-none" href="serviceprovider">Dashboard</a>
+								</c:if>
+								
+								<c:if test="${user_type == 3 }">
+									<a class="side-link text-decoration-none" href="user">Dashboard</a>
+								</c:if>
+								
+								<c:if test="${user_type == 1 }">
+									<a class="side-link text-decoration-none" href="admin">Dashboard</a>
+								</c:if></li>
+				<li class="side-items" id="offcanvasLogout"><a
+						class="side-link text-decoration-none"
+						href="logout">Log out</a></li>
           </ul>
     
         </div>
@@ -300,7 +313,7 @@
 												<div class="input-group-text">+91</div>
 											</div>
 											<input type="text" class="form-control"
-												id="inlineFormInputGroup"  name="mobile" placeholder="Mobile number">
+												id="mobile"  name="mobile" placeholder="Mobile number">
 										</div>
 									</div>
 								</div>
@@ -308,7 +321,7 @@
 							<div class="form-group">
 								<div class="row">
 									<div class="col">
-										<input type="password" class="form-control" id="exampleInputPassword1" required name="password" placeholder="Password">
+										<input type="password" class="form-control" id="password" required name="password" placeholder="Password">
 									</div>
 									<div class="col">
 										<input type="password" class="form-control" id="exampleInputPassword2" required name="confirmpassword"
@@ -316,6 +329,8 @@
 									</div>
 								</div>
 							</div>
+							<div class="mt-2 text-center mb-2" id="passwordvalidation"></div>
+								<div class="mt-2 text-center mb-2" id="Phonevalidation"></div>
 							<div class="form-check" style="margin-left: 15px;">
 								<input type="checkbox" class="form-check-input" required
 									id="exampleCheck1"> <label class="form-check-label"
@@ -660,29 +675,79 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-	let name = <%=request.getAttribute("hideshow")%>
-	
-	if(name == null){
-		/* document.getElementById("notificon").style.display = "none"; */
-		/* $("#notificon").hide(); */
-		$("#notificon").removeClass( "d-flex" );
-		$("#notificon").css("display", "none");
-		$("#profilepic").css("display", "none");
-		$("#loginlink").css("display", "block");
-		$("#becomelink").css("display", "block");
-		console.log("hiiiiiiiiiiiiiiiiiii");
+let name = <%=request.getAttribute("hideshow")%>
+
+if(name == null){
+	/* document.getElementById("notificon").style.display = "none"; */
+	/* $("#notificon").hide(); */
+	$("#notificon").removeClass( "d-flex" );
+	$("#notificon").css("display", "none");
+	$("#profilepic").css("display", "none");
+	$("#loginlink").css("display", "block");
+	$("#becomelink").css("display", "block");
+	$("#offcanvasLogin").css("display", "block");
+	$("#offcanvasBecomeapro").css("display", "block");
+	$("#offcanvasDashboard").css("display", "none");
+	$("#offcanvasLogout").css("display", "none");
+	console.log("hiiiiiiiiiiiiiiiiiii");
+}
+else{
+	$("#notificon").addClass( "d-flex" );
+	$("#notificon").css("display", "block");
+	$("#profilepic").css("display", "block");
+	$("#loginlink").css("display", "none");
+	$("#becomelink").css("display", "none");
+	$("#offcanvasLogin").css("display", "none");
+	$("#offcanvasBecomeapro").css("display", "none");
+	$("#offcanvasDashboard").css("display", "block");
+	$("#offcanvasLogout").css("display", "block");
+	$('#my_image').css("width", "73px");
+	$('#my_image').css("height", "54px"); 
+	console.log("hiiiiiiiiiiiiiiiiiii");
+		
+}
+
+$(document).ready(function() {
+	$("#password").on('keyup', function() {
+		var password = $("#password").val();
+		var regularExpression = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,14}$/;
+		if(!regularExpression.test(password)){
+			$('#passwordvalidation').html("Password must be in length 6-14<br>Should contain atleast one uppercase letter, lowercase letter, number and special character.<br><hr>").css("color", "red");
+		}
+		else{
+			$('#passwordvalidation').html("Password strength : Good<br><hr>").css("color", "green");
+		}
+		
+	});
+	$("#mobile").on('keyup', function() {
+		var a = document.forms["createuseraccount"]["mobile"].value;
+		var filter = /[0-9]{10}/;
+		if (!filter.test(a)) {
+			$('#Phonevalidation').html("Enter Correct Phone number").css("color", "red");
+		}
+		else {
+			$('#Phonevalidation').html("");
+		}
+	});
+});
+
+
+$("#createuseraccount").submit(function(event) {
+	var password = document.forms["createuseraccount"]["password"].value;
+	var regularExpression = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,14}$/;
+	var a = document.forms["createuseraccount"]["mobile"].value;
+	var filter = /[0-9]{10}/;
+	if(!regularExpression.test(password) || !filter.test(a)){
+		return false;
 	}
 	else{
-		$("#notificon").addClass( "d-flex" );
-		$("#notificon").css("display", "block");
-		$("#profilepic").css("display", "block");
-		$("#loginlink").css("display", "none");
-		$("#becomelink").css("display", "none");
-		$('#my_image').css("width", "73px");
-		$('#my_image').css("height", "54px"); 
-		console.log("hiiiiiiiiiiiiiiiiiii");
- 		
+		return true;
 	}
+});
+
+$("#errorMessage").fadeTo(2000, 500).slideUp(500, function(){
+    $("#errorMessage").slideUp(500);
+});
 	</script>
 
 

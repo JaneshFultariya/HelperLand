@@ -1,74 +1,142 @@
 package helperland.dto;
 
-public class ServiceRequestDto {
+import java.io.Serializable;
 
-private int service_req_id;
-	
-	private int user_id;
-	
-private String service_start_date;
-	
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-	private int postal_code;
+public class ServiceRequestDto implements Serializable {
+
+
+	private int service_req_id;
+	
+	private String service_start_date;
+	
+	private float service_hours;
+	
+	private float total_cost;
+	private String comments;
+	
+	private String service_start_time;
+	
+	private String has_pets;
 	
 	public String AddressLine1;
 	public String AddressLine2;
-	
-	private String first_name;
-	private String last_name;
+	public String Mobile;
+	public String Email;
+
+	private String service_extra;
+
 	public int getService_req_id() {
 		return service_req_id;
 	}
+
 	public void setService_req_id(int service_req_id) {
 		this.service_req_id = service_req_id;
 	}
-	public int getUser_id() {
-		return user_id;
-	}
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
-	}
+
+
+
 	public String getService_start_date() {
 		return service_start_date;
 	}
+
 	public void setService_start_date(String service_start_date) {
 		this.service_start_date = service_start_date;
 	}
-	public int getPostal_code() {
-		return postal_code;
+
+	public float getService_hours() {
+		return service_hours;
 	}
-	public void setPostal_code(int postal_code) {
-		this.postal_code = postal_code;
+
+	public void setService_hours(float service_hours) {
+		this.service_hours = service_hours;
 	}
+
+	public float getTotal_cost() {
+		return total_cost;
+	}
+
+	public void setTotal_cost(float total_cost) {
+		this.total_cost = total_cost;
+	}
+
+	public String getComments() {
+		return comments;
+	}
+
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
+
+	public String getService_start_time() {
+		return service_start_time;
+	}
+
+	public void setService_start_time(String service_start_time) {
+		this.service_start_time = service_start_time;
+	}
+
+	public String getHas_pets() {
+		return has_pets;
+	}
+
+	public void setHas_pets(String has_pets) {
+		this.has_pets = has_pets;
+	}
+
 	public String getAddressLine1() {
 		return AddressLine1;
 	}
+
 	public void setAddressLine1(String addressLine1) {
 		AddressLine1 = addressLine1;
 	}
+
 	public String getAddressLine2() {
 		return AddressLine2;
 	}
+
 	public void setAddressLine2(String addressLine2) {
 		AddressLine2 = addressLine2;
 	}
-	public String getFirst_name() {
-		return first_name;
+
+	public String getMobile() {
+		return Mobile;
 	}
-	public void setFirst_name(String first_name) {
-		this.first_name = first_name;
+
+	public void setMobile(String mobile) {
+		Mobile = mobile;
 	}
-	public String getLast_name() {
-		return last_name;
+
+	public String getEmail() {
+		return Email;
 	}
-	public void setLast_name(String last_name) {
-		this.last_name = last_name;
+
+	public void setEmail(String email) {
+		Email = email;
 	}
+
+	public String getService_extra() {
+		return service_extra;
+	}
+
+	public void setService_extra(String service_extra) {
+		this.service_extra = service_extra;
+	}
+
 	@Override
 	public String toString() {
-		return "ServiceRequestDto [service_req_id=" + service_req_id + ", user_id=" + user_id + ", service_start_date="
-				+ service_start_date + ", postal_code=" + postal_code + ", AddressLine1=" + AddressLine1
-				+ ", AddressLine2=" + AddressLine2 + ", first_name=" + first_name + ", last_name=" + last_name + "]";
-	}	
+		return "ServiceRequestDto [service_req_id=" + service_req_id + ", service_start_date=" + service_start_date
+				+ ", service_hours=" + service_hours + ", total_cost=" + total_cost + ", comments=" + comments
+				+ ", service_start_time=" + service_start_time + ", has_pets=" + has_pets + ", AddressLine1="
+				+ AddressLine1 + ", AddressLine2=" + AddressLine2 + ", Mobile=" + Mobile + ", Email=" + Email
+				+ ", service_extra=" + service_extra + "]";
+	}
+
+	
+	
 	
 }

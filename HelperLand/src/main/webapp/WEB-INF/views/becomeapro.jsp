@@ -103,7 +103,7 @@
 					class="dropdown-menu dropdown-menu-right dropdown-cyan text-color-nav"
 					aria-labelledby="navbarDropdownMenuLink-4">
 					<span style="padding-left: 15px;">Welcome,<br>
-					<strong style="padding-left: 15px;">First Customer</strong></span>
+					<strong style="padding-left: 15px;">${htmlusername }</strong></span>
 					<div class="devider-line"></div>
 					<a class="dropdown-item text-color-nav text-decoration-none"
 						href="user">My Dashboard</a>  <a
@@ -120,7 +120,8 @@
       <div class="text-center register-text">
         <h3>Register Now!</h3>
       </div>
-      <form  method="post" action="registerServiceProvider">
+      <form  method="post" action="registerServiceProvider"
+      oninput='confirmpassword.setCustomValidity(confirmpassword.value != password.value ? "Passwords do not match." : "")'>
       <div class="alert alert-danger alert-dismissible fade show d-none "
 				${displayError } role="alert">
 				${error }
@@ -146,28 +147,30 @@
             style="height: 46px;" placeholder="Email Address">
         </div>
         <div class="number_input d-flex justify-content-center form-group" style="padding-top: 15px;">
-          <input type="text" id="form3Example1" class="form-control float-right country_number" placeholder="+91"
-            style="height: 46px; width: 54px; background-color: #f4f4f4;" />
-
-          <input type="text" id="form3Example1" class="form-control" placeholder="Mobile number" name="mobile"
-            style="height: 46px;" />
+          <div class="input-group mb-2">
+												<div class="input-group-prepend">
+													<div class="input-group-text">+91</div>
+												</div>
+												<input type="text" class="form-control"
+													id="mobile" name="mobile"
+													placeholder="Mobile number" required>
+											</div>
         </div>
         <div class="form-group" style="padding-top: 15px;">
-          <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Password"
+          <input type="password" class="form-control" id="password" name="password" placeholder="Password"
             style="height: 46px;">
         </div>
         <div class="form-group" style="padding-top: 15px;">
-          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Confirm Password"
+          <input type="password" class="form-control" id="exampleInputPassword1" name="confirmpassword" placeholder="Confirm Password"
             style="height: 46px;">
         </div>
-        <div class="form-check" style="padding-top: 15px;">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1">
-          <label class="form-check-label" for="exampleCheck1">Send me newsletters from Helperland</label>
-        </div>
+        
         <div class="form-check" style="padding-top: 15px;">
           <input type="checkbox" class="form-check-input" id="exampleCheck1">
           <label class="form-check-label" for="exampleCheck1">I accept terms and conditions & privacy policy</label>
         </div>
+        <div class="mt-2 text-center mb-2" id="passwordvalidation"></div>
+								<div class="mt-2 text-center mb-2" id="Phonevalidation"></div>
         <div class="btn-get-strated mx-auto text-center align-items-center py-2 my-3">
           <button type="submit" class="button_link text-decoration-none text-light" style="background: transparent; border-color: transparent;">Get Started <img src="<c:url value="/resources/images/shape-1.svg" />"></button>
         </div>
@@ -202,13 +205,26 @@
         <li class="side-items">
           <a class="side-link text-decoration-none" href="contactUs ">Contact</a>
         </li>
-        <li class="side-items">
-          <a class="side-link text-decoration-none" data-toggle="modal" data-target="#exampleModalCenter"
-            href="#">Login</a>
-        </li>
-        <li class="side-items">
-          <a class="side-link text-decoration-none" href="becomeapro ">Become a cleaner</a>
-        </li>
+        <li class="side-items" id="offcanvasLogin"><a
+					class="side-link text-decoration-none" data-toggle="modal" data-bs-dismiss="offcanvas" 
+					data-target="#exampleModalCenter" href="#">Login</a></li>
+				<li class="side-items" id="offcanvasBecomeapro"><a 
+					class="side-link text-decoration-none" data-bs-dismiss="offcanvas" href="becomeapro">Become
+						a cleaner</a></li>
+						<li class="side-items" id="offcanvasDashboard"><c:if test="${user_type == 2 }">
+									<a class="side-link text-decoration-none" href="serviceprovider">Dashboard</a>
+								</c:if>
+								
+								<c:if test="${user_type == 3 }">
+									<a class="side-link text-decoration-none" href="user">Dashboard</a>
+								</c:if>
+								
+								<c:if test="${user_type == 1 }">
+									<a class="side-link text-decoration-none" href="admin">Dashboard</a>
+								</c:if></li>
+				<li class="side-items" id="offcanvasLogout"><a
+						class="side-link text-decoration-none"
+						href="logout">Log out</a></li>
       </ul>
 
     </div>
@@ -574,7 +590,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     
     <script>
-	let name = <%=request.getAttribute("hideshow")%>
+let name = <%=request.getAttribute("hideshow")%>
 	
 	if(name == null){
 		/* document.getElementById("notificon").style.display = "none"; */
@@ -584,6 +600,10 @@
 		$("#profilepic").css("display", "none");
 		$("#loginlink").css("display", "block");
 		$("#becomelink").css("display", "block");
+		$("#offcanvasLogin").css("display", "block");
+		$("#offcanvasBecomeapro").css("display", "block");
+		$("#offcanvasDashboard").css("display", "none");
+		$("#offcanvasLogout").css("display", "none");
 		console.log("hiiiiiiiiiiiiiiiiiii");
 	}
 	else{
@@ -592,11 +612,57 @@
 		$("#profilepic").css("display", "block");
 		$("#loginlink").css("display", "none");
 		$("#becomelink").css("display", "none");
+		$("#offcanvasLogin").css("display", "none");
+		$("#offcanvasBecomeapro").css("display", "none");
+		$("#offcanvasDashboard").css("display", "block");
+		$("#offcanvasLogout").css("display", "block");
 		$('#my_image').css("width", "73px");
 		$('#my_image').css("height", "54px"); 
 		console.log("hiiiiiiiiiiiiiiiiiii");
  		
 	}
+	
+	$(document).ready(function() {
+		$("#password").on('keyup', function() {
+			var password = $("#password").val();
+			var regularExpression = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,14}$/;
+			if(!regularExpression.test(password)){
+				$('#passwordvalidation').html("Password must be in length 6-14<br>Should contain atleast one uppercase letter, lowercase letter, number and special character.<br><hr>").css("color", "red");
+			}
+			else{
+				$('#passwordvalidation').html("Password strength : Good<br><hr>").css("color", "green");
+			}
+			
+		});
+		$("#mobile").on('keyup', function() {
+			var a = document.forms["createuseraccount"]["mobile"].value;
+			var filter = /[0-9]{10}/;
+			if (!filter.test(a)) {
+				$('#Phonevalidation').html("Enter Correct Phone number").css("color", "red");
+			}
+			else {
+				$('#Phonevalidation').html("");
+			}
+		});
+	});
+	
+	
+	$("#createuseraccount").submit(function(event) {
+		var password = document.forms["createuseraccount"]["password"].value;
+		var regularExpression = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,14}$/;
+		var a = document.forms["createuseraccount"]["mobile"].value;
+		var filter = /[0-9]{10}/;
+		if(!regularExpression.test(password) || !filter.test(a)){
+			return false;
+		}
+		else{
+			return true;
+		}
+	});
+	
+	$("#errorMessage").fadeTo(2000, 500).slideUp(500, function(){
+	    $("#errorMessage").slideUp(500);
+	});
 	</script>
     
 </body>

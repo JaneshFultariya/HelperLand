@@ -101,7 +101,7 @@
 					class="dropdown-menu dropdown-menu-right dropdown-cyan text-color-nav"
 					aria-labelledby="navbarDropdownMenuLink-4">
 					<span style="padding-left: 15px;">Welcome,<br>
-					<strong style="padding-left: 15px;">First Customer</strong></span>
+					<strong style="padding-left: 15px;">${htmlusername }</strong></span>
 					<div class="devider-line"></div>
 					<c:if test="${user_type == 2 }">
 									<a class="dropdown-item" href="serviceprovider">Dashboard</a>
@@ -127,7 +127,7 @@
 <div class="position-absolute w-100 d-flex justify-content-center"
 		style="top: 10px; z-index: 100000;">
 		<div
-			class="alert alert-danger alert-dismissible fade show d-none w-75"
+			class="alert alert-danger alert-dismissible fade show d-none w-75" id="errorMessage"
 			${displayError } role="alert">
 			${error }
 			<button type="button" class="btn-close" data-bs-dismiss="alert"
@@ -330,7 +330,7 @@
 													<div class="input-group-text">+91</div>
 												</div>
 												<input type="text" class="form-control"
-													id="inlineFormInputGroup" name="mobile"
+													id="mobile" name="mobile"
 													placeholder="Mobile number" required>
 											</div>
 										</div>
@@ -359,6 +359,7 @@
 								</div>
 								
 								<div class="mt-2 text-center mb-2" id="passwordvalidation"></div>
+								<div class="mt-2 text-center mb-2" id="Phonevalidation"></div>
 								
 								<button type="submit" class="btn btn-primary btn-lg" 
 									title="Send">Register</button>
@@ -462,12 +463,26 @@
 				<li class="side-items"><a
 					class="side-link text-decoration-none" data-bs-dismiss="offcanvas" href="contactUs">Contact</a>
 				</li>
-				<li class="side-items"><a
-					class="side-link text-decoration-none" data-toggle="modal" data-bs-dismiss="offcanvas"
+				<li class="side-items" id="offcanvasLogin"><a
+					class="side-link text-decoration-none" data-toggle="modal" data-bs-dismiss="offcanvas" 
 					data-target="#exampleModalCenter" href="#">Login</a></li>
-				<li class="side-items"><a
+				<li class="side-items" id="offcanvasBecomeapro"><a 
 					class="side-link text-decoration-none" data-bs-dismiss="offcanvas" href="becomeapro">Become
 						a cleaner</a></li>
+						<li class="side-items" id="offcanvasDashboard"><c:if test="${user_type == 2 }">
+									<a class="side-link text-decoration-none" href="serviceprovider">Dashboard</a>
+								</c:if>
+								
+								<c:if test="${user_type == 3 }">
+									<a class="side-link text-decoration-none" href="user">Dashboard</a>
+								</c:if>
+								
+								<c:if test="${user_type == 1 }">
+									<a class="side-link text-decoration-none" href="admin">Dashboard</a>
+								</c:if></li>
+				<li class="side-items" id="offcanvasLogout"><a
+						class="side-link text-decoration-none"
+						href="logout">Log out</a></li>
 			</ul>
 
 		</div>
@@ -748,6 +763,7 @@
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
 	<script>
 		let temp =
@@ -768,6 +784,10 @@
 		$("#profilepic").css("display", "none");
 		$("#loginlink").css("display", "block");
 		$("#becomelink").css("display", "block");
+		$("#offcanvasLogin").css("display", "block");
+		$("#offcanvasBecomeapro").css("display", "block");
+		$("#offcanvasDashboard").css("display", "none");
+		$("#offcanvasLogout").css("display", "none");
 		console.log("hiiiiiiiiiiiiiiiiiii");
 	}
 	else{
@@ -776,6 +796,10 @@
 		$("#profilepic").css("display", "block");
 		$("#loginlink").css("display", "none");
 		$("#becomelink").css("display", "none");
+		$("#offcanvasLogin").css("display", "none");
+		$("#offcanvasBecomeapro").css("display", "none");
+		$("#offcanvasDashboard").css("display", "block");
+		$("#offcanvasLogout").css("display", "block");
 		$('#my_image').css("width", "73px");
 		$('#my_image').css("height", "54px"); 
 		console.log("hiiiiiiiiiiiiiiiiiii");
@@ -792,6 +816,17 @@
 			else{
 				$('#passwordvalidation').html("Password strength : Good<br><hr>").css("color", "green");
 			}
+			
+		});
+		$("#mobile").on('keyup', function() {
+			var a = document.forms["createuseraccount"]["mobile"].value;
+			var filter = /[0-9]{10}/;
+			if (!filter.test(a)) {
+				$('#Phonevalidation').html("Enter Correct Phone number").css("color", "red");
+			}
+			else {
+				$('#Phonevalidation').html("");
+			}
 		});
 	});
 	
@@ -799,12 +834,18 @@
 	$("#createuseraccount").submit(function(event) {
 		var password = document.forms["createuseraccount"]["password"].value;
 		var regularExpression = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,14}$/;
-		if(!regularExpression.test(password)){
+		var a = document.forms["createuseraccount"]["mobile"].value;
+		var filter = /[0-9]{10}/;
+		if(!regularExpression.test(password) || !filter.test(a)){
 			return false;
 		}
 		else{
 			return true;
 		}
+	});
+	
+	$("#errorMessage").fadeTo(2000, 500).slideUp(500, function(){
+	    $("#errorMessage").slideUp(500);
 	});
 	</script>
 

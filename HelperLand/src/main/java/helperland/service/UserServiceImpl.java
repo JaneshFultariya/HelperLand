@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import helperland.dao.BookaServiceDao;
 import helperland.dao.UserDao;
+import helperland.dto.ServiceRequestDto;
 import helperland.model.Rating;
 import helperland.model.ServiceRequest;
 import helperland.model.User;

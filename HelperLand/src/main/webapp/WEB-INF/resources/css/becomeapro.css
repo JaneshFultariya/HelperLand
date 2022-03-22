@@ -86,7 +86,7 @@ li {
 
 .header .container {
     width: 430px;
-    height: 685px;
+    height: auto;
     background-color: #FFFFFF;
     opacity: 1;
     margin-top: 38px;

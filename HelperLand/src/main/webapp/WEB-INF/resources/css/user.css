@@ -492,13 +492,8 @@ ul {
 	padding: 15px;
 }
 
-.pagination {
-	margin-right: 150px !important;
-}
 
-.dataTables_info {
-	margin-left: 15px;
-}
+
 
 .nav-style {
 	width: 350px;
@@ -1031,6 +1026,10 @@ ul {
 }
 
 .custom-select {
+	width: 130px !important;
+}
+
+#dashboardtable_length .custom-select {
 	width: 75px !important;
 }
 

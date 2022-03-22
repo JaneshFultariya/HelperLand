@@ -123,10 +123,10 @@
 			<div class="offcanvas-body">
 				<div class="devider-line"></div>
 				<ul class="side-nav">
-					<li class="side-items"><a
+					<li class="side-items"><a id="realtimedashboardcanva"
 						class="side-link text-decoration-none"
 						onclick="openCity(event, 'Deshboard')" href="#">Dashboard</a></li>
-					<li class="side-items"><a
+					<li class="side-items"><a id="realtimeservicehistorycanva"
 						class="side-link text-decoration-none"
 						onclick="openCity(event, 'History')" href="#">Service History</a>
 					</li>
@@ -224,126 +224,7 @@
 				<button class="btn addrequestbuttton tablinks" style="width: 200px;">Add
 					new service request</button>
 			</div>
-			<%-- <div class="container">
-				<div class="row">
-					<div class="col-lg-12">
-						<table id="example" class="display table nowrap" cellspacing="0"
-							style="width: 100%">
-							<thead>
-								<tr>
-									<th scope="col" class="serviceidrow">Service ID</th>
-									<th scope="col" class="servicedate">Service date</th>
-									<th scope="col" class="provider">Service Provider</th>
-									<th scope="col" class="payment">Payment</th>
-									<th scope="col" class="action">Actions</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td scope="row text-color-table number-and-km"><a href="#"
-										data-toggle="modal"
-										data-target="#withoutServiceProviderdashboardModalCenter"
-										class="text-decoration-none link-text">323436</a></td>
-									<td>
-										<div class="col">
-											<div class="d-flex custom-margin-table">
-												<img
-													src="<c:url value="/resources/images/calculator.png" />"
-													class="calander-img"> <a href="#" data-toggle="modal"
-													data-target="#withoutServiceProviderdashboardModalCenter"
-													class="text-decoration-none link-text"><strong>31/03/2018</strong></a>
-											</div>
-											<div class="d-flex">
-												<img class="clock" src="images/layer-712.png"> <a
-													href="#" data-toggle="modal"
-													data-target="#withoutServiceProviderdashboardModalCenter"
-													class="text-decoration-none link-text">12:00 - 18:00</a>
-											</div>
-										</div>
-									</td>
-									<td></td>
-									<td class="eurotext">
-										<div class="d-flex flex-row custom-margin-table-two-data">
-											<p class="euro-text">€</p>
-											<p class="number-text">63</p>
-										</div>
-									</td>
-									<td>
-										<div class="d-flex flex-row">
-											<button class="btn Reschedule-button" data-toggle="modal"
-												data-target="#rescheduleModalCenter">Reschedule</button>
-											<button class="btn Cancle-button" data-toggle="modal"
-												data-target="#cancelModalCenter">Cancle</button>
-										</div>
-									</td>
-								</tr>
-
-								<tr>
-									<td scope="row text-color-table number-and-km"><a href="#"
-										data-toggle="modal"
-										data-target="#withServiceProviderdashboardModalCenter"
-										class="text-decoration-none link-text">323436</a></td>
-									<td>
-										<div class="col">
-											<div class="d-flex custom-margin-table">
-												<img
-													src="<c:url value="/resources/images/calculator.png" />"
-													class="calander-img"> <a href="#" data-toggle="modal"
-													data-target="#withServiceProviderdashboardModalCenter"
-													class="text-decoration-none link-text"><strong>31/03/2018</strong></a>
-											</div>
-											<div class="d-flex">
-												<img class="clock"
-													src="<c:url value="/resources/images/layer-712.png" />">
-												<a href="#" data-toggle="modal"
-													data-target="#withServiceProviderdashboardModalCenter"
-													class="text-decoration-none link-text">12:00 - 18:00</a>
-											</div>
-										</div>
-									</td>
-									<td>
-										<div class="d-flex flex-row">
-											<img src="<c:url value="/resources/images/hat.png" />"
-												class="hat-img">
-											<div class="col">
-												<p class="link-text">Lyum Watson</p>
-												<div class="d-flex">
-													<img class="clock"
-														src="<c:url value="/resources/images/yellowstar.png" />">
-													<img class="clock"
-														src="<c:url value="/resources/images/yellowstar.png" />">
-													<img class="clock"
-														src="<c:url value="/resources/images/yellowstar.png" />">
-													<img class="clock"
-														src="<c:url value="/resources/images/yellowstar.png" />">
-													<img class="clock"
-														src="<c:url value="/resources/images/brownstar.png" />">
-													<p>4</p>
-												</div>
-											</div>
-										</div>
-									</td>
-									<td class="eurotext">
-										<div class="d-flex flex-row custom-margin-table-two-data">
-											<p class="euro-text">€</p>
-											<p class="number-text">63</p>
-										</div>
-									</td>
-									<td>
-										<div class="d-flex flex-row">
-											<button class="btn Reschedule-button" data-toggle="modal"
-												data-target="#rescheduleModalCenter">Reschedule</button>
-											<button class="btn Cancle-button" data-toggle="modal"
-												data-target="#cancelModalCenter">Cancle</button>
-										</div>
-									</td>
-								</tr>
-
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div> --%>
+			
 
 			<div class="container">
 				<div class="row">
@@ -378,131 +259,13 @@
 					<h3 class="link-text">Service History</h3>
 				</div>
 
-				<button class="btn addrequestbuttton" style="width: 200px;">Export</button>
+				<button class="btn addrequestbuttton" id="exporttabledata" style="width: 200px;">Export</button>
 			</div>
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-12">
 						<div id="serviceHistory">
-							<%-- <table id="selectedColumn" class="display table nowrap"
-							cellspacing="0" style="width: 100%">
-							<thead>
-								<tr>
-									<th scope="col">Service ID</th>
-									<th scope="col">Service date</th>
-									<th scope="col">Service Provider</th>
-									<th scope="col">Payment</th>
-									<th scope="col">Report</th>
-									<th scope="col">Status</th>
-									<th scope="col">Rate SP</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td scope="row text-color-table number-and-km"><a href="#"
-										data-toggle="modal"
-										data-target="#withServiceProviderModalCenter"
-										class="text-decoration-none link-text">323436</a></td>
-									<td>
-										<div class="col">
-											<div class="d-flex custom-margin-table">
-												<img
-													src="<c:url value="/resources/images/calculator.png" />"
-													class="calander-img"> <a href="#" data-toggle="modal"
-													data-target="#withServiceProviderModalCenter"
-													class="text-decoration-none link-text"><strong>31/03/2018</strong></a>
-											</div>
-											<div class="d-flex">
-												<img class="clock"
-													src="<c:url value="/resources/images/layer-712.png" />">
-												<a href="#" data-toggle="modal"
-													data-target="#withServiceProviderModalCenter"
-													class="text-decoration-none link-text">12:00 - 18:00</a>
-											</div>
-										</div>
-									</td>
-									<td>
-										<div class="d-flex flex-row">
-											<img src="<c:url value="/resources/images/hat.png" />"
-												class="hat-img">
-											<div class="col">
-												<p class="link-text">Lyum Watson</p>
-												<div class="d-flex">
-													<img class="clock"
-														src="<c:url value="/resources/images/yellowstar.png" />">
-													<img class="clock"
-														src="<c:url value="/resources/images/yellowstar.png" />">
-													<img class="clock"
-														src="<c:url value="/resources/images/yellowstar.png" />">
-													<img class="clock"
-														src="<c:url value="/resources/images/yellowstar.png" />">
-													<img class="clock"
-														src="<c:url value="/resources/images/brownstar.png" />">
-													<p>4</p>
-												</div>
-											</div>
-										</div>
-									</td>
-									<td class="eurotext">
-										<div class="d-flex flex-row custom-margin-table-two-data">
-											<p class="euro-text">€</p>
-											<p class="number-text">63</p>
-										</div>
-									</td>
-									<td><img
-										src="<c:url value="/resources/images/icons8-mail-64.png" />"
-										alt="reportimg"></td>
-									<td>
-										<button
-											class="Not-Applicable-button align-items-center justify-content-center custom-margin-table-two-data">Cancelled</button>
-									</td>
-									<td><button
-											class="btn custom-margin-table-two-data-button">Rate
-											SP</button></td>
-								</tr>
-								<tr>
-									<td scope="row text-color-table number-and-km"><a href="#"
-										data-toggle="modal"
-										data-target="#withoutServiceProviderModalCenter"
-										class="text-decoration-none link-text">323436</a></td>
-									<td>
-										<div class="col">
-											<div class="d-flex custom-margin-table">
-												<img
-													src="<c:url value="/resources/images/calculator.png" />"
-													class="calander-img"> <a href="#" data-toggle="modal"
-													data-target="#withoutServiceProviderModalCenter"
-													class="text-decoration-none link-text"><strong>31/03/2018</strong></a>
-											</div>
-											<div class="d-flex">
-												<img class="clock"
-													src="<c:url value="/resources/images/layer-712.png" />">
-												<a href="#" data-toggle="modal"
-													data-target="#withoutServiceProviderModalCenter"
-													class="text-decoration-none link-text">12:00 - 18:00</a>
-											</div>
-										</div>
-									</td>
-									<td></td>
-									<td class="eurotext">
-										<div class="d-flex flex-row custom-margin-table-two-data">
-											<p class="euro-text">€</p>
-											<p class="number-text">63</p>
-										</div>
-									</td>
-									<td><img
-										src="<c:url value="/resources/images/icons8-mail-64.png" />"
-										alt="reportimg"></td>
-									<td>
-										<button
-											class="Not-Applicable-button align-items-center justify-content-center custom-margin-table-two-data">Cancelled</button>
-									</td>
-									<td><button
-											class="btn custom-margin-table-two-data-button">Rate
-											SP</button></td>
-								</tr>
-							</tbody>
-						</table> --%>
+							
 
 							<table id="selectedColumn" class="display table nowrap"
 								cellspacing="0" style="width: 100%">
@@ -876,7 +639,9 @@
 										name="confirmpassword" id="updtconfirmpassword"
 										placeholder="Confirm Password">
 								</div>
+								<div id="passwordvalidationuser"></div>
 								<button class="save-btn" style="margin-left: 0px;">save</button>
+								
 							</form>
 						</div>
 
@@ -952,7 +717,7 @@
 										style="height: 46px;" type="text" class="form-control"
 										id="pincode" name="postalcode" placeholder="Postal code">
 								</div>
-								<div class="form-group col-md-6">
+								<div class="form-group col-md-4">
 									<label for="inputPassword4">City</label> <select
 										class="custom-select" id="City" name="City"
 										style="margin-left: 5px; width: 200px; height: 46px;">
@@ -977,6 +742,7 @@
 
 							</div>
 							<button type="submit" class="Edit-btn" title="Login">Edit</button>
+							<div id="mobilevalidationcheck"></div>
 						</form>
 					</div>
 				</div>
@@ -1018,7 +784,7 @@
 										style="height: 46px;" type="text" class="form-control"
 										id="pincode" name="postalcode" placeholder="Postal code">
 								</div>
-								<div class="form-group col-md-6">
+								<div class="form-group col-md-4">
 									<label for="inputPassword4">City</label> <select
 										class="custom-select" id="City" name="City"
 										style="margin-left: 5px; width: 200px; height: 46px;">
@@ -1036,7 +802,7 @@
 										<div class="input-group-prepend">
 											<div class="input-group-text">+91</div>
 										</div>
-										<input type="text" class="form-control" id="Mobile"
+										<input type="text" class="form-control" id="Mobileadd"
 											name="Mobile" placeholder="Mobile number">
 									</div>
 								</div>
@@ -1045,6 +811,7 @@
 							<button type="submit" class="Edit-btn" title="Login">Add
 								Address</button>
 							<div id="successmessage"></div>
+							<div id="mobilevalidationcheckadd"></div>
 						</form>
 					</div>
 				</div>
@@ -1148,7 +915,7 @@
 					<div class="modal-header">
 						<h4 class="modal-title strong-color" id="exampleModalLongTitle">Reschedule
 							Service Request</h4>
-						<button type="button" class="close" data-dismiss="modal"
+						<button type="button" class="close" data-dismiss="modal" id="closereschedulemodal"
 							aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
@@ -1185,23 +952,6 @@
 			<div class="modal-dialog modal-dialog-centered">
 				<div class="modal-content">
 					<div class="modal-header">
-						<div class="d-flex">
-							<img src="<c:url value="/resources/images/avatar-car.png" />" alt="">
-							<div>
-								<h5 class="modal-title">Sandip Patel</h5>
-								<div id="rating-form3">
-									<span class="rating-star"> <input type="radio"
-										name="rating3" value="5"><span class="star"></span> <input
-										type="radio" name="rating3" value="4"><span
-										class="star"></span> <input type="radio" name="rating3"
-										value="3"><span class="star"></span> <input
-										type="radio" name="rating3" value="2"><span
-										class="star"></span> <input type="radio" name="rating3"
-										value="1"><span class="star"></span>
-									</span>
-								</div>
-							</div>
-						</div>
 
 						<button type="button" class="btn-close" data-bs-dismiss="modal"
 							aria-label="Close"></button>
@@ -1274,9 +1024,7 @@
 	</section>
 
 	<div style="flex-grow: 1;"></div>
-
-	<input type="hidden" id="temppp">
-
+	
 	<div class="footer_section w-100">
 		<div
 			class="footer_main d-flex justify-content-around align-items-center">
@@ -1340,6 +1088,8 @@
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+		
+		<script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/jquery.table2excel.min.js"></script>
 
 
 	<!-- <script>
@@ -1826,6 +1576,7 @@
 				success : function(data) {
 					console.log("SUCCESS: ", data);
 					$("#closecanclemodal").click();
+					alert("Service request successfully cancel !!!");
 					dashboard();
 				},
 				error : function(e) {
@@ -1856,9 +1607,9 @@
 						+ $("#startTime").val(),
 				success : function(data) {
 					console.log("SUCCESS: ", data);
-					$("#closecanclemodal").click();
+					$("#closereschedulemodal").click();
 					dashboard();
-					console.log("hiii");
+					alert("Service request successfully reschedule !!!");
 				},
 				error : function(e) {
 					console.log("ERROR: ", e);
@@ -1868,10 +1619,14 @@
 				}
 			});
 		}
-
-		$(document)
-				.on('click','#realtimeservicehistory',
-						function() {
+		
+		$(document).on('click', '#realtimeservicehistorycanva', function() {
+			realtimeservicehistory();
+		});
+		$(document).on('click', '#realtimeservicehistory', function() {
+			realtimeservicehistory();
+		});
+		function realtimeservicehistory() {
 							$.ajax({
 										type : "GET",
 										url : "/helperland/showserviceHistory",
@@ -1979,7 +1734,25 @@
 											console.log("Done");
 										}
 									});
-						});
+						}
+		$(function () {
+            $("#exporttabledata").click(function (e) {
+                var table = $("#selectedColumn");
+                if (table && table.length) {
+                    $(table).table2excel({
+                        exclude: ".noExl",
+                        name: "Excel Document Name",
+                        filename: "ServiceHistory" + new Date().toISOString().replace(/[\-\:\.]/g, "") + ".xls",
+                        fileext: ".xls",
+                        exclude_img: true,
+                        exclude_links: true,
+                        exclude_inputs: true,
+                        preserveColors: false
+                    });
+                }
+            });
+
+        });
 
 		var on_time_arriaval = "";
 		var friendly = "";
@@ -2032,6 +1805,9 @@
 		$(document).on('click', '#realtimedashboard', function() {
 			dashboard();
 		});
+		$(document).on('click', '#realtimedashboardcanva', function() {
+			dashboard();
+		});
 
 		$(document).ready(function() {
 			var dtToday = new Date();
@@ -2048,6 +1824,78 @@
 			$('#service_start_date').attr('min', minDate);
 		});
 
+		$("#updateaddressformsettings").submit(function(event) {
+			var a = document.forms["updateaddressformsettings"]["Mobile"].value;
+			var filter = /[0-9]{10}/;
+			if(!filter.test(a)){
+				return false;
+			}
+			else{
+				return true;
+			}
+		});
+
+		$(document).ready(function() {
+			$("#Mobile").on('keyup', function() {
+				var a = document.forms["updateaddressformsettings"]["Mobile"].value;
+				var filter = /[0-9]{10}/;
+				if (!filter.test(a)) {
+					$('#mobilevalidationcheck').html("Enter Correct Phone number").css("color", "red");
+				}
+				else {
+					$('#mobilevalidationcheck').html("");
+				}
+			});
+		})
+		
+		$("#addaddressformsettings").submit(function(event) {
+			var a = document.forms["addaddressformsettings"]["Mobile"].value;
+			var filter = /[0-9]{10}/;
+			if(!filter.test(a)){
+				return false;
+			}
+			else{
+				return true;
+			}
+		});
+
+		$(document).ready(function() {
+			$("#Mobileadd").on('keyup', function() {
+				var a = document.forms["addaddressformsettings"]["Mobile"].value;
+				var filter = /[0-9]{10}/;
+				if (!filter.test(a)) {
+					$('#mobilevalidationcheckadd').html("Enter Correct Phone number").css("color", "red");
+				}
+				else {
+					$('#mobilevalidationcheckadd').html("");
+				}
+			});
+		});
+		
+		
+		$(document).ready(function() {
+	        $("#updtpassword").on('keyup', function() {
+	            var password = $("#updtpassword").val();
+	            var regularExpression = /^(?=.[0-9])(?=.[!@#$%^&])[a-zA-Z0-9!@#$%^&]{6,14}$/;
+	            if(!regularExpression.test(password)){
+	                $('#passwordvalidationuser').html("Password must be in length 6-14<br>Should contain atleast one uppercase letter, lowercase letter, number and special character.<br><hr>").css("color", "red");
+	            }
+	            else{
+	                $('#passwordvalidationuser').html("Password strength : Good<br><hr>").css("color", "green");
+	            }
+
+	        });
+	});
+	$("#settingupdatepasswordform").click(function(event) {
+	        var password = document.forms["settingupdatepasswordform"]["password"].value;
+	        var regularExpression = /^(?=.[0-9])(?=.[!@#$%^&])[a-zA-Z0-9!@#$%^&]{6,14}$/;
+	        if(!regularExpression.test(password)){
+	            return false;
+	        }
+	        else{
+	            return true;
+	        }
+	    });
 		
 	</script>
 

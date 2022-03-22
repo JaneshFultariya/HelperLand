@@ -90,9 +90,9 @@
 					class="dropdown-menu dropdown-menu-right dropdown-cyan text-color-nav"
 					aria-labelledby="navbarDropdownMenuLink-4">
 					<span style="padding-left: 15px;">Welcome,<br>
-					<strong style="padding-left: 15px;">First Customer</strong></span>
+					<strong style="padding-left: 15px;">${htmlusername }</strong></span>
 					<div class="devider-line"></div>
-					<a class="dropdown-item text-color-nav text-decoration-none"
+					<a class="dropdown-item text-color-nav text-decoration-none" id="customerdashboard"
 						href="user">My Dashboard</a>  <a
 						class="dropdown-item text-color-nav text-decoration-none"
 						href="logout">Log out</a>
@@ -127,13 +127,21 @@
                 <li class="side-items">
                     <a class="side-link text-decoration-none" href="#">Contact</a>
                 </li>
-                <li class="side-items">
-                    <a class="side-link text-decoration-none" data-toggle="modal" data-target="#exampleModalCenter"
-                        href="#">Login</a>
-                </li>
-                <li class="side-items">
-                    <a class="side-link text-decoration-none" href="#">Become a cleaner</a>
-                </li>
+                
+						<li class="side-items" id="offcanvasDashboard"><c:if test="${user_type == 2 }">
+									<a class="side-link text-decoration-none" href="serviceprovider">Dashboard</a>
+								</c:if>
+								
+								<c:if test="${user_type == 3 }">
+									<a class="side-link text-decoration-none" href="user">Dashboard</a>
+								</c:if>
+								
+								<c:if test="${user_type == 1 }">
+									<a class="side-link text-decoration-none" href="admin">Dashboard</a>
+								</c:if></li>
+				<li class="side-items" id="offcanvasLogout"><a
+						class="side-link text-decoration-none"
+						href="logout">Log out</a></li>
             </ul>
 
         </div>
@@ -172,7 +180,7 @@
                           <div class="form-group col-md-6">
                             <label for="inputPassword4">City</label>
                             <select class="custom-select" id="City" name="City"
-                              style="margin-left: 5px; width: 200px; height: 46px;">
+                              style="margin-left: 5px; width: 200px;">
                               <option selected value="ABC">ABC</option>
                               <option value="DEF">DEF</option>
                               <option value="GHI">GHI</option>
@@ -194,11 +202,52 @@
                         </div>
                         <button type="submit" class="Save-btn" title="Save">Save</button>
                        	<div id="successmessage"></div>
+                       	<div id="mobilevalidationcheck"></div>
                       </form>
                     </div>
                   </div>
                 </div>
               </div>
+              
+   <%-- <div class="modal fade" id="booking-success-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm mx-auto" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="d-flex align-items-center justify-content-center flex-column">
+                    <div class="success-symbol d-flex align-items-center justify-content-center success-booking-img">
+                        <img src="<c:url value="/resources/images/correct-white-medium.png" />" alt="">
+                    </div>
+                    <div class="text-center mt-3">
+                        <h5>Booking has been successfully submitted</h5>
+                    </div>
+                    <div class="mt-3 mb-2">Service Request id: <span id="service-id">8848</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> --%>
+<div class="modal fade" id="bookingsuccessmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 	</section>
 
 
@@ -1001,9 +1050,9 @@ function finalcontinue(){
 		type:"GET",
 		url:"/helperland/finalsave/" + $('#address_id:checked').val()+ "," +$("#firstEuroValue").text() + "," + $("#EuroValue").text() + "," + $("#comments").val() + "," + $("#extratime").val() + "," + $("#postalcode").val() + "," + $("#service_start_date").val() +","+ $("#petcheck").is(":checked").toString() + "," + allitems + "," + $("#startTime").val() + "," + $("#totaltime").text(),
 		success:function(response){
-			
 				console.log("SUCCESS: ", response);
-				alert("service request sent...");
+				/* alert("service request sent..."); */
+				$("#bookingsuccessmodal").modal("show");
 		},
 		error: function(e){
 			console.log("ERROR: ", e);
@@ -1014,6 +1063,11 @@ function finalcontinue(){
 		}
 	});
 }
+
+$('#bookingsuccessmodal').on('hidden.bs.modal', function () {
+	console.log("hii");
+	document.getElementById("customerdashboard").click();
+});
 
 function clicktime() {
   var time = parseFloat(document.getElementById('extratime').value);
@@ -1056,7 +1110,29 @@ $("#parentidcheckbox label").click(function(){
   console.log(temp);
 });
 
+$("#addaddressform").submit(function(event) {
+	var a = document.forms["addaddressform"]["Mobile"].value;
+	var filter = /[0-9]{10}/;
+	if(!filter.test(a)){
+		return false;
+	}
+	else{
+		return true;
+	}
+});
 
+$(document).ready(function() {
+	$("#Mobile").on('keyup', function() {
+		var a = document.forms["addaddressform"]["Mobile"].value;
+		var filter = /[0-9]{10}/;
+		if (!filter.test(a)) {
+			$('#mobilevalidationcheck').html("Enter Correct Phone number").css("color", "red");
+		}
+		else {
+			$('#mobilevalidationcheck').html("");
+		}
+	});
+})
 
   </script>  
     

@@ -95,7 +95,7 @@
 					class="dropdown-menu dropdown-menu-right dropdown-cyan text-color-nav"
 					aria-labelledby="navbarDropdownMenuLink-4">
 					<span style="padding-left: 15px;">Welcome,<br>
-					<strong style="padding-left: 15px;">First Customer</strong></span>
+					<strong style="padding-left: 15px;">${htmlusername }</strong></span>
 					<div class="devider-line"></div>
 					<a class="dropdown-item text-color-nav text-decoration-none"
 						href="user">My Dashboard</a>  <a
@@ -123,7 +123,7 @@
 					class="side-link text-decoration-none" href="bookservice ">Book
 						now</a></li>
 				<li class="side-items"><a
-					class="side-link text-decoration-none" href="price ">Prices &
+					class="side-link text-decoration-none" href="price">Prices &
 						services</a></li>
 				<li class="side-items"><a
 					class="side-link text-decoration-none" href="#">Warranty</a></li>
@@ -132,12 +132,26 @@
 				<li class="side-items"><a
 					class="side-link text-decoration-none" href="contactUs ">Contact</a>
 				</li>
-				<li class="side-items"><a
-					class="side-link text-decoration-none" data-toggle="modal"
+				<li class="side-items" id="offcanvasLogin"><a
+					class="side-link text-decoration-none" data-toggle="modal" data-bs-dismiss="offcanvas" 
 					data-target="#exampleModalCenter" href="#">Login</a></li>
-				<li class="side-items"><a
-					class="side-link text-decoration-none" href="becomeapro ">Become
+				<li class="side-items" id="offcanvasBecomeapro"><a 
+					class="side-link text-decoration-none" data-bs-dismiss="offcanvas" href="becomeapro">Become
 						a cleaner</a></li>
+				<li class="side-items" id="offcanvasDashboard"><c:if test="${user_type == 2 }">
+									<a class="side-link text-decoration-none" href="serviceprovider">Dashboard</a>
+								</c:if>
+								
+								<c:if test="${user_type == 3 }">
+									<a class="side-link text-decoration-none" href="user">Dashboard</a>
+								</c:if>
+								
+								<c:if test="${user_type == 1 }">
+									<a class="side-link text-decoration-none" href="admin">Dashboard</a>
+				</c:if></li>
+				<li class="side-items" id="offcanvasLogout"><a
+						class="side-link text-decoration-none"
+						href="logout">Log out</a></li>
 			</ul>
 
 		</div>
@@ -290,7 +304,7 @@
 							<img
 								src="<c:url value="/resources/images/forma-1-copy-5.png" />">
 						</div>
-						<form class="mx-auto" style="margin-top: 15px;" method="post" action="registerUser"
+						<form class="mx-auto" style="margin-top: 15px;" method="post" action="registerUser" id="createuseraccount"
 						oninput='confirmpassword.setCustomValidity(confirmpassword.value != password.value ? "Passwords do not match." : "")'
 						>
 						<div class="alert alert-danger alert-dismissible fade show d-none "
@@ -328,7 +342,7 @@
 												<div class="input-group-text">+91</div>
 											</div>
 											<input type="text" class="form-control"
-												id="inlineFormInputGroup"  name="mobile" placeholder="Mobile number">
+												id="mobile"  name="mobile" placeholder="Phone number">
 										</div>
 									</div>
 								</div>
@@ -336,7 +350,7 @@
 							<div class="form-group">
 								<div class="row">
 									<div class="col">
-										<input type="password" class="form-control" id="exampleInputPassword1" required name="password" placeholder="Password">
+										<input type="password" class="form-control" id="password" required name="password" placeholder="Password">
 									</div>
 									<div class="col">
 										<input type="password" class="form-control" id="exampleInputPassword2" required name="confirmpassword"
@@ -344,6 +358,8 @@
 									</div>
 								</div>
 							</div>
+							<div class="mt-2 text-center mb-2" id="passwordvalidation"></div>
+								<div class="mt-2 text-center mb-2" id="Phonevalidation"></div>
 							<div class="form-check" style="margin-left: 15px;">
 								<input type="checkbox" class="form-check-input" required
 									id="exampleCheck1"> <label class="form-check-label"
@@ -420,56 +436,19 @@
 		</div>
 
 		<div class="deviderline  mx-auto"></div>
-
-		<!-- <div class="container" style="padding-top: 74px;">
-            <div class="text-center">
-                <h3>Get in touch with us</h3>
-            </div>
-            <form class="form-get-in-touch" style="margin-top: 23px;">
-                <div class="name_input d-flex justify-content-center" style="margin-bottom: 15px;">
-                    <input type="text" id="form3Example1" class="form-control" placeholder="First Name"
-                        style="width: 299px; height: 46px; margin-right: 25px;" />
-                    <input type="text" id="form3Example2" class="form-control" placeholder="Last Name"
-                        style="width: 299px; height: 46px;" />
-                </div>
-                <div class=" d-flex justify-content-center" style="margin-bottom: 15px;">
-                    <input type="text" id="form3Example1" class="form-control float-right country_number"
-                        placeholder="+91" style="width: 57px; height: 46px; background-color: #c8c8c8;" />
-                    <div class="number_input d-flex justify-content-center">
-                        <input type="text" id="form3Example1" class="form-control float-right"
-                            placeholder="Mobile number" style="width: 242px; height: 46px; margin-right: 25px;" />
-                        <input type="text" id="form3Example2" class="form-control float-left"
-                            placeholder="Email address" style="width: 299px; height: 46px;" />
-                    </div>
-                </div>
-                <div class="row" style="margin-bottom: 15px;">
-                    <select class="custom-select mx-auto" style="width: 626px; height: 46px;"
-                        id="inlineFormCustomSelectPref">
-                        <option selected>Subject</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
-                </div>
-
-                <div class="d-flex justify-content-center">
-                    <input type="text" placeholder="Message" class="Rounded-Rectangle-2-copy-11">
-                </div>
-
-        </div> -->
 	</section>
 	<div class="container get-in-touch-form">
 		<div class="text-center">
 			<h3>Get in touch with us</h3>
 		</div>
-		<form class="mx-auto" method="post" action="contactUs">
+		<form class="mx-auto" method="post" action="contactUs" id="contactusformvalidation">
 			<div class="alert alert-danger alert-dismissible fade show d-none "
 				${displayError } role="alert">
 				${error }
 				<button type="button" class="btn-close" data-bs-dismiss="alert"
 					aria-label="Close"></button>
 			</div>
-			<div class="alert alert-success alert-dismissible fade show d-none "
+			<div class="alert alert-success alert-dismissible fade show d-none " id="successMessage"
 				${displaySuccess } role="alert">
 				${success }
 				<button type="button" class="btn-close" data-bs-dismiss="alert"
@@ -494,7 +473,7 @@
 							<div class="input-group-prepend">
 								<div class="input-group-text">+91</div>
 							</div>
-							<input type="text" required name="phone_number"
+							<input type="text" required name="phone_number" id="phone_number"
 								placeholder="Mobile number" class=" form-control">
 						</div>
 					</div>
@@ -519,7 +498,7 @@
 				<textarea class="form-control" id="exampleFormControlTextarea1"
 					rows="3" name="message" placeholder="Message"></textarea>
 			</div>
-
+			<div class="mt-2 text-center mb-2" id="Phonevalidationcontact"></div>
 			<div class="container text-center">
 				<button type="submit"
 					class="submit_btn rounded-pill text-white main_button">
@@ -629,6 +608,8 @@
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 		
+		<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+		
 		
 		<script>
 		function matchPassword() {  
@@ -644,29 +625,99 @@
 		</script>
 		
 		<script>
-	let name = <%=request.getAttribute("hideshow")%>
-	
-	if(name == null){
-		/* document.getElementById("notificon").style.display = "none"; */
-		/* $("#notificon").hide(); */
-		$("#notificon").removeClass( "d-flex" );
-		$("#notificon").css("display", "none");
-		$("#profilepic").css("display", "none");
-		$("#loginlink").css("display", "block");
-		$("#becomelink").css("display", "block");
-		console.log("hiiiiiiiiiiiiiiiiiii");
-	}
-	else{
-		$("#notificon").addClass( "d-flex" );
-		$("#notificon").css("display", "block");
-		$("#profilepic").css("display", "block");
-		$("#loginlink").css("display", "none");
-		$("#becomelink").css("display", "none");
-		$('#my_image').css("width", "73px");
-		$('#my_image').css("height", "54px"); 
-		console.log("hiiiiiiiiiiiiiiiiiii");
- 		
-	}
+		let name = <%=request.getAttribute("hideshow")%>
+		
+		if(name == null){
+			/* document.getElementById("notificon").style.display = "none"; */
+			/* $("#notificon").hide(); */
+			$("#notificon").removeClass( "d-flex" );
+			$("#notificon").css("display", "none");
+			$("#profilepic").css("display", "none");
+			$("#loginlink").css("display", "block");
+			$("#becomelink").css("display", "block");
+			$("#offcanvasLogin").css("display", "block");
+			$("#offcanvasBecomeapro").css("display", "block");
+			$("#offcanvasDashboard").css("display", "none");
+			$("#offcanvasLogout").css("display", "none");
+			console.log("hiiiiiiiiiiiiiiiiiii");
+		}
+		else{
+			$("#notificon").addClass( "d-flex" );
+			$("#notificon").css("display", "block");
+			$("#profilepic").css("display", "block");
+			$("#loginlink").css("display", "none");
+			$("#becomelink").css("display", "none");
+			$("#offcanvasLogin").css("display", "none");
+			$("#offcanvasBecomeapro").css("display", "none");
+			$("#offcanvasDashboard").css("display", "block");
+			$("#offcanvasLogout").css("display", "block");
+			$('#my_image').css("width", "73px");
+			$('#my_image').css("height", "54px"); 
+			console.log("hiiiiiiiiiiiiiiiiiii");
+	 		
+		}
+		
+		$(document).ready(function() {
+			$("#password").on('keyup', function() {
+				var password = $("#password").val();
+				var regularExpression = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,14}$/;
+				if(!regularExpression.test(password)){
+					$('#passwordvalidation').html("Password must be in length 6-14<br>Should contain atleast one uppercase letter, lowercase letter, number and special character.<br><hr>").css("color", "red");
+				}
+				else{
+					$('#passwordvalidation').html("Password strength : Good<br><hr>").css("color", "green");
+				}
+				
+			});
+			$("#mobile").on('keyup', function() {
+				var a = document.forms["createuseraccount"]["mobile"].value;
+				var filter = /[0-9]{10}/;
+				if (!filter.test(a)) {
+					$('#Phonevalidation').html("Enter Correct Phone number").css("color", "red");
+				}
+				else {
+					$('#Phonevalidation').html("");
+				}
+			});
+			$("#phone_number").on('keyup', function() {
+				var a = document.forms["contactusformvalidation"]["phone_number"].value;
+				var filter = /[0-9]{10}/;
+				if (!filter.test(a)) {
+					$('#Phonevalidationcontact').html("Enter Correct Phone number").css("color", "red");
+				}
+				else {
+					$('#Phonevalidationcontact').html("");
+				}
+			});
+		});
+		
+		
+		$("#createuseraccount").submit(function(event) {
+			var password = document.forms["createuseraccount"]["password"].value;
+			var regularExpression = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,14}$/;
+			var a = document.forms["createuseraccount"]["mobile"].value;
+			var filter = /[0-9]{10}/;
+			if(!regularExpression.test(password) || !filter.test(a)){
+				return false;
+			}
+			else{
+				return true;
+			}
+		});
+		$("#contactusformvalidation").submit(function(event) {
+			var a = document.forms["contactusformvalidation"]["phone_number"].value;
+			var filter = /[0-9]{10}/;
+			if(!filter.test(a)){
+				return false;
+			}
+			else{
+				return true;
+			}
+		});
+		
+		$("#errorMessage").fadeTo(2000, 500).slideUp(500, function(){
+		    $("#errorMessage").slideUp(500);
+		});
 	</script>
 
 </body>

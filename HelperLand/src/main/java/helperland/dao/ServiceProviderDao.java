@@ -3,8 +3,11 @@ package helperland.dao;
 import java.util.HashMap;
 import java.util.List;
 
+import helperland.dto.ServiceRequestDto;
+import helperland.model.Favoriteandblocked;
 import helperland.model.Rating;
 import helperland.model.ServiceRequest;
+import helperland.model.ServiceScheduleEntity;
 import helperland.model.User;
 import helperland.model.UserAddress;
 
@@ -37,4 +40,18 @@ public interface ServiceProviderDao {
 	
 	
 	public List<Rating> getAllspRatings(int uid);
+	
+	public List<ServiceScheduleEntity> getServiceSchedule(int uid);
+	
+	
+	public List<User> getUserList(int uid);
+	
+	
+	public Favoriteandblocked getBlockCustomerList(int uid, int spid);
+	
+	
+	public int insertBlockCustomer(Favoriteandblocked favoriteandblocked);
+	
+	
+	public int updateBlockCustomer(Favoriteandblocked favoriteandblocked);
 }

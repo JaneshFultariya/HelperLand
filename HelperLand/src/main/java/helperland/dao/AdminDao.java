@@ -25,4 +25,6 @@ public interface AdminDao {
 	public int editServiceRequestAddress(ServiceRequestAddress serRequestAddress);
 	
 	public ServiceRequestAddress getServiceRequestAddress(int srId);
+	
+	public String getUserEmail(int uid);
 }

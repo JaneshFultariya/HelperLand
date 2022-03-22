@@ -28,7 +28,7 @@
         <div class="header" id="topheader">
             <nav class="navbar navbar-expand-lg navbar-light py-2" style="background-color: #1fb6ff;">
 
-                <a class="navbar-brand text-light" href="homepage.html">
+                <a class="navbar-brand text-light" href="homepage">
                     <h3>HelperLand</h3>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -135,24 +135,24 @@
                     <div class="col">
                         <input type="text" class="form-control" style="height: 46px;" id="serviceProviderName" placeholder="Service Provider name">
                     </div>
-                    <div class="col">
+                    <!-- <div class="col">
                         <select id="status" style="height: 46px;" class="form-control">
                             <option selected>Choose...</option>
                             <option>...</option>
                         </select>
-                    </div>
+                    </div> -->
                 
 
                     
-                    <!-- <div class="col" style="max-width: 140px;">
+                    <div class="col" style="max-width: 140px;">
                         <input type="text" id="From_Date" style="height: 46px;" placeholder="From Date" onfocus="(this.type='date')" onblur="(this.type='text')">
                     </div>
                     <div class="col" style="max-width: 140px;">
                          <input type="text" id="To_Date" style="height: 46px;" placeholder="To Date" onfocus="(this.type='date')" onblur="(this.type='text')">
-                    </div> -->
+                    </div>
                     
                     <div class="col-auto">
-                        <button type="submit" style="height: 46px;" class="btn btn-primary mb-2">clear</button>
+                        <button type="submit" id="clearbtnservicerequests" style="height: 46px;" class="btn btn-primary mb-2">clear</button>
                     </div>
                 </div>
             </div>
@@ -240,7 +240,7 @@
                         <button type="submit" style="height: 46px;" class="btn btn-primary mb-2">Serach</button>
                     </div> -->
                     <div class="col-auto">
-                        <button type="submit" style="height: 46px;" class="btn btn-primary mb-2">clear</button>
+                        <button id="clearbtnusermanagement" type="submit" style="height: 46px;" class="btn btn-primary mb-2">clear</button>
                     </div>
                 </div>
             </div>
@@ -546,9 +546,40 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
    
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+   <script src="https://cdn.datatables.net/datetime/1.1.2/js/dataTables.dateTime.min.js"></script>
+   
     <script>
     function servicerequestdatatable(){
         $(document).ready(function () {
+        	/* var minDate, maxDate;
+        	
+        	$.fn.dataTable.ext.search.push(
+        		    function( settings, data, dataIndex ) {
+        		        var min = minDate.val();
+        		        var max = maxDate.val();
+        		        var date = new Date( data[1] );
+        		 
+        		        if (
+        		            ( min === null && max === null ) ||
+        		            ( min === null && date <= max ) ||
+        		            ( min <= date   && max === null ) ||
+        		            ( min <= date   && date <= max )
+        		        ) {
+        		            return true;
+        		        }
+        		        return false;
+        		    }
+        		);
+        	
+        	    // Create date inputs
+        	    minDate = new DateTime($('#From_Date'), {
+        	        format: 'MMMM Do YYYY'
+        	    });
+        	    maxDate = new DateTime($('#To_Date'), {
+        	        format: 'MMMM Do YYYY'
+        	    }); */
+        	
         	var table = $('#example').DataTable({
 
             	"aLengthMenu": [[25, 50, 75, -1], [25, 50, 75, "All"]],
@@ -599,7 +630,10 @@
                             .search(this.value)
                             .draw();
                     });
-                	$("#status").each(function () {
+                	/* $('#From_Date, #To_Date').on('change', function () {
+                        table.draw();
+                    }); */
+                	/* $("#status").each(function () {
                         var select = $('<select style="height: 46px;"><option value=""></option></select>')
                             .appendTo($(this).empty())
                             .on('change', function () {
@@ -611,11 +645,26 @@
                         table.column(5).data().unique().sort().each(function (d, j) {
                             select.append('<option value="' + d + '">' + d + '</option>')
                         });
-                    });
+                    }); */
+                    
+                    
             
         });
     }
+    
+    jQuery(document).ready(function($) {
+		$("#clearbtnservicerequests").click(function(event) {
+			$('#serviceId').val('');
+	    	$('#customerName').val('');
+	    	$('#postalCode').val('');
+	    	$('#serviceProviderName').val('');
+			event.preventDefault();
+			servicerequests();
+		});
+	});
         
+    
+    
         function usermanagementdatatablequery() {
         $(document).ready(function () {
         	var table = $('#usermanagementdt').DataTable({
@@ -676,6 +725,17 @@
             });
         });
         }
+        
+        jQuery(document).ready(function($) {
+    		$("#clearbtnusermanagement").click(function(event) {
+    			$('#namesearch').val('');
+    	    	$('#Phonenumber').val('');
+    	    	$('#Postalcode').val('');
+    	    	$('#UserTypeSearch').val('');
+    			event.preventDefault();
+    			usermanagement();
+    		});
+    	});
         
         
         function usermanagement(){
@@ -817,9 +877,8 @@
       			}
       		});
       	}
-        function adminapproval(uid,activestatus){
+        function adminapproval(uid){
         	event.preventDefault();
-      		console.log(uid + activestatus + "Hiiiiiiiiiiiiiiiiiii");
       		$.ajax({
       			type:"GET",
       			url:"/helperland/adminapproval/" + uid,
@@ -840,9 +899,8 @@
       			}
       		});
       	}
-        function adminuserdelete(uid,activestatus){
+        function adminuserdelete(uid){
         	event.preventDefault();
-      		console.log(uid + activestatus + "Hiiiiiiiiiiiiiiiiiii");
       		$.ajax({
       			type:"GET",
       			url:"/helperland/adminuserdelete/" + uid,
@@ -910,7 +968,7 @@
 							addClass = "new-button";
 						}
 						else if(v[15] == "Accepted"){
-							addClass = "addClass";
+							addClass = "Accepted-button";
 						}
 						else if(v[15] == "cancel"){
 							addClass = "Refunded-button";

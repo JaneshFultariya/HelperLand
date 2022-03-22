@@ -84,7 +84,7 @@
 					class="dropdown-menu dropdown-menu-right dropdown-cyan text-color-nav"
 					aria-labelledby="navbarDropdownMenuLink-4">
 					<span style="padding-left: 15px;">Welcome,<br>
-					<strong style="padding-left: 15px;">First Customer</strong></span>
+					<strong style="padding-left: 15px;">${htmlusername }</strong></span>
 					<div class="devider-line"></div>
 					<a class="dropdown-item text-color-nav text-decoration-none"
 						href="user">My Dashboard</a>  <a
@@ -121,13 +121,26 @@
             <li class="side-items">
               <a class="side-link text-decoration-none" href="contactUs">Contact</a>
             </li>
-            <li class="side-items">
-              <a class="side-link text-decoration-none" data-toggle="modal" 
-              data-target="#exampleModalCenter" href="#">Login</a>
-            </li>
-            <li class="side-items">
-              <a class="side-link text-decoration-none" href="becomeapro">Become a cleaner</a>
-            </li>
+            <li class="side-items" id="offcanvasLogin"><a
+					class="side-link text-decoration-none" data-toggle="modal" data-bs-dismiss="offcanvas" 
+					data-target="#exampleModalCenter" href="#">Login</a></li>
+				<li class="side-items" id="offcanvasBecomeapro"><a 
+					class="side-link text-decoration-none" data-bs-dismiss="offcanvas" href="becomeapro">Become
+						a cleaner</a></li>
+						<li class="side-items" id="offcanvasDashboard"><c:if test="${user_type == 2 }">
+									<a class="side-link text-decoration-none" href="serviceprovider">Dashboard</a>
+								</c:if>
+								
+								<c:if test="${user_type == 3 }">
+									<a class="side-link text-decoration-none" href="user">Dashboard</a>
+								</c:if>
+								
+								<c:if test="${user_type == 1 }">
+									<a class="side-link text-decoration-none" href="admin">Dashboard</a>
+								</c:if></li>
+				<li class="side-items" id="offcanvasLogout"><a
+						class="side-link text-decoration-none"
+						href="logout">Log out</a></li>
           </ul>
     
         </div>
@@ -243,29 +256,37 @@
     
 
 <script>
-	let name = <%=request.getAttribute("hideshow")%>
-	
-	console.log(name);
-	
-	if(name == null){
-		/* document.getElementById("notificon").style.display = "none"; */
-		/* $("#notificon").hide(); */
-		$("#notificon").removeClass( "d-flex" );
-		$("#notificon").css("display", "none");
-		$("#profilepic").css("display", "none");
-		$("#loginlink").css("display", "block");
-		$("#becomelink").css("display", "block");
-		console.log("hiiiiiiiiiiiiiiiiiii");
-	}
-	else{
-		$("#notificon").addClass( "d-flex" );
-		$("#notificon").css("display", "block");
-		$("#profilepic").css("display", "block");
-		$("#loginlink").css("display", "none");
-		$("#becomelink").css("display", "none");
-		console.log("hiiiiiiiiiiiiiiiiiii");
- 		
-	}
+let name = <%=request.getAttribute("hideshow")%>
+
+if(name == null){
+	/* document.getElementById("notificon").style.display = "none"; */
+	/* $("#notificon").hide(); */
+	$("#notificon").removeClass( "d-flex" );
+	$("#notificon").css("display", "none");
+	$("#profilepic").css("display", "none");
+	$("#loginlink").css("display", "block");
+	$("#becomelink").css("display", "block");
+	$("#offcanvasLogin").css("display", "block");
+	$("#offcanvasBecomeapro").css("display", "block");
+	$("#offcanvasDashboard").css("display", "none");
+	$("#offcanvasLogout").css("display", "none");
+	console.log("hiiiiiiiiiiiiiiiiiii");
+}
+else{
+	$("#notificon").addClass( "d-flex" );
+	$("#notificon").css("display", "block");
+	$("#profilepic").css("display", "block");
+	$("#loginlink").css("display", "none");
+	$("#becomelink").css("display", "none");
+	$("#offcanvasLogin").css("display", "none");
+	$("#offcanvasBecomeapro").css("display", "none");
+	$("#offcanvasDashboard").css("display", "block");
+	$("#offcanvasLogout").css("display", "block");
+	$('#my_image').css("width", "73px");
+	$('#my_image').css("height", "54px"); 
+	console.log("hiiiiiiiiiiiiiiiiiii");
+		
+}
 	</script>
 
 </body>
