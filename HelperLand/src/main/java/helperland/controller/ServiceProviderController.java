@@ -84,55 +84,10 @@ public class ServiceProviderController {
 		
 		serviceRequest.setService_provider_id(uid);
 		
-//		float serviceStartTime = this.serviceProviderService.getServiceTime(serviceRequest);
-//		
-//		List<Float> serviceEndTime = this.serviceProviderService.getServiceTotalTimeList(this.serviceProviderService.getServiceDate(serviceRequest));
-//		
-//		int temp = 0;
-//		Iterator<Float> iterator = serviceEndTime.iterator();
-//		
-//		
-//		
-//		while(iterator.hasNext()) {
-//			
-//			if(serviceStartTime-iterator.next()>1) {
-//				temp = 1;
-//			}
-//			else {
-//				temp = 0;
-//			}
-//		}
-//		
-//		SimpleDateFormat dtf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//		Date date = new Date();
-//		serviceRequest.setSp_accepted_date(dtf.format(date));
-//		
-//		if(temp == 1) {
-//			System.out.println("yoo!!!");
-//		}
-//		else {
-//			System.out.println("Never mind!!!");
-//		}
 		
 		ServiceRequest temp = this.serviceProviderService.servicestartDate(service_req_id);
-//		System.out.println(temp.getService_start_date()+"--"+temp.getService_start_time());
-//		
 		int temp1 = this.serviceProviderService.getState(temp.getService_start_date(),temp.getService_start_time(),uid,temp.getService_hours());
-//		
-		
-		
-//		Iterator<ServiceRequest> iterator = temp1.iterator();
-//		
-//		while(iterator.hasNext()) {
-//			float temp2 = Float.parseFloat(temp.getService_start_time())-Float.parseFloat(iterator.next()+"");
-//			if(temp2>1) {
-//				System.out.println("hii");
-//			}
-//			else {
-//				System.out.println("hello");
-//			}
-//		}
-		
+
 		if(temp1 == 0) {
 		SimpleDateFormat dtf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Date date = new Date();
@@ -148,13 +103,6 @@ public class ServiceProviderController {
 			
 			String to = email1.stream().map(User::getEmail).collect(Collectors.joining(","));
 			sendServiceRequestEmail(message1, subject1, to, from1);
-			
-			
-//			Iterator<User> iterator = email1.iterator();
-//			while (iterator.hasNext()) {
-//				String to = iterator.next().getEmail();
-//				sendServiceRequestEmail(message, subject, to, from);
-//			}
 			
 			
 			String message = "Your Request has been accepted by " + session.getAttribute("username") + session.getAttribute("userlastname") + "\n"+"Your service provider's contact informations are as below:\n" + "Email: " + session.getAttribute("useremail") + "Mobile Number: " + session.getAttribute("usermobile") +"\nFor more information visit your Dashboard.";
@@ -228,13 +176,6 @@ public class ServiceProviderController {
 		List<User> email1 = this.serviceProviderService.getUserEmail(service_req_id);
 		String to = email1.stream().map(User::getEmail).collect(Collectors.joining(","));
 		sendServiceRequestEmail(message1, subject1, to, from1);
-		
-		
-//		Iterator<User> iterator = email1.iterator();
-//		while (iterator.hasNext()) {
-//			String to = iterator.next().getEmail();
-//			sendServiceRequestEmail(message, subject, to, from);
-//		}
 		
 		
 		String message = "Your Request has been canceled by you service provider !!!";

@@ -109,35 +109,6 @@ public class UserDaoImpl implements UserDao{
 	public List<ServiceRequest> getAllService(int uid) {
 		Session session = factory.getCurrentSession();
 		try {
-//			  Query query = session.createQuery("from servicerequest as sp left join user as u on sp.service_provider_id=u.user_id and sp.status=:statuss where sp.user_id=:user_id and sp.status in :status");
-//			  query.setParameter("user_id", uid);
-//			  query.setParameter("statuss", "Accepted");
-////			  query.setParameter("status", "new");
-////			  String[] tempppp = {"new","Accepted"};
-////			  List<String> l = Arrays.asList(tempppp);
-//			  query.setParameter("status", Arrays.asList("new","Accepted"));
-//			  
-//			  ServiceRequest serviceRequest = new ServiceRequest();
-//			  List<ServiceRequest> servicerequestList = query.getResultList();
-//			  
-//			  
-////			  for(int i =0;i<servicerequestList.size();i++) {
-////				  System.out.println(servicerequestList.get(i));
-////			  }
-////			  
-////			  servicerequestList.stream().forEach((eachservicerequest) -> {
-//				  
-//				  
-//				  
-////				  int sp_id = eachservicerequest.getService_provider_id();
-////				  if(sp_id != 0) {
-////				  Double query1 = (Double) session.createQuery("select avg(ratings) from rating where rating_to="+sp_id+"").getSingleResult();
-////					  eachservicerequest.setAvg_rating(query1);
-////				  }
-////			  });
-//			  
-//			  System.out.println(servicerequestList.toString());
-			
 			List<ServiceRequest> query = (List<ServiceRequest>) session.createSQLQuery("select sp.user_id, sp.service_req_id, sp.service_start_date,sp.service_start_time,sp.service_hours,u1.first_name,u1.last_name, "
 					+ "avg(ratings) as avgrating, sp.total_cost,sp.status,u1.user_profile_pic,sp.service_provider_id from servicerequest as sp "
 					+ "left join user as u1 on sp.service_provider_id=u1.user_id and sp.status= 'Accepted' "

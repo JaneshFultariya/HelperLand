@@ -303,14 +303,7 @@ public class ServiceProviderDaoImpl implements ServiceProviderDao {
 		Session session = null;
 		Transaction transaction = null;
 		
-//		Session session = factory.getCurrentSession();
 		try {
-//			  List<ServiceRequest> query = session.createSQLQuery("select service_req_id as id, service_start_date as start, status as status from servicerequest where status in ('Completed','Accepted') and service_provider_id="+uid+"").getResultList();
-//			  Query<ServiceRequest> query = session.createQuery("from servicerequest where status in :status and service_provider_id=:service_provider_id",ServiceRequest.class);
-//			  query.setParameter("service_provider_id", uid);
-//			  query.setParameter("status", Arrays.asList("Completed","Accepted"));
-//			  
-//			  List<ServiceRequest> lisServiceRequests = query.getResultList();
 			
 			session = factory.openSession();
 			transaction = session.beginTransaction();
@@ -448,11 +441,9 @@ public class ServiceProviderDaoImpl implements ServiceProviderDao {
 		try {
 			 Object query =  session.createSQLQuery("select count((service_start_time+service_hours)-"+service_start_time+") as AcceptTime from servicerequest where Status='Accepted' and service_provider_id="+uid+" and service_start_date='"+service_start_date+"' and (((service_start_time+service_hours)-"+service_start_time+")>1)").getSingleResult();
 			
-			System.out.println(query+".............................................");
 
 			Object query1 = session.createSQLQuery("select count(("+service_start_time+"+"+f+"+1)>service_start_time) as AcceptTime from servicerequest where Status='Accepted' and service_provider_id="+uid+" and service_start_date='"+service_start_date+"'  and (("+service_start_time+"+"+f+"+1)>service_start_time)").getSingleResult();
 			
-			System.out.println(query1+"______________________________");
 			
 			if(Integer.parseInt(query.toString())!=0 && Integer.parseInt(query1.toString())!=0) {
 				return 1;
@@ -466,87 +457,6 @@ public class ServiceProviderDaoImpl implements ServiceProviderDao {
 			System.out.println(e.getMessage());
 			return 0;
 		}
-//		int inicount = 0;
-//		Session session = null;
-//		Transaction transaction = null;
-//		try {
-//
-//			
-//			session = factory.openSession();
-//			transaction = session.beginTransaction();
-//			
-//			inicount = (int) session.createQuery("select count((service_start_time+service_hours)-"+service_start_time+") from servicerequest where status='Accepted' and service_provider_id="+uid+" and service_start_date="+service_start_date+" and ((service_start_time+service_hours)-"+service_start_time+")>1")
-//					.setResultTransformer(
-//							Transformers.aliasToBean(ServiceRequest.class))
-//					.getSingleResult();
-//			
-//			transaction.commit();
-//			
-//			System.out.println(inicount);
-//			
-//			}
-//		catch(Exception e) {
-//			System.out.println(e.getMessage());
-//
-//			inicount = 0;
-//			
-//			if(transaction != null) {
-//				transaction.rollback();
-//			}
-//		}
-//		finally {
-//			session.close();
-//		}
-//		return inicount;
 	}
-
-//	@Transactional
-//	public String getServiceDate(ServiceRequest serviceRequest) {
-//		Session session = factory.getCurrentSession();
-//		try {
-//			   
-//
-//			   Query<ServiceRequest> query = session.createQuery("from servicerequest where service_req_id=:service_req_id",ServiceRequest.class);
-//				query.setParameter("service_req_id", serviceRequest.getService_req_id());
-//				
-//				String Service_start_date = query.getSingleResult().getService_start_date();
-//			   
-//			  return Service_start_date;
-//			}
-//		catch(Exception e) {
-//			System.out.println(e.getMessage());
-//			return null;
-//		}
-//	}
-//
-//	@Transactional
-//	public List<ServiceRequest> getState(String service_start_date, String service_start_time, int uid) {
-//		Session session = factory.getCurrentSession();
-//		try {
-//			List<ServiceRequest> query = (List<ServiceRequest>) session.createSQLQuery("select replace(service_hours,'.5','.3') + service_start_time from servicerequest where service_start_date="+service_start_date+"").getResultList();
-//
-//			  return query;
-//			}
-//		catch(Exception e) {
-//			System.out.println(e.getMessage());
-//			return null;
-//		}
-//	}
-//
-//	@Transactional
-//	public float getServiceTime(ServiceRequest serviceRequest) {
-//		Session session = factory.getCurrentSession();
-//		try {
-//			float query = (float) session.createSQLQuery("select service_start_time from servicerequest where service_req_id="+serviceRequest.getService_req_id()+"").getSingleResult();
-//
-//			  return query;
-//			}
-//		catch(Exception e) {
-//			System.out.println(e.getMessage());
-//			return 0;
-//		}
-//	}
-	
-	
 
 }

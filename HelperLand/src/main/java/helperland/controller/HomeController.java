@@ -63,9 +63,6 @@ import net.bytebuddy.agent.builder.AgentBuilder.FallbackStrategy.Simple;
 @ComponentScan(basePackages = { "helperland.dao,helperland.models,helperland.service,helperland.interceptors" })
 public class HomeController {
 
-//	@Autowired
-//	private ContactusDao contactusDao;
-
 	@Autowired
 	private ContactusServiceclass contactUsService;
 
@@ -246,11 +243,6 @@ public class HomeController {
 			model.addAttribute("displayError", "style='display: block !important;'");
 			return "homepage";
 		} else {
-
-			/*
-			 * model.addAttribute("success" , "You Login successfully. Thank you!");
-			 * model.addAttribute("displaySuccess" , "style='display: block !important;'");
-			 */
 
 			User login_user = this.loginService.getUser(user);
 

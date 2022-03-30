@@ -21,16 +21,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmailService {
 	
-//
-//	Properties prop = System.getProperties();
-//	prop.put("mail.smtp.auth", true);
-//	prop.put("mail.smtp.starttls.enable", "true");
-//	prop.put("mail.smtp.host", "smtp.mailtrap.io");
-//	prop.put("mail.smtp.port", "25");
-//	prop.put("mail.smtp.ssl.trust", "smtp.mailtrap.io");
-	
-	
-	
 	public static void SendEmail() {
 		Properties prop = new Properties();
 		prop.put("mail.smtp.auth", true);

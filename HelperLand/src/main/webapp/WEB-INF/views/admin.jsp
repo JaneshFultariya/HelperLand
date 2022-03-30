@@ -283,6 +283,10 @@
             </div>
         </div>
     </div>
+    
+    <div id="loading-image" style="display: none;">
+<div class="loader"></div>
+</div>
 
     <div id="Invoices" class="tabcontent">
         <h1 style="padding-top: 15px; padding-bottom: 15px;">Invoices</h1>
@@ -346,7 +350,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLongTitle">Edit Service Requests</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button"id="closecompletemodal" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -820,6 +824,7 @@
       		});
       	}
         function adminapproval(uid){
+        	$('#loading-image').show();
         	event.preventDefault();
       		$.ajax({
       			type:"GET",
@@ -838,7 +843,10 @@
       			},
       			done: function(e){
       				console.log("Done");
-      			}
+      			},
+    			complete: function(){
+      		        $('#loading-image').hide();
+      		      }
       		});
       	}
         function adminuserdelete(uid){
@@ -1002,6 +1010,8 @@
 		}
         
         function editandrescheduleserviceRequest(srId) {
+        	$("#closecompletemodal").click();
+    		$('#loading-image').show();
         	$.ajax({
 				type : "GET",
 				url : "/helperland/editserviceRequest/" + srId + "," + $("#service_start_date").val() + "," + $("#startTime").val() + "," + $("#AddressLine1").val() + "," +$("#AddressLine2").val() + "," + $("#Postal_Code").val() + "," + $("#City").val(),
@@ -1014,7 +1024,10 @@
 				},
 				done : function(e) {
 					console.log("Done");
-				}
+				},
+    			complete: function(){
+      		        $('#loading-image').hide();
+      		      }
 			});
 		}
     </script>

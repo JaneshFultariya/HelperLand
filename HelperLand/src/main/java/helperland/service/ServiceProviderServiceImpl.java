@@ -36,18 +36,8 @@ public class ServiceProviderServiceImpl implements ServiceProviderService {
 	}
 
 	public List<ServiceRequest> getAllUpcomingServices(int uid) {
-//		List<ServiceRequest> serviceRequestList =
 				return serviceProviderDao.getAllUpcomingServices(uid);
 		
-//		for(Object object:serviceRequestList) {
-//			List<Object> objects1 = new ArrayList<Object>(); 
-//			objects1.add(object);
-//			
-//			for(Object object2:objects1) {
-//				System.out.println(object2);
-//			}
-//			
-//		}
 	}
 
 	public int cancelspServiceRequest(ServiceRequest serviceRequest) {
@@ -114,16 +104,5 @@ public class ServiceProviderServiceImpl implements ServiceProviderService {
 		return serviceProviderDao.getState(service_start_date,service_start_time,uid, f);
 	}
 
-//	public String getServiceDate(ServiceRequest serviceRequest) {
-//		return serviceProviderDao.getServiceDate(serviceRequest);
-//	}
-//
-//	public List<Float> getServiceTotalTimeList(String serviceDate) {
-//		return serviceProviderDao.getServiceTotalTimeList(serviceDate);
-//	}
-//
-//	public float getServiceTime(ServiceRequest serviceRequest) {
-//		return serviceProviderDao.getServiceTime(serviceRequest);
-//	}
 
 }

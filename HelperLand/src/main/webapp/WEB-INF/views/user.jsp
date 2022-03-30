@@ -169,25 +169,6 @@
 
 	</section>
 
-	<%-- <div class="position-absolute w-100 d-flex justify-content-center"
-		style="top: 10px; z-index: 100000;">
-		<div
-			class="alert alert-danger alert-dismissible fade show d-none w-75"
-			${displayError } role="alert">
-			${error }
-			<button type="button" class="btn-close" data-bs-dismiss="alert"
-				aria-label="Close"></button>
-		</div>
-		<div
-			class="alert alert-success alert-dismissible fade show d-none w-75"
-			${displaySuccess } role="alert">
-			${success }
-			<button type="button" class="btn-close" data-bs-dismiss="alert"
-				aria-label="Close"></button>
-		</div>
-
-
-	</div> --%>
 
 	<section id="title" class="text-center">
 		<div class="main-text">
@@ -433,22 +414,6 @@
 
 							<form method="post" id="settingupdateform"
 								name="settingupdateform">
-
-
-								<%-- <div
-									class="alert alert-danger alert-dismissible fade show d-none w-75"
-									${displayError } role="alert">
-									${error }
-									<button type="button" class="btn-close" data-bs-dismiss="alert"
-										aria-label="Close"></button>
-								</div>
-								<div
-									class="alert alert-success alert-dismissible fade show d-none w-75"
-									${displaySuccess } role="alert">
-									${success }
-									<button type="button" class="btn-close" data-bs-dismiss="alert"
-										aria-label="Close"></button>
-								</div> --%>
 								<div class="form-row">
 									<div class="col">
 										<label for="exampleFormControlInput1">First name</label>
@@ -593,8 +558,7 @@
 										Language</label><br> <select required
 										class="custom-select language-select" id="edtlanguage"
 										name="language">
-										<option selected>Language</option>
-										<option value="English">English</option>
+										<option selected value="English">English</option>
 										<option value="German">German</option>
 									</select>
 								</div>

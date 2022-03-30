@@ -63,13 +63,4 @@ public interface ServiceProviderDao {
 
 
 	public int getState(String service_start_date, String service_start_time, int uid, float f);
-	
-	
-//	public String getServiceDate(ServiceRequest serviceRequest);
-//
-//
-//	public List<Float> getServiceTotalTimeList(String serviceDate);
-//
-//
-//	public float getServiceTime(ServiceRequest serviceRequest);
 }
