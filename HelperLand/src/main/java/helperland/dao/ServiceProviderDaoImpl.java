@@ -1,5 +1,6 @@
 package helperland.dao;
 
+import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -35,12 +36,15 @@ public class ServiceProviderDaoImpl implements ServiceProviderDao {
 	private SessionFactory factory;	
 	
 	@Transactional
-	public List<ServiceRequest> getAllServiceRequest() {
+	public List<ServiceRequest> getAllServiceRequest(int uid, int postal) {
 		Session session = factory.getCurrentSession();
 		try {
-			  Query query = session.createQuery("from servicerequest as sp inner join servicerequestaddress as spa on sp.service_req_id=spa.ServiceRequestId inner join user as u on sp.user_id=u.user_id where sp.service_provider_id=:service_provider_id and sp.status=:status");
+			  Query query = session.createQuery("from servicerequest as sp inner join servicerequestaddress as spa on sp.service_req_id=spa.ServiceRequestId inner join user as u on sp.user_id=u.user_id left join favoriteandblocked as fab on sp.user_id=fab.TargetUserId and fab.UserId is not null and fab.UserId=:service_provider_id1 where sp.service_provider_id=:service_provider_id and sp.status=:status and (fab.IsBlocked=:IsBlocked or fab.IsBlocked is null) and spa.PostalCode=:PostalCode");
 			  query.setParameter("service_provider_id", 0);
+			  query.setParameter("IsBlocked", 0);
 			  query.setParameter("status", "new");
+			  query.setParameter("service_provider_id1", uid);
+			  query.setParameter("PostalCode", postal);
 			  
 			  ServiceRequest serviceRequest = new ServiceRequest();
 			  List<ServiceRequest> servicerequestList = query.getResultList();	  
@@ -170,9 +174,10 @@ public class ServiceProviderDaoImpl implements ServiceProviderDao {
 	public int completespServiceRequest(ServiceRequest serviceRequest) {
 		Session session = factory.getCurrentSession();
 		try {
-			  Query query = session.createQuery("update servicerequest set status=:status where service_req_id=:service_req_id");
+			  Query query = session.createQuery("update servicerequest set status=:status, "+"payment_done=:payment_done "+"where service_req_id=:service_req_id");
 			  query.setParameter("service_req_id", serviceRequest.getService_req_id());
 			  query.setParameter("status", "Completed");
+			  query.setParameter("payment_done", "Completed");
 			  
 			  int state = query.executeUpdate();
 			  return state;
@@ -345,7 +350,7 @@ public class ServiceProviderDaoImpl implements ServiceProviderDao {
 	public List<User> getUserList(int uid) {
 		Session session = factory.getCurrentSession();
 		try {
-			  Query query = session.createQuery("from user as u inner join servicerequest as sr on sr.service_provider_id = u.user_id left join favoriteandblocked as fab on sr.service_provider_id = fab.UserId where sr.service_provider_id=:service_provider_id and sr.status=:status group by (sr.service_provider_id)");
+			  Query query = session.createQuery("from user as u inner join servicerequest as sr on sr.user_id = u.user_id left join favoriteandblocked as fab on sr.user_id = fab.TargetUserId where sr.service_provider_id=:service_provider_id and sr.status=:status group by (u.user_id)");
 			  query.setParameter("service_provider_id", uid);
 			  query.setParameter("status", "Completed");
 			  User user = new User();
@@ -399,5 +404,149 @@ public class ServiceProviderDaoImpl implements ServiceProviderDao {
 			return 0;
 		}
 	}
+
+	@Transactional
+	public int getUserStatus(int uid) {
+		Session session = factory.getCurrentSession();
+		try {
+			Query<User> query = session.createQuery("from user where user_id=:user_id",User.class);
+			query.setParameter("user_id", uid);
+			
+			int user = query.getSingleResult().getIs_active();
+			
+			return user;
+		}
+		catch (Exception e) {
+			System.out.println(e.getMessage());
+			return 0;
+		}
+	}
+
+	@Transactional
+	public ServiceRequest servicestartDate(int service_req_id) {
+		Session session = factory.getCurrentSession();
+		try {
+			   
+
+			   Query<ServiceRequest> query = session.createQuery("from servicerequest where service_req_id=:service_req_id",ServiceRequest.class);
+				query.setParameter("service_req_id", service_req_id);
+				
+				ServiceRequest serviceRequest = query.getSingleResult();
+			   
+			  return serviceRequest;
+			}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+	}
+
+	@Transactional
+	public int getState(String service_start_date, String service_start_time, int uid, float f) {
+		System.out.println(service_start_time+ service_start_date+ f+ uid);
+		Session session = factory.getCurrentSession();
+		try {
+			 Object query =  session.createSQLQuery("select count((service_start_time+service_hours)-"+service_start_time+") as AcceptTime from servicerequest where Status='Accepted' and service_provider_id="+uid+" and service_start_date='"+service_start_date+"' and (((service_start_time+service_hours)-"+service_start_time+")>1)").getSingleResult();
+			
+			System.out.println(query+".............................................");
+
+			Object query1 = session.createSQLQuery("select count(("+service_start_time+"+"+f+"+1)>service_start_time) as AcceptTime from servicerequest where Status='Accepted' and service_provider_id="+uid+" and service_start_date='"+service_start_date+"'  and (("+service_start_time+"+"+f+"+1)>service_start_time)").getSingleResult();
+			
+			System.out.println(query1+"______________________________");
+			
+			if(Integer.parseInt(query.toString())!=0 && Integer.parseInt(query1.toString())!=0) {
+				return 1;
+			}
+			else {
+				return 0;
+			}
+			
+			}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+			return 0;
+		}
+//		int inicount = 0;
+//		Session session = null;
+//		Transaction transaction = null;
+//		try {
+//
+//			
+//			session = factory.openSession();
+//			transaction = session.beginTransaction();
+//			
+//			inicount = (int) session.createQuery("select count((service_start_time+service_hours)-"+service_start_time+") from servicerequest where status='Accepted' and service_provider_id="+uid+" and service_start_date="+service_start_date+" and ((service_start_time+service_hours)-"+service_start_time+")>1")
+//					.setResultTransformer(
+//							Transformers.aliasToBean(ServiceRequest.class))
+//					.getSingleResult();
+//			
+//			transaction.commit();
+//			
+//			System.out.println(inicount);
+//			
+//			}
+//		catch(Exception e) {
+//			System.out.println(e.getMessage());
+//
+//			inicount = 0;
+//			
+//			if(transaction != null) {
+//				transaction.rollback();
+//			}
+//		}
+//		finally {
+//			session.close();
+//		}
+//		return inicount;
+	}
+
+//	@Transactional
+//	public String getServiceDate(ServiceRequest serviceRequest) {
+//		Session session = factory.getCurrentSession();
+//		try {
+//			   
+//
+//			   Query<ServiceRequest> query = session.createQuery("from servicerequest where service_req_id=:service_req_id",ServiceRequest.class);
+//				query.setParameter("service_req_id", serviceRequest.getService_req_id());
+//				
+//				String Service_start_date = query.getSingleResult().getService_start_date();
+//			   
+//			  return Service_start_date;
+//			}
+//		catch(Exception e) {
+//			System.out.println(e.getMessage());
+//			return null;
+//		}
+//	}
+//
+//	@Transactional
+//	public List<ServiceRequest> getState(String service_start_date, String service_start_time, int uid) {
+//		Session session = factory.getCurrentSession();
+//		try {
+//			List<ServiceRequest> query = (List<ServiceRequest>) session.createSQLQuery("select replace(service_hours,'.5','.3') + service_start_time from servicerequest where service_start_date="+service_start_date+"").getResultList();
+//
+//			  return query;
+//			}
+//		catch(Exception e) {
+//			System.out.println(e.getMessage());
+//			return null;
+//		}
+//	}
+//
+//	@Transactional
+//	public float getServiceTime(ServiceRequest serviceRequest) {
+//		Session session = factory.getCurrentSession();
+//		try {
+//			float query = (float) session.createSQLQuery("select service_start_time from servicerequest where service_req_id="+serviceRequest.getService_req_id()+"").getSingleResult();
+//
+//			  return query;
+//			}
+//		catch(Exception e) {
+//			System.out.println(e.getMessage());
+//			return 0;
+//		}
+//	}
+	
+	
 
 }

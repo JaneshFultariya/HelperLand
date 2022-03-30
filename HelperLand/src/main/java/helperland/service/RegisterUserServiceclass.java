@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import helperland.dao.ContactusDao;
 import helperland.dao.RegisterUserDao;
+import helperland.model.Rating;
 import helperland.model.User;
 import helperland.model.UserAddress;
 
@@ -29,6 +30,12 @@ public class RegisterUserServiceclass implements RegisterUserService{
 
 	public User getAllEmail(String email) {
 		return this.registerUserDao.getAllEmail(email);
+	}
+
+
+	public int createRatingUser(Rating rating) {
+		return this.registerUserDao.createRatingUser(rating);
+		
 	}
 
 }

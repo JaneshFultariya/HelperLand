@@ -351,13 +351,14 @@ public class UserController {
 		return serviceRequest2;
 	}
 	
-	@RequestMapping(value="/ratingserviceurl/{sp_id},{on_time_arriaval},{friendly},{quality_of_service},{sr_id}",method = RequestMethod.GET)
+	@RequestMapping(value="/ratingserviceurl/{sp_id},{on_time_arriaval},{friendly},{quality_of_service},{sr_id},{ratingscomments}",method = RequestMethod.GET)
 	public @ResponseBody void ajaxratingservice(
 			@PathVariable("sp_id") int sp_id,
 			@PathVariable("on_time_arriaval") int on_time_arriaval,
 			@PathVariable("friendly") int friendly,
 			@PathVariable("quality_of_service") int quality_of_service,
 			@PathVariable("sr_id") int sr_id,
+			@PathVariable("ratingscomments") String ratingscomments,
 			@ModelAttribute ServiceRequest serviceRequest, 
 			BindingResult br , Model model,
 			HttpServletRequest request) throws Exception {
@@ -382,6 +383,7 @@ public class UserController {
 		rating.setRating_date(dtf.format(date));
 		rating.setRatings(ratings);
 		rating.setService_req_id(sr_id);
+		rating.setComments(ratingscomments);
 		
 		this.userService.ratingService(rating);
 

@@ -199,9 +199,10 @@ public class UserDaoImpl implements UserDao{
 	public int cancelServiceRequest(ServiceRequest serviceRequest) {
 		Session session = factory.getCurrentSession();
 		try {
-			  Query query = session.createQuery("update servicerequest set status=:status where service_req_id=:service_req_id");
+			  Query query = session.createQuery("update servicerequest set status=:status, "+ "payment_done=:payment_done " +"where service_req_id=:service_req_id");
 			  query.setParameter("service_req_id", serviceRequest.getService_req_id());
 			  query.setParameter("status", "cancel");
+			  query.setParameter("payment_done", serviceRequest.getPayment_done());
 			  
 			  int state = query.executeUpdate();
 			  return state;
@@ -234,8 +235,9 @@ public class UserDaoImpl implements UserDao{
 		Session session = factory.getCurrentSession();
 		try {	
 			  List<ServiceRequest> query = (List<ServiceRequest>) session.createSQLQuery("select sp.user_id, sp.service_req_id, sp.service_start_date,sp.service_start_time,sp.service_hours,u1.first_name,u1.last_name,"
-			  		+ " avg(ratings) as avgrating,sp.total_cost,sp.status,u1.user_profile_pic,sp.service_provider_id from servicerequest as sp left join user as u1 on sp.service_provider_id=u1.user_id and sp.status in ('Completed','cancel') left join rating"
-			  		+ " as rt on sp.service_provider_id = rt.rating_to where sp.user_id="+uid+" and sp.status in ('cancel','Completed') group by(sp.service_req_id)").getResultList();
+			  		+ " avg(rt.ratings) as avgrating,sp.total_cost,sp.status,u1.user_profile_pic,sp.service_provider_id,rt1.service_req_id as rqid from servicerequest as sp left join user as u1 on sp.service_provider_id=u1.user_id and sp.status in ('Completed','cancel') left join rating"
+			  		+ " as rt on sp.service_provider_id = rt.rating_to"
+			  		+ " left join rating as rt1 on sp.service_req_id = rt1.service_req_id where sp.user_id="+uid+" and sp.status in ('cancel','Completed') group by(sp.service_req_id)").getResultList();
 			  return query;
 			}
 		catch(Exception e) {

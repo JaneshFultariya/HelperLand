@@ -10,13 +10,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/bookservice.css" />">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
-        integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap.min.css">
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="icon" type="image/x-icon"
@@ -83,22 +83,21 @@
 			<div class="profile-dropedown" id="profilepic">
 				<a class="nav-link  dropdown-toggle text-decoration-none"
 					id="navbarDropdownMenuLink-4" data-toggle="dropdown"
-					aria-haspopup="true" aria-expanded="false"><i
-					class="fa fa-user"></i> <img
+					aria-haspopup="true" aria-expanded="false"><img
 					src="<c:url value="/resources/images/forma-1-1-1.png" />"> </a>
 				<div
 					class="dropdown-menu dropdown-menu-right dropdown-cyan text-color-nav"
 					aria-labelledby="navbarDropdownMenuLink-4">
-					<span style="padding-left: 15px;">Welcome,<br>
+					<%-- <span style="padding-left: 15px;">Welcome,<br>
 					<strong style="padding-left: 15px;">${htmlusername }</strong></span>
-					<div class="devider-line"></div>
+					<div class="devider-line"></div> --%>
 					<a class="dropdown-item text-color-nav text-decoration-none" id="customerdashboard"
 						href="user">My Dashboard</a>  <a
 						class="dropdown-item text-color-nav text-decoration-none"
 						href="logout">Log out</a>
 				</div>
 			</div>
-            <a class="btn" style="float:right" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo">
+            <a class="btn btn-background-color" style="float:right" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo">
                 <span class="navbar-toggler-icon"></span>
             </a>
         </nav>
@@ -146,6 +145,11 @@
 
         </div>
     </div>
+
+
+<div id="loading-image" style="display: none;">
+<div class="loader"></div>
+</div>
 
 
 	<section id="modal">
@@ -209,11 +213,11 @@
                 </div>
               </div>
               
-   <%-- <div class="modal fade" id="booking-success-modal" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade bookingsuccesmodallllll" id="bookingsuccesmodallllll" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-sm mx-auto" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -230,8 +234,8 @@
             </div>
         </div>
     </div>
-</div> --%>
-<div class="modal fade" id="bookingsuccessmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+</div>
+<!-- <div class="modal fade" id="bookingsuccessmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -247,7 +251,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 	</section>
 
 
@@ -648,6 +652,7 @@
         </div>
     </section>
 
+<a class="text-decoration-none" id="backtoTopbutton"></a>
 
     <div class="footer_section w-100" style="margin-top: 53px;">
         <div class="footer_main d-flex justify-content-around align-items-center">
@@ -703,7 +708,8 @@
         integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2"
         crossorigin="anonymous"></script>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="<c:url value="/resources/js/jquery.js" />"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> -->
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"></script>
 
@@ -715,7 +721,9 @@
     
     <script>
 
-    window.onload = function () {
+    window.onload = Postalcodetab();
+    	
+    	function Postalcodetab() {
     	document.getElementById("home").style.display = "block";
     	
     	document.getElementById("firsttab").style.color = "#fff";
@@ -1039,6 +1047,7 @@ function removecost(){
 
 
 function finalcontinue(){
+	$('#loading-image').show();
 	var allitems = "";
 
 	listArray.map(e => {
@@ -1052,7 +1061,7 @@ function finalcontinue(){
 		success:function(response){
 				console.log("SUCCESS: ", response);
 				/* alert("service request sent..."); */
-				$("#bookingsuccessmodal").modal("show");
+				$("#bookingsuccesmodallllll").modal("show");
 		},
 		error: function(e){
 			console.log("ERROR: ", e);
@@ -1060,14 +1069,13 @@ function finalcontinue(){
 		},
 		done: function(e){
 			console.log("Done");
-		}
+		},
+		complete: function(){
+  		    $('#loading-image').hide();
+  		}
 	});
 }
 
-$('#bookingsuccessmodal').on('hidden.bs.modal', function () {
-	console.log("hii");
-	document.getElementById("customerdashboard").click();
-});
 
 function clicktime() {
   var time = parseFloat(document.getElementById('extratime').value);
@@ -1179,6 +1187,55 @@ $(document).ready(function() {
         $('#service_start_date').attr('min', maxDate);
     });
 	</script>
+    
+    <script>
+
+    $('.bookingsuccesmodallllll').on('hidden.bs.modal', function (){
+    	console.log("hii");
+    	document.getElementById("customerdashboard").click();
+    });
+    </script>
+    
+    <script>
+	window.onload = function () {
+	    if (typeof history.pushState === "function") {
+	        history.pushState("jibberish", null, null);
+	        window.onpopstate = function () {
+	            history.pushState('newjibberish', null, null);
+	        };
+	    }
+	    else {
+	        var ignoreHashChange = true;
+	        window.onhashchange = function () {
+	            if (!ignoreHashChange) {
+	                ignoreHashChange = true;
+	                window.location.hash = Math.random();
+	            }
+	            else {
+	                ignoreHashChange = false;
+	            }
+	        };
+	    }
+	};
+
+	</script>
+    
+<script>
+var btn = $('#backtoTopbutton');
+
+$(window).scroll(function() {
+  if ($(window).scrollTop() > 300) {
+    btn.addClass('show');
+  } else {
+    btn.removeClass('show');
+  }
+});
+
+btn.on('click', function(e) {
+  e.preventDefault();
+  $('html, body').animate({scrollTop:0}, '300');
+});
+</script>
     
 </body>
 

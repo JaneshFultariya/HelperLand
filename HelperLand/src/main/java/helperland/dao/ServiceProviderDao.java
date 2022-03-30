@@ -13,7 +13,7 @@ import helperland.model.UserAddress;
 
 public interface ServiceProviderDao {
 
-	public List<ServiceRequest> getAllServiceRequest();
+	public List<ServiceRequest> getAllServiceRequest(int uid, int postal);
 	
 	
 	public int acceptService(ServiceRequest serviceRequest);
@@ -54,4 +54,22 @@ public interface ServiceProviderDao {
 	
 	
 	public int updateBlockCustomer(Favoriteandblocked favoriteandblocked);
+	
+	
+	public int getUserStatus(int uid);
+
+
+	public ServiceRequest servicestartDate(int service_req_id);
+
+
+	public int getState(String service_start_date, String service_start_time, int uid, float f);
+	
+	
+//	public String getServiceDate(ServiceRequest serviceRequest);
+//
+//
+//	public List<Float> getServiceTotalTimeList(String serviceDate);
+//
+//
+//	public float getServiceTime(ServiceRequest serviceRequest);
 }

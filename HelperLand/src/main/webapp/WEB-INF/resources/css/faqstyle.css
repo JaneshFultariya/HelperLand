@@ -441,3 +441,48 @@ font-size: 16px;
 	width: 40px !important;
 	height: 40px !important;
 }
+
+#backtoTopbutton {
+  display: inline-block;
+  background-color: #646464;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  border-radius: 4px;
+  position: fixed;
+  bottom: 30px;
+  left: 30px;
+  transition: background-color .3s, 
+    opacity .5s, visibility .5s;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 1000;
+  border-radius:50%;
+}
+#backtoTopbutton::after {
+  content: "\f077";
+  font-family: FontAwesome;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 2em;
+  line-height: 50px;
+  color: #fff;
+}
+#backtoTopbutton:hover {
+  cursor: pointer;
+  background-color: #333;
+}
+#backtoTopbutton:active {
+  background-color: #555;
+}
+#backtoTopbutton.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+@media (min-width: 500px) {
+  
+  #backtoTopbutton {
+    margin: 30px;
+  }
+}

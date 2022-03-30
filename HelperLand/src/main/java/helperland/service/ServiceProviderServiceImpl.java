@@ -23,8 +23,8 @@ public class ServiceProviderServiceImpl implements ServiceProviderService {
 	@Autowired
 	ServiceProviderDao serviceProviderDao;
 	
-	public List<ServiceRequest> getAllServiceRequest() {
-		return serviceProviderDao.getAllServiceRequest();
+	public List<ServiceRequest> getAllServiceRequest(int uid,int postal) {
+		return serviceProviderDao.getAllServiceRequest(uid,postal);
 	}
 
 	public int acceptService(ServiceRequest serviceRequest) {
@@ -101,5 +101,29 @@ public class ServiceProviderServiceImpl implements ServiceProviderService {
 	public int updateBlockCustomer(Favoriteandblocked favoriteandblocked) {
 		return serviceProviderDao.updateBlockCustomer(favoriteandblocked);
 	}
+
+	public int getUserStatus(int uid) {
+		return serviceProviderDao.getUserStatus(uid);
+	}
+
+	public ServiceRequest servicestartDate(int service_req_id) {
+		return serviceProviderDao.servicestartDate(service_req_id);
+	}
+
+	public int getState(String service_start_date, String service_start_time,int uid, float f) {
+		return serviceProviderDao.getState(service_start_date,service_start_time,uid, f);
+	}
+
+//	public String getServiceDate(ServiceRequest serviceRequest) {
+//		return serviceProviderDao.getServiceDate(serviceRequest);
+//	}
+//
+//	public List<Float> getServiceTotalTimeList(String serviceDate) {
+//		return serviceProviderDao.getServiceTotalTimeList(serviceDate);
+//	}
+//
+//	public float getServiceTime(ServiceRequest serviceRequest) {
+//		return serviceProviderDao.getServiceTime(serviceRequest);
+//	}
 
 }

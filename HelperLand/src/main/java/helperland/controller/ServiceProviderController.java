@@ -62,8 +62,10 @@ public class ServiceProviderController {
 		HttpSession session = request.getSession();
 		String temp = "" + session.getAttribute("loginUser");
 		int uid = Integer.parseInt(temp);
+		session.getAttribute("loginUser");
+		int postal= Integer.parseInt(session.getAttribute("SpPostalCodeSession")+"");
 		
-		java.util.List<ServiceRequest> serviceRequest2 = this.serviceProviderService.getAllServiceRequest();
+		java.util.List<ServiceRequest> serviceRequest2 = this.serviceProviderService.getAllServiceRequest(uid,postal);
 		
 		return serviceRequest2;
 	}
@@ -82,12 +84,61 @@ public class ServiceProviderController {
 		
 		serviceRequest.setService_provider_id(uid);
 		
+//		float serviceStartTime = this.serviceProviderService.getServiceTime(serviceRequest);
+//		
+//		List<Float> serviceEndTime = this.serviceProviderService.getServiceTotalTimeList(this.serviceProviderService.getServiceDate(serviceRequest));
+//		
+//		int temp = 0;
+//		Iterator<Float> iterator = serviceEndTime.iterator();
+//		
+//		
+//		
+//		while(iterator.hasNext()) {
+//			
+//			if(serviceStartTime-iterator.next()>1) {
+//				temp = 1;
+//			}
+//			else {
+//				temp = 0;
+//			}
+//		}
+//		
+//		SimpleDateFormat dtf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//		Date date = new Date();
+//		serviceRequest.setSp_accepted_date(dtf.format(date));
+//		
+//		if(temp == 1) {
+//			System.out.println("yoo!!!");
+//		}
+//		else {
+//			System.out.println("Never mind!!!");
+//		}
+		
+		ServiceRequest temp = this.serviceProviderService.servicestartDate(service_req_id);
+//		System.out.println(temp.getService_start_date()+"--"+temp.getService_start_time());
+//		
+		int temp1 = this.serviceProviderService.getState(temp.getService_start_date(),temp.getService_start_time(),uid,temp.getService_hours());
+//		
+		
+		
+//		Iterator<ServiceRequest> iterator = temp1.iterator();
+//		
+//		while(iterator.hasNext()) {
+//			float temp2 = Float.parseFloat(temp.getService_start_time())-Float.parseFloat(iterator.next()+"");
+//			if(temp2>1) {
+//				System.out.println("hii");
+//			}
+//			else {
+//				System.out.println("hello");
+//			}
+//		}
+		
+		if(temp1 == 0) {
 		SimpleDateFormat dtf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Date date = new Date();
 		serviceRequest.setSp_accepted_date(dtf.format(date));
-		
+		if(this.serviceProviderService.getUserStatus(uid)==1) {
 		int accept_state = this.serviceProviderService.acceptService(serviceRequest);
-		
 		if(accept_state == 1) {
 			List<User> email1 = this.serviceProviderService.getUserEmail(service_req_id);
 			
@@ -111,11 +162,20 @@ public class ServiceProviderController {
 			String from = "helperland.janesh@gmail.com";
 			 String useremail = this.serviceProviderService.getOneEmail(service_req_id);
 			 sendServiceRequestEmail(message, subject, useremail, from);
-
-
 		}
 		
 		return accept_state;
+		}
+		
+		
+		else {
+			return 0;
+		}
+		}
+		else {
+			return 2;
+		}
+		
 	}
 	
 	@RequestMapping(value="/displayspdashboardmodal/{servicerequestid}",method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
@@ -290,7 +350,7 @@ public class ServiceProviderController {
 			
 		}
 		else {
-			
+
 			model.addAttribute("success" , "Your response submitted. Thank you!");
 			model.addAttribute("displaySuccess" , "style='display: block !important;'");
 
@@ -304,6 +364,7 @@ public class ServiceProviderController {
 			session.setAttribute("userlastname", LastName);
 			session.setAttribute("usermobile", Mobile);
 			session.setAttribute("userAvatar", Avatar);
+			session.setAttribute("SpPostalCodeSession", postalcode);
 			
 			model.addAttribute("htmlusername", FirstName);
 			model.addAttribute("htmllastname", LastName);

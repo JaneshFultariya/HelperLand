@@ -694,3 +694,92 @@ padding: 25px;
 border-radius: 500px;
 margin-bottom: 25px;
 }
+
+.btn-background-color{
+	background-color: transparent !important;
+	width: auto !important;
+	height: auto !important;
+}
+.btn-background-color:hover{
+	background-color: transparent !important;
+	width: auto !important;
+	height: auto !important;
+}
+
+.loader {
+  border: 8px solid #4c4c4c;
+  border-radius: 50%;
+  border-top: 8px solid #1d7a8c;
+  border-bottom: 8px solid #1d7a8c;
+  width: 80px;
+  height: 80px;
+  position:absolute;
+  left: 48%;
+  top: 40%;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+#loading-image{
+	position:fixed;
+    width:100%;
+    left:0;right:0;top:0;bottom:0;
+    background-color: rgba(0,0,0,0.7);
+    z-index:9999;
+    display:none;
+}
+
+#backtoTopbutton {
+  display: inline-block;
+  background-color: #646464;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  border-radius: 4px;
+  position: fixed;
+  bottom: 30px;
+  left: 30px;
+  transition: background-color .3s, 
+    opacity .5s, visibility .5s;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 1000;
+  border-radius:50%;
+}
+#backtoTopbutton::after {
+  content: "\f077";
+  font-family: FontAwesome;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 2em;
+  line-height: 50px;
+  color: #fff;
+}
+#backtoTopbutton:hover {
+  cursor: pointer;
+  background-color: #333;
+}
+#backtoTopbutton:active {
+  background-color: #555;
+}
+#backtoTopbutton.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+@media (min-width: 500px) {
+  
+  #backtoTopbutton {
+    margin: 30px;
+  }
+}

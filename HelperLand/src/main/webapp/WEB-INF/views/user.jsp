@@ -26,19 +26,21 @@
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
+	<link href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css" rel="stylesheet">
 <link href='https://fonts.googleapis.com/css?family=Roboto'
 	rel='stylesheet'>
 <link
 	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
 	rel="stylesheet">
-<title>Services History</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<title>Customer</title>
 </head>
 <body>
 	<section id="header">
 		<div class="header" id="topheader">
 			<nav class="navbar navbar-expand-lg navbar-light py-2"
 				style="background-color: #525252;">
-				<a class="navbar-brand" href="homepage.html"> <img
+				<a class="navbar-brand" href="homepage"> <img
 					src="<c:url value="/resources/images/white-logo-transparent-background.png" />"
 					style="width: 73px; height: 54px;">
 				</a>
@@ -151,14 +153,14 @@
 						class="side-link text-decoration-none" href="bookservice">Book
 							now</a></li>
 					<li class="side-items"><a
-						class="side-link text-decoration-none" href="price.html">Prices
+						class="side-link text-decoration-none" href="price">Prices
 							& services</a></li>
 					<li class="side-items"><a
 						class="side-link text-decoration-none" href="#">Warranty</a></li>
 					<li class="side-items"><a
 						class="side-link text-decoration-none" href="#">Blog</a></li>
 					<li class="side-items"><a
-						class="side-link text-decoration-none" href="contactUs.html">Contact</a>
+						class="side-link text-decoration-none" href="contactUs">Contact</a>
 					</li>
 				</ul>
 
@@ -196,6 +198,10 @@
 		</div>
 		<div class="div-line-below-user-profile"></div>
 	</section>
+	
+	<div id="loading-image" style="display: none;">
+<div class="loader"></div>
+</div>
 
 	<section id="tab_data">
 		<div class="tab">
@@ -259,7 +265,7 @@
 					<h3 class="link-text">Service History</h3>
 				</div>
 
-				<button class="btn addrequestbuttton" id="exporttabledata" style="width: 200px;">Export</button>
+				<!-- <button class="btn addrequestbuttton" id="exporttabledata" style="width: 200px;">Export</button> -->
 			</div>
 			<div class="container">
 				<div class="row">
@@ -630,8 +636,8 @@
 								</div>
 								<div class="form-group">
 									<label for="exampleFormControlInput1">New Password</label> <input
-										type="password" class="form-control" required name="password"
-										id="updtpassword" placeholder="Password">
+										type="password" class="form-control" name="password"
+										id="updtpassword" placeholder="Password" required>
 								</div>
 								<div class="form-group">
 									<label for="exampleFormControlInput1">Confirm Password</label>
@@ -654,6 +660,9 @@
 
 	</section>
 
+<div>
+<a type="hidden" href="homepage" id="homepagesessionclose"> </a>
+</div>
 
 	<section id="model">
 		<div class="modal fade" id="deleteModalCenter" tabindex="-1"
@@ -1008,8 +1017,10 @@
 						</div>
 						<br>
 						<h5>Feedback on service provider</h5>
-						<textarea rows="2" style="width: 100%;"></textarea>
-						<button type="submit" class="btn Reschedule-button">Save
+						<input type="hidden" id="ratingspidmodal">
+						<input type="hidden" id="ratingsridmodal">
+						<textarea rows="2" style="width: 100%;" id="ratingscomments"></textarea>
+						<button type="submit" class="btn Reschedule-button" data-bs-dismiss="modal">Save
 							changes</button>
 												</form>
 					</div>
@@ -1021,9 +1032,79 @@
 		</div>
 
 
+<div class="modal fade bookingsuccesmodallllll" id="bookingcancelmodallllll" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm mx-auto" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="d-flex align-items-center justify-content-center flex-column">
+                    <div class="success-symbol d-flex align-items-center justify-content-center success-booking-img">
+                        <img src="<c:url value="/resources/images/correct-white-medium.png" />" alt="">
+                    </div>
+                    <div class="text-center mt-3">
+                        <h5>Service Request Canceled !!!</h5>
+                    </div>
+                    <div class="mt-3 mb-2">Service Request id: <span id="service-id">8848</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bookingsuccesmodallllll" id="bookingReschedulemodallllll" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm mx-auto" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="d-flex align-items-center justify-content-center flex-column">
+                    <div class="success-symbol d-flex align-items-center justify-content-center success-booking-img">
+                        <img src="<c:url value="/resources/images/correct-white-medium.png" />" alt="">
+                    </div>
+                    <div class="text-center mt-3">
+                        <h5>Service Request Rescheduled !!!</h5>
+                    </div>
+                    <div class="mt-3 mb-2">Service Request id: <span id="service-id">8848</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade bookingsuccesmodallllll" id="bookingerrormodallllll" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm mx-auto" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="d-flex align-items-center justify-content-center flex-column">
+                    <%-- <div class="success-symbol d-flex align-items-center justify-content-center success-booking-img">
+                        <img src="<c:url value="/resources/images/correct-white-medium.png" />" alt="">
+                    </div> --%>
+                    <div class="text-center mt-3" style="color: red;">
+                        <h5>Oops!!! Something went wrong!! Please try again later!!!</h5>
+                    </div>
+                    <div class="mt-3 mb-2">Service Request id: <span id="service-id">8848</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 	</section>
 
 	<div style="flex-grow: 1;"></div>
+	
+	<a class="text-decoration-none" id="backtoTopbutton"></a>
 	
 	<div class="footer_section w-100">
 		<div
@@ -1076,8 +1157,9 @@
 		integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2"
 		crossorigin="anonymous"></script>
 
+	<script src="<c:url value="/resources/js/jquery.js" />"></script>
 	<!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> -->
-	<script src="http://code.jquery.com/jquery-1.8.3.min.js "></script>
+	<!-- <script src="http://code.jquery.com/jquery-1.8.3.min.js "></script> -->
 	<script
 		src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 	<script
@@ -1090,6 +1172,13 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 		
 		<script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/jquery.table2excel.min.js"></script>
+		
+		<script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
 
 
 	<!-- <script>
@@ -1124,9 +1213,12 @@
 			$(document).ready(function() {
 				$('#selectedColumn').DataTable({
 					responsive : true,
-					"dom" : '<"top">rt<"bottom"lip><"clear">',
+					"dom" : '<"top"B>rt<"bottom"lip><"clear">',
 					"aaSorting" : [],
 					"order": [[ 0, "desc" ]],
+					buttons: [
+	                    'excel'
+	                ],
 					columnDefs : [ {
 						orderable : false,
 						targets : [ 4, 6 ]
@@ -1204,12 +1296,22 @@
 	</script>
 
 	<script>
-		jQuery(document).ready(function($) {
-			$("#settingupdatepasswordform").submit(function(event) {
-				event.preventDefault();
-				updtpasswordfunction();
-			});
-		});
+	jQuery(document).ready(function($) {
+	$("#settingupdatepasswordform").submit(function(event) {
+		event.preventDefault();
+		var password = document.forms["settingupdatepasswordform"]["password"].value;
+		console.log(password);
+		var regularExpression = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,14}$/;
+		if(!regularExpression.test(password)){
+			
+			alert("Please follow password formation!!");
+		}
+		else{
+			updtpasswordfunction();
+		}
+	});
+	});
+	
 
 		function updtpasswordfunction() {
 
@@ -1443,7 +1545,7 @@
 													firstname = v[5];
 													lastname = v[6];
 													avatar = '<img class="img-custom-class" src="<c:url value="/resources/images/avatar-'+ v[10] +'.png" />" alt="">';
-													avgRatings = '<p>Avg ratings: '+v[7]+'/5</p>';
+													avgRatings = '<p>Avg ratings: '+v[7].toFixed(2)+'/5</p>';
 												}
 												//console.log(v.state);
 												//document.getElementById("showadd").innerHTML = document.getElementById("showadd").innerHTML + v.addressLine1;
@@ -1452,7 +1554,7 @@
 												result += '<a href="#" data-toggle="modal" data-target="#withoutServiceProviderdashboardModalCenter" onclick="openModaldetails('
 														+ v[1]
 														+ ')" class="text-decoration-none link-text">'
-														+ v[1]
+														+ '35'+v[1]
 														+ '</a>';
 												result += "</td>";
 												result += "<td>";
@@ -1481,7 +1583,7 @@
 												result += '<div class="d-flex flex-row"><button class="btn Reschedule-button" onclick="reschedulebtndashboard('
 														+ v[1]
 														+ ')" data-toggle="modal" data-target="#rescheduleModalCenter">Reschedule</button><button class="btn Cancle-button" onclick="cancelbtndashboard('
-														+ v[1]
+														+ v[1] +','+v[2]
 														+ ')" data-toggle="modal" data-target="#cancelModalCenter">Cancel</button></div>';
 												result += "</td>";
 												result += "</tr>";
@@ -1570,25 +1672,31 @@
 
 		function cancelbtndashboardform(servicerequestid) {
 			console.log(servicerequestid + "Hiiiiiiiiiiiiiiiiiii");
+			$("#closecanclemodal").click();
+			$('#loading-image').show();
 			$.ajax({
 				type : "GET",
 				url : "/helperland/cancelbtndashboard/" + servicerequestid,
 				success : function(data) {
 					console.log("SUCCESS: ", data);
-					$("#closecanclemodal").click();
-					alert("Service request successfully cancel !!!");
+					$("#bookingcancelmodallllll").modal("show");
 					dashboard();
 				},
 				error : function(e) {
 					console.log("ERROR: ", e);
+					$("#bookingerrormodallllll").modal("show");
 				},
 				done : function(e) {
 					console.log("Done");
-				}
+				},
+      			complete: function(){
+      		        $('#loading-image').hide();
+      		      }
 			});
 		}
 
-		function reschedulebtndashboard(servicerequestid) {
+		function reschedulebtndashboard(servicerequestid,dateValue) {
+			document.getElementById("service_start_date").value = dateValue;
 			console.log(servicerequestid);
 			jQuery(document).ready(function($) {
 				$("#reschedulebtndashboardform").submit(function(event) {
@@ -1600,6 +1708,8 @@
 
 		function reschedulebtndashboardform(servicerequestid) {
 			console.log(servicerequestid + "Hiiiiiiiiiiiiiiiiiii");
+			$("#closereschedulemodal").click();
+			$('#loading-image').show();
 			$.ajax({
 				type : "GET",
 				url : "/helperland/reschedulebtndashboard/" + servicerequestid
@@ -1607,16 +1717,19 @@
 						+ $("#startTime").val(),
 				success : function(data) {
 					console.log("SUCCESS: ", data);
-					$("#closereschedulemodal").click();
 					dashboard();
-					alert("Service request successfully reschedule !!!");
+					$("#bookingReschedulemodallllll").modal("show");
 				},
 				error : function(e) {
 					console.log("ERROR: ", e);
+					$("#bookingerrormodallllll").modal("show");
 				},
 				done : function(e) {
 					console.log("Done");
-				}
+				},
+      			complete: function(){
+      		        $('#loading-image').hide();
+      		      }
 			});
 		}
 		
@@ -1650,7 +1763,7 @@
 																	firstname = v[5];
 																	lastname = v[6];
 																	avatar = '<img class="img-custom-class" src="<c:url value="/resources/images/avatar-'+ v[10] +'.png" />" alt="">';
-																	avgrating = '<p>Avg ratings: '+v[7]+'/5</p>';
+																	avgrating = '<p>Avg ratings: '+v[7].toFixed(2)+'/5</p>';
 																}
 																
 																var status = "";
@@ -1664,6 +1777,10 @@
 																	status = "completed";
 																	colorcls = "complete-button";
 																}
+																
+																if(v[12] == v[1]){
+																	disablebtn = "disabled";
+																}
 
 																//console.log(v.state);
 																//document.getElementById("showadd").innerHTML = document.getElementById("showadd").innerHTML + v.addressLine1;
@@ -1672,7 +1789,7 @@
 																result += '<a href="#"  data-toggle="modal" data-target="#withoutServiceProviderdashboardModalCenter" onclick="openModaldetails('
 																		+ v[1]
 																		+ ')" class="text-decoration-none link-text">'
-																		+ v[1]
+																		+ '35'+v[1]
 																		+ '</a>';
 																result += "</td>";
 																result += "<td>";
@@ -1704,7 +1821,7 @@
 																		+ '</button>'
 																result += "</td>";
 																result += "<td>";
-																result += '<button '+disablebtn+' class="btn custom-margin-table-two-data-button" onclick="openModalratsp(' + v[11] + ','+v[1] + ')" data-bs-toggle="modal" data-bs-target="#ratingmodal">Rate SP</button>';
+																result += '<button '+disablebtn+' class="btn custom-margin-table-two-data-button" id="rattingspBtn'+v[1]+'" onclick="openModalratsp(' + v[11] + ','+v[1] + ')" data-bs-toggle="modal" data-bs-target="#ratingmodal">Rate SP</button>';
 																result += "</td>";
 																result += "</tr>"
 															});
@@ -1774,23 +1891,27 @@
 		
 		function openModalratsp(sp_id,sr_id) {
 			console.log(sp_id,sr_id);
-      	  jQuery(document).ready(function($){
-      			$("#ratingserviceform").submit(function(event){
-      				event.preventDefault();
-       				ratingservice(sp_id,sr_id); 
-      			});
-      		});
+			$('#ratingspidmodal').val(sp_id);
+			$('#ratingsridmodal').val(sr_id);
 		}
+		jQuery(document).ready(function($){
+  			$("#ratingserviceform").submit(function(event){
+  				event.preventDefault();
+   				ratingservice($('#ratingspidmodal').val(),$('#ratingsridmodal').val()); 
+  			});
+  		});
 		function ratingservice(sp_id,sr_id){
     		console.log(sp_id + "Hiiiiiiiiiiiiiiiiiii");
     		console.log(on_time_arriaval);
     		$.ajax({
     			type:"GET",
-    			url:"/helperland/ratingserviceurl/" + sp_id + "," + on_time_arriaval + "," + friendly + "," + quality_of_service + "," + sr_id,
+    			url:"/helperland/ratingserviceurl/" + sp_id + "," + on_time_arriaval + "," + friendly + "," + quality_of_service + "," + sr_id +","+$("#ratingscomments").val(),
     			success:function(data){
     				console.log("SUCCESS: ", data);
-    				/* $("#closecompletemodal").click();
-    				realtimeupcomingservicce(); */
+    				/* $("#closecompletemodal").click(); */
+    				/* realtimeupcomingservicce();  */
+    				$("#rattingspBtn"+sr_id+"").attr('disabled', true);
+    				
     			},
     			error: function(e){
     				console.log("ERROR: ", e);
@@ -1846,7 +1967,7 @@
 					$('#mobilevalidationcheck').html("");
 				}
 			});
-		})
+		});
 		
 		$("#addaddressformsettings").submit(function(event) {
 			var a = document.forms["addaddressformsettings"]["Mobile"].value;
@@ -1872,33 +1993,97 @@
 			});
 		});
 		
-		
-		$(document).ready(function() {
-	        $("#updtpassword").on('keyup', function() {
-	            var password = $("#updtpassword").val();
-	            var regularExpression = /^(?=.[0-9])(?=.[!@#$%^&])[a-zA-Z0-9!@#$%^&]{6,14}$/;
-	            if(!regularExpression.test(password)){
-	                $('#passwordvalidationuser').html("Password must be in length 6-14<br>Should contain atleast one uppercase letter, lowercase letter, number and special character.<br><hr>").css("color", "red");
-	            }
-	            else{
-	                $('#passwordvalidationuser').html("Password strength : Good<br><hr>").css("color", "green");
-	            }
-
-	        });
-	});
-	$("#settingupdatepasswordform").click(function(event) {
-	        var password = document.forms["settingupdatepasswordform"]["password"].value;
-	        var regularExpression = /^(?=.[0-9])(?=.[!@#$%^&])[a-zA-Z0-9!@#$%^&]{6,14}$/;
-	        if(!regularExpression.test(password)){
-	            return false;
-	        }
-	        else{
-	            return true;
-	        }
-	    });
-		
 	</script>
 
+<script>
+
+$(document).ready(function() {
+	  setTimeout(function() {
+	    console.log("hii");
+	  }, 2000);
+	});
+	function temp() {
+		var tempname = ${htmlusername };
+		if(tempname==null){
+			$(location).attr('href','http://localhost:8080/helperland/');
+		}
+	}
+</script>
+
+<script>
+$('#ratingmodal').on('hidden.bs.modal', function () {
+	$('input:radio[name=rating1]:checked').prop('checked', false);
+	$('input:radio[name=rating]:checked').prop('checked', false);
+	$('input:radio[name=rating2]:checked').prop('checked', false);
+	$("#ratingscomments").val("");
+});
+
+$(document).ready(function() {
+	$("#edtbdate").val(${htmldobday });
+	$("#edtbmonth").val("${htmldobmonth }");
+	$("#edtbyear").val(${htmldobyear });
+});
+</script>
+
+<script>
+	window.onload = function () {
+	    if (typeof history.pushState === "function") {
+	        history.pushState("jibberish", null, null);
+	        window.onpopstate = function () {
+	            history.pushState('newjibberish', null, null);
+	        };
+	    }
+	    else {
+	        var ignoreHashChange = true;
+	        window.onhashchange = function () {
+	            if (!ignoreHashChange) {
+	                ignoreHashChange = true;
+	                window.location.hash = Math.random();
+	            }
+	            else {
+	                ignoreHashChange = false;
+	            }
+	        };
+	    }
+	};
+
+	</script>
+	
+	<script>
+var btn = $('#backtoTopbutton');
+
+$(window).scroll(function() {
+  if ($(window).scrollTop() > 300) {
+    btn.addClass('show');
+  } else {
+    btn.removeClass('show');
+  }
+});
+
+btn.on('click', function(e) {
+  e.preventDefault();
+  $('html, body').animate({scrollTop:0}, '300');
+});
+</script>
+
+
+<script>
+$(document).ready(function() {
+	$("#updtpassword").on('keyup', function() {
+		var password = $("#updtpassword").val();
+		var regularExpression = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,14}$/;
+		if(!regularExpression.test(password)){
+			$('#passwordvalidationuser').html("Password must be in length 6-14<br>Should contain atleast one uppercase letter, lowercase letter, number and special character.<br><hr>").css("color", "red");
+		}
+		else{
+			$('#passwordvalidationuser').html("Password strength : Good<br><hr>").css("color", "green");
+		}
+		
+	});
+});
+
+
+</script>
 
 
 </body>

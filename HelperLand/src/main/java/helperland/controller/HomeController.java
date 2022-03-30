@@ -36,13 +36,16 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.view.RedirectView;
 
 import antlr.collections.List;
 import helperland.dao.ContactusDao;
 import helperland.dao.ForgotPasswordDao;
 import helperland.model.Contactus;
+import helperland.model.Rating;
 import helperland.model.ServiceRequest;
 import helperland.model.User;
 import helperland.model.UserAddress;
@@ -104,7 +107,7 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/contactUs", method = RequestMethod.POST)
-	public String handleContactUs(@ModelAttribute Contactus contactUs, BindingResult br, Model model) {
+	public String handleContactUs(@ModelAttribute Contactus contactUs, BindingResult br, Model model,@RequestParam CommonsMultipartFile file) {
 
 		if (br.hasErrors()) {
 			java.util.List<FieldError> errors = br.getFieldErrors();
@@ -116,6 +119,8 @@ public class HomeController {
 			model.addAttribute("displayError", "style='display: block !important;'");
 			return "contactUs";
 		} else {
+			 String filename=file.getOriginalFilename();  
+			System.out.println(filename);
 			SimpleDateFormat dtf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			Date date = new Date();
 			model.addAttribute("success", "Your response submitted. Thank you!");
@@ -123,6 +128,7 @@ public class HomeController {
 			contactUs.setName(contactUs.getFirstname(), contactUs.getLastname());
 			contactUs.setCreated_by(this.contactUsService.getContactUsUser(contactUs));
 			contactUs.setCreated_on(dtf.format(date));
+			contactUs.setFile_name(filename);
 			this.contactUsService.createContactUs(contactUs);
 			return "contactUs";
 		}
@@ -148,6 +154,8 @@ public class HomeController {
 			user.setModified_date(dtf.format(date));
 			user.setUser_type_id(3);
 			user.setIs_approved(1);
+			user.setIs_active(1);
+			user.setDate_of_birth("01-January-2022");
 			
 			User useremailCheck = this.registerUserService.getAllEmail(user.getEmail());
 			
@@ -187,6 +195,8 @@ public class HomeController {
 			user.setUser_type_id(2);
 			user.setUser_profile_pic("car");
 			user.setIs_approved(0);
+			user.setIs_active(1);
+			user.setDate_of_birth("01-January-2022");
 			userAddress.setAddressLine1(null);
 			userAddress.setAddressLine2(null);
 			userAddress.setCity(null);
@@ -207,6 +217,10 @@ public class HomeController {
 				userAddress.setUserid(uid);
 				userAddress.setMobile(null);
 				this.registerUserService.createRegisterUserAddress(userAddress);
+				Rating rating = new Rating();
+				rating.setRating_to(uid);
+				rating.setRatings(0);
+				this.registerUserService.createRatingUser(rating);
 			}
 			
 			String to = "janeshfultariya@gmail.com";
@@ -252,8 +266,14 @@ public class HomeController {
 				session.setAttribute("userlastname", login_user.getLast_name());
 				session.setAttribute("usermobile", login_user.getMobile());
 				session.setAttribute("userAvatar", login_user.getUser_profile_pic());
-
-				session.setMaxInactiveInterval(10 * 60);
+				session.setAttribute("userStatus", login_user.getIs_active());
+				session.setAttribute("usergender", login_user.getGender());
+				session.setAttribute("userdob", login_user.getDate_of_birth());
+				System.out.println(login_user.getIs_active());
+				
+				session.setMaxInactiveInterval(10*60);
+				
+				
 
 				if (login_user.getUser_type_id() == 1) {
 					return "redirect:admin";
@@ -482,6 +502,14 @@ public class HomeController {
 			model.addAttribute("htmllastname", session.getAttribute("userlastname"));
 			model.addAttribute("htmlMobile", session.getAttribute("usermobile"));
 			model.addAttribute("UserType", session.getAttribute("loginUsertype"));
+			
+			String dobstring = session.getAttribute("userdob")+"";
+			
+			String[] DOB = (dobstring).split("-");
+			model.addAttribute("htmldobday", DOB[0]);
+			model.addAttribute("htmldobmonth", DOB[1]);
+			model.addAttribute("htmldobyear", DOB[2]);
+			
 			model.addAttribute("success", "You Login successfully. Thank you!");
 			model.addAttribute("displaySuccess", "style='display: block !important;'");
 			return "user";
@@ -504,6 +532,19 @@ public class HomeController {
 			model.addAttribute("htmlMobile", session.getAttribute("usermobile"));
 			model.addAttribute("UserType", session.getAttribute("loginUsertype"));
 			model.addAttribute("htmlavatar", session.getAttribute("userAvatar"));
+			model.addAttribute("htmlstatus", session.getAttribute("userStatus"));
+			model.addAttribute("htmlgender", session.getAttribute("usergender"));
+			
+			String dobstring = session.getAttribute("userdob")+"";
+			
+			String[] DOB = (dobstring).split("-");
+			model.addAttribute("htmldobday", DOB[0]);
+			model.addAttribute("htmldobmonth", DOB[1]);
+			model.addAttribute("htmldobyear", DOB[2]);
+			
+			
+			System.out.println(session.getAttribute("userStatus"));
+			
 			model.addAttribute("success", "You Login successfully. Thank you!");
 			model.addAttribute("displaySuccess", "style='display: block !important;'");
 
@@ -514,6 +555,8 @@ public class HomeController {
 			model.addAttribute("htmladdline2", useraddress1.getAddressLine2());
 			model.addAttribute("htmlcity", useraddress1.getCity());
 			model.addAttribute("htmlpostalcode", useraddress1.getPostalcode());
+			
+			session.setAttribute("SpPostalCodeSession", useraddress1.getPostalcode());
 
 			return "serviceprovider";
 		} else {

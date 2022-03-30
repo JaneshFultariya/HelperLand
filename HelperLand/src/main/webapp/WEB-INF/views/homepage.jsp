@@ -14,6 +14,7 @@
 	crossorigin="anonymous">
 <link rel="icon" type="image/x-icon"
 	href="<c:url value="/resources/images/white-logo-transparent-background.png" />">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -94,14 +95,11 @@
 			<div class="profile-dropedown" id="profilepic">
 				<a class="nav-link  dropdown-toggle text-decoration-none"
 					id="navbarDropdownMenuLink-4" data-toggle="dropdown"
-					aria-haspopup="true" aria-expanded="false"><i
-					class="fa fa-user"></i> <img
+					aria-haspopup="true" aria-expanded="false"><img
 					src="<c:url value="/resources/images/forma-1-1-1.png" />"> </a>
 				<div
 					class="dropdown-menu dropdown-menu-right dropdown-cyan text-color-nav"
 					aria-labelledby="navbarDropdownMenuLink-4">
-					<span style="padding-left: 15px;">Welcome,<br>
-					<strong style="padding-left: 15px;">${htmlusername }</strong></span>
 					<div class="devider-line"></div>
 					<c:if test="${user_type == 2 }">
 									<a class="dropdown-item" href="serviceprovider">Dashboard</a>
@@ -709,6 +707,8 @@
 	</section>
 
 
+<a class="text-decoration-none" id="backtoTopbutton"></a>
+
 	<div class="footer_section w-100">
 		<div
 			class="footer_main d-flex justify-content-around align-items-center">
@@ -763,7 +763,8 @@
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> -->
+	<script src="<c:url value="/resources/js/jquery.js" />"></script>
 
 	<script>
 		let temp =
@@ -849,6 +850,22 @@
 	});
 	</script>
 
+<script>
+var btn = $('#backtoTopbutton');
+
+$(window).scroll(function() {
+  if ($(window).scrollTop() > 300) {
+    btn.addClass('show');
+  } else {
+    btn.removeClass('show');
+  }
+});
+
+btn.on('click', function(e) {
+  e.preventDefault();
+  $('html, body').animate({scrollTop:0}, '300');
+});
+</script>
 
 
 </body>

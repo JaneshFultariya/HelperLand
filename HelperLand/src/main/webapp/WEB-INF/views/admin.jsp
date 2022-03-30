@@ -16,10 +16,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
     <link rel="icon" type="image/x-icon" href="<c:url value="/resources/images/white-logo-transparent-background.png" />">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap.min.css">
+    
+    <link href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
-    <title>User Management</title>
+    <title>Admin</title>
 
 </head>
 <body>
@@ -43,8 +47,7 @@
                         <li class="nav-item">
                             <div class="profile-dropedown nav-btnn-img">
                                 <a class="nav-link  dropdown-toggle text-decoration-none" id="navbarDropdownMenuLink-4"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
-                                        class="fa fa-user"></i>
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <img src=" <c:url value="/resources/images/forma-1-1-1.png" />"> </a>
                                 <!-- <div class="dropdown-menu dropdown-menu-right dropdown-cyan text-color-nav"
                                     aria-labelledby="navbarDropdownMenuLink-4">
@@ -135,21 +138,33 @@
                     <div class="col">
                         <input type="text" class="form-control" style="height: 46px;" id="serviceProviderName" placeholder="Service Provider name">
                     </div>
-                    <!-- <div class="col">
-                        <select id="status" style="height: 46px;" class="form-control">
+
+<div class="col" id="status">
+                        <select id="inputState" style="height: 46px;" class="form-control">
                             <option selected>Choose...</option>
-                            <option>...</option>
+                            <option value="new">new</option>
+                            <option value="Accepted">Accepted</option>
+                            <option value="cancel">cancel</option>
+                            <option value="Completed">Completed</option>
                         </select>
-                    </div> -->
-                
+                    </div>
+                    
+                    <div class="col" id="paymentstatus">
+                        <select id="inputState" style="height: 46px;" class="form-control">
+                            <option selected>Choose...</option>
+                            <option value="pending">pending</option>
+                            <option value="cancel">cancel</option>
+                            <option value="Completed">Completed</option>
+                        </select>
+                    </div>
 
                     
-                    <div class="col" style="max-width: 140px;">
+                    <!-- <div class="col" style="max-width: 140px;">
                         <input type="text" id="From_Date" style="height: 46px;" placeholder="From Date" onfocus="(this.type='date')" onblur="(this.type='text')">
                     </div>
                     <div class="col" style="max-width: 140px;">
                          <input type="text" id="To_Date" style="height: 46px;" placeholder="To Date" onfocus="(this.type='date')" onblur="(this.type='text')">
-                    </div>
+                    </div> -->
                     
                     <div class="col-auto">
                         <button type="submit" id="clearbtnservicerequests" style="height: 46px;" class="btn btn-primary mb-2">clear</button>
@@ -228,17 +243,6 @@
                     <div class="col">
                         <input type="text" id="Email" style="height: 46px;" class="form-control" placeholder="Email">
                     </div>
-                    <!-- <div class="col">
-                        <input type="date" class="link-text form-control" style="width: 150px; margin-right: 20px;"
-													id="startdate_to" placeholder="From Date">
-						<input type="text" id="From_Date" style="height: 46px;" placeholder="From Date" onfocus="(this.type='date')" onblur="(this.type='text')">
-                    </div>
-                    <div class="col">
-                        <input type="text" id="To_Date" style="height: 46px;" placeholder="To Date" onfocus="(this.type='date')" onblur="(this.type='text')">
-                    </div> -->
-                    <!-- <div class="col-auto">
-                        <button type="submit" style="height: 46px;" class="btn btn-primary mb-2">Serach</button>
-                    </div> -->
                     <div class="col-auto">
                         <button id="clearbtnusermanagement" type="submit" style="height: 46px;" class="btn btn-primary mb-2">clear</button>
                     </div>
@@ -272,96 +276,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- <tr>
-                                <td scope="row text-color-table number-and-km">Abhishek Vadhadiya</td>
-                                <td></td>
-                                <td style="padding: 0px; padding-top: 13px;">
-                                    <div class="col">
-                                        <div class="d-flex custom-margin-table">
-                                            <img src="images/calculator.png" class="calander-img">
-                                            <p>09/04/2018</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td scope="row text-color-table number-and-km">Customer</td>
-                                <td scope="row text-color-table number-and-km">9925177550</td>
-                                <td></td>
-                                <td><button
-                                        class="Not-Applicable-button align-items-center justify-content-center custom-margin-table-two-data">Inactive</button>
-                                </td>
-                                <td>
-                                    <div class="profile-dropedown nav-btnn-img float-left">
-                                        <a class="nav-link  dropdown-toggle text-decoration-none"
-                                            id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true"
-                                            aria-expanded="false"><i class="fa fa-user"></i>
-                                            <img src="images/icons8-menu-vertical-30.png"> </a>
-                                        <div class="dropdown-menu dropdown-menu-right dropdown-cyan text-color-nav"
-                                            aria-labelledby="navbarDropdownMenuLink-4">
-                                            <a class="dropdown-item text-color-nav text-decoration-none" href="#">Delete</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td scope="row text-color-table number-and-km">Sandip Patel</td>
-                                <td scope="row text-color-table number-and-km">Call Center Employee</td>
-                                <td style="padding: 0px; padding-top: 13px;">
-                                    <div class="col">
-                                        <div class="d-flex custom-margin-table">
-                                            <img src="images/calculator.png" class="calander-img">
-                                            <p>09/04/2018</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td scope="row text-color-table number-and-km">Admin</td>
-                                <td scope="row text-color-table number-and-km">999988887777</td>
-                                <td></td>
-                                <td><button
-                                        class="complete-button align-items-center justify-content-center custom-margin-table-two-data">Active</button>
-                                </td>
-                                <td>
-                                    <div class="profile-dropedown nav-btnn-img float-left">
-                                        <a class="nav-link  dropdown-toggle text-decoration-none"
-                                            id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true"
-                                            aria-expanded="false"><i class="fa fa-user"></i>
-                                            <img src="images/icons8-menu-vertical-30.png"> </a>
-                                        <div class="dropdown-menu dropdown-menu-right dropdown-cyan text-color-nav"
-                                            aria-labelledby="navbarDropdownMenuLink-4">
-                                            <a class="dropdown-item text-color-nav text-decoration-none" href="#">Delete</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td scope="row text-color-table number-and-km">First Provider</td>
-                                <td></td>
-                                <td style="padding: 0px; padding-top: 13px;">
-                                    <div class="col">
-                                        <div class="d-flex custom-margin-table">
-                                            <img src="images/calculator.png" class="calander-img">
-                                            <p>09/04/2018</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td scope="row text-color-table number-and-km">Service Provider</td>
-                                <td scope="row text-color-table number-and-km">9966554477</td>
-                                <td scope="row text-color-table number-and-km">53225</td>
-                                <td><button
-                                        class="complete-button align-items-center justify-content-center custom-margin-table-two-data">Active</button>
-                                </td>
-                                <td>
-                                    <div class="profile-dropedown nav-btnn-img float-left">
-                                        <a class="nav-link  dropdown-toggle text-decoration-none"
-                                            id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true"
-                                            aria-expanded="false"><i class="fa fa-user"></i>
-                                            <img src="images/icons8-menu-vertical-30.png"> </a>
-                                        <div class="dropdown-menu dropdown-menu-right dropdown-cyan text-color-nav"
-                                            aria-labelledby="navbarDropdownMenuLink-4">
-                                            <a class="dropdown-item text-color-nav text-decoration-none" href="#">Delete</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr> -->
                         </tbody>
                     </table>
                     </div>
@@ -423,6 +337,7 @@
         </div>
     </div>
 
+<a class="text-decoration-none" id="backtoTopbutton"></a>
 
     <section id="models">
         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
@@ -536,7 +451,8 @@
         integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2"
         crossorigin="anonymous"></script>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> -->
+    <script src="<c:url value="/resources/js/jquery.js" />"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"></script>
 
@@ -548,6 +464,13 @@
    
    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
    <script src="https://cdn.datatables.net/datetime/1.1.2/js/dataTables.dateTime.min.js"></script>
+   
+   <script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
    
     <script>
     function servicerequestdatatable(){
@@ -630,10 +553,26 @@
                             .search(this.value)
                             .draw();
                     });
+                	$('#status').on('change', function () {
+                		console.log("hiiii");
+                		
+                        table
+                            .columns(5)
+                            .search($('#status option:selected').val())
+                            .draw();
+                    });
+                	$('#paymentstatus').on('change', function () {
+                		console.log("hiiii");
+                		
+                        table
+                            .columns(6)
+                            .search($('#paymentstatus option:selected').val())
+                            .draw();
+                    });
                 	/* $('#From_Date, #To_Date').on('change', function () {
                         table.draw();
                     }); */
-                	/* $("#status").each(function () {
+                	 /* $("#status").each(function () {
                         var select = $('<select style="height: 46px;"><option value=""></option></select>')
                             .appendTo($(this).empty())
                             .on('change', function () {
@@ -643,9 +582,9 @@
                             });
 
                         table.column(5).data().unique().sort().each(function (d, j) {
-                            select.append('<option value="' + d + '">' + d + '</option>')
+                            select.append("<option value='" + d + "'>" + d + "</option>")
                         });
-                    }); */
+                    }); */ 
                     
                     
             
@@ -676,8 +615,11 @@
                     orderable: false,
                     targets: [4, 5, 6, 8, 9],
                 }] */
-            	"dom": '<"top">rt<"bottom"lip><"clear">',
-            	"order": [[ 1, "desc" ]]
+            	"dom": '<"top"B>rt<"bottom"lip><"clear">',
+            	"order": [[ 1, "desc" ]],
+            	buttons: [
+                    'excel'
+                ]
             });
         	$('#Postalcode').on('keyup', function () {
                 table
@@ -824,7 +766,7 @@
         					 result += '</td>';
         					 result += '<td>';
         					 result += '<div class="profile-dropedown nav-btnn-img float-left">';
-        					 result += '<a class="nav-link  dropdown-toggle text-decoration-none" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i>';
+        					 result += '<a class="nav-link  dropdown-toggle text-decoration-none" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
         					 result += '<img src="<c:url value="/resources/images/icons8-menu-vertical-30.png" />"> </a>';
         					 result += '<div class="dropdown-menu dropdown-menu-right dropdown-cyan text-color-nav" aria-labelledby="navbarDropdownMenuLink-4">';
         					 result += statusdropdown;
@@ -946,7 +888,7 @@
 							firstname = v[7];
 							lastname = v[8];
 							avatar = '<img class="img-custom-class" src="<c:url value="/resources/images/avatar-'+ v[9] +'.png" />" style="width: 50px; height: 50px;"  alt="">';
-							avg_rating = '<p>Avg ratings: '+v[6]+'/5</p>';
+							avg_rating = '<p>Avg ratings: '+v[6].toFixed(2)+'/5</p>';
 						}
 						else{
 							firstname = "";
@@ -965,27 +907,27 @@
 						
 						var addClass = ""
 						if(v[15] == "new"){
-							addClass = "new-button";
+							addClass = '<div class="badge badge-warning">new</div>';
 						}
 						else if(v[15] == "Accepted"){
-							addClass = "Accepted-button";
+							addClass = '<div class="badge badge-info">Accepted</div>';
 						}
 						else if(v[15] == "cancel"){
-							addClass = "Refunded-button";
+							addClass = '<div class="badge badge-danger">cancel</div>';
 						}
 						else{
-							addClass = "complete-button";
+							addClass = '<div class="badge badge-success">Completed</div>';
 						}
 						
 						var addPaymentStatusClass = "";
 						if(v[16] == "Completed"){
-							addPaymentStatusClass = "complete-button";
+							addPaymentStatusClass = '<div class="badge badge-success">Completed</div>';
 						}
 						else if(v[16] == "cancel"){
-							addPaymentStatusClass = "Refunded-button";
+							addPaymentStatusClass = '<div class="badge badge-danger">cancel</div>';
 						}
 						else{
-							addPaymentStatusClass = "Expired-button";
+							addPaymentStatusClass = '<div class="badge badge-secondary">pending</div>';
 						}
       					 
       					result += "<tr>";
@@ -1004,8 +946,10 @@
 								+ '</p></div></div></div>';
 						result += "</td>";
       					result += '<td class="eurotext"><div class="d-flex flex-row custom-margin-table-two-data"><p class="euro-text">&euro;</p><p class="number-text">'+v[14]+'</p></div></td>';
-      				 	result += '<td><button class="'+addClass+' align-items-center justify-content-center custom-margin-table-two-data">'+v[15]+'</button></td>';
-      				 	result += '<td><button class="'+addPaymentStatusClass+' align-items-center justify-content-center custom-margin-table-two-data">'+v[16]+'</button></td>';
+      				 	result += '<td>';
+      				 	result += addClass;
+      				 	result += '</td>';
+      				 	result += '<td>'+addPaymentStatusClass+'</td>';
       				 	result += '<td><div class="profile-dropedown nav-btnn-img"><a class="nav-link  dropdown-toggle text-decoration-none" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="<c:url value="/resources/images/icons8-menu-vertical-30.png" />"> </a><div class="dropdown-menu dropdown-menu-right dropdown-cyan text-color-nav" aria-labelledby="navbarDropdownMenuLink-4">';
       				 	result += editandrescheduledropedown;
       				 	result += '<a class="dropdown-item text-color-nav text-decoration-none" href="#">Refund</a>';
@@ -1074,6 +1018,47 @@
 			});
 		}
     </script>
+
+<script>
+	window.onload = function () {
+	    if (typeof history.pushState === "function") {
+	        history.pushState("jibberish", null, null);
+	        window.onpopstate = function () {
+	            history.pushState('newjibberish', null, null);
+	        };
+	    }
+	    else {
+	        var ignoreHashChange = true;
+	        window.onhashchange = function () {
+	            if (!ignoreHashChange) {
+	                ignoreHashChange = true;
+	                window.location.hash = Math.random();
+	            }
+	            else {
+	                ignoreHashChange = false;
+	            }
+	        };
+	    }
+	};
+
+	</script>
+
+<script>
+var btn = $('#backtoTopbutton');
+
+$(window).scroll(function() {
+  if ($(window).scrollTop() > 300) {
+    btn.addClass('show');
+  } else {
+    btn.removeClass('show');
+  }
+});
+
+btn.on('click', function(e) {
+  e.preventDefault();
+  $('html, body').animate({scrollTop:0}, '300');
+});
+</script>
 
 </body>
 </html>

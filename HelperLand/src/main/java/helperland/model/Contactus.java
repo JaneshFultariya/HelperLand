@@ -23,6 +23,7 @@ public class Contactus {
 	private String message;
 	private String created_on;
 	private String name;
+	private String file_name;
 	private int created_by;
 	
 	public String getName() {
@@ -32,12 +33,12 @@ public class Contactus {
 		this.name = fname +" "+ lname;
 	}
 
-	@Override
-	public String toString() {
-		return "ContactUs [contact_us_id=" + contact_us_id + ", firstname=" + firstname + ", lastname=" + lastname
-				+ ", email=" + email + ", subject_type=" + subject_type + ", phone_number=" + phone_number
-				+ ", message=" + message + ", created_on=" + created_on + " , name="
-			 + "]";
+	
+	public String getFile_name() {
+		return file_name;
+	}
+	public void setFile_name(String file_name) {
+		this.file_name = file_name;
 	}
 	public Contactus() {
 		super();

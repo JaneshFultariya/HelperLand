@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import helperland.model.Contactus;
+import helperland.model.Rating;
 import helperland.model.User;
 import helperland.model.UserAddress;
 
@@ -48,5 +49,11 @@ public class RegisterUserDaoclass implements RegisterUserDao{
 			System.out.println(e.getMessage());
 			return null;
 		}
+	}
+
+	@Transactional
+	public int createRatingUser(Rating rating) {
+		int id2 = (Integer) this.hibernateTemplate.save(rating);
+		return id2;
 	}
 }

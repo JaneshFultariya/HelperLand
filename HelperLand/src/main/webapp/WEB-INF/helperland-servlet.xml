@@ -16,7 +16,7 @@
 
 <tx:annotation-driven />
 
-	<context:component-scan base-package="helperland.controller, helperland.service , helperland.dao , helperland.model"></context:component-scan>
+	<context:component-scan base-package="helperland.controller, helperland.service , helperland.dao , helperland.model , helperland.exception"></context:component-scan>
 	
 	<mvc:annotation-driven />
 	
@@ -28,6 +28,8 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 	
+	        <bean id="multipartResolver"   
+    class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>  
 	
 	
 	
@@ -40,7 +42,7 @@
 		<property name="driverClassName"
 			value="com.mysql.jdbc.Driver" />
 		<property name="url"
-			value="jdbc:mysql://localhost:3306/new_schema" />
+			value="jdbc:mysql://localhost:3306/helperland_schema" />
 		<property name="username" value="root" />
 		<property name="password" value="Jbf@2102" />
 

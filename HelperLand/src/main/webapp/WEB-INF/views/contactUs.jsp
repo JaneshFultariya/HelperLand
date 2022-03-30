@@ -20,6 +20,7 @@
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href='https://fonts.googleapis.com/css?family=Roboto'
 	rel='stylesheet'>
 <title>Contact Us</title>
@@ -88,14 +89,11 @@
 			<div class="profile-dropedown" id="profilepic">
 				<a class="nav-link  dropdown-toggle text-decoration-none"
 					id="navbarDropdownMenuLink-4" data-toggle="dropdown"
-					aria-haspopup="true" aria-expanded="false"><i
-					class="fa fa-user"></i> <img
+					aria-haspopup="true" aria-expanded="false"><img
 					src="<c:url value="/resources/images/forma-1-1-1.png" />"> </a>
 				<div
 					class="dropdown-menu dropdown-menu-right dropdown-cyan text-color-nav"
 					aria-labelledby="navbarDropdownMenuLink-4">
-					<span style="padding-left: 15px;">Welcome,<br>
-					<strong style="padding-left: 15px;">${htmlusername }</strong></span>
 					<div class="devider-line"></div>
 					<a class="dropdown-item text-color-nav text-decoration-none"
 						href="user">My Dashboard</a>  <a
@@ -184,7 +182,7 @@
 					</div>
 					<div class="modal-body">
 						<form action="login" method="post">
-							<div
+							<%-- <div
 								class="alert alert-danger alert-dismissible fade show d-none "
 								${displayError } role="alert">
 								${error }
@@ -197,7 +195,7 @@
 								${success }
 								<button type="button" class="btn-close" data-bs-dismiss="alert"
 									aria-label="Close"></button>
-							</div>
+							</div> --%>
 							<div class="form-group">
 								<label for="exampleInputEmail1">Email address</label> <input
 									type="email" name="email" class="form-control"
@@ -251,7 +249,7 @@
 					</div>
 					<div class="modal-body">
 					<form action="forgetpassword" method="post">
-					<div class="alert alert-danger alert-dismissible fade show d-none "
+					<%-- <div class="alert alert-danger alert-dismissible fade show d-none "
 				${displayError } role="alert">
 				${error }
 				<button type="button" class="btn-close" data-bs-dismiss="alert"
@@ -262,7 +260,7 @@
 				${success }
 				<button type="button" class="btn-close" data-bs-dismiss="alert"
 					aria-label="Close"></button>
-			</div>
+			</div> --%>
 						<div class="form-group">
 							<input type="email" class="form-control" id="exampleInputEmail1"
 								aria-describedby="emailHelp" required name="email" placeholder="Enter email">
@@ -307,7 +305,7 @@
 						<form class="mx-auto" style="margin-top: 15px;" method="post" action="registerUser" id="createuseraccount"
 						oninput='confirmpassword.setCustomValidity(confirmpassword.value != password.value ? "Passwords do not match." : "")'
 						>
-						<div class="alert alert-danger alert-dismissible fade show d-none "
+						<%-- <div class="alert alert-danger alert-dismissible fade show d-none "
 				${displayError } role="alert">
 				${error }
 				<button type="button" class="btn-close" data-bs-dismiss="alert"
@@ -318,7 +316,7 @@
 				${success }
 				<button type="button" class="btn-close" data-bs-dismiss="alert"
 					aria-label="Close"></button>
-			</div>
+			</div> --%>
 							<div class="form-group">
 								<div class="row">
 									<div class="col">
@@ -441,7 +439,7 @@
 		<div class="text-center">
 			<h3>Get in touch with us</h3>
 		</div>
-		<form class="mx-auto" method="post" action="contactUs" id="contactusformvalidation">
+		<form class="mx-auto" method="post" action="contactUs" id="contactusformvalidation" enctype="multipart/form-data">
 			<div class="alert alert-danger alert-dismissible fade show d-none "
 				${displayError } role="alert">
 				${error }
@@ -498,6 +496,10 @@
 				<textarea class="form-control" id="exampleFormControlTextarea1"
 					rows="3" name="message" placeholder="Message"></textarea>
 			</div>
+			<div class="form-group" id="fileUpd">
+    <label for="exampleFormControlFile1">Example file input</label>
+    <input type="file" class="form-control-file" name="file" id="exampleFormControlFile1">
+  </div>
 			<div class="mt-2 text-center mb-2" id="Phonevalidationcontact"></div>
 			<div class="container text-center">
 				<button type="submit"
@@ -537,6 +539,8 @@
 			</div>
 		</div>
 	</section>
+	
+	<a class="text-decoration-none" id="backtoTopbutton"></a>
 
 	<div class="footer_section w-100" style="margin-top: 53px;">
 		<div
@@ -608,7 +612,9 @@
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 		
-		<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+		
+		<script src="<c:url value="/resources/js/jquery.js" />"></script>
+		<!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> -->
 		
 		
 		<script>
@@ -719,6 +725,23 @@
 		    $("#errorMessage").slideUp(500);
 		});
 	</script>
+
+<script>
+var btn = $('#backtoTopbutton');
+
+$(window).scroll(function() {
+  if ($(window).scrollTop() > 300) {
+    btn.addClass('show');
+  } else {
+    btn.removeClass('show');
+  }
+});
+
+btn.on('click', function(e) {
+  e.preventDefault();
+  $('html, body').animate({scrollTop:0}, '300');
+});
+</script>
 
 </body>
 </html>

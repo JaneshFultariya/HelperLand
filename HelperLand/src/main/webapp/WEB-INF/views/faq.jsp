@@ -84,8 +84,6 @@
 				<div
 					class="dropdown-menu dropdown-menu-right dropdown-cyan text-color-nav"
 					aria-labelledby="navbarDropdownMenuLink-4">
-					<span style="padding-left: 15px;">Welcome,<br>
-					<strong style="padding-left: 15px;">${htmlusername }</strong></span>
 					<div class="devider-line"></div>
 					<a class="dropdown-item text-color-nav text-decoration-none"
 						href="user">My Dashboard</a>  <a
@@ -514,6 +512,8 @@
             
         </div>
     </section>
+    
+    <a class="text-decoration-none" id="backtoTopbutton"></a>
 
     <div class="footer_section w-100">
         <div class="footer_main d-flex justify-content-around align-items-center">
@@ -570,6 +570,7 @@
         crossorigin="anonymous"></script>
 
 
+<script src="<c:url value="/resources/js/jquery.js" />"></script>
     
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -651,6 +652,23 @@ $("#errorMessage").fadeTo(2000, 500).slideUp(500, function(){
     $("#errorMessage").slideUp(500);
 });
 	</script>
+	
+	<script>
+var btn = $('#backtoTopbutton');
+
+$(window).scroll(function() {
+  if ($(window).scrollTop() > 300) {
+    btn.addClass('show');
+  } else {
+    btn.removeClass('show');
+  }
+});
+
+btn.on('click', function(e) {
+  e.preventDefault();
+  $('html, body').animate({scrollTop:0}, '300');
+});
+</script>
 
 </body>
 </html>
