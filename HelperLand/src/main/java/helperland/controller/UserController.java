@@ -24,6 +24,7 @@ import org.springframework.http.MediaType;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,7 +51,7 @@ public class UserController {
 	@Autowired
 	BookaService bookaService;
 	
-	@RequestMapping(value="/mydetails/{edtfirstname},{edtlastname},{edtmobile},{edtbdate},{edtbmonth},{edtbyear},{edtlanguage}",method = RequestMethod.GET)
+	@GetMapping(value="/mydetails/{edtfirstname},{edtlastname},{edtmobile},{edtbdate},{edtbmonth},{edtbyear},{edtlanguage}")
 	public @ResponseBody void ajaxEdtUser(@PathVariable("edtfirstname") String edtfirstname,
 			@PathVariable("edtlastname") String edtlastname,
 			@PathVariable("edtmobile") String edtmobile,
@@ -95,7 +96,7 @@ public class UserController {
 		}
 	}
 	
-	@RequestMapping(value="/updtpassword/{old_password},{updtpassword}",method = RequestMethod.GET)
+	@GetMapping(value="/updtpassword/{old_password},{updtpassword}")
 	public @ResponseBody int ajaxUpdtPassword(@PathVariable("old_password") String old_password,
 			@PathVariable("updtpassword") String updtpassword,
 			@ModelAttribute User user, 
@@ -128,7 +129,7 @@ public class UserController {
 		
 	}
 	
-	@RequestMapping(value="/addaddresssettings/{AddressLine1},{AddressLine2},{postalcode},{City},{Mobile}",method = RequestMethod.GET)
+	@GetMapping(value="/addaddresssettings/{AddressLine1},{AddressLine2},{postalcode},{City},{Mobile}")
 	public @ResponseBody void ajaxaddaddresssettings(@PathVariable("AddressLine1") String AddressLine1,
 			@PathVariable("AddressLine2") String AddressLine2,
 			@PathVariable("postalcode") String postalcode,
@@ -147,7 +148,7 @@ public class UserController {
 
 	}
 	
-	@RequestMapping(value="/showaddresssettings",method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value="/showaddresssettings", produces = MediaType.APPLICATION_JSON_VALUE)
 	 @ResponseBody
 	public List<UserAddress> ajaxshowaddresssettings(HttpServletRequest request) throws Exception {
 		
@@ -160,7 +161,7 @@ public class UserController {
 		return userAddress2;
 	}
 	
-	@RequestMapping(value="/updateaddresssettings/{AddressLine1},{AddressLine2},{postalcode},{City},{Mobile},{user_address_id}",method = RequestMethod.GET)
+	@GetMapping(value="/updateaddresssettings/{AddressLine1},{AddressLine2},{postalcode},{City},{Mobile},{user_address_id}")
 	public @ResponseBody void ajaxupdateaddresssettings(@PathVariable("AddressLine1") String AddressLine1,
 			@PathVariable("AddressLine2") String AddressLine2,
 			@PathVariable("postalcode") String postalcode,
@@ -186,7 +187,7 @@ public class UserController {
 	}
 	
 	
-	@RequestMapping(value="/deleteaddresssettings/{user_address_id}",method = RequestMethod.GET)
+	@GetMapping(value="/deleteaddresssettings/{user_address_id}")
 	public @ResponseBody void ajaxdeleteaddresssettings(
 			@PathVariable("user_address_id") String user_address_id,
 			@ModelAttribute UserAddress userAddress, 
@@ -205,7 +206,7 @@ public class UserController {
 
 	}
 	
-	@RequestMapping(value="/displaydashboard",method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value="/displaydashboard", produces = MediaType.APPLICATION_JSON_VALUE)
 	 @ResponseBody
 	public List<ServiceRequest> ajaxdisplaydashboard(HttpServletRequest request) throws Exception {
 		
@@ -218,7 +219,7 @@ public class UserController {
 		return serviceRequest2;
 	}
 	
-	@RequestMapping(value="/ratingsavg/{spid}",method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value="/ratingsavg/{spid}", produces = MediaType.APPLICATION_JSON_VALUE)
 	 @ResponseBody
 	public double ajaxratingsavg(HttpServletRequest request,
 			@PathVariable("spid") String spid) throws Exception {
@@ -230,7 +231,7 @@ public class UserController {
 		return avgrating;
 	}
 	
-	@RequestMapping(value="/displaydashboardmodal/{servicerequestid}",method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value="/displaydashboardmodal/{servicerequestid}", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public HashMap<String, Object> ajaxdisplaydashboardmodal(
 			@PathVariable("servicerequestid") int servicerequestid,
@@ -246,7 +247,7 @@ public class UserController {
 		return finalData;
 	}
 	
-	@RequestMapping(value="/cancelbtndashboard/{service_req_id}",method = RequestMethod.GET)
+	@GetMapping(value="/cancelbtndashboard/{service_req_id}")
 	public @ResponseBody void ajaxcancelbtndashboard(
 			@PathVariable("service_req_id") int service_req_id,
 			@ModelAttribute ServiceRequest serviceRequest, 
@@ -275,7 +276,7 @@ public class UserController {
 		}
 	}
 	
-	@RequestMapping(value="/reschedulebtndashboard/{service_req_id},{service_start_date},{startTime}",method = RequestMethod.GET)
+	@GetMapping(value="/reschedulebtndashboard/{service_req_id},{service_start_date},{startTime}")
 	public @ResponseBody void ajaxreschedulebtndashboard(
 			@PathVariable("service_req_id") int service_req_id,
 			@PathVariable("service_start_date") String service_start_date,
@@ -338,7 +339,7 @@ public class UserController {
 
 	}
 	
-	@RequestMapping(value="/showserviceHistory",method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value="/showserviceHistory", produces = MediaType.APPLICATION_JSON_VALUE)
 	 @ResponseBody
 	public List<ServiceRequest> ajaxshowserviceHistory(HttpServletRequest request) throws Exception {
 		
@@ -351,7 +352,7 @@ public class UserController {
 		return serviceRequest2;
 	}
 	
-	@RequestMapping(value="/ratingserviceurl/{sp_id},{on_time_arriaval},{friendly},{quality_of_service},{sr_id},{ratingscomments}",method = RequestMethod.GET)
+	@GetMapping(value="/ratingserviceurl/{sp_id},{on_time_arriaval},{friendly},{quality_of_service},{sr_id},{ratingscomments}")
 	public @ResponseBody void ajaxratingservice(
 			@PathVariable("sp_id") int sp_id,
 			@PathVariable("on_time_arriaval") int on_time_arriaval,

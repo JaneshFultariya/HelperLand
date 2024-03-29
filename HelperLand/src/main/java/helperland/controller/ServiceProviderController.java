@@ -25,6 +25,7 @@ import org.springframework.http.MediaType;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,7 +56,7 @@ public class ServiceProviderController {
 	@Autowired 
 	UserService userService;
 	
-	@RequestMapping(value="/displayspdashboard",method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value="/displayspdashboard", produces = MediaType.APPLICATION_JSON_VALUE)
 	 @ResponseBody
 	public List<ServiceRequest> ajaxdisplayspdashboard(HttpServletRequest request) throws Exception {
 		
@@ -70,7 +71,7 @@ public class ServiceProviderController {
 		return serviceRequest2;
 	}
 	
-	@RequestMapping(value = "/acceptbtndashboardform/{service_req_id}",method = RequestMethod.GET)
+	@GetMapping(value = "/acceptbtndashboardform/{service_req_id}")
 	public @ResponseBody int ajaxcancelbtndashboard(
 			@PathVariable("service_req_id") int service_req_id,
 			@ModelAttribute ServiceRequest serviceRequest, 
@@ -126,7 +127,7 @@ public class ServiceProviderController {
 		
 	}
 	
-	@RequestMapping(value="/displayspdashboardmodal/{servicerequestid}",method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value="/displayspdashboardmodal/{servicerequestid}", produces = MediaType.APPLICATION_JSON_VALUE)
 	 @ResponseBody
 	public HashMap<String, Object> ajaxdisplaydashboardmodal(
 			@PathVariable("servicerequestid") int servicerequestid,
@@ -142,7 +143,7 @@ public class ServiceProviderController {
 	}
 	
 	
-	@RequestMapping(value="/upcomingservicce",method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value="/upcomingservicce", produces = MediaType.APPLICATION_JSON_VALUE)
 	 @ResponseBody
 	public List<ServiceRequest> ajaxupcomingservicce(
 			HttpServletRequest request) throws Exception {
@@ -157,7 +158,7 @@ public class ServiceProviderController {
 	}
 	
 	
-	@RequestMapping(value="/cancelbtnupcomingservice/{service_req_id}",method = RequestMethod.GET)
+	@GetMapping(value="/cancelbtnupcomingservice/{service_req_id}")
 	public @ResponseBody void ajaxcancelbtnupcomingservice(
 			@PathVariable("service_req_id") int service_req_id,
 			@ModelAttribute ServiceRequest serviceRequest, 
@@ -188,7 +189,7 @@ public class ServiceProviderController {
 
 	}
 	
-	@RequestMapping(value="/completebtnupcomingservice/{service_req_id}",method = RequestMethod.GET)
+	@GetMapping(value="/completebtnupcomingservice/{service_req_id}")
 	public @ResponseBody void ajaxcompletebtnupcomingservice(
 			@PathVariable("service_req_id") int service_req_id,
 			@ModelAttribute ServiceRequest serviceRequest, 
@@ -208,7 +209,7 @@ public class ServiceProviderController {
 	}
 	
 	
-	@RequestMapping(value="/spservicehistory",method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value="/spservicehistory", produces = MediaType.APPLICATION_JSON_VALUE)
 	 @ResponseBody
 	public List<ServiceRequest> ajaxspservicehistory(
 			HttpServletRequest request) throws Exception {
@@ -222,7 +223,7 @@ public class ServiceProviderController {
 		return upcomingservicceData;
 	}
 	
-	@RequestMapping(value="/spratingsdetails",method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value="/spratingsdetails", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public List<Rating> ajaxspratingsdetails(
 			HttpServletRequest request) throws Exception {
@@ -237,7 +238,7 @@ public class ServiceProviderController {
 	}
 	
 	
-	@RequestMapping(value="/updtsppassword/{old_password},{updtpassword}",method = RequestMethod.GET)
+	@GetMapping(value="/updtsppassword/{old_password},{updtpassword}")
 	public @ResponseBody int ajaxUpdtspPassword(@PathVariable("old_password") String old_password,
 			@PathVariable("updtpassword") String updtpassword,
 			@ModelAttribute User user, 
@@ -270,7 +271,7 @@ public class ServiceProviderController {
 		
 	}
 	
-	@RequestMapping(value="/updtspdetails/{FirstName},{LastName},{Mobile},{Day},{Month},{Year},{Nationality},{Gender},{Avatar},{AddressLine1},{AddressLine2},{PostalCode},{City}",method = RequestMethod.GET)
+	@GetMapping(value="/updtspdetails/{FirstName},{LastName},{Mobile},{Day},{Month},{Year},{Nationality},{Gender},{Avatar},{AddressLine1},{AddressLine2},{PostalCode},{City}")
 	public @ResponseBody void ajaxupdtspdetails(@PathVariable("FirstName") String FirstName,
 			@PathVariable("LastName") String LastName,
 			@PathVariable("Mobile") String Mobile, @PathVariable("Day") String Day, @PathVariable("Month") String Month,
@@ -341,7 +342,7 @@ public class ServiceProviderController {
 		
 	}
 	
-	@RequestMapping(value="/serviceSchedule",method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value="/serviceSchedule", produces = MediaType.APPLICATION_JSON_VALUE)
 	 @ResponseBody
 	public String ajaxshowserviceHistory(HttpServletRequest request) throws Exception {
 		
@@ -356,7 +357,7 @@ public class ServiceProviderController {
 		return gson.toJson(serviceRequest2);
 	}
 	
-	@RequestMapping(value="/blockCustomer",method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value="/blockCustomer", produces = MediaType.APPLICATION_JSON_VALUE)
 	 @ResponseBody
 	public List<User> ajaxUserList(HttpServletRequest request) throws Exception {
 		
@@ -369,7 +370,7 @@ public class ServiceProviderController {
 		return userList;
 	}
 	
-	@RequestMapping(value="/blockCustomerAction/{uid}",method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value="/blockCustomerAction/{uid}", produces = MediaType.APPLICATION_JSON_VALUE)
 	 @ResponseBody
 	public void ajaxblockCustomerAction(HttpServletRequest request,
 			@PathVariable("uid") int uid) throws Exception {

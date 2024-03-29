@@ -33,7 +33,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -95,7 +97,7 @@ public class HomeController {
 		return "aboutus";
 	}
 
-	@RequestMapping(value = "/contactUs", method = RequestMethod.GET)
+	@GetMapping(value = "/contactUs")
 	public String contactUs(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		request.setAttribute("hideshow", session.getAttribute("loginUser"));
@@ -103,7 +105,7 @@ public class HomeController {
 		return "contactUs";
 	}
 
-	@RequestMapping(value = "/contactUs", method = RequestMethod.POST)
+	@PostMapping(value = "/contactUs")
 	public String handleContactUs(@ModelAttribute Contactus contactUs, BindingResult br, Model model,@RequestParam CommonsMultipartFile file) {
 
 		if (br.hasErrors()) {
@@ -131,7 +133,7 @@ public class HomeController {
 		}
 	}
 
-	@RequestMapping(value = "/registerUser", method = RequestMethod.POST)
+	@PostMapping(value = "/registerUser")
 	public String handleRegisterUser(@ModelAttribute User user, BindingResult br, HttpServletRequest request, Model model) {
 
 		if (br.hasErrors()) {
@@ -169,7 +171,7 @@ public class HomeController {
 		}
 	}
 
-	@RequestMapping(value = "/registerServiceProvider", method = RequestMethod.POST)
+	@PostMapping(value = "/registerServiceProvider")
 	public String handleRegisterServiceProvider(@ModelAttribute User user, @ModelAttribute UserAddress userAddress, HttpServletRequest request,
 			BindingResult br, Model model) {
 
@@ -231,7 +233,7 @@ public class HomeController {
 		}
 	}
 
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	@PostMapping(value = "/login")
 	public String handleLogin(@ModelAttribute User user, BindingResult br, Model model, HttpServletRequest request) {
 
 		if (br.hasErrors()) {
@@ -295,7 +297,7 @@ public class HomeController {
 
 	}
 
-	@RequestMapping(value = "/forgetpassword", method = RequestMethod.POST)
+	@PostMapping(value = "/forgetpassword")
 	public String handleForgetpassword(@ModelAttribute User user, BindingResult br, Model model) {
 
 		if (br.hasErrors()) {

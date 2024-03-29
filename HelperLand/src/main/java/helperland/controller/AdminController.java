@@ -22,6 +22,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.MediaType;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,7 +50,7 @@ public class AdminController {
 	@Autowired
 	BookaService bookaService;
 	
-	@RequestMapping(value="/usermanagement",method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value="/usermanagement", produces = MediaType.APPLICATION_JSON_VALUE)
 	 @ResponseBody
 	public List<User> ajaxdisplayusermanagement(HttpServletRequest request) throws Exception {
 	
@@ -58,7 +59,7 @@ public class AdminController {
 		return users;
 	}
 	
-	@RequestMapping(value = "/adminchangestatus/{uid},{activestatus}",method = RequestMethod.GET)
+	@GetMapping(value = "/adminchangestatus/{uid},{activestatus}")
 	public @ResponseBody int ajaxadminchangestatus(
 			@PathVariable("uid") int uid,
 			@PathVariable("activestatus") int activestatus,
@@ -80,7 +81,7 @@ public class AdminController {
 		return status;
 	}
 	
-	@RequestMapping(value = "/adminapproval/{uid}",method = RequestMethod.GET)
+	@GetMapping(value = "/adminapproval/{uid}")
 	public @ResponseBody int ajaxadminapproval(
 			@PathVariable("uid") int uid,
 			@ModelAttribute User user, 
@@ -102,7 +103,7 @@ public class AdminController {
 		return status;
 	}
 	
-	@RequestMapping(value = "/adminuserdelete/{uid}",method = RequestMethod.GET)
+	@GetMapping(value = "/adminuserdelete/{uid}")
 	public @ResponseBody int ajaxadminuserdelete(
 			@PathVariable("uid") int uid,
 			@ModelAttribute User user, 
@@ -126,7 +127,7 @@ public class AdminController {
 		return status;
 	}
 	
-	@RequestMapping(value="/servicerequests",method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value="/servicerequests", produces = MediaType.APPLICATION_JSON_VALUE)
 	 @ResponseBody
 	public List<ServiceRequest> ajaxdisplayservicerequests(HttpServletRequest request) throws Exception {
 		
@@ -135,7 +136,7 @@ public class AdminController {
 		return serviceRequests;
 	}
 	
-	@RequestMapping(value="/getServiceREquestAddress/{srId}",method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value="/getServiceREquestAddress/{srId}", produces = MediaType.APPLICATION_JSON_VALUE)
 	 @ResponseBody
 	public ServiceRequestAddress ajaxgetServiceREquestAddress(@PathVariable("srId") int srId,
 			HttpServletRequest request) throws Exception {
@@ -145,7 +146,7 @@ public class AdminController {
 		return serviceRequestAddress;
 	}
 	
-	@RequestMapping(value="/editserviceRequest/{srId},{service_start_date},{startTime},{AddressLine1},{AddressLine2},{Postal_Code},{City}",method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value="/editserviceRequest/{srId},{service_start_date},{startTime},{AddressLine1},{AddressLine2},{Postal_Code},{City}", produces = MediaType.APPLICATION_JSON_VALUE)
 	 @ResponseBody
 	public void ajaxeditserviceRequest(@PathVariable("srId") int srId,
 			@PathVariable("service_start_date") String service_start_date,
