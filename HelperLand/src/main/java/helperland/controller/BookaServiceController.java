@@ -30,6 +30,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -52,13 +53,13 @@ public class BookaServiceController {
 	@Autowired
 	BookaService bookaService;
 
-	@RequestMapping(value = "/postalcode/{pincode}", method = RequestMethod.GET)
+	@GetMapping(value = "/postalcode/{pincode}")
 	public @ResponseBody String ajaxSearch(@PathVariable("pincode") String pincode) {
 		Boolean pin = this.bookaService.getUserAddress(pincode);
 		return pin.toString();
 	}
 
-	@RequestMapping(value = "/addaddress/{AddressLine1},{AddressLine2},{postalcode},{City},{Mobile}", method = RequestMethod.GET)
+	@GetMapping(value = "/addaddress/{AddressLine1},{AddressLine2},{postalcode},{City},{Mobile}")
 	public @ResponseBody void ajaxAddAddress(@PathVariable("AddressLine1") String AddressLine1,
 			@PathVariable("AddressLine2") String AddressLine2, @PathVariable("postalcode") String postalcode,
 			@PathVariable("City") String City, @PathVariable("Mobile") String Mobile,
@@ -72,7 +73,7 @@ public class BookaServiceController {
 
 	}
 
-	@RequestMapping(value = "/showaddress", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/showaddress", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public List<UserAddress> ajaxshowAddress(HttpServletRequest request) throws Exception {
 
@@ -85,7 +86,7 @@ public class BookaServiceController {
 		return userAddress2;
 	}
 
-	@RequestMapping(value = "/finalsave/{address_id},{total_cost},{sub_total},{comments},{extratime},{postalcode},{service_start_date},{petcheck},{listArray},{startTime},{totaltime}", method = RequestMethod.GET)
+	@GetMapping(value = "/finalsave/{address_id},{total_cost},{sub_total},{comments},{extratime},{postalcode},{service_start_date},{petcheck},{listArray},{startTime},{totaltime}")
 	public @ResponseBody String ajaxsaverequest(HttpServletRequest request, @PathVariable("address_id") int address_id,
 			@PathVariable("total_cost") float total_cost, @PathVariable("sub_total") float sub_total,
 			@PathVariable("comments") String comments, @PathVariable("extratime") float extratime,
