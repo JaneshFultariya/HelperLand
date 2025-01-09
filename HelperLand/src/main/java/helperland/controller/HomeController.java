@@ -1,6 +1,7 @@
 package helperland.controller;
 
 import java.awt.Window;
+import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -428,7 +429,7 @@ public class HomeController {
 				'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '@', '#', '/', '$', '0', '1', '2',
 				'3', '4', '5', '6', '7', '8', '9' };
 
-		Random random = new Random();
+		Random random = new SecureRandom();
 
 		StringBuilder password = new StringBuilder();
 
